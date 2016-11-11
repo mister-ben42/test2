@@ -1,0 +1,46 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/voirQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Voir les questions
+{% endblock %}
+
+{% block admin_body %}
+
+  <h3>Il y a {{ nbquestions }} questions correspondant à votre requête.</h3>
+ <div id="bloc_list_question">
+  <ul>
+   
+	{% for question in questions %}
+      <li>
+	  <div class="bloc1">
+		{{ loop.index }} :<a href="{{ path('mdqadmin_modifQ', {'id': question.id, 'error': error, 'valid':valid, 'diff': diff, 'dom1': dom1, 'theme': theme, 'crit': crit, 'sens': sens, 'nbdeQ': nbdeQ, 'nbmin': nbmin}) }}">{{ question.id }} - {{ question.intitule }}</a>
+        <div class="blocrep"><div class="rep"> {{ question.brep }} </div><div class="prctrep"> {{ question.prctBrep }} </div> <div class="rep">{{ question.mrep1 }}</div> <div class="prctrep"> {{ question.prctMrep1 }} </div> <div class="rep"> {{ question.mrep2 }}</div><div class="prctrep"> {{ question.prctMrep2 }} </div>  <div class="rep">  {{ question.mrep3 }}</div><div class="prctrep"> {{ question.prctMrep3 }} </div>  </div>
+        <p><div class="commentaire">{{ question.commentaire }}</div></p>
+		{% if question.type=="image" %}
+		<img src="{{ asset('bundles/mdqquestion/images/imgQuestions/'~question.media~'.jpg') }}" height="100" />
+		{% endif %}
+	  </div>
+	  <div class="bloc2">
+		<p><div class="crit">dom1 : </div><div class="critQ1"> {{ question.dom1}} </div>  <div class="crit">diff : </div><div class="critQ1"> {{ question.diff}} </div> <div class="crit">nbJ : </div><div class="critQ2"> {{ question.nbJoue}} </div> <div class="crit">%Brep </div><div class="critQ2"> {{ question.prctBrep}} </div>
+		<p><div class="crit">theme : </div><div class="critQ1"> {{ question.theme}} </div> </p>
+		<p><div class="crit">dom2 : </div><div class="critQ1"> {{ question.dom2}} </div> <div class="crit">dom3 : </div><div class="critQ1"> {{ question.dom3}} </div> </p>
+		<p><div class="crit">type :</div><div class="crit"> {{ question.type}} </div>
+		<div class="crit">auteur :</div><div class="crit"><a href="{{ path('mdqadmin_profileUAdmin', {'id': question.auteur.usermap.id}) }}">{{ question.auteur.usermap.username}} </a></div>
+		<div class="crit">date : </div><div class="crit"> </div> <div class="crit">délai :</div><div class="crit"> {{ question.delai}} </div> 
+		<div class="crit">prct100j</div><div class="critQ1"> {{ question.prct100j}} </div> <div class="crit">valid :</div><div class="critQ1"> {{ question.valid}} </div></p>
+		<p><div class="crit">erreur :</div><div class="critQ2"> {{ question.error}} - [{{question.taberror[0]}},{{question.taberror[1]}},{{question.taberror[2]}}]</div></p>
+	  </div>
+	  
+      </li> 
+	
+    {% else %}
+      <li>Aucune question ne correspond à votre requête.</li>
+    {% endfor %}
+  </ul>	
+  </div>
+  
+{% endblock %}
+
+

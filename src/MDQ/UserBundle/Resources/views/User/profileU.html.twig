@@ -1,0 +1,540 @@
+{# src/MDQ/UserBundle/Resources/views/User/profileU.html.twig #}
+
+{% extends "MDQUserBundle::layout.html.twig" %}
+
+{% block title %}
+  Profil de {{ user.username }}
+{% endblock %}
+
+{% block fos_user_content %}
+
+	
+	  <div class="bloc_profile_joueur" id="profile_joueur">
+	  <div id="profil_partie_gauche">
+		{# <div class="titre_bloc_joueur">Profil</div> #}
+		<p>
+		{% if user.sexe==1 %}
+		<span id="sexe_femme">
+		{% else %}
+		<span id="sexe_homme">
+		{% endif %}{{ sexe(user.sexe) }}</span></p>
+		<p>{{ age(user.datenaissance|date('d/m/Y')) }} ans, 
+		{{ user.departement }}</p>
+		</br>
+		<p id="date_inscription_joueur">Inscription le {{ user.datecreate|date('d/m/Y') }} </p>
+		<p> Dernière connection : <span >{{ user.lastLogin|date('d/m/Y') }}</span></p>
+
+		</div>
+		<div id="profil_partie_centre">
+		{% if user.scUser==dateref.rMDQ and user.sexe==0 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/roi2.png') }}" alt="roi" width=100% title="Roi de MDQ">
+		{% elseif user.scUser==dateref.rMDQ and user.sexe==1 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/reine3.png') }}" alt="reine" width=100% title="Reine de MDQ">
+		{% elseif user.scUser==dateref.sMDQ and user.sexe==0 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/savant-H.png') }}" alt="savant-H" width=100% title="Erudit de MDQ">
+		{% elseif user.scUser==dateref.sMDQ and user.sexe==1 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/savant-F.png') }}" alt="savant-F" width=100% title="Erudite de MDQ">
+		{% elseif user.scUser==dateref.mMDQ and user.sexe==0 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/ministre-H.png') }}" alt="ministre-H" width=100% title="Ministre de MDQ">
+		{% elseif user.scUser==dateref.mMDQ and user.sexe==1 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/ministre-F.png') }}" alt="ministre-F" width=100% title="Ministre de MDQ">
+		{% elseif user.scUser==dateref.muMDQ and user.sexe==0 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/virtuose-H.png') }}" alt="virtuose-H" width=100% title="Virtuose de MDQ">
+		{% elseif user.scUser==dateref.muMDQ and user.sexe==1 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/virtuose-F.png') }}" alt="virtuose-F" width=100% title="Virtuose de MDQ">
+		{% elseif user.scUser==dateref.ffMDQ and user.sexe==0 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/nature-H.png') }}" alt="écolo-H" width=100% title="Ecologiste de MDQ">
+		{% elseif user.scUser==dateref.ffMDQ and user.sexe==1 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/nature-F.png') }}" alt="écolo-F" width=100% title="Ecologiste de MDQ">
+		{% elseif user.scUser==dateref.arMDQ and user.sexe==0 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/peintre-H.png') }}" alt="peintre-H" width=100% title="Peintre de MDQ">
+		{% elseif user.scUser==dateref.arMDQ and user.sexe==1 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/peintre-F.png') }}" alt="peintre-F" width=100% title="Peintre de MDQ">
+		{% elseif user.scUser==dateref.lxMDQ and user.sexe==0 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/globeT-H2.png') }}" alt="gobeT-H" width=100% title="Globe-trotter de MDQ">
+		{% elseif user.scUser==dateref.lxMDQ and user.sexe==1 %}
+		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/globeT-F.png') }}" alt="globeT-F" width=100% title="Globe-trotter de MDQ">
+		{%endif%}
+{#		{% if user.devise!=NULL %}
+		<p><div id="devise_joueur"><span id="devise_joueur_txt">{{ user.devise }}</span></div> </p>
+		{% endif %}
+#}
+		</div>
+		<div id="profil_partie_droite">
+
+
+		</div>
+			
+
+		
+	  </div>
+	<div class="bloc_profile_joueur" id="stats_joueur">
+		<div class="titre_bloc_joueur">Stats</div>
+		<div id="user_stats_medailles">
+		<div class="user_stats_titre">Médailles</div>
+			<div id="user_stats_tab_medaille">
+			<table>
+					<tr>
+						<th></th>
+						<th>Or</th>
+						<th>Argent</th>
+						<th>Bronze</th>
+						<th class="tab_med_med_Ch">Chocolat</th>
+						<th class="tab_med_med_Ct">Coton</th>
+					</tr>
+
+					
+					<tr>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedKm', 'id':user.scuser.id}) }}">King Master</a></td>
+						<td class="tab_med_med">
+							
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Km1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Km1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Km1}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						       {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Km2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Km2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Km2}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Km3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Km3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Km3}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med tab_med_med_Ch">
+							{% for i in 1..5%} 
+						       {% if user.scuser.medailles.Km4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.Km4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Km4}}</div>
+								{% endif %}
+						</td>	
+						<td class="tab_med_med tab_med_med_Ct">
+								{% for i in 1..5%} 
+						       {% if user.scuser.medailles.Km5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.Km5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Km5}}</div>
+								{% endif %}
+						</td>		
+					</tr>
+					
+					<tr>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedMq', 'id':user.scuser.id}) }}">MasterQuizz</a></td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Mq1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Mq1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Mq1}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						       {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Mq2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Mq2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Mq2}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Mq3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Mq3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Mq3}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med tab_med_med_Ch">
+							{% for i in 1..5%} 
+						       {% if user.scuser.medailles.Mq4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.Mq4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Mq4}}</div>
+								{% endif %}
+						</td>	
+						<td class="tab_med_med tab_med_med_Ct">
+								{% for i in 1..5%} 
+						       {% if user.scuser.medailles.Mq5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.Mq5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Mq5}}</div>
+								{% endif %}
+						</td>	
+					</tr>
+					<tr>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedTm', 'id':user.scuser.id}) }}">Expert Medias</a></td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Tm1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Tm1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Tm1}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						       {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Tm2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Tm2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Tm2}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Tm3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Tm3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Tm3}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med tab_med_med_Ch">
+							{% for i in 1..5%} 
+						       {% if user.scuser.medailles.Tm4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.Tm4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Tm4}}</div>
+								{% endif %}
+						</td>	
+						<td class="tab_med_med tab_med_med_Ct">
+								{% for i in 1..5%} 
+						       {% if user.scuser.medailles.Tm5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.Tm5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Tm5}}</div>
+								{% endif %}
+						</td>		
+					</tr>
+					<tr>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedAr', 'id':user.scuser.id}) }}">Quizz Art</a></td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.ar1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.ar1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.ar1}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						       {% for i in 1..5%} 
+						       {% if user.scuser.medailles.ar2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.ar2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.ar2}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.ar3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.ar3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.ar3}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med tab_med_med_Ch">
+							{% for i in 1..5%} 
+						       {% if user.scuser.medailles.ar4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.ar4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.ar4}}</div>
+								{% endif %}
+						</td>	
+						<td class="tab_med_med tab_med_med_Ct">
+								{% for i in 1..5%} 
+						       {% if user.scuser.medailles.ar5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.ar5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.ar5}}</div>
+								{% endif %}
+						</td>	
+					</tr>
+					<tr>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedFf', 'id':user.scuser.id}) }}">Quizz Nature</a></td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.ff1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.ff1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.ff1}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						       {% for i in 1..5%} 
+						       {% if user.scuser.medailles.ff2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.ff2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.ff2}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.ff3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.ff3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.ff3}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med tab_med_med_Ch">
+							{% for i in 1..5%} 
+						       {% if user.scuser.medailles.ff4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.ff4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.ff4}}</div>
+								{% endif %}
+						</td>	
+						<td class="tab_med_med tab_med_med_Ct">
+								{% for i in 1..5%} 
+						       {% if user.scuser.medailles.ff5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.ff5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.ff5}}</div>
+								{% endif %}
+						</td>	
+					</tr>
+					<tr>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedLx', 'id':user.scuser.id}) }}">Lieux du monde</a></td>						
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.lx1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.lx1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.lx1}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						       {% for i in 1..5%} 
+						       {% if user.scuser.medailles.lx2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.lx2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.lx2}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.lx3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.lx3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.lx3}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med tab_med_med_Ch">
+							{% for i in 1..5%} 
+						       {% if user.scuser.medailles.lx4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.lx4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.lx4}}</div>
+								{% endif %}
+						</td>	
+						<td class="tab_med_med tab_med_med_Ct">
+								{% for i in 1..5%} 
+						       {% if user.scuser.medailles.lx5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.lx5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.lx5}}</div>
+								{% endif %}
+						</td>	
+					</tr>
+					<tr>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedMu', 'id':user.scuser.id}) }}">Musique classique</a></td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Mu1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Mu1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Mu1}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						       {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Mu2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Mu2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Mu2}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med">
+						      {% for i in 1..5%} 
+						       {% if user.scuser.medailles.Mu3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+								{% if user.scuser.medailles.Mu3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Mu3}}</div>
+								{% endif %}
+						</td>
+						<td class="tab_med_med tab_med_med_Ch">
+							{% for i in 1..5%} 
+						       {% if user.scuser.medailles.Mu4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.Mu4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Mu4}}</div>
+								{% endif %}
+						</td>	
+						<td class="tab_med_med tab_med_med_Ct">
+								{% for i in 1..5%} 
+						       {% if user.scuser.medailles.Mu5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
+						      {% endfor %}
+							  {% if user.scuser.medailles.Mu5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
+																	<div class="user_tab_med">{{user.scuser.medailles.Mu5}}</div>
+								{% endif %}
+						</td>		
+					</tr>
+			</table>
+			</div>
+			<div>Nombre total de médailles : {% if user.scuser.medailles.totMed>0%}<a href="{{ path('mdqgene_highScore', {'crit':'totMed', 'id':user.scuser.id}) }}">{{user.scuser.medailles.totMed}}</a>
+										{% else %}0
+											{% endif %}
+			</div>
+		</div>
+		
+		<div id="user_stats_Mq">
+		<div id="user_stats_titre_MqKm" class="user_stats_titre">MasterQuizz et King Master</div>
+		<div id="stats_bloc1">
+			<div class="user_stats_titre_Mq">MasterQuizz</div>
+			<div class="profile_user_type">Score du jour :<a href="{{ path('mdqgene_highScore', {'crit':'scofDayMq', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayMq>0 %}{{user.scUser.scofDayMq}}{%else%}0{%endif%}</span></div></a>
+
+			<div class="profile_user_type">Meilleur score : <a href="{{ path('mdqgene_highScore', {'crit':'scMaxMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scMaxMq}}</span></div></a>
+			<div id="stats_date_hsc">({{user.scUser.datescMaxMq|date('d/m/Y') }})</div>			
+			
+			<div class="profile_user_type"> % de bonnes réponses : {% if user.scuser.nbQtotMq>99 %}<a href="{{ path('mdqgene_highScore', {'crit':'prctBrtotMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.prctBrtotMq}}</span></div></a>
+											{% else %}<span class="score_profile" style="cursor:pointer;" title="Il faut avoir répondu à plus de 100 questions pour que le pourcentage soit calculé">-</span></div>
+											{% endif %}
+			<div class="profile_user_type"> Score moyen : {% if user.scuser.nbPMq>10 %}<a href="{{ path('mdqgene_highScore', {'crit':'scMoyMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scMoyMq}}</span></div></a>
+								{% else %}<span class="score_profile" style="cursor:pointer;" title="Il faut avoir joué plus de 10 partie au MasterQuizz pour que la moyenne soit calculée">-</span></div>
+								{% endif %}
+			<div class="profile_user_type"> Nombre de questions jouées : <a href="{{ path('mdqgene_highScore', {'crit':'nbQtotMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.nbQtotMq}}</span></a></div>
+
+			</br>
+			<div id="stats_masters">
+			<div class="user_stats_titre_Mq" style="margin-top:10px;">King Master</div>
+			<div class="profile_user_type"> Score actuel :<a href="{{ path('mdqgene_highScore', {'crit':'kingMaster', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.kingMaster >0 %}{{user.scUser.kingMaster}}{% else %}0{% endif %}  </span></a></div>
+			<div class="profile_user_type"> Meilleur score :<a href="{{ path('mdqgene_highScore', {'crit':'highScKM', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.highScKM}}</span></a></div>
+			</div>
+		</div>
+		<div id="graph_bande_stats" {% if user.scuser.nbQtotMq<100 %}title="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les moyennes soient calculées." style="cursor:pointer; color:rgb(75,75,75);"{% endif %}>
+			<div id="user_graphstats_titre">% de bonnes réponses par catégorie</div>
+			<div id="bande_H"><a href="{{ path('mdqgene_highScore', {'crit':'prctBrhMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Histoire</div><div class="base"><div class="bande_score" id="bande_score_H"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_H">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBrhMq}}{% else %}0{%endif%}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrgMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Géographie </div><div class="base"><div class="bande_score" id="bande_score_G"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_G">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBrgMq}}{% else %}0{%endif%}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrsnMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sciences et nature </div><div class="base"><div class="bande_score" id="bande_score_SN"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SN">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBrsnMq}}{% else %}0{%endif%}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBralMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Arts et Littérature </div><div class="base"><div class="bande_score" id="bande_score_AL"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_AL">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBralMq}}{% else %}0{%endif%}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrslMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sports et loisirs </div><div class="base"><div class="bande_score" id="bande_score_SL"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SL">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBrslMq}}{% else %}0{%endif%}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrdMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Divers </div><div class="base"><div class="bande_score" id="bande_score_D"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_D">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBrdMq}}{% else %}0{%endif%}</span> %</div></a></div>
+		</div>
+		</div>
+		</div>
+		<div id="user_stats_QnF">
+		<div class="user_stats_titre">Quizz Médias</div>
+			<div id="user_stats_QnF_bloc1">
+				<div id="user_stats_QnF_TF">
+					<img src={{ asset('bundles/GeneBundle/LogoQuizzEm.png') }} alt="Expert Media" width="170px">
+					<div class="user_stats_QnF_col_line">
+						<span class="user_stats_QnF_crit">Score du jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayTM', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayTM>0 %}{{user.scuser.scofdayTM}}{%else%}0{%endif%}</span></a>
+					</div>
+					<div class="user_stats_QnF_col_line">
+						<span class="user_stats_QnF_crit">Meilleur score :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxTM', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxTM}}</span></a>
+					</div>
+				</div>
+			</div>
+			<div id="user_stats_QnF_bloc2">
+			<div class="user_stats_QnF_col">
+				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzAr2.png') }} alt="Art" width="120px"></div>
+				<div class="user_stats_QnF_col_line">
+					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayAr', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayAr>0 %}{{user.scuser.scofdayAr}}{%else%}0{%endif%}</span></a>
+				</div>
+				<div class="user_stats_QnF_col_line">
+					<span class="user_stats_QnF_crit">Score max :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxAr', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxAr}}</span></a>
+				</div>
+				<div class="user_stats_QnF_col_line">
+					<span class="user_stats_QnF_crit">Score moy :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMoyAr', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMoyAr}}</span></a>
+				</div>
+			</div>
+			<div class="user_stats_QnF_col">
+				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzFf2.png') }} alt="Nature" width="120px"></div>
+				<div class="user_stats_QnF_col_line">
+					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayFf', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayFf>0 %}{{user.scuser.scofdayFf}}{%else%}0{%endif%}</span></a>
+				</div>
+				<div class="user_stats_QnF_col_line">
+				<span class="user_stats_QnF_crit">Score max :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxFf', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxFf}}</span></a>
+				</div>
+				<div class="user_stats_QnF_col_line">
+				<span class="user_stats_QnF_crit">Score moy :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMoyFf', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMoyFf}}</span></a>
+				</div>
+				</div>
+			<div class="user_stats_QnF_col">
+				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzMu2.png') }} alt="Musique" width="120px"></div>
+				<div class="user_stats_QnF_col_line">
+					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayMu', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayMu>0 %}{{user.scuser.scofdayMu}}{%else%}0{%endif%}</span></a>
+				</div>
+				<div class="user_stats_QnF_col_line">
+					<span class="user_stats_QnF_crit">Score max :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxMu', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxMu}}</span></a>
+				</div>
+				<div class="user_stats_QnF_col_line">				
+					<span class="user_stats_QnF_crit">Score moy :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMoyMu', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMoyMu}}</span></a>
+				</div>
+			</div>
+			<div class="user_stats_QnF_col">
+				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzLx2.png') }} alt="Lieux" width="120px"></div>
+				<div class="user_stats_QnF_col_line">
+					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayLx', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayLx>0 %}{{user.scuser.scofdayLx}}{%else%}0{%endif%}</span></a>
+				</div>
+				<div class="user_stats_QnF_col_line">
+					<span class="user_stats_QnF_crit">Score max :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxLx', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxLx}}</span></a>
+				</div>
+				<div class="user_stats_QnF_col_line">
+					<span class="user_stats_QnF_crit">Score moy :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMoyLx', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMoyLx}}</span></a>
+				</div>
+			</div>
+			</div>
+
+	</div>
+	<div class="bloc_profile_joueur" id="derparties_joueur">
+		<div class="titre_bloc_joueur">Dernières parties</div>
+		{% if derParties is defined %}
+		{% for partie in derParties %}
+			<div id="partie{{loop.index}}" class="derpartie">
+			{% if partie.type=="FfQuizz" %}<span style="color:rgb(0,255,0);">Quizz Nature</span>
+			{% elseif partie.type=="MuQuizz" %}<span style="color:rgb(255,128,255);">Musique class.</span>
+			{% elseif partie.type=="ArQuizz" %}<span style="color:rgb(255,121,0);">Quizz Art</span>
+			{% elseif partie.type=="LxQuizz" %}<span style="color:rgb(0,255,255);">Lieux du monde</span>
+			{% elseif partie.type=="MasterQuizz" %}<span style="color:rgb(255,255,0);">{{partie.type}}</span>
+			{% else %}Autre
+			{% endif %}
+			: {{partie.score}} <span style="font-size:9px;">-{{partie.date|date('d/m/Y')}}</span></div>
+		{% endfor %}
+		{% endif %}
+	</div>
+	
+ {% block infoperso %}
+ 
+ {% endblock %}
+	
+ {% block infoadmin %}
+ 
+ {% endblock %}
+	
+  
+{% endblock %}
+{% block user_menu %}
+	<div class="bloc_menu">
+	  <ul>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png')}}" alt="bjaune" width="20px">Accueil</a></li>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulebleue.png')}}" alt="bbleue" width="20px">Retour</a></li>
+
+	  </ul>
+	</div>
+{%endblock %}
+
+{% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script	src="{{ asset('bundles/UserBundle/profile.js') }}"></script>
+
+{% endblock %}
+

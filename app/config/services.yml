@@ -1,0 +1,23 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    mdq_user.registration.form.type:
+        class: MDQ\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: mdq_user_registration }
+    mdq_user.profile.form.type:
+        class: MDQ\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: mdq_user_profile }                      
+    mdq_user.twig.mdq_extension:
+        class: MDQ\UserBundle\Twig\UserExtension
+        tags:
+            - { name: twig.extension }

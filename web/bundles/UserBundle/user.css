@@ -1,0 +1,784 @@
+#login_fond_noir
+{
+	max-width:1100px;
+	width:100%;
+	height:100%;
+	margin:auto;
+	background-color: black;
+	text-align:center;
+}
+
+#bloc_user, #bloc_regle, #bloc_ajoutQ
+{
+	display: block;
+	border: solid 1px rgb(243,248,78);
+	border-radius:10px;
+	background-color: black;
+	color: rgb(234,254,255);
+	margin: auto;
+	margin-bottom:30px;
+	max-width: 900px;
+	min-width:270px;
+	width:98%;
+	font-family:Arial;
+	letter-spacing:1px;
+	word-spacing:150%;
+	font-size:12px;
+	padding-bottom:20px;
+}
+#bloc_user a
+{
+	color: rgb(234,254,255);
+}
+#nom_du_joueur, #regle_titre_bloc, #bloc_ajoutQ .titre_bloc
+{
+	width:220px;
+	text-align:center;
+	background-color:black;
+	color: rgb(243,248,78);
+	font-size:25px;
+	border: solid 1px rgb(243,248,78);
+	border-radius:20px;
+	margin-top:-20px;
+	margin-left:68%;
+	overflow:hidden;
+	height:40px;
+	line-height:40px;
+}
+
+.bloc_profile_joueur
+{
+	display: block;
+	margin:auto;
+	margin-top:50px;
+	border-top: solid 1px rgb(234,254,255);
+	/*border-bottom: solid 1px rgb(234,254,255);	*/
+	background-color: black;
+	color: rgb(234,254,255);
+	text-align:center;
+}
+.titre_bloc_joueur
+{
+	width:180px;
+	text-align:center;
+	background-color:black;
+	color:white;
+	font-size:20px;
+	margin-top:-13px;
+	margin-left:50px;
+	margin-bottom:20px;
+}
+#donnees_perso .titre_bloc_joueur
+{
+	width:250px;
+}
+#profile_joueur
+{
+	border:none;
+	margin-top:0px;
+	text-align:left;
+	margin-left:30px;
+}
+#sexe_femme
+{
+	color:rgb(255,1,125);
+	font-size:20px;
+}
+#sexe_homme
+{
+	color:rgb(0,255,255);
+	font-size:20px;
+}
+.score_profile
+{
+	float:right;
+}
+#devise_joueur
+{
+	width:192px;
+	height:60px;
+	border: inset 1px rgb(234,254,255);
+	background-color:rgb(30,30,30);
+	padding:4px;
+	margin-top:5px;
+	text-align:center;
+	font-style:italic;
+	line-height:60px;
+}
+#devise_joueur_txt
+{
+	font-size:14px;
+	line-height:20px;
+	display:inline-block;
+}
+#profil_partie_droite, #profil_partie_gauche, #profil_partie_centre
+{
+	display:inline-block;
+	vertical-align:bottom;
+	text-align:left;
+}
+#profil_partie_gauche
+{
+	width:45%;
+	font-size:12px;
+}
+#profil_partie_droite
+{
+	margin-left:110px;
+	width:100px;
+	font-size:15px;
+	display:none;
+}
+#profil_partie_centre
+{
+	width:150px;
+	text-align:right;
+	margin-bottom:-30px;
+}
+
+.profile_user_type
+{
+	display:inline-block;
+	width:300px;
+	text-align:left;
+	overflow:hidden;
+}
+#user_stats_Mq, #user_stats_QnF , #user_stats_medailles
+{
+	max-width:750px;
+	min-width:245px;
+	width:90%;
+	display:inline-block;
+	border: solid 1px rgb(243,248,78);
+	padding-bottom:20px;
+	margin:auto;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.user_stats_titre
+{
+	color:rgb(243,248,78);
+	text-align:center;
+	background-color:black;
+	font-size:17px;
+	display:block;
+	margin:auto;
+	margin-top:-10px;
+	margin-bottom:20px;
+	width:150px;	
+}
+#user_stats_titre_MqKm
+{
+	width:300px;
+}
+.user_stats_titre_Mq
+{
+	display:inline-block;
+	width:220px;
+	text-align:center;
+	color:rgb(255,5,255);
+	border-bottom:solid 1px;
+	margin-bottom:5px;
+}
+#user_stats_tab_medaille table
+{
+	display:inline-block;
+	border:solid 1px white;
+	border-collapse:collapse;
+}
+#user_stats_tab_medaille tr
+{
+	height:23px;
+	padding:0px;
+}
+#user_stats_tab_medaille td
+{
+	background-image: url("fond_tabmedaille3.png");
+	height:23px;
+	overflow:hidden;
+	padding:0px;
+}
+#user_stats_tab_medaille td img
+{
+	margin:auto;
+	display:block;
+	vertical-align:middle;
+	width:52px;
+}
+#user_stats_tab_medaille .tab_med_titre
+{
+	text-align:left;
+	width: 150px;
+}
+#user_stats_tab_medaille .tab_med_med
+{
+	width:60px;
+	text-align:center;
+}
+.user_tab_med
+{
+	width:16px;
+	font-size:10px;	
+	background-color:rgba(0,0,0,0.6);
+	display:inline-block;
+	position:absolute;
+	margin-top:-14px;
+	margin-left:-8px;
+}
+#stats_bloc1
+{
+	display:inline-block;
+	vertical-align:top;
+	width:360px;margin:auto;
+	text-align:center;
+	font-size:15px;
+}
+
+#stats_date_hsc
+{
+	text-align:right;
+	font-size:11px;
+	margin-right:10px;
+	margin-bottom:5px;
+	color:rgb(255,255,255);
+}
+#stats_masters
+{
+	font-size:13px;
+}
+#stats_num_HgScD
+{
+	font-size:10px;
+	color:rgb(255,255,255);
+}
+#graph_bande_stats
+{
+	display:inline-block;
+	max-width:310px;
+	width:100%;
+	border: solid 1px rgb(234,254,255);
+	font-size:11px;
+	letter-spacing:0px;
+	word-spacing:100%;
+	margin:auto;
+	margin-top:30px;
+}
+#user_graphstats_titre
+{
+	color:black;
+	font-size:13px;
+	height:20px;
+	border-bottom:solid 1px rgb(234,254,255);
+	line-height:20px;
+	background-color:rgb(0,255,255);
+}
+#bande_H
+{
+	padding-top:4px;
+}
+.dom_bande
+{
+	display:inline-block;
+	vertical-align:top;
+	text-align:right;
+	width:110px;	
+	margin-right:2px;
+	font-size:12px;
+	height:18px;
+	line-height:18px;
+	
+}
+.bande_score
+{
+	display:inline-block;
+	width:0px;
+	height:18px;
+	background-image: url("bande_score.jpg");	
+	background-repeat:repeat-x;
+}
+.bande_fin
+{
+	display:inline-block;
+	width:2px;
+	height:18px;
+	background-image: url("bande_fin.jpg");	
+	line-height:18px;
+	vertical-align:top;
+	/*background-repeat:no-repeat;*/
+}
+.bande_prct
+{
+	display:inline-block;
+	line-height:18px;
+	vertical-align:top;
+	width:40px;
+	font-size:9px;
+}
+.base
+{
+	display:inline-block;
+	width:150px;
+	height:18px;
+	background-image: url("base.jpg");
+	margin-right:2px;
+	text-align:left;
+}
+#user_stats_QnF_bloc1, #user_stats_QnF_bloc2
+{
+	display:inline-block;
+	width:350px;
+	vertical-align:middle;
+}
+#user_stats_QnF_TF
+{
+	display:inline-block;
+	vertical-align:middle;
+	border:outset 2px rgb(200,200,200);
+	width:200px;
+	height:120px;
+}
+.user_stats_QnF_col
+{
+	display:inline-block;
+	width:150px;
+	font-size:12px;
+	margin:0px 10px;
+}
+
+.user_stats_QnF_col_line
+{
+	width:146px;
+	display:inline-block;
+	text-align:left;
+}
+#user_stats_QnF_TF .user_stats_QnF_col_line
+{
+	width:180px;
+	font-size:14px;
+	margin:5px 0px;
+}
+.user_stats_QnF_col_titre
+{
+	margin-bottom:5px;
+	margin-top:15px;
+}
+#derparties_joueur
+{
+	min-height:100px;
+	font-size:14px;
+	text-align: center;
+}
+.derpartie
+{
+	display:inline-block;
+	width:250px;
+	font-size:13px;
+}
+/* ******************** Bouton formulaires *************************/
+#inscription_valid input, .profileUAuto_button,  .profileUAuto_button_inactive, #form_ajoutQ .bouton_valid input
+{
+	background-image: none;
+	display:block;
+	float:none;
+	margin:30px auto;
+	margin-bottom:20px;
+	width:100px;
+	height:40px;
+	border-radius:10px;
+	border: offset 2px rgb(129,226,237);
+	color:rgb(129,226,237);
+	font-size:19px;
+	text-shadow:1px 1px rgb(100,100,100);
+	letter-spacing:2px;
+	background-color : black;
+	cursor:pointer;
+}
+.profileUAuto_button
+{
+	font-size:15px;
+	height:50px;
+	width:120px;
+	border: inset 2px rgb(129,226,237);
+	line-height:25px;
+	background:black;
+
+}
+.profileUAuto_button:hover
+{
+	font-size:15px;
+	height:50px;
+	width:120px;
+	border: inset 2px black;
+	line-height:25px;
+	color:black;
+	background:rgb(129,226,237);
+}
+.profileUAuto_button_inactive
+{
+	font-size:15px;
+	height:50px;
+	width:120px;
+	border: inset 2px rgb(50,50,50);
+	line-height:25px;
+	color: rgb(70,70,70);
+}
+.profileUAuto_inactif
+{
+	color:rgb(150,150,150);
+}
+#profileUAuto_table_Q
+{
+	display:inline-block;
+	margin-top:20px;
+	border-collapse:collapse;
+}
+#profileUAuto_table_Q a
+{
+	color:white;
+	text-decoration:underline;
+	color:rgb(129,226,237);
+}
+#profileUAuto_table_Q tbody
+{
+	background-color:rgb(40,40,40);
+	border: inset 2px rgb(129,226,237);
+	margin:5px;
+	font-size:15px;
+}
+#profileUAuto_table_Q tr
+{
+	width:650px;
+	height:40px;
+}
+#profileUAuto_table_Q tbody tr:hover
+{
+	background-color: rgb(125,125,125);
+}
+#profileUAuto_table_Q td
+{
+	padding:10px;
+	border: solid 1px black;
+	overflow:hidden;
+}
+.profileUAuto_table_Q_intitule
+{
+	width:600px;
+}
+.profileUAuto_table_Q_rep
+{
+	width:150px;
+	font-size:14px;
+}
+/* /////////////////////////*************************** Formulaires ////////////////////////*/
+#formulaire_inscription
+{
+	display:block;
+	max-width:460px;
+	width:98%;
+	margin:20px auto;
+}
+.registration_ligne
+{
+	line-height:30px;
+	display:block;
+	height:30px;
+}
+.form_error
+{
+	color:red;
+	height:30px;
+}
+#registration_password
+{
+	display:block;
+	height:80px;
+}
+#registration_devise
+{
+	height:40px;
+	line-height:40px;
+}
+#registration_captcha
+{
+	height:120px;
+	line-height:60px;
+}
+#registration_captcha_img_input
+{
+	display:inline-block;
+	float:right;
+	line-height:60px;
+	width:200px;
+}
+#formulaire_inscription input, #formulaire_inscription select
+{
+	background-image: url("../GeneBundle/fondinputb.jpg");
+	margin:2px;
+	margin-right:5px;
+	float:right;
+}
+#formulaire_inscription textarea
+{
+	background-color:rgb(129,226,237);
+	margin:2px;
+	margin-right:5px;
+	float:right;
+	resize:none;
+	height:30px;
+}
+#fos_user_registration_form_sexe, #fos_user_profile_form_sexe
+{
+	margin:2px;
+	margin-right:5px;
+	float:right;
+}
+#fos_user_registration_form_sexe input, #fos_user_profile_form_sexe input
+{
+	float:none;
+	margin-left:20px;
+}
+#registration_captcha img, #registration_captcha .captcha_reload
+{
+	display:block;
+}
+#registration_bloc_captcha_image
+{
+	display:inline-block;
+	height:60px;
+	vertical-align:middle;
+	line-height:normal;
+	margin-left:30px;	
+}
+#registration_captcha .captcha_reload
+{
+	font-size:10px;
+}
+#registration_captcha input
+{
+	display:inline-block;
+	margin-top:20px;
+}
+
+#formulaire_inscription .registration_ligne
+{
+	margin:25px auto 5px;
+	max-width:500px;
+	width:98%;
+}
+#fos_user_registration_form_plainPassword div
+{
+	margin-bottom:15px;
+}
+#fos_user_registration_form_sexe, #fos_user_registration_form_datenaissance, #fos_user_profile_form_datenaissance
+{
+	display:inline-block;
+	float:right;
+	margin:2px;
+	margin-right:5px;
+}
+#formulaire_inscription #new_password
+{
+	text-align:right;
+	font-size:13px;
+}
+#new_password a
+{
+	width:200px;
+	text-align:center;
+	color:yellow;
+	float:right;
+	display:block;
+}
+#form_ajoutQ .form_ligne
+{
+	width:500px;
+	margin:10px auto;
+}
+#form_ajoutQ label
+{
+	display:inline-block;
+	text-align:left;
+	color:rgb(255,255,255);
+}
+#form_ajoutQ textarea
+{
+	height:34px;
+	width:200px;
+	display:inline-block;
+	background-image: url("../GeneBundle/fondinputb.jpg");
+	text-align:center;
+	resize:none;
+	font-size:14px;
+}
+#form_ajoutQ #form_ajoutQ_intitule textarea, #form_ajoutQ #form_ajoutQ_com textarea
+{
+	width:450px;
+}
+#form_ajoutQ #form_ajoutQ_com textarea
+{
+	font-size: 12px;
+	height:60px;
+	background-image: url("../GeneBundle/fondinputc.jpg");
+}
+.form_ajoutQ_rep
+{
+	display:inline-block;
+	width:220px;
+}
+#form_ajoutQ select
+{
+	display:inline-block;
+	background-image: url("../GeneBundle/fondinputb.jpg");
+}
+/* //////////////////////// Partie Ajout Q /////////////////////////////////////////////////*/
+#bloc_ajoutQ
+{
+	text-align:center;
+	font-family:serif;
+	width: 800px;
+	font-size:14px;
+	letter-spacing:2px;
+	word-spacing:110%;
+}
+.ligne_nb_lettre_ajoutQ
+{
+	text-align:right;
+}
+.nb_lettre_ajoutQ
+{
+	font-size:10px;
+	width:20px;
+	display:inline-block;	
+}
+#bloc_ajoutQ_intro
+{
+	display:inline-block;	
+	margin-top:30px;
+	margin-bottom:20px;
+}
+#bloc_ajoutQ_consigne
+{
+	display:inline-block;
+	width:700px;
+	margin-top:80px;
+	margin-bottom:30px;
+	line-height:30px;
+	text-align:justify;
+	text-indent:40px;	
+}
+#bloc_ajoutQ_consigne h1
+{
+	text-align:center;
+	color: yellow;
+	margin-bottom:40px;
+	font-size:27px;
+}
+#bloc_ajoutQ_consigne h2
+{
+	color:rgb(0,255,255);
+	font-weight:normal;
+	font-size:22px;
+	margin-top:40px;
+	margin-bottom:20px;
+}
+/***************************************** Media Queries ********************************************************/
+@media (max-width:790px)
+{
+
+	#nom_du_joueur, #regle_titre_bloc, #bloc_ajoutQ .titre_bloc
+	{
+	margin:auto;
+	margin-top:-20px;
+	margin-bottom:30px;
+	font-size:22px;
+	height:30px;
+	line-height:30px;
+	}
+/*** Profile user ***/
+	#profile_joueur
+	{
+	 text-align:center; 
+	}
+
+}
+
+@media (max-width:400px)
+{     
+      
+/*** Profile user ***/    
+    #profile_joueur {
+      margin-left:10px;
+    }
+    #profil_partie_gauche {
+      font-size: 10px;
+      width: 70%;
+    }
+    #profil_partie_centre {
+      vertical-align:top;
+      margin-top:20px;
+      width:25%;
+      float:right;
+    }
+    .tab_med_med_Ch,  .tab_med_med_Ct, .base
+      {
+	display:none;
+      }
+      .user_stats_titre
+      {
+	font-size:13px;
+      }
+      #user_stats_titre_MqKm
+      {
+	width:230px;
+      }
+      #stats_bloc1
+      {
+	font-size:13px;
+	min-width:220px;
+	width:80px;
+      }
+      .profile_user_type
+      {
+	width:98%;
+	word-spacing:0%;
+	letter-spacing:0px;
+	font-size:12px;
+      }
+      #user_stats_QnF_bloc1, #user_stats_QnF_bloc2
+      {
+	width:98%;
+      }
+      .titre_bloc_joueur
+      {
+	margin: -13px auto 20px;
+      
+      }
+      .dom_bande
+      {
+	text-align:left;
+      }
+ /*** formulaires ***/
+      .registration_ligne
+      {
+	height:60px;
+	text-align:center;
+      }
+
+      #formulaire_inscription input, #formulaire_inscription select, #fos_user_registration_form_sexe, #fos_user_registration_form_datenaissance, #fos_user_profile_form_datenaissance, #fos_user_profile_form_sexe, #new_password a
+      {
+	display:block;
+	float:none;
+	margin:auto;
+      }
+
+      #fos_user_registration_form_datenaissance select, #fos_user_profile_form_datenaissance select
+      {
+	display:inline-block;
+      }
+      #fos_user_registration_form_sexe input, #fos_user_profile_form_sexe input
+      {
+	display:inline-block;
+	margin-left:10px;
+	margin-right:5px;
+      }
+}

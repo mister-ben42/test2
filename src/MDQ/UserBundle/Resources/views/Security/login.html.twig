@@ -1,0 +1,28 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+{% block haut_page %}{% endblock %}
+	{% block bloc_page %}
+	<div id="login_fond_noir">
+	{% endblock %}
+{% block body %}
+{% block fos_user_content %}
+ 
+	<div id="bandeau_form_connexion" style="display:block;">
+	      <div id="bloc_form_connexion">
+
+{% if error %}
+    <div class="form_error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+{% include "MDQUserBundle:Security:login_content.html.twig" %}
+      
+{% endblock fos_user_content %}
+		<div id="inscrire">
+		<a href="{{ path('fos_user_registration_register') }}">Pas encore inscrit ?</a>
+		</div>
+	</div></div></div>
+{% block user_menu %}
+{% endblock %}
+
+{% endblock %}
+{% block bas_page %}{% endblock %}

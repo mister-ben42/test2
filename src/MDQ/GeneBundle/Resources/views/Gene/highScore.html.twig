@@ -1,0 +1,173 @@
+{# src/MDQ/GeneBundle/Resources/views/accueilJeu.html.twig #}
+
+{% extends "MDQGeneBundle::layoutG.html.twig" %}
+
+
+
+{% block body_gene %}
+
+	<div id="page_HighScore">
+	
+	<div id="bloc_HighScore">
+	{% if aide!="none" %}
+		<div class="highScore_aide">{{aide}}</div>
+	{% endif %}
+	<h3>{{ linecrit1 }}</br>{{ linecrit2 }}</h3>
+	{% if aide!="none" %}
+		<div class="sigle_aide">?</div>
+	{% endif %}
+	{% if crit=="MedMq" or crit=="MedKm" or crit=="MedTm" or crit=="MedAr" or crit=="MedFf" or crit=="MedLx" or crit=="MedMu" %}
+		
+		 {% for scuser in scusers %}
+			{% if crit=="MedMq" %}
+				{% set Or=scuser.mq1 %}
+				{% set Ag=scuser.mq2 %}
+				{% set Bz=scuser.mq3 %}
+				{% set Ch=scuser.mq4 %}
+				{% set Ct=scuser.mq5 %}
+				{% set Clsmt=scuser.highClassDayMq %}
+			{% elseif crit=="MedKm" %}
+				{% set Or=scuser.km1 %}
+				{% set Ag=scuser.km2 %}
+				{% set Bz=scuser.km3 %}
+				{% set Ch=scuser.km4 %}
+				{% set Ct=scuser.km5 %}
+				{% set Clsmt=scuser.highClassKM %}
+			{% elseif crit=="MedTm" %}
+				{% set Or=scuser.tm1 %}
+				{% set Ag=scuser.tm2 %}
+				{% set Bz=scuser.tm3 %}
+				{% set Ch=scuser.tm4 %}
+				{% set Ct=scuser.tm5 %}
+				{% set Clsmt=scuser.highClassDayTM %}
+			{% elseif crit=="MedAr"%}
+				{% set Or=scuser.ar1 %}
+				{% set Ag=scuser.ar2 %}
+				{% set Bz=scuser.ar3 %}
+				{% set Ch=scuser.ar4 %}
+				{% set Ct=scuser.ar5 %}
+				{% set Clsmt=scuser.highClassDayAr %}
+			{% elseif crit=="MedFf" %}
+				{% set Or=scuser.ff1 %}
+				{% set Ag=scuser.ff2 %}
+				{% set Bz=scuser.ff3 %}
+				{% set Ch=scuser.ff4 %}
+				{% set Ct=scuser.ff5 %}
+				{% set Clsmt=scuser.highClassDayFf %}
+			{% elseif crit=="MedLx" %}
+				{% set Or=scuser.lx1 %}
+				{% set Ag=scuser.lx2 %}
+				{% set Bz=scuser.lx3 %}
+				{% set Ch=scuser.lx4 %}
+				{% set Ct=scuser.lx5 %}
+				{% set Clsmt=scuser.highClassDayLx %}
+			{% elseif crit=="MedMu" %}
+				{% set Or=scuser.mu1 %}
+				{% set Ag=scuser.mu2 %}
+				{% set Bz=scuser.mu3 %}
+				{% set Ch=scuser.mu4 %}
+				{% set Ct=scuser.mu5 %}
+				{% set Clsmt=scuser.highClassDayMu %}
+			{% endif %}
+			
+			{% set number=loop.index+(page-1)*nbparPage %}
+		<div class="ligne_HSc_Med"><span class="num_nom" >{{number}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}" {%if scuser.id==id_connect %}style="color:rgb(128,255,255);"{%elseif scuser.id==id_search %} style="color:rgb(255,168,168);" {%endif%}> {{scuser.username}} </a></span>
+		<span class="score">
+			{% if Or+Ag+Bz+Ch+Ct==0 %}
+				Meilleur classement : {{Clsmt}}ème
+			{% else %}
+				<span class="bloc_med">
+					{% if Or>0 %}
+					<img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{Or}}
+					{% endif %}
+				</span>
+				<span class="bloc_med">
+					{% if Ag>0 %}
+					<img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{Ag}}
+					{% endif %}
+				</span>
+				<span class="bloc_med">
+					{% if Bz>0 %}
+					<img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{Bz}}
+					{% endif %}
+				</span>
+				<span class="bloc_med">
+					{% if Ch>0 %}
+					<img src={{ asset('bundles/UserBundle/MedCh0.png') }} alt="Med">x{{Ch}}
+					{% endif %}
+				</span>
+				<span class="bloc_med">
+					{% if Ct>0 %}
+					<img src={{ asset('bundles/UserBundle/MedCt0.png') }} alt="Med">x{{Ct}}
+					{% endif %}
+				</span>
+			{% endif %}
+		</span></div>
+		 {% endfor %}
+	{% else  %}
+		 {% for scuser in scusers %}
+			{% set number=loop.index+(page-1)*nbparPage %}
+		<div class="ligne_HSc"><span class="num_nom" >{{number}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}" {%if scuser.id==id_connect %}style="color:rgb(128,255,255);"{%elseif scuser.id==id_search %} style="color:rgb(255,168,168);" {%endif%}> {{scuser.username}} </a></span><span class="score">{{scuser[crit]}} 
+		{% if crit=='highClassDayMq' %}<span id="nbfois_highSC">({{scuser.numHighClassDayMq}} fois)</span>
+		{% elseif crit=='highClasstop5wMq' %}<span id="nbfois_highSC">({{scuser.numHighClasstop5wMq}} fois)</span>
+		{% elseif crit=='highClassDayTF' %}<span id="nbfois_highSC">({{scuser.numHighClassDayTF}} fois)</span>{% endif %}</span></div>
+			
+		 {% endfor %}
+	{% endif %} 
+	 <div class="pagination">
+		<ul>
+		{# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+		<li class="num_page"><a href="{{ path('mdqgene_highScore', {'crit': crit, 'page': 1}) }}"><<</a></li>
+		<li class="num_page">{% if page !=1 %}<a href="{{ path('mdqgene_highScore', {'crit': crit, 'page': page-1}) }}"><</a>{% else %}-{% endif %}</li>
+		{% if page<4 %}
+			{% set min=1 %}
+			{% if nombrePage<7 %}
+			{% set max=nombrePage %}
+			{% else %}
+			{% set max=7 %}
+			{%endif%}
+		{% elseif page>nombrePage-4 %}
+			{% if nombrePage<7 %}
+			{% set min=1 %}
+			{% else %}			
+			{% set min=nombrePage-6 %}
+			{%endif%}
+			{% set max=nombrePage %}
+		{% else %}
+			{% set min=page-3 %}
+			{% set max=page+3 %}
+		{% endif %}
+		{% for p in range(min, max) %}
+		<li{% if p == page %} class="num_page_active"{% else %} class="num_page"{% endif %}>
+		<a href="{{ path('mdqgene_highScore', {'crit': crit, 'page': p}) }}">{{ p }}</a>
+		</li>
+		{% endfor %}
+		<li class="num_page">{% if page !=nombrePage %}<a href="{{ path('mdqgene_highScore', {'crit': crit, 'page': page+1}) }}">></a>{% else %}-{% endif %}</li>
+		<li class="num_page"><a href="{{ path('mdqgene_highScore', {'crit': crit, 'page': nombrePage}) }}">>></a></li>
+		{% if id_connect!=0 %}<li class="num_page" title="Voir mon classement"><a href="{{ path('mdqgene_highScore', {'crit': crit, 'id': id_connect}) }}"><img src="{{ asset('bundles/GeneBundle/smiley3.png') }}" alt="face" width="15px"></a></li>
+		{% endif %}
+
+
+		</ul>
+	</div>
+	</div>
+	
+	
+	<div class="bloc_menu">
+	  <ul>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png')}}" alt="bjaune" width="20px">Accueil</a></li>
+	  <li><a href="{{ path('mdqgene_accueilHighScore') }}" title="Tableau d'honneur"><img src="{{ asset('bundles/GeneBundle/petiteboulerose.png') }}" alt="brose" width="20px" >Tableau</a></li>
+		</ul>
+	</div>
+	
+
+	</div>
+
+
+ {% endblock %}
+ {% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script src="{{ asset('bundles/GeneBundle/scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+	<script	src="{{ asset('bundles/GeneBundle/gene.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+   {# Les erreurs générales du formulaire. #}
+	{{ form_errors(form) }}
+
+<div id="registration_pseudo" class="registration_ligne">
+	{{ form_label(form.username, "Pseudo") }}
+	{{ form_widget(form.username) }}
+</div>
+{% if (form_errors(form.username))!="" %}<div class="form_error">{{ form_errors(form.username) }}</div>{% endif %}
+
+		<div class="registration_ligne" >
+				{{ form_label(form.plainPassword.first, "Mot de Passe") }}
+				{{ form_widget(form.plainPassword.first) }}
+		</div>
+		
+		<div class="registration_ligne" >
+				{{ form_label(form.plainPassword.second, "Confirmation") }}
+				{{ form_widget(form.plainPassword.second) }}
+		</div>
+		{% if (form_errors(form.plainPassword.first))!="" %}	<div class="form_error">{{ form_errors(form.plainPassword.first) }}</div>{% endif %}
+
+<div id="registration_email" class="registration_ligne">
+	{{ form_label(form.email, "Adresse mail") }}	
+	{{ form_widget(form.email) }}
+</div>
+{% if (form_errors(form.email))!="" %}	<div class="form_error">{{ form_errors(form.email) }}</div>{% endif %}
+<div id="registration_sexe" class="registration_ligne">
+	{{ form_label(form.sexe, "Sexe") }}
+	{{ form_widget(form.sexe) }}
+</div>
+<div id="registration_datenaissance" class="registration_ligne">
+	{{ form_label(form.datenaissance, "Date de naissance") }}
+	{{ form_widget(form.datenaissance) }}
+</div>
+<div id="registration_departement" class="registration_ligne">
+	{{ form_label(form.departement, "Département") }}
+	{{ form_widget(form.departement) }}
+</div>
+{#
+<div id="registration_devise"class="registration_ligne" >
+	{{ form_label(form.devise, "Devise") }}
+	{{ form_errors(form.devise) }}	
+	{{ form_widget(form.devise) }}
+</div>
+#}
+<div id="registration_captcha"class="registration_ligne" >
+	{{ form_label(form.captcha, "Sécurité") }}
+	<div id="registration_captcha_img_input">
+	{{ form_widget(form.captcha, {'attr' : {'placeholder' : 'Ecrivez le code'}}) }}
+	</div>
+</div>
+{% if (form_errors(form.captcha))!="" %}	<div class="form_error">{{ form_errors(form.captcha) }}</div>{% endif %}
+{{ form_rest(form) }}
+    <div id="inscription_valid" class="registration_ligne">
+        <input type="submit" value="Valider" />
+    </div>
+</form>

@@ -1,0 +1,48 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/ajouterQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Admin - Gestion
+{% endblock %}
+
+{% block admin_body %}
+
+  <h2>Partie Gestion</h2>
+
+ 
+<div >
+  <form  method="post" class="formQ" {{ form_enctype(form) }}>
+
+{# Les erreurs générales du formulaire. #}
+{{ form_errors(form) }}
+<div class="form_ligne">
+   {{ form_label(form.blocageTot, "Blocage de l'ensemble du site") }}
+   {{ form_errors(form.blocageTot) }}
+   {{ form_widget(form.blocageTot) }}  
+</div>
+<div class="form_ligne">
+   {{ form_label(form.inscription, "Autoriser les inscriptions") }}
+   {{ form_errors(form.inscription) }}
+   {{ form_widget(form.inscription) }}  
+</div>
+<div class="form_ligne">
+   {{ form_label(form.signalE, "Autoriser le signalement d'erreur") }}
+   {{ form_errors(form.signalE) }}
+   {{ form_widget(form.signalE) }}  
+</div>
+<div class="form_ligne">
+   {{ form_label(form.propQ, "Autoriser la proposition de question") }}
+   {{ form_errors(form.propQ) }}
+   {{ form_widget(form.propQ) }}  
+</div>
+{{ form_rest(form) }}
+<input type="submit" class="btnvalid"/>
+</form>
+</div>
+
+ 
+
+  
+
+{% endblock %}

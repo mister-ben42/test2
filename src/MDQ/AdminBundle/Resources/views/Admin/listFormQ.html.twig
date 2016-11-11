@@ -1,0 +1,206 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/voirQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Voir les questions
+{% endblock %}
+
+{% block admin_body %}
+
+  <h3>Il y a {{ nbquestions }} questions correspondant à votre requête.</h3>
+ <div id="bloc_list_question">
+  <ul>
+	{% set bddqcm=0%}{% set bddqaval=0%}
+	{% for question in questions %}
+      <li class="admin_listQ_bloc">
+	  <div class="bloc1">
+		<form>
+	
+	{% if error is defined %} {% set bddqcm=1 %} {% else %} {% set bddqaval=1 %}{%endif%}
+	{% if bddqcm==1%}	<div class="bloc_intitule">{% set num=loop.index+(page-1)*nbpp %}{{ num }} :<a href="{{ path('mdqadmin_modifQ', {'id': question.id, 'choice':choice, 'error': error, 'valid':valid, 'diff': diff, 'dom1': dom1C, 'theme': theme, 'crit': crit, 'sens': sens, 'nbdeQ': nbdeQ, 'nbmin': nbmin}) }}"><span class="admin_listQ_idQ">{{ question.id }}</span></a><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
+    {% else %}	<div class="bloc_intitule">{% set num=loop.index+(page-1)*nbpp %}{{ num }} :<span class="admin_listQ_idQ">{{ question.id }}</span><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
+				
+
+	{% endif %}
+		<div class="blocrep"><div class="rep"><input name="brep" type="text" value="{{question.Brep}}"></div><div class="nblettre"></div> <div class="rep"><input name="mrep1" type="text" value="{{question.mrep1}}"></div> <div class="nblettre"></div> <div class="rep"><input name="mrep2" type="text" value="{{question.mrep2}}"></div><div class="nblettre"></div>  <div class="rep"><input name="mrep3" type="text" value="{{question.mrep3}}"></div><div class="nblettre"></div>  </div>
+        <div class="bloc_commentaire"><div class="commentaire"><textarea name="com" >{{question.commentaire}}</textarea></div><div class="nblettre"></div></div>
+		{% if question.type=="image" %}		
+			{% if question.dom1=='TvQuizz' %} {% set chemin="TV/" %}
+			{% elseif question.dom1=='EyesQuizz' %} {% set chemin="Eyes/" %}
+			{% elseif question.dom1=='SexyQuizz' %} {% set chemin="Sexy/" %}
+			{% elseif question.dom1=='FfQuizz' %} {% set chemin="Ff/" %}
+			{% elseif question.dom1=='ArQuizz' %} {% set chemin="Ar/" %}
+			{% elseif question.dom1=='LxQuizz' %} {% set chemin="Lx/" %}
+			{% else %}{% set chemin='' %}
+			{% endif%}
+		<img src="{{ asset('bundles/mdqquestion/images/imgQuestions/'~chemin~''~question.media~'.jpg') }}" height="100" />
+	  {% endif %}
+{% if bddqcm==1%}
+		<div class="admin_listQ_blocbouton" {%if question.valid==0 %}style="background-color:rgb(250,50,50);" {%elseif question.valid==1 %}style="background-color:rgb(100,255,100);"  {%elseif question.valid==2 %}style="background-color:rgb(100,100,255);"  {%endif%} >
+				<div class="admin_listQ_modifier">Modifier</div>
+				<div>{{question.valid}}
+				<div class="admin_listQ_valider admin_listQ_valid">Valide</div>
+				<div class="admin_listQ_invalider admin_listQ_valid">Refus</div>
+				<div class="admin_listQ_passvalid admin_listQ_valid">Passe</div>
+			</div>		
+		</div>
+{% endif %}
+{% if bddqaval==1%}
+		<div class="admin_listQ_repAdmin">Réponse donnée : {{question.repAdmin}}</div>
+		<select name="repAdmin">
+			{% for rep in tabrepAdmin %}
+			<option value="{{rep.value}}" {% if question.repAdmin==rep.value %}selected style="background-color:pink;"{%endif%}>{{rep.name}}</option>
+			{%endfor%}
+		</select>
+		<div class="admin_listQ_blocbouton">
+			<div class="admin_listQ_envoyer admin_listQ_valid">Envoyer</div>
+			{% if bddqaval==1 and question.retournee==1%}<div>Retournée</div>{% endif %}
+		</div>
+{% endif %}
+	  <p>nb caractères réponses : 25 à 40</p>
+	  <p>nb caractères intitulé : max 90 hypermax 100</p>
+	  <p>nb caractères commentaire : max 190 hypermax 200</p>
+{% if bddqaval!=1%}
+	  <div class="admin_listQ_stats">
+	  <p>STATS</p>
+	  <div class="admin_listQ_stats_a ">nb joué : {{question.nbJoue}}</div>
+	  <div class="admin_listQ_stats_a "> nb Br : {{question.nbBrep}}</div>
+	  <div class="admin_listQ_stats_a "> % Br : {{question.prctBrep}}</div>
+	  </br>
+	  <div class="admin_listQ_stats_a "> % Br 100j : {{question.prct100j}}</div>
+	   <div class="admin_listQ_stats_a ">% Br 500j : {{question.prct500j}}</div>
+	  </br>
+	  <div class="admin_listQ_stats_a "> nb Mr1 : {{question.nbMrep1}}</div>
+	  <div class="admin_listQ_stats_a "> % Mr1 : {{question.prctMrep1}}</div>
+	   <div class="admin_listQ_stats_a ">nb Mr2 : {{question.nbMrep2}}</div>
+	  <div class="admin_listQ_stats_a "> % Mr2b : {{question.prctMrep2}}</div>
+	  </br>
+	  <div class="admin_listQ_stats_a "> nb Mr3 : {{question.nbMrep3}}</div>
+	   <div class="admin_listQ_stats_a ">% Mr3 :{{question.prctMrep3}}</div>
+	  
+	  </div>
+{% endif %}
+	  </div>
+	  
+	  
+	  
+	  <div class="bloc2">
+		<select name="dom1" >
+           <option value="Histoire"{% if question.dom1=="Histoire" %}selected style="background-color:pink;"{%endif%}>Histoire</option>
+           <option value="Géographie"{% if question.dom1=="Géographie" %}selected style="background-color:pink;"{%endif%}>Géographie</option>
+           <option value="Sciences et nature"{% if question.dom1=="Sciences et nature" %}selected style="background-color:pink;"{%endif%}>Sciences et nature</option>
+           <option value="Arts et Littérature"{% if question.dom1=="Arts et Littérature" %}selected style="background-color:pink;"{%endif%}>Arts et Littérature</option>
+           <option value="Sports et loisirs"{% if question.dom1=="Sports et loisirs" %}selected style="background-color:pink;"{%endif%}>Sports et loisirs</option>
+           <option value="Divers" {% if question.dom1=="Divers" %}selected style="background-color:pink;"{%endif%}>Divers</option>
+           <option value="McQuizz"{% if question.dom1=="McQuizz" %}selected style="background-color:pink;"{%endif%}>Musique classique</option>
+           <option value="ArQuizz"{% if question.dom1=="ArQuizz" %}selected style="background-color:pink;"{%endif%}>Quizz Art</option>
+           <option value="FfQuizz"{% if question.dom1=="FfQuizz" %}selected style="background-color:pink;"{%endif%}>Faune et Flore</option>
+           <option value="LxQuizz"{% if question.dom1=="LxQuizz" %}selected style="background-color:pink;"{%endif%}>Lieux du monde</option>
+           <option value="TvQuizz"{% if question.dom1=="TvQuizz" %}selected style="background-color:pink;"{%endif%}>TvQuizz</option>
+           <option value="EyesQuizz"{% if question.dom1=="EyesQuizz" %}selected style="background-color:pink;"{%endif%}>Regard de star</option> 
+           <option value="SexyQuizz"{% if question.dom1=="SexyQuizz" %}selected style="background-color:pink;"{%endif%}>SexyQuizz</option>
+			<option value="Error" {% if question.dom1!="TvQuizz" and question.dom1!="EyesQuizz" and question.dom1!="McQuizz" and question.dom1!="FfQuizz" and question.dom1!="ArQuizz" and question.dom1!="LxQuizz" and  question.dom1!="SexyQuizz" and question.dom1!="Histoire" and question.dom1!="Géographie" and question.dom1!="Sciences et nature" and question.dom1!="Arts et Littérature" and question.dom1!="Sports et loisirs" and question.dom1!="Divers"%}selected style="background-color:pink;"{%endif%}>Erreur</option>
+	  </select>
+		<select name="diff">
+           <option value="1" {% if question.diff==1 %}selected style="background-color:pink;"{%endif%}>Très facile</option>
+           <option value="2" {% if question.diff==2 %}selected style="background-color:pink;"{%endif%}>Facile</option>
+           <option value="3" {% if question.diff==3 %}selected style="background-color:pink;"{%endif%}>Moyen</option>
+           <option value="4" {% if question.diff==4 %}selected style="background-color:pink;"{%endif%}>Difficile</option>
+           <option value="5" {% if question.diff==5 %}selected style="background-color:pink;"{%endif%}>Très difficile</option>
+       </select>
+	  <p><label>theme</label></p>
+	   <select name="theme">
+			{% for theme in tabtheme %}
+		{% if loop.index==1 %}<optgroup label="{{theme.dom1}}">{% set dom1=theme.dom1 %}{% endif %}
+		{%if theme.dom1!=dom1 %}</optgroup><optgroup label="{{theme.dom1}}">{% endif %}
+			<option value="{{theme.nom}}" {% if question.theme==theme.nom %}selected style="background-color:pink;"{%endif%}>{{theme.nom}}</option>
+			{% set dom1=theme.dom1 %}
+			{% endfor %}
+		</select>
+		<div class="listFormQ_theme"><input name="theme" type="text"></div>
+		<p><label>dom2</label></p>
+		<select name="dom2">
+			{% for rep in tabdom2 %}
+		{% if loop.index==1 %}<optgroup label="{{rep.dom1}}">{% set dom1=rep.dom1 %}{% endif %}
+		{%if rep.dom1!=dom1 %}</optgroup><optgroup label="{{rep.dom1}}">{% endif %}
+			<option value="{{rep.dom2}}" {% if question.dom2==rep.dom2 %}selected style="background-color:pink;"{%endif%}>{{rep.dom2}}</option>
+			{% set dom1=rep.dom1 %}
+			{% endfor %}
+			</optgroup>
+		</select>
+		<div class="listFormQ_dom2"><input name="dom2" type="text"></div>
+		<p><label>dom3</label></p>
+		<select name="dom3">
+			{% for rep in tabdom3 %}
+		{% if loop.index==1 %}<optgroup label="{{rep.dom1}}">{% set dom1=rep.dom1 %}{% endif %}
+		{%if rep.dom1!=dom1 %}</optgroup><optgroup label="{{rep.dom1}}">{% endif %}
+			<option value="{{rep.dom3}}" {% if question.dom3==rep.dom3 %}selected style="background-color:pink;"{%endif%}>{{rep.dom3}}</option>
+
+			{% set dom1=rep.dom1 %}
+			{% endfor %}
+		</select>
+		<div class="listFormQ_dom3"><input name="dom3" type="text"></div>
+		</br>
+		<select name="type">
+			{% for type in tabmedia %}
+			<option value="{{type}}" {% if question.type==type %}selected style="background-color:pink;"{%endif%}>{{type}}</option>
+			{%endfor%}
+		</select>
+			<input name="delai_année" type="text" placeholder="année délai" value="{{question.delai}}">
+
+		<div>
+		<div class="crit">auteur :</div><div class="critQ1"><a href="{{ path('mdqadmin_profileUAdmin', {'id': question.auteur.usermap.id}) }}">{{ question.auteur.usermap.username}} </a></div>
+		<div class="crit">date : </div><div class="critQ1" class="admin_listQ_date">{{ question.datecreate|date('d/m/Y') }} </div> 
+		</div>
+{% if bddqcm==1%}
+		<div id="admin_editQ_error">
+		<p>Nombre d'erreurs singalées : {{question.error}}</p>
+		<p>Rép fausse : {{question.taberror[0]}}, Ortho : {{question.taberror[1]}}, Autre : {{question.taberror[2]}}</p>
+		{% if not question.users_error.empty %}
+		  <p>
+			Joueurs ayant signalé une erreur : 
+			{% for scuser in question.users_error %}
+			<a href="{{ path('mdqadmin_profileUAdmin', {'id':scuser.usermap.id}) }}">{{ scuser.usermap.username }}</a>{% if not loop.last %}, {% endif %}
+			{% endfor %}
+		  </p>
+		{% endif %}	
+		<div class="admin_editQ_error_button">Remise à 0</div>
+		</div>
+{% else %}
+		<div id="bloc_doublon">Doublon possible ? 
+				<select name="doublon">
+					<option value="0" selected>Non</option>
+					<option value="1">Oui</option>
+				</select>
+		</div>
+{% endif %}
+		</div>
+		</form>
+		
+      </li> 
+	</br></br></br></br></br></br>
+    {% else %}
+      <li>Aucune question ne correspond à votre requête.</li>
+    {% endfor %}
+  </ul>
+	 </div>
+	<div id="admin_listQ_pagination">
+		{% for p in range(1, nbpage) %}
+		<li{% if p == page %} class="admin_listQ_num_page_active"{% else %} class="admin_listQ_num_page"{% endif %}>
+{% if bddqcm==1%}<a href="{{ path('mdqadmin_voirQ', {'choice':choice, 'page':p, 'error': error, 'valid':valid, 'diff': diff, 'game':game, 'dom1': dom1C, 'theme': theme, 'crit': crit, 'sens': sens, 'nbdeQ': nbdeQ, 'nbmin': nbmin}) }}">{{ p }}</a>{% endif %}
+{% if bddqaval==1%}<a href="{{ path('mdqadmin_voirQaVal', {'page':p, 'repAdmin':repAdmin, 'diff': diff, 'dom1': dom1C, 'crit': crit, 'sens': sens, 'nbdeQ': nbdeQ, 'nbmin': nbmin}) }}">{{ p }}</a>{% endif %}
+
+		</li>
+		{% endfor %}
+	</div>
+
+ 
+  
+{% endblock %}
+{% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script	src="{{ asset('bundles/QuestionBundle/adaptForm.js') }}"></script>
+
+{% endblock %}
+

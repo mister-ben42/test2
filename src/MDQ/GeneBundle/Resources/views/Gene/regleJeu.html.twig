@@ -1,0 +1,107 @@
+{# src/MDQ/GeneBundle/Resources/views/accueilJeu.html.twig #}
+
+{% extends "MDQGeneBundle::layoutG.html.twig" %}
+{% block stylesheets %}
+	  <link rel="stylesheet" href="{{ asset('bundles/UserBundle/user.css') }}" type="text/css" />
+      <link rel="stylesheet" href="{{ asset('bundles/GeneBundle/gene2.css') }}" type="text/css" />
+	  <link rel="stylesheet" href="{{ asset('bundles/GeneBundle/scrollbar/jquery.mCustomScrollbar.css') }}" />
+    {% endblock %}
+
+
+{% block body_gene %}
+	<div id="bloc_regle">
+	<div id="regle_titre_bloc">Règles du jeu</div>
+	<div id="regle_sommaire">
+		<div id="regle_sommaire_bloc">
+		<a  href="#regle-I"><div class="regle_som_titre1">I- Les différents jeux</div></a>
+		<a  href="#regle-I1"><div class="regle_som_titre2">1) Le Masterquizz</div></a>
+		<a	href="#regle-I2"><div class="regle_som_titre2" >2) Les Quizz en folie</div></a>
+		<a href="#regle-II"><div class="regle_som_titre1" >II- Autres informations</div></a>
+		<a href="#regle-II1"><div class="regle_som_titre2" >1) Les jetons</div></a>
+		<a href="#regle-II2"><div class="regle_som_titre2" >2) Signaler une erreur</div></a>
+		<a href="#regle-II3"><div class="regle_som_titre2" >3) Proposer des questions</div></a>
+		<a href="#regle-II4"><div class="regle_som_titre2" >4) Scores et classements</div></a>
+		</div>
+	</div>
+	
+	<div class="regle_titre1" id="regle-I">I- Les différents jeux</div>
+		<div class="regle_titre2" id="regle-I1">1) Le MasterQuizz</div>
+	<p>	Le MasterQuizz est un quizz de culture générale, sous forme de QCM. 10 questions sont posées successivement, 
+		de difficulté croissante. Pour chaque question il n'y a qu'une bonne réponse.</p> 
+	<p>	Le score marqué pour une réponse correcte dépend de la difficulté de la question et du temps de réponse.</p>
+	<p>	Il y a 2 clasements au MasterQuizz :</p>
+		<p>	- Les Masters du jour, qui répertorient les meilleurs parties du jour au MasterQuizz</p>
+		<p>	- Les Masters du mois, qui répertorient les meilleurs score du mois, chaque score du mois
+		étant égal à la somme des 10 meilleurs score du joueur aux Masters du jour dans le mois en cours.</p>
+		
+		<div class="regle_titre2" id="regle-I2">2) Les Quizz en folie</div>
+	<p>	Les Quizz en Folie sont des quizz centrés sur un domaine spécifique. Chaque partie est composée
+		de 8 questions sous forme de QCM.</p>
+	<p>	Il existe actuellement 4 quizz dans les Quizz en folie :</p>
+		<p>	- TvQuizz : à partir de la photo d'un acteur d'une série télévisée, il faut retrouver soit
+		le nom de la série dans laquelle apparaît cet acteur, soit le nom de cet acteur, soit le nom du
+		personnage interprété par cet acteur dans la série.</p>
+		<p>	- Oeil de star : à chaque question la photo des yeux d'une célébrité est proposée. Le but est
+		de retrouver à qui appartient ce regard.</p>
+		<p>	- Musique classique : le but est de retrouver le titre ou l'auteur d'un extrait de musique classique.</p>
+		<p>	- SexyQuizz : en quizz exclusvement réservé au personnes de plus de 18 ans !!!</p>
+	
+	<div class="regle_titre1" id="regle-II">II- Autres informations</div>
+		<div class="regle_titre2" id="regle-II1">1) Les jetons</div>
+	<p>Les jetons se divisent en deux caégories : les jetons MQ, pour les parties de MasterQuizz et
+	les jetons QnF, pour les parties des Quizz en Folie. </p>
+	<p>Lors de l'inscription, chaque joueur dispose de 5 jetons MQ et de 8 jetons QnF. Chaque jour, le 
+	nombre de jetons quotidiens disponibles est de 3 jetons MQ et 5 jetons QnF.</p>
+	<p>Pour gagner des jetons, il est possible de proposer des questions à ajouter dans la base de donnée.</p>
+		<div class="regle_titre2" id="regle-II2">2) Signaler une erreur</div>
+	<p> Si au cours d'un jeu, une question vous semble présenter une erreur, vous pouvez le signaler
+	en cliquant sur le point jaune en dessous du bloc réponse. </p>
+	<p> Si vous souhaitez contacter l'admin su site pour signaler un problème de fonctionnement du site,
+	vous pouvez utiliser le formulaire de contact.</p>
+		<div class="regle_titre2" id="regle-II3">3) Proposer une question</div>
+	<p>Pour pouvoir proposer une question, il faut avoir répondu à 100 questions au MasterQuizz, avec
+	au moins 60% de bonnes réponses.</p>
+	<p>Pour accéder au formulaire de proposition de question, il faut cliquer sur le lien approprié 
+	sur la page de votre compte. Pour l'instant, il est uniquement possible de proposer des questions
+	pour le MasterQuizz. Vous devez rédiger votre question en respectant les instructions indiquées.</p>
+	<p>Chaque joueur peut propoer au maximum 5 nouvelles questions par semaine. Vous serez tenu informé
+	lorsque votre question sera étudiée et si elle est validée, elle sera ajoutée à la base de donnée. 
+	Vous recevrez alors un jeton supplémentaire.</p>
+		<div class="regle_titre2" id="regle-II4">4) Scores et classements</div>
+	<p>Le Monde du Quizz propose plusieurs scores et classements qui sont autant d'occasions 
+	de se situer par rapport aux autres et de tenter de remporter chacun des classements. Si vous
+	êtes performants, vous pourrez peut-être - honneur suprême - figurer parmi les Maîtres du Monde
+	du Quizz !!!</p>
+	<p>Au MasterQuizz, il y a deux classements principaux : les Masters du jour et les Masters du mois.
+	Les Masters du jour sont la compétition quotidienne du MasterQuizz : c'est le classement des meilleurs
+	scores du jour de chaque joueur. 
+	Les Masters du mois sont une compétiton mensuelle. Le score de chaque joueur dans ce classmeent est
+	égal à la somme de ses 10 meilleurs performances aux Masters du jour, dans le mois en cours.</p>
+	<p>Aux Quizz en Folie !!!, il y a un classement quotidien pour chaqun des 4 quizz et le classement 
+	Totale Folie ! Le score de chaque joueur au Total Folie regroupe la somme de ses
+	meilleurs scores du jour en cours dans 3 quizz différents des Quizz en Folie !!!.</p>
+	<p>Chaque jour, il y a 3 maîtres du Monde du Quizz : le Maître du jour, vainqueur du classement des
+	Masters du jour précédent, le Maître du mois, vainqueur du classement des Masters du mois
+	précédent et le Maître de Folie, vainqueur du classement Totale Folie ! de le veille.
+	<p>Pour accéder aux diférents classements, plusieurs moyens s'offrent à vous. Vous pouvez passer
+	par le tableau d'honneur et cliquer sur le nom du classement auquel vous souhaitez accéder. Vous pouvez
+	également passer par votre compte ou le compte d'un joueur et cliquer sur un des scores pour accéder
+	au classement correspondant. Enfin, vous pouvez cliquer sur les noms des différents classements sur
+	la page d'accueil.</p>
+	
+	<p>
+	<p>
+	</div>
+	
+	<div class="bloc_menu">
+	  <ul>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png') }}" alt="bjaune" width="20px">Accueil</a></li>
+		</ul>
+	</div>
+
+	
+
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}

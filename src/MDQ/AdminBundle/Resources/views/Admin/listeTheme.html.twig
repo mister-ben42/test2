@@ -1,0 +1,44 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/statQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Liste des thèmes
+{% endblock %}
+
+{% block admin_body %}
+	<h3>Liste des theme</h3>
+  {% for theme in tabtheme %}
+	<p>{{theme.nom}}</p>
+  {% endfor %}
+  </br> </br> </br>
+  {% for theme in tabtheme %}
+  '{{theme.nom}}'=>'{{theme.nom}}',
+  {% endfor %}
+    </br> </br>Theme </br>
+	{% for theme in tabtheme %}
+		{% if loop.index==1 %}&lt;optgroup label="{{theme.dom1}}"&gt;{% set dom1=theme.dom1 %}{% endif %}
+		{%if theme.dom1!=dom1 %}&lt;/optgroup&gt;&lt;optgroup label="{{theme.dom1}}"&gt;{% endif %}
+			&lt;option value="{{theme.nom}}"&gt;{{theme.nom}}&lt;/option&gt;
+			{% set dom1=theme.dom1 %}
+	{% endfor %}
+		&lt;/optgroup&gt;
+	   </br> </br>Dom2 </br>
+	{% for rep in tabdom2 %}
+		{% if loop.index==1 %}&lt;optgroup label="{{rep.dom1}}"&gt;{% set dom1=rep.dom1 %}{% endif %}
+		{%if rep.dom1!=dom1 %}&lt;/optgroup&gt;&lt;optgroup label="{{rep.dom1}}"&gt;{% endif %}
+			&lt;option value="{{rep.dom2}}"&gt;{{rep.dom2}}&lt;/option&gt;
+			{% set dom1=rep.dom1 %}
+	{% endfor %}
+		&lt;/optgroup&gt;
+	   </br> </br>Dom3 </br>
+	{% for rep in tabdom3 %}
+		{% if loop.index==1 %}&lt;optgroup label="{{rep.dom1}}"&gt;{% set dom1=rep.dom1 %}{% endif %}
+		{%if rep.dom1!=dom1 %}&lt;/optgroup&gt;&lt;optgroup label="{{rep.dom1}}"&gt;{% endif %}
+			&lt;option value="{{rep.dom3}}"&gt;{{rep.dom3}}&lt;/option&gt;
+			{% set dom1=rep.dom1 %}
+	{% endfor %}
+		&lt;/optgroup&gt;
+{% endblock %}
+
+

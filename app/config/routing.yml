@@ -1,0 +1,23 @@
+mdq_question:
+    resource: "@MDQQuestionBundle/Resources/config/routing.yml"
+    prefix:   /question
+
+mdq_quizz:
+    resource: "@MDQQuizzBundle/Resources/config/routing.yml"
+    prefix:   /quizz
+
+mdq_user:
+    resource: "@MDQUserBundle/Resources/config/routing.yml"
+    prefix:   /user
+
+mdq_gene:
+    resource: "@MDQGeneBundle/Resources/config/routing.yml"
+    prefix:   /
+
+mdq_admin:
+    resource: "@MDQAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+gregwar_captcha_routing:
+    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"

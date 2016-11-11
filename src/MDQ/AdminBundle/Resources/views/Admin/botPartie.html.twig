@@ -1,0 +1,19 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/statQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Partie des Bots
+{% endblock %}
+
+{% block admin_body %}
+	<h3>Partie des bots</h3>
+  {% for partie in Parties %}
+	<p> Partie{{loop.index}} : {{ partie.bot }} - {{ partie.game }} - {{ partie.scQ1 }}, {{ partie.scQ2 }}, {{ partie.scQ3 }}, {{ partie.scQ4 }}, {{ partie.scQ5 }}, {{ partie.scQ6 }}, {{ partie.scQ7 }}, {{ partie.scQ8 }}, {{ partie.scQ9 }}, {{ partie.scQ10 }} - Score total : {{ partie.sctot }},</p>
+  {% endfor %}
+  {% for bot in Bots2 %}
+  <p>{{bot}}</p>
+  {% endfor %}
+  nb de bots: {{nbBotsSelect}}
+{% endblock %}
+

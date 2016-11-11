@@ -1,0 +1,33 @@
+{# src/MDQ/GeneBundle/Resources/views/news.html.twig #}
+
+{% extends "MDQGeneBundle::layoutG.html.twig" %}
+{% block stylesheets %}
+	  <link rel="stylesheet" href="{{ asset('bundles/UserBundle/user.css') }}" type="text/css" />
+      <link rel="stylesheet" href="{{ asset('bundles/GeneBundle/gene2.css') }}" type="text/css" />
+	  <link rel="stylesheet" href="{{ asset('bundles/GeneBundle/scrollbar/jquery.mCustomScrollbar.css') }}" />
+    {% endblock %}
+
+
+{% block body_gene %}
+	<div id="bloc_regle">
+	<div id="regle_titre_bloc">Infos</div>
+	<div id="page_news_block">
+			  {% for new in news %}
+			<div class="bloc_news_titre">{{ new.titre }}</div>
+			<div class="bloc_news_date">Le {{ new.dateCreate|date('d/m/Y') }}</div>
+			<div class="bloc_news_texte">{{ new.texte|nl2br }}</div>				
+			{% endfor %}
+	</div></div>
+	
+	<div class="bloc_menu">
+	  <ul>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png') }}" alt="bjaune" width="20px">Accueil</a></li>
+		</ul>
+	</div>
+
+	
+
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}

@@ -1,0 +1,1472 @@
+
+body
+{
+	width: 98%;
+	margin:auto;
+	background-color: black;
+	font-family:serif;
+	font-size:12px;
+}
+p
+{
+	margin:0px;
+	padding:0px;
+}
+li
+{
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
+}
+ul
+{
+	margin:0px;
+	padding:0px;
+}
+a
+{
+	text-decoration: none;
+	color:yellow;
+	cursor:pointer;
+}
+#bloc_page
+{
+	max-width:1100px;
+	width:100%;
+	height:100%;
+	margin:auto;
+	background-color: rgb(27,35,114);
+	background-image: url("fond2cb.jpg");
+	padding-bottom:20px;
+	text-align:center;
+}
+
+.bloc
+{
+	display: inline-block;
+	border: solid 1px rgb(243,248,78);
+	background-color: black;
+	color: rgb(234,254,255);
+}
+#pied_page
+{
+	display:block;
+	width:80%;
+	margin:auto;
+	margin-top:100px;	
+	font-size:11px;	
+	letter-spacing:1px;
+}
+#pied_page .pied_page_crit
+{
+	display:inline-block;
+	margin-left:30px;
+	margin-right:30px;
+	cursor:pointer;
+	width:150px;
+}
+.bloc_menu
+{
+	background-color:black;
+	border: solid 1px rgb(243,248,78);
+	width:100px;
+	float:right;
+	margin-bottom:40px;
+	font-family:Arial;
+	letter-spacing:1px;
+	word-spacing:150%;
+	font-size:14px;
+	text-align:left;
+	margin-top:-22px;
+}
+.bloc_menu img
+{
+	margin-right:5px;
+	vertical-align:middle;
+}
+.bloc_menu a
+{
+	color: rgb(234,254,255);
+}
+.bloc_menu li
+{
+	display:inline-block;
+	width:95px;
+	height:22px;
+	line-height:22px;
+	text-align:left;
+	margin-left:10px
+}
+#bloc_flash_message
+{
+	
+	display:none;
+	width:100%;
+	max-width:980px;
+	position:fixed;	
+	top:40%;
+	z-index:8;
+}
+#flash_message
+{
+	background-color:rgb(0,255,255);
+	color:black;
+	display:block;
+	margin:auto;
+	width:80%;
+	border:outset 5px white;
+	padding:10px 20px;;
+	font-size:1.2em;
+	font-family:Arial;
+	letter-spacing:1px;
+	word-spacing:150%;
+	z-index:1;
+}
+#flash_message_croix
+{
+	background-color:red;
+	color:white;
+	width:20px;
+	border:solid 1px white;
+	border-radius:10px;
+	float:right;
+	cursor:pointer;
+}
+.affich_flash
+{
+	cursor:pointer;
+	color:yellow;
+}
+#bandeau_form_connexion
+{
+	
+	display:none;
+	max-width:980px;
+	width:100%;
+	position:fixed;	
+	top:20%;
+	z-index:7;
+}
+#bloc_form_connexion
+{
+	display:block;
+	background-color: rgb(0,0,112);
+	  background: -webkit-linear-gradient( right, rgb(10,250,255), rgb(10, 50, 225)); 
+	  background: -moz-linear-gradient( right, rgb(10,250,255), rgb(10, 50, 225)); 
+	  background: -ms-linear-gradient( right, rgb(10,250,255), rgb(10, 50, 225)); 
+	  background: -o-linear-gradient( right, rgb(10,250,255), rgb(10, 50, 225)); 
+	  background: linear-gradient( to left, rgb(10,250,255), rgb(10, 50, 225));
+	margin:auto;
+	width:300px;
+	height:300px;
+	background-color:blue;
+	border: outset 2px white;
+	
+}
+#bloc_form_connexion input
+{
+	background-image: url("fondinputd.jpg");
+	display:block;
+	border:inset 2px white;
+	margin:auto;
+	margin-top:20px;
+}
+#bloc_form_connexion #_submit
+{
+	height:40px;
+	width:80px;
+	border:outset 2px white;
+	font-size:21px;
+}
+#bloc_connexion_croix
+{
+	background-color:red;
+	color:white;
+	width:20px;
+	height:20px;
+	border:solid 1px yellow;
+	border-radius:15px;
+	line-height:20px;
+	margin-left:260px;
+	margin-top:20px;
+	cursor:pointer;
+}
+.sigle_aide
+{
+	background-color:blue;
+	color:white;
+	width:14px;
+	border:solid 1px white;
+	border-radius:7px;
+	float:right;
+	cursor:pointer;
+	font-size:11px;
+	margin-top:-58px;
+	margin-right:3px;
+	text-align:center;
+	cursor:pointer;
+}
+#haut_page
+{
+	margin-bottom:10px;
+	display:inline-block;
+	width:100%;
+	min-width:275px;
+}
+
+/* ///////////////////////////// Page Accueil //////////////////////////// */
+#bloc_titre
+{
+	display:inline-block;
+	float:left;
+	width:30%;
+	min-width:60px;
+	max-width:250px;
+}
+
+#bandeau_form_connexion
+{
+	
+	display:none;
+	max-width:980px;
+	width:100%;
+	position:fixed;	
+	top:20%;
+	z-index:10;
+}
+#bloc_form_connexion
+{
+	display:block;
+	background-color: rgb(0,0,112);
+	  background: -webkit-linear-gradient( right, rgb(10,250,255), rgb(10, 50, 225)); 
+	  background: -moz-linear-gradient( right, rgb(10,250,255), rgb(10, 50, 225)); 
+	  background: -ms-linear-gradient( right, rgb(10,250,255), rgb(10, 50, 225)); 
+	  background: -o-linear-gradient( right, rgb(10,250,255), rgb(10, 50, 225)); 
+	  background: linear-gradient( to left, rgb(10,250,255), rgb(10, 50, 225));
+	margin:auto;
+	width:300px;
+	height:300px;
+	background-color:blue;
+	border: outset 2px white;
+	
+}
+#bloc_form_connexion input
+{
+	background-image: url("fondinputd.jpg");
+	display:block;
+	border:inset 2px white;
+	margin:auto;
+	margin-top:20px;
+}
+#bloc_form_connexion #_submit
+{
+	height:40px;
+	width:80px;
+	border:outset 2px white;
+	font-size:21px;
+}
+#bloc_connexion_croix
+{
+	background-color:red;
+	color:white;
+	width:20px;
+	height:20px;
+	border:solid 1px yellow;
+	border-radius:15px;
+	line-height:20px;
+	margin-left:260px;
+	margin-top:20px;
+	cursor:pointer;
+}
+#bloc_connexion
+{
+	float:right;
+	width: 180px;
+	vertical-align:bottom;
+	display: inline-block;
+	color: rgb(234,254,255);
+	margin: 10px;
+	/*border: solid 1px rgb(243,248,78);*/
+}
+#bloc_connextion_bouton
+{
+	display:block;
+	margin:auto;
+	width:100px;
+	height:30px;
+	line-height:30px;
+	border-radius:5px;
+	border:outset 2px white;
+		background-color: rgb(0,0,112);
+	  background: -webkit-linear-gradient( right, #222, rgb(0,0,225)); 
+	  background: -moz-linear-gradient( right, #222, rgb(0,0,225)); 
+	  background: -ms-linear-gradient( right, #222, rgb(0,0,225)); 
+	  background: -o-linear-gradient( right, #222, rgb(0,0,225)); 
+	  background: linear-gradient( to left, #222, rgb(0,0,225));
+	cursor:pointer;
+	color:white;
+	margin-top:5px;
+	
+}
+#bloc_connexion input
+{
+	background-image: url("fondinputc.jpg");
+	margin:2px;
+	margin-right:5px;
+	float:right;
+}
+
+
+#bloc_connexion #remember_me
+{
+	margin-top:10px;
+}
+#_submit
+{
+	background-image: url("fondvalid.jpg");
+	cursor:pointer;
+	border-radius:5px;
+}
+#inscrire
+{
+	display:inline-block;
+	margin-top:5px;
+	font-size:14px;
+}
+#pseudo
+{	
+	width:120px;
+	text-align: center;	
+	color:rgb(235,258,1);
+	overflow:hidden;
+	background-image: url("connexionb.jpg");
+	margin-bottom:6px;
+}
+.list_connexion
+{
+	color:black;
+	width:143px;
+	height:16px;
+	display:block;
+	background-image: url("fondinput.jpg");
+	margin:2px;
+	padding:1px;
+	font-size:15px;
+	margin-right:5px;
+	float:right;
+	border: 2px inset white;
+	text-align:center;	
+}
+.list_connexion a
+{
+	color:black;
+}
+#deconnexion
+{
+	float:right;
+	margin-right: 5px;
+}
+#accueil_bloc_centre
+{
+	display: block;
+	border: solid 1px rgb(243,248,78);
+	background-color: black;
+	color: rgb(243,248,170);
+	margin: auto;
+	max-width: 700px;
+	width:90%;
+	height:250px;
+	border-radius:10px;
+	margin-bottom:-30px;
+	text-align:center;
+	font-family:Courier;
+	font-size:23px;
+	font-weight: bold;
+	overflow:hidden;
+	
+}
+
+.bloc_centre_anim, #accueil_bloc_centre_anim
+{
+	max-width:700px;
+	width:100%;
+	margin:auto;
+	height:250px;
+	border-radius:10px;
+	overflow:hidden;
+}
+#bloc_centre_anim1
+{
+	background-image: url("anim1b.jpg");
+	background-size: 100% 100%;
+	position:absolute;
+	width:88%;
+}
+#bloc_centre_anim2
+{
+	background-image: url("anim2.jpg");
+	background-size: 100% 100%;
+	display:none;
+	position:absolute;
+	width:88%;
+}
+
+#bouton_jouer
+{
+	display:block;
+	width:128px;
+	height:128px;
+	margin:auto;
+	position:relative;
+	z-index:5;
+	/*margin-top:150px;*/
+	
+}
+#accueil_bloc1, #accueil_bloc2
+{
+	display:block;
+	text-align:center;
+	width:100%;
+	max-width:980px;
+	margin:auto;	
+}
+#accueil_bloc1
+{
+	height:450px;
+	margin-top:20px;
+}
+#accueil_bloc2
+{
+	height:600px;
+}
+#accueil_bloc1_gauche, #accueil_bloc2_gauche
+{
+	display:inline-block;
+	max-width:460px; 
+	width:100%;
+	margin-right:8px;
+	vertical-align:top;
+}
+#accueil_bloc1_droite, #accueil_bloc2_droite
+{
+	display:inline-block;
+	max-width:460px; 
+	width:100%;
+	margin-left:8px;
+	vertical-align:top;
+}
+#accueil_maitre, #highScDay,#highScMonth,#newslarge,#accueil_bloc_menu, #bloc_QnF
+{
+	max-width:450px;
+	display:inline-block;
+	width:100%;
+}
+#accueil_maitre
+{
+	height:450px;
+	text-align:center;
+}
+#accueil_maitre .img_highscore
+{
+	max-width:320px;
+	width:100%;
+	margin:auto;
+	margin-top:-15px;
+}
+#accueil_maitre_ligne1, #accueil_maitre_ligne2
+{
+	max-width:446px;
+	width:100%;
+	overflow:hidden;
+	margin-top:10px;
+}
+#accueil_maitre_ligne1
+{
+	font-size:14px;
+	height:240px;
+}
+#accueil_maitre_ministre, #accueil_maitre_savant
+{
+	vertical-align:-50px;
+}
+.accueil_maitre_txt
+{
+	display:inline-block;
+	width:120px;
+	color:white;
+	font-weight:bold;
+}
+.accueil_maitre_txt2
+{
+	display:inline-block;
+	width:90px;
+	color:white;
+	font-weight:bold;
+	font-size:10px;
+}
+.accueil_maitre_txt_nom_H
+{
+	background-color:black;
+	color:rgb(0,255,255);
+	overflow:hidden;
+}
+.accueil_maitre_txt_nom_F
+{
+	background-color:black;	
+	color:rgb(255,130,200);
+	overflow:hidden;
+}
+.accueil_maitre_col1
+{
+	width:140px;
+	display:inline-block;
+}
+.accueil_maitre_col2
+{
+	width:80px;
+	display:inline-block;
+	margin:20px 10px 20px;
+}
+
+#accueil_maitre_MB
+{
+	display:block;
+	width:380px;
+	text-align:center;
+	margin-top:-100px;
+}
+#accueil_maitre_M
+{
+	display:inline-block;
+	width:150px;
+}
+#accueil_maitre_B
+{
+	display:inline-block;
+	margin-left:65px;
+	width:150px;
+}
+#highScDay, #highScMonth
+{
+	margin-top:40px;
+	height:245px;
+}
+.accueil_heighSC_1 img, .accueil_heighSC_2 img, .accueil_heighSC_3 img
+{
+	display:inline-block;
+	vertical-align:middle;
+}
+.accueil_heighSC_tous
+{
+	display:inline-block;
+	font-size:13px;
+	width:200px;
+}
+.accueil_heighSC_1
+{
+	font-size:18px;
+	margin-top:10px;
+	height:30px;
+}
+.accueil_heighSC_2, .accueil_heighSC_3
+{
+	font-size:15px;
+	height:25px;
+}
+.accueil_heighSC_col, .accueil_heighSC_col2
+{
+	display:inline-block;
+	width:210px;
+	margin-top:10px;
+	vertical-align:top;
+}
+.accueil_highSC_nom
+{
+	display:inline-block;
+	width:155px;
+	overflow:hidden;
+	text-align:left;
+	white-space:nowrap;
+}
+.accueil_highSC_sc
+{
+	display:inline-block;
+	float:right;
+}
+
+.img_highscore,	#news_titre_img
+{
+	text-align:left;
+	margin-left:30px;
+	margin-top:-15px;
+}
+
+#newslarge
+{
+
+	text-align:justify;
+	font-family: Arial;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+#bloc_news
+{		
+	width:430px;
+	height: 303px;
+	overflow:auto;
+	margin-left:20px;
+	padding-bottom:10px;
+	display:block;
+}
+#bloc_news2
+{		
+	max-width:445px;
+	width:95%;
+	height: 303px;
+	overflow:hidden;
+	margin-left:10px;
+	padding-bottom:10px;	
+	display:none;
+}
+#bloc_news2_X
+{
+	background-color:green;
+	color:white;
+	font-size:25px;
+	height:30px;
+	width:30px;
+	border-radius:15px;
+	float:right;
+	top:310px;
+	position:relative;
+	border:outset 2px white;
+	cursor:pointer;
+	display:none;
+}
+#bloc_news2_X:hover
+{
+	border:inset 2px white;
+}
+#bloc_news2_X img
+{
+	margin:0px;
+}
+.bloc_news_titre
+{
+	font-family:Courier;
+	color: rgb(243,248,170);
+	margin-top:15px;
+	margin-right:20px;
+	font-size:17px;
+}
+.bloc_news_date
+{
+	font-size:12px;
+	margin-left:30px;
+	margin-bottom:10px;
+	font-style:italic;
+}
+.bloc_news_texte
+{
+	margin-right:20px;
+	margin-bottom:30px;
+	letter-spacing: 1.5px;
+	line-height:110%;
+}
+#accueil_bloc_menu
+{
+	margin-bottom:40px;
+	font-family:Arial;
+	letter-spacing:1px;
+	word-spacing:150%;
+	font-size:13px;
+	text-align:center;
+}
+#accueil_bloc_menu img
+{
+	margin-right:5px;
+	vertical-align:middle;
+}
+#accueil_bloc_menu a
+{
+	color: rgb(234,254,255);
+}
+#accueil_bloc_menu li
+{
+	display:inline-block;
+	width:160px;
+	height:30px;
+	line-height:30px;
+	text-align:left;
+}
+#bloc_QnF
+{
+	margin-top:40px;
+	display:inline-block;
+	height: 531px;
+	text-align:center;
+}
+#bloc_QnF_EM
+{
+	height:300px;
+}
+#accueil_QnF_bloc2
+{
+	margin-top:30px;
+}
+#bloc_QnF .QnF_col
+{
+	vertical-align:top;
+	display:inline-block;
+	width:160px;
+	height:130px;
+	margin:auto 15px auto;
+}
+.QnF_ligne_HighSc
+{
+	width:160px;
+	font-size:12px;
+	overflow:hidden;
+	text-align:left;
+}
+.Qnf_highSC_nom 
+{
+	display:inline-block;
+	width:100px;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.Qnf_highSC_sc
+{
+	display:inline-block;
+	float:right;
+}
+.QnF_col_titre
+{
+	font-family:arial;
+	font-size:13px;
+	margin:5px 0px;
+	height:18px;
+	margin-bottom:15px;
+}
+
+/* ******************************** Page HighScore ******************************** */
+#bloc_HighScore
+{
+	display: block;
+	border: solid 1px rgb(243,248,78);
+	background-color: black;
+	color: rgb(234,254,255);
+	margin: 5px;
+	max-width: 450px;
+	min-width:290px;
+	width:98%;
+	margin:auto;
+	margin-top:0px;
+	text-align:center;
+	font-family: Arial;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+#bloc_HighScore h3
+{
+	letter-spacing:2px;
+	color:white;
+	padding:10px;
+	border-bottom:solid 1px rgb(243,248,78);
+	font-weight:normal;
+	margin:0 0 20px;
+}
+#bloc_HighScore .ligne_HSc
+{
+	display:block;
+	width:250px;
+	margin:3px auto;
+	text-align:left;
+}
+#bloc_HighScore .ligne_HSc:hover, #bloc_HighScore .ligne_HSc_Med:hover
+{
+	background-color:rgb(75,75,75);
+}
+#bloc_HighScore .ligne_HSc_Med
+{
+	display:block;
+	width:440px;
+	margin:5px auto;
+	text-align:center;
+	line-height:20px;
+}
+#bloc_HighScore .ligne_HSc_Med img
+{
+	width:15px;
+}
+.bloc_med
+{
+	display:inline-block;
+	width:47px;
+	text-align:left;
+}
+#bloc_HighScore .score
+{
+	font-size:13px;
+}
+#bloc_HighScore .num_nom
+{
+	display:inline-block;
+	width:150px;
+	text-align:center;
+	white-space:nowrap;
+	overflow:hidden;
+}
+#bloc_HighScore .ligne_HSc .score
+{
+	float:right;
+}
+#bloc_HighScore .ligne_HSc_Med .score
+{
+	display:inline-block;
+	text-align:center;
+	width:280px;
+}
+#bloc_HighScore #nbfois_highSC
+{
+	font-size:11px;
+}
+#bloc_HighScore .pagination
+{
+	width:330px;
+	text-align:center;
+	margin:auto;
+	margin-top:20px;
+}
+
+#bloc_HighScore .pagination .num_page
+{
+	width:20px;
+	display:inline-block;
+	border: solid 1px rgb(243,248,78);
+	padding:4px;
+	margin: 3px;
+	border-radius:2px;
+}
+#bloc_HighScore .pagination .num_page:hover
+{
+	background-color: rgb(122,124,39);
+	cursor:pointer;
+}
+#bloc_HighScore .pagination .num_page a
+{
+	padding:4px;
+}
+#bloc_HighScore .pagination .num_page_active
+{
+	width:20px;
+	display:inline-block;
+	border: solid 1px rgb(243,248,78);
+	padding:4px;
+	margin: 4px;	
+	background-color:rgb(180,185,60);
+	border-radius:2px;
+}
+#bloc_HighScore .pagination .num_page_active a
+{
+	color: rgb(0,0,0);
+	padding:4px;
+}
+#page_HighScore .bloc_menu
+{
+	margin-top:10px;
+	float:right;
+	margin-right:60px;
+}
+.highScore_aide
+{
+	background-color:rgb(0,255,255);
+	color:black;
+	display:none;
+	width:150px;
+	border:outset 5px white;
+	padding:10px;
+	font-size:13px;
+	font-family:Arial;
+	letter-spacing:1px;
+	word-spacing:120%;
+	margin-top:-40px;
+	position:absolute;
+}
+
+/***************************************** page accueil HighScore *******************************************/
+#bloc_accueil_HighScore
+{
+	display: block;
+	border: solid 1px rgb(243,248,78);
+	border-radius:10px;
+	background-color: black;
+	color: rgb(234,254,255);
+	margin: auto;
+	margin-bottom:30px;
+	width:95%;
+	max-width: 950px;
+	min-width:300px;
+	font-family:Arial;
+	letter-spacing:1px;
+	word-spacing:150%;
+	text-align:center;
+}
+#bloc_titre_accueil_HighScore
+{
+	width:100%;
+	height:40px;
+}
+#titre_accueil_HighScore
+{
+	width:200px;
+	text-align:center;
+	background-color:black;
+	color: rgb(243,248,78);
+	font-size:25px;
+	border: solid 1px rgb(243,248,78);
+	border-radius:20px;
+	margin-top:-20px;
+	margin-right:60px;
+	float:right;
+}
+.sous_bloc_accueil_HighScore
+{
+	display:inline-block;
+	width:280px;
+	border: solid 1px rgb(243,248,78);
+	margin:10px;
+	padding-bottom:10px;
+	vertical-align:top;
+	height:310px;
+}
+.listescore_bloc_accueil_HighScore
+{
+	display:inline-block;
+	font-size:13px;
+	letter-spacing:1.2px;
+	line-height:18px;
+	width:278px;
+	overflow:hidden;
+	white-space:nowrap;
+	word-spacing:0px;
+}
+.titre_sous_bloc_accueil_HighScore
+{
+	border-bottom: solid 1px rgb(243,248,78);
+	margin-bottom:10px;
+	font-size:17px;
+	color:rgb(255,255,255);
+	padding:5px;	
+	font-family:Courier;
+}
+.sous_bloc_accueil_HighScore_QnF, .sous_bloc_accueil_HighScore_QnF_2
+{
+	display:inline-block;
+	width:235px;
+	height:310px;
+	border: solid 1px rgb(243,248,78);
+	padding-bottom:10px;
+	vertical-align:top;
+	margin:10px;
+}
+.sous_bloc_accueil_HighScore_QnF .titre_sous_bloc_accueil_HighScore, .sous_bloc_accueil_HighScore_QnF_2 .titre_sous_bloc_accueil_HighScore
+{
+	font-size:15px;
+	height:55px;
+	line-height:55px;
+}
+.sous_bloc_accueil_HighScore_QnF .titre_sous_bloc_accueil_HighScore_txt, .sous_bloc_accueil_HighScore_QnF_2 .titre_sous_bloc_accueil_HighScore_txt
+{
+	display:inline-block;
+	line-height:18px;
+	vertical-align:middle
+}
+.sous_bloc_accueil_HighScore_QnF .listescore_bloc_accueil_HighScore
+{
+	width:230px;
+	line-height:17px;
+	word-spacing:0px;
+}
+.sous_bloc_accueil_HighScore_QnF_2 .listescore_bloc_accueil_HighScore
+{
+	width:230px;
+	line-height:20px;
+}
+.accueil_HighScore_clsmt
+{
+	font-size:9px;
+	vertical-align:middle;
+}
+.sous_bloc_accueil_HighScore img
+{
+	width:13px;
+}
+.accueil_HighSc_Med
+{
+	display:inline-block;
+	width:145px;
+	overflow:hidden;
+	text-align:left;
+	margin-right:5px;
+}
+.accueil_HighSc_Med_case
+{
+	display:inline-block;
+	width: 46px;
+}
+.accueil_HighSc_Score
+{	
+	display:inline-block;
+	width:80px;
+	overflow:hidden;
+	text-align:right;
+	margin-right:5px;
+}
+.accueil_HgSc_gauche
+{
+	display:inline-block;
+	width:125px;
+	overflow:hidden;
+}
+.sous_bloc_accueil_HighScore_QnF img
+{
+	width:12px;
+}
+.sous_bloc_accueil_HighScore_QnF .accueil_HighSc_Med, .sous_bloc_accueil_HighScore_QnF_2 .accueil_HighSc_Med
+{
+	width:100px;
+	text-align:left;
+}
+
+/******************************** page règle du jeu et page news **************************/
+#bloc_regle
+{
+	text-align:justify;
+	font-family: Arial;
+	letter-spacing:2.5px;
+	font-size:14px;
+	word-spacing:105%;
+	line-height:20px;
+}
+#regle_sommaire
+{
+	text-align:center;
+	margin-bottom:50px;
+}
+#regle_sommaire_bloc
+{
+	display:inline-block;
+	text-align:left;
+}
+.regle_som_titre1
+{
+	color:yellow;
+	margin-top:20px;
+	font-size:16px;
+}
+.regle_som_titre2
+{
+	margin-left:40px;	
+	color:rgb(0,255,255);
+	margin-top:7px;
+}
+#bloc_regle p
+{
+	max-width:650px;
+	width:80%;
+	margin:10px auto;
+	text-indent:60px;
+}
+.regle_titre1
+{
+	margin-left:8%;
+	margin-top:50px;
+	color:yellow;
+	font-size:16px;
+}
+.regle_titre2
+{
+	margin-top:30px;
+	margin-bottom:15px;
+	margin-left:3%;	
+	color:rgb(0,255,255);
+}
+#page_news_block
+{
+	width:90%;
+	display:block;
+	margin:auto;
+	min-height:600px;
+}
+#page_news_block .bloc_news_titre
+{
+	color:rgb(0,255,255);
+	font-weight:bold;
+	font-size:18px;
+}
+/************************************************* Accueil Jeu **************************************************/
+#page_accueil_jeu
+{
+	height:100vh;
+	overflow:hidden;
+}
+.accueil_jeu_bloc
+{
+	width:42%;
+	max-width:370px;
+	min-width:180px;
+	max-height:460px;
+	min-height:200px;
+	height:66%;
+	padding-top:20px;
+	margin:10px 10px;	
+	margin-bottom:40px;
+	text-align:center;
+	vertical-align:top;
+}
+#accueil_jeu_Mq
+{
+	/*background-image:url('FondAccueilJeu4.png');*/
+}
+.accueil_jeu_logo
+{
+	display: block;
+	max-width:250px;
+	width:65%;
+	margin:auto;
+}
+#accueil_jeu_boutonGo
+{
+	display:inline-block;
+	margin-top:25%;
+	border-radius:40px;
+	overflow:hidden;
+	max-width:200px;
+	width:42%;
+	
+}
+#accueil_jeu_bloc_QnF
+{
+	margin-top:30px;
+	text-align:center;
+}
+.accueil_jeu_QnF
+{
+	display:inline-block;
+	max-width:145px;
+	width:39%;	
+	vertical-align:top;
+	background-color:black;
+	margin:3%;	
+}
+
+.accueil_jeu_QnF img
+{
+	display:inline-block;
+	vertical-align:middle;
+	border: outset 3px yellow;
+	border-radius:25px;
+}
+.accueil_jeu_QnF img:hover
+{
+	background-color:rgb(190,240,240);
+	border: inset 3px yellow;
+}
+#accueil_jeu_bloc_menu .bloc_menu
+{
+	margin-right:50px;
+}
+/************************************************************************** Media Queries *************************************************/
+
+@media (max-width:978px)
+{
+/*** Accueil ***/
+	#accueil_bloc1, #accueil_bloc2
+	{
+	  height:auto;
+	}
+	#accueil_bloc1_gauche, #accueil_bloc2_gauche, #accueil_bloc1_droite, #accueil_bloc2_droite
+	{
+	margin:auto;
+	display:block;
+	}
+
+	#accueil_bloc_menu
+	{
+	margin-top:40px;
+	}
+}
+@media (max-width:750px)
+{
+/*** Accueil ***/
+	.bloc_centre_anim, #accueil_bloc_centre_anim, #accueil_bloc_centre
+	{
+	    height:200px;
+	}
+	 #accueil_bloc_centre
+	 {
+	  margin-bottom:-22px; 
+	 }
+	#bouton_jouer
+	{
+	  height:100px;
+	  width:100px
+	}
+	#accueil_connexion_date
+	{
+	 display:none; 
+	}
+}
+@media (max-width:650px)
+{
+ /*** Accueil Highscore ***/
+	#bloc_titre_accueil_HighScore
+	{
+	margin-bottom:20px;
+	}
+	#titre_accueil_HighScore
+	{
+	font-size:22px;	
+	float:none;
+	margin:auto;
+	margin-top:-20px;
+	}
+}
+@media (max-width:550px)
+{
+/*** Accueil ***/
+	.bloc_centre_anim, #accueil_bloc_centre_anim, #accueil_bloc_centre
+	{
+	    height:160px;
+	}
+	 #accueil_bloc_centre
+	 {
+	  margin-bottom:-15px; 
+	 }
+	#bouton_jouer
+	{
+	  height:80px;
+	  width:80px
+	}
+	#bloc_news, #accueil_connexion_titre
+	{
+	 display:none; 
+	}
+	#bloc_news2, #bloc_news2_X
+	{
+	 display:block; 
+	}
+	.accueil_maitre_col1
+	{
+	    width:130px;
+	}
+}
+@media (max-width:475px)
+{
+ /*** Pages highscore ***/
+	  #bloc_HighScore .ligne_HSc_Med
+	  {
+	   width:270px;
+	   white-space:nowrap;
+	   overflow:hidden;
+	  }
+	  .highScore_aide
+	  {
+	   left:35%; 
+	  }
+}
+@media (max-width:450px)
+{
+/*** Accueil ***/
+	#bloc_connexion
+	{
+	  width:130px;
+	}
+	#bloc_connexion #inscrire, .accueil_heighSC_col2
+	{
+	display:none;
+	}
+	.bloc_centre_anim, #accueil_bloc_centre_anim, #accueil_bloc_centre
+	{
+	    height:130px;
+	}
+	#bloc_QnF
+	{
+	    height:auto;
+	}
+	#accueil_maitre
+	{
+	 height:360px; 
+	}
+	#accueil_maitre_ligne1
+	{
+	    height:180px;
+	}
+	.accueil_maitre_col1
+	{
+	    width:90px;
+	}
+	.accueil_maitre_txt
+	{
+	 width:100px;
+	 font-size:12px;
+	}
+	.accueil_maitre_col2
+	{
+	    width:60px;
+	    margin:20px 3px;
+	}
+	.accueil_maitre_txt2
+	{
+	 width:62px;
+	 font-size:8px;
+	}
+	.img_highscore,	#news_titre_img
+	{
+	 text-align:center;
+	 margin-left:0px;
+	}
+}
+
+@media (max-width:360px)
+{
+   /*** Pages highscore ***/
+	#bloc_HighScore .pagination
+      {
+	width:290px;
+      }
+      #bloc_HighScore .pagination .num_page
+      {
+	margin: 0px;
+	}
+      .highScore_aide
+	  {
+	   left:20%; 
+	  }
+}
+@media (max-height:650px)
+{
+	#bloc_titre
+      {
+	width:120px;
+	}
+/*** Accueil jeu ***/
+	#accueil_jeu_boutonGo
+	{
+	  max-width:160px;
+	  margin-top:20%;
+	}
+	.accueil_jeu_logo
+	{
+	 max-width:200px;
+	}
+	.accueil_jeu_QnF
+	{
+	  max-width:115px;
+	}
+	
+}
+@media (max-height:540px)
+{
+	#bloc_titre
+      {
+	width:120px;
+	}
+/*** Accueil ***/
+	#bandeau_form_connexion
+	{
+	 top:2%; 
+	}
+/*** Accueil jeu ***/
+	#accueil_jeu_boutonGo
+	{
+	  max-width:106px;
+	  margin-top:20%;
+	}
+	.accueil_jeu_logo
+	{
+	 max-width:133px;
+	}
+	.accueil_jeu_QnF
+	{
+	  max-width:90px;
+	}
+	#page_accueil_jeu .bloc_menu
+	{
+	 display:none; 
+	}
+	
+}
+@media (max-height:400px)
+{
+	#bloc_titre
+      {
+	width:80px;
+	}
+/*** Accueil ***/
+	#bloc_connexion #inscrire
+	{
+	display:none;
+	}
+/*** Accueil jeu ***/
+	#accueil_jeu_boutonGo
+	{
+	  max-width:70px;
+	}
+	.accueil_jeu_logo
+	{
+	 max-width:92px;
+	}
+	.accueil_jeu_QnF
+	{
+	  max-width:63px;
+	}
+	
+}
+@media (max-height:815px) and (min-height:450px) and (max-width:615px)
+{
+  	#flash_message
+	{
+	  left:2%;
+	}
+/*** Accueil jeu ***/
+	.accueil_jeu_bloc
+{
+	width:95%;
+	max-width:500px;
+	max-height:300px;
+	min-height:150px;
+	height:30vh;
+	padding-top:0px;
+	margin:10px 10px;	
+	margin-bottom:40px;
+	text-align:center;
+	line-height:30vh;
+	vertical-align:middle;
+}
+	.accueil_jeu_bloc_logo, #accueil_jeu_bloc_boutonGo, #accueil_jeu_bloc_QnF
+	{
+	  display:inline-block;
+	  width:45%;
+	  height:30vh;
+	  vertical-align:middle;
+	}
+	#accueil_jeu_boutonGo
+	{
+	    margin-top:0px;
+	}
+	#accueil_jeu_bloc_QnF
+	{
+	    margin-top:0px;
+	    line-height:12vh;
+	}
+	#accueil_jeu_boutonGo img, .accueil_jeu_bloc_logo img
+	{
+	     display:inline-block;
+	     vertical-align:middle;
+	}
+
+}

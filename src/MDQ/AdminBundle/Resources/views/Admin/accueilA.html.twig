@@ -1,0 +1,59 @@
+{# src/MDQ/AdminBundle/Resources/views/Admin/accueilA.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Accueil admin
+{% endblock %}
+
+{% block admin_body %}
+
+  <h2>Accueil de la partie Admin</h2>
+
+  <h3>Faites votre choix</h3>
+	<div id="blocadmin_gauche">
+		<div class="blocadmin">
+			<h4> Gestion Questions </h4>
+			<div class="choix_accueilQ"><a href="{{ path('mdqquestion_ajouterQ') }}">Ajouter une question</a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_critvoirQ') }}">Afficher des questions</a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_critvoirQ',{'choice':'listForm'}) }}">Editer liste de questions </a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_critvoirQaVal') }}">Editer liste de questions à valider </a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_statQ') }}">Voir des stats</a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_arbratheme') }}">Arbratheme</a></div>
+			<div class="choix_accueilQ"><a href="../../../vendor/arbratheme/listetheme_accueil.php?entete=1">Listetheme</a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_resetTheme') }}">Reset Table des themes + MAJ</a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_testQdouble') }}">Test doublon</a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_gestion') }}">Partie gestion</a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_mail') }}">Envoyer mail</a></div>
+			<div class="blocadmin">
+			      <h4> Stats Utilisateurs </h4>
+			      <div class="choix_accueilQ"><a href="{{ path('mdqadmin_critvoirU') }}">Voir liste d'utilisateurs</a></div>
+			      <div class="choix_accueilQ">Voir des stats</div>
+			</div>
+
+		</div>
+	</div>
+	<div id="blocadmin_droite">
+		<div class="blocadmin">
+			<h4> Stats Parties </h4>
+			<div class="choix_accueilQ">Voir les stats</div>
+		</div>
+		<div class="blocadmin">
+			<h4> Gestion des news </h4>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_newNews') }}">Ajout de news</a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_listNews') }}">Modification de news</a></div>
+		</div>
+		<div class="blocadmin">
+			<h4> Partie des Bots </h4>
+			<div class="choix_accueilQ">Tous les bots : Mq et QnF <a href="{{ path('mdqadmin_botGame', {'nbBots':2, 'djajoue':0, 'type':'Tous'}) }}"> 2 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':5, 'djajoue':0, 'type':'Tous'}) }}"> 5 </a>- <a href="{{ path('mdqadmin_botGame', {'nbBots':10, 'djajoue':0, 'type':'Tous'}) }}"> 10 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':20, 'djajoue':0, 'type':'Tous'}) }}"> 20 </a></div>
+			<div class="choix_accueilQ">Bots n'ayant pas joués : Mq et QnF <a href="{{ path('mdqadmin_botGame', {'nbBots':2, 'djajoue':1, 'type':'Tous'}) }}"> 2 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':5,'djajoue':1, 'type':'Tous'}) }}"> 5 </a>- <a href="{{ path('mdqadmin_botGame', {'nbBots':10,'djajoue':1, 'type':'Tous'}) }}"> 10 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':20,'djajoue':1, 'type':'Tous'}) }}"> 20 </a></div>
+			<div class="choix_accueilQ">Tous les bots : Mq seul<a href="{{ path('mdqadmin_botGame', {'nbBots':2, 'djajoue':0, 'type':'Mq'}) }}"> 2 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':5, 'djajoue':0, 'type':'Mq'}) }}"> 5 </a>- <a href="{{ path('mdqadmin_botGame', {'nbBots':10, 'djajoue':0, 'type':'Mq'}) }}"> 10 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':20, 'djajoue':0, 'type':'Mq'}) }}"> 20 </a></div>
+			<div class="choix_accueilQ">Bots n'ayant pas joués : Mq seul <a href="{{ path('mdqadmin_botGame', {'nbBots':2, 'djajoue':1, 'type':'Mq'}) }}"> 2 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':5,'djajoue':1, 'type':'Mq'}) }}"> 5 </a>- <a href="{{ path('mdqadmin_botGame', {'nbBots':10,'djajoue':1, 'type':'Mq'}) }}"> 10 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':20,'djajoue':1, 'type':'Mq'}) }}"> 20 </a></div>
+			<div class="choix_accueilQ">Tous les bots : QnF seul<a href="{{ path('mdqadmin_botGame', {'nbBots':2, 'djajoue':0, 'type':'QM'}) }}"> 2 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':5, 'djajoue':0, 'type':'QM'}) }}"> 5 </a>- <a href="{{ path('mdqadmin_botGame', {'nbBots':10, 'djajoue':0, 'type':'QM'}) }}"> 10 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':20, 'djajoue':0, 'type':'QM'}) }}"> 20 </a>-<a href="{{ path('mdqadmin_botGame', {'nbBots':40, 'djajoue':0, 'type':'QM'}) }}"> 40 </a></div>
+		
+		</div>
+	</div>
+
+  
+
+{% endblock %}

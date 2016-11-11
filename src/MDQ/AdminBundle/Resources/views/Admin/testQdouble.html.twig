@@ -1,0 +1,15 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/statQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  TestQdouble
+{% endblock %}
+
+{% block admin_body %}
+	<h3>Questions doublées</h3>
+  {% for doublon in tabIdDouble %}
+  <p>{{ doublon[0] }} doublé avec {{ doublon[1] }}</p>
+  {% endfor %}
+{% endblock %}
+

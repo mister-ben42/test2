@@ -1,0 +1,23 @@
+mdq_question:
+    resource: "@MDQQuestionBundle/Resources/config/routing.yml"
+    prefix:   /
+
+mdq_quizz:
+    resource: "@MDQQuizzBundle/Resources/config/routing.yml"
+    prefix:   /
+
+mdq_user:
+    resource: "@MDQUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+mdq_gene:
+    resource: "@MDQGeneBundle/Resources/config/routing.yml"
+    prefix:   /
+
+mdq_admin:
+    resource: "@MDQAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

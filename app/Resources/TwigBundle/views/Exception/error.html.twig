@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Page erreur</title>
+        <link rel="stylesheet" href="{{ asset('bundles/GeneBundle/gene2.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/UserBundle/user.css') }}" type="text/css" />
+    </head>
+    <body>
+      	<div id="haut_page">
+	<div id="bloc_titre">
+	  <a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/MDQ3b.png') }}" alt="titre" width="100%"></a>
+	</div>
+	</div>
+      <div id="bloc_regle" style="padding:10px; text-align:center">
+        <h1>Une erreur est survenue</h1>
+        <h2>Le serveur a retourné "{{ status_code }} {{ status_text }}".</h2>
+
+        <div>Désolé pour ce dysfonctionnement, vous pouvez nous le signaler par mail à l'aide du formulaire de contact.
+        </div>
+       </div>
+    </body>
+</html>

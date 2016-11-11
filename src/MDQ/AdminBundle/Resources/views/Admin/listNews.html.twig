@@ -1,0 +1,39 @@
+{# src/MDQ/UserBundle/Resources/views/User/voirU.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Voir les news
+{% endblock %}
+
+{% block admin_body %}
+	
+   {% for new in news %}
+   <div class="admin_each_news">
+   <div class="admin_news_gauche">
+   <a href="{{ path('mdqadmin_modifNews', {'id':new.id}) }}">{{ new.titre }} </a></br>
+   {{ new.texte }} </br>
+   </div>
+   <div class="admin_news_droite">
+   {{ new.auteur }}, {{ new.dateCreate|date('d/m/Y') }},</br> publication : {% if new.publication==1 %}oui{%else%}non{%endif%}, priorité :{% if new.priorite==1 %}oui{%else%}non{%endif%}
+   </br></br>
+	  <form class="form_news" >
+		<p>
+		<div class="id_news" style="visibility: hidden">{{ new.id }}</div>
+		<div class="publication"><label  for="Publication">Publication</label><input type="checkbox" name="publication" class="checkbox_news" {% if new.publication==1 %}checked="checked"{%endif%}/></div>
+		<div class="priorite"><label class="priorite" for="Priorité">Priorité</label><input type="checkbox" name="priorite" class="checkbox_news" {% if new.priorite==1 %}checked="checked"{%endif%}/></div>
+		<input type="button" name="valider" value="Valider" id="button_valid_news" class="bloc_news_button">
+		</p>
+	</form>
+   </div>
+   </div>
+		
+   {% endfor %}
+  
+{% endblock %}
+
+{% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script	src="{{ asset('bundles/AdminBundle/admin.js') }}"></script>
+
+{% endblock %}
