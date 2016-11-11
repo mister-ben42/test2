@@ -9,5 +9,5 @@ parameters:
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
-    secret: 0ff68ca609b5ba0c6449c0fd62664c6cc307acd2
     locale: fr
+    secret: pompompompifpafpouf
