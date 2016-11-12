@@ -5,11 +5,7 @@
 namespace MDQ\GeneBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use MDQ\QuizzBundle\Entity\PartieQuizz;
-use MDQ\AdminBundle\Entity\News;
-use MDQ\GeneBundle\Entity\DateReference;
 use MDQ\GeneBundle\Entity\StatsQuot;
-use Symfony\Component\HttpFoundation\Request;
 
 
 class GeneController extends Controller
@@ -30,8 +26,8 @@ class GeneController extends Controller
 			$intcontrol = new \DateInterval('PT10M');// Definition d'un intervalle de 10 minutes
 			$dateactu= new \DateTime();
 			$datepartie=$partie->getDate();
-			//$intreel=new \DateInterval();
-			//$intreel=$dateactu->diff($datepartie);
+			/*$intreel=new \DateInterval();
+			$intreel=$dateactu->diff($datepartie);*/
 			if($dateactu->sub($intcontrol)>$datepartie){
 				$partie->setValid(true);
 				$user=$partie->getUser();
@@ -49,20 +45,20 @@ class GeneController extends Controller
 	$datejour= new \DateTime(date('Y-m-d'));
 		//Reste un petit pb avec l'objet date : si pas de connexion le lundi, mais le mardi, la date de Maj de la datebdd jour est celle du debut de semane, ce qui conduit a une maj automatique du jour lors de l'arrivee suivante sur la page d'accueil.
 		$datebdd=$em->getRepository('MDQGeneBundle:DateReference')->find(1);
-		$tabrMDQ[0]=$datebdd->getRMDQ();
+		//$tabrMDQ[0]=$datebdd->getRMDQ(); Que si classement mensuel
 		$tabMaitres=[$datebdd->getRMDQ(), null,null,null,null,null,null];
 		if($datebdd->getDay()!=$datejour){
 			$datebdd->setDay($datejour);// Je le mets la ; si je le mets apres l'operation sub dateInter, l'interval est deduit de la date entree en bdd -jsp pourquoi.
 			//*************************Mise a jour de la bdd StatsQuot****************** ///
 			// A voir ou le placer.
 			$statsJ=$em->getRepository('MDQGeneBundle:StatsQuot')->findOneBy(array('valid'=>0));
-			if($datebdd->getRMDQ()!=null){$statsJ->setRMDQ($datebdd->getRMDQ()->getId());}
-			if($datebdd->getMMDQ()!=null){$statsJ->setMMDQ($datebdd->getMMDQ()->getId());}
-			if($datebdd->getSMDQ()!=null){$statsJ->setSMDQ($datebdd->getSMDQ()->getId());}
-			if($datebdd->getFfMDQ()!=null){$statsJ->setFfMDQ($datebdd->getFfMDQ()->getId());}
-			if($datebdd->getLxMDQ()!=null){$statsJ->setLxMDQ($datebdd->getLxMDQ()->getId());}
-			if($datebdd->getArMDQ()!=null){$statsJ->setArMDQ($datebdd->getArMDQ()->getId());}
-			if($datebdd->getMuMDQ()!=null){$statsJ->setMuMDQ($datebdd->getMuMDQ()->getId());}
+			if($datebdd->getRMDQ()!==null){$statsJ->setRMDQ($datebdd->getRMDQ()->getId());}
+			if($datebdd->getMMDQ()!==null){$statsJ->setMMDQ($datebdd->getMMDQ()->getId());}
+			if($datebdd->getSMDQ()!==null){$statsJ->setSMDQ($datebdd->getSMDQ()->getId());}
+			if($datebdd->getFfMDQ()!==null){$statsJ->setFfMDQ($datebdd->getFfMDQ()->getId());}
+			if($datebdd->getLxMDQ()!==null){$statsJ->setLxMDQ($datebdd->getLxMDQ()->getId());}
+			if($datebdd->getArMDQ()!==null){$statsJ->setArMDQ($datebdd->getArMDQ()->getId());}
+			if($datebdd->getMuMDQ()!==null){$statsJ->setMuMDQ($datebdd->getMuMDQ()->getId());}
 		//	$nbPMq=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('MasterQuizz',0,1); // 0 pour la date = depuis tjrs.
 			$nbPMq=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('MasterQuizz',$datebdd->getDay(),0);
 			$nbPFf=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('FfQuizz',$datebdd->getDay(),0);
@@ -219,8 +215,7 @@ class GeneController extends Controller
 				->addOrderBy('n.id', 'DESC');							
 	$newsA=$news->getQuery()
 			    ->getResult();	
-	/*$news=$em->getRepository('MDQAdminBundle:News')	
-		    ->recupNews();*/
+
 	$highScDay=$em->getRepository('MDQUserBundle:ScUser')		
 					->recupHighScore('scofDayMq',1,15);
 //	$highScDayTv=$em->getRepository('MDQUserBundle:ScUser')		
@@ -297,15 +292,8 @@ class GeneController extends Controller
 		$em=$this->getDoctrine()->getManager();
 		$highScKM=$em->getRepository('MDQUserBundle:ScUser')
 					->recupHighScore('highScKM',1,10);
-	/*	$scTotMq=$em->getRepository('MDQUserBundle:ScUser')
-					->recupHighScore('scTotMq',1,10);
-		$scMaxMq=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('scMaxMq',1,10);
-		$scMoyMq=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('scMoyMq',1,10);
-		$nbBrtotMq=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('nbBrtotMq',1,10);
-	*/	$prctBrtotMq=$em->getRepository('MDQUserBundle:ScUser')		
+
+		$prctBrtotMq=$em->getRepository('MDQUserBundle:ScUser')		
 					->recupHighScore('prctBrtotMq',1,10);	
 		$medMq=$em->getRepository('MDQUserBundle:ScUser')		
 					->recupHighScore('MedMq',1,10);
@@ -325,10 +313,7 @@ class GeneController extends Controller
 					->recupHighScore('nbQvalid',1,10);
 		$nbBrtot=$em->getRepository('MDQUserBundle:ScUser')		
 					->recupHighScore('nbBrtot',1,10);
-/*		$nbPMq=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('nbPMq',1,5);
-		$scofDayMq=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('scofDayMq',1,5);*/
+
 		
 		return $this->render('MDQGeneBundle:Gene:accueilHighScore.html.twig', array(
 	//	  'scTotMq' => $scTotMq,
@@ -385,10 +370,10 @@ class GeneController extends Controller
 		if($nbHighScore==0){$nbPage=1;}//gère le cas ou aucun highscore.
 		if($id!=0)
 		{			
-			$scUser=$em->getRepository('MDQUserBundle:ScUser')
+/*			$scUser=$em->getRepository('MDQUserBundle:ScUser')
 						->findOneById($id);			
-//			$rang=$em->getRepository('MDQUserBundle:ScUser')
-//						->rangScofDay2($crit, $scUser);
+			$rang=$em->getRepository('MDQUserBundle:ScUser')
+						->rangScofDay2($crit, $scUser);*/
 			$i=0;$j=0;
 			foreach($highScoreTous as $user)
 			{
@@ -440,7 +425,7 @@ class GeneController extends Controller
 						);
 		if($crit=='scMaxMq' || $crit=='scMaxMq' || $crit=='scMaxMu' || $crit=='scMaxLx' || $crit=='scMaxFf' || $crit=='scMaxAr' || $crit=='scMaxTM' || $crit=='highScKM')
 		{$linecrit1='Meilleur score';}
-		elseif($crit=='MedMq' || $crit=='MedKm'or $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu')
+		elseif($crit=='MedMq' || $crit=='MedKm' || $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu')
 		{$linecrit1='Médailles';}
 		elseif($crit=='scofDayMq' || $crit=='scofDayMu' || $crit=='scofDayLx' || $crit=='scofDayFf' || $crit=='scofDayAr' || $crit=='scofDayTM')
 		{$linecrit1='Score du jour';}

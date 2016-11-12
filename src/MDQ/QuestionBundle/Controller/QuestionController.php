@@ -5,16 +5,8 @@
 namespace MDQ\QuestionBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use MDQ\QuestionBundle\Entity\Question;
 use MDQ\QuestionBundle\Entity\QaValider;
-use MDQ\UserBundle\Entity\User;
-use MDQ\UserBundle\Entity\ScUser;
-use MDQ\QuestionBundle\Form\QuestionType;
 use MDQ\QuestionBundle\Form\QaValiderType;
-use MDQ\QuestionBundle\Entity\CritEditQ;
-use MDQ\QuestionBundle\Form\CritEditQType;
-use MDQ\QuestionBundle\Form\QuestionEditType;
-use Symfony\Component\HttpFoundation\Request; // pour les requête ajax
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
 
 class QuestionController extends Controller
@@ -23,7 +15,7 @@ class QuestionController extends Controller
 	{
 		$em=$this->getDoctrine()->getManager();
 		$gestion=$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
-		if($gestion->getPropQ()==0 and !$this->get('security.context')->isGranted('ROLE_ADMIN')){ return $this->redirect($this->generateUrl('mdqgene_accueil'));    }
+		if($gestion->getPropQ()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN')){ return $this->redirect($this->generateUrl('mdqgene_accueil'));    }
 		if (!$this->get('security.context')->isGranted('ROLE_USER')) {
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
@@ -35,9 +27,8 @@ class QuestionController extends Controller
 		$nbPMq=$user->getScUser()->getNbPMq();
 		$nbQaval7j=$em 	->getRepository('MDQQuestionBundle:QaValider')
 						->nbQaval7j($user->getId());
-	//	$nbQaval7j=2;
 		if(!$this->get('security.context')->isGranted('ROLE_ADMIN')){
-			if($nbQaval7j>4 or $nbPMq<10){ return $this->redirect($this->generateUrl('mdqgene_accueil'));}
+			if($nbQaval7j>4 || $nbPMq<10){ return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		}
 		$quest = new QaValider;
 		$quest->setAuteur($user->getScUser());
@@ -46,7 +37,6 @@ class QuestionController extends Controller
 		if ($request->getMethod() == 'POST') {
 			$form->bind($request);
 			$intitule=$quest->getIntitule();
-			//$intitule="test doublon";
 			$doublons=$em->getRepository('MDQQuestionBundle:Question')
 							->testDoublon('bddqaval', 'intitule', $intitule);
 			if ($doublons!=[]){
@@ -82,7 +72,7 @@ class QuestionController extends Controller
 		$iduser=$user->getId();
 		$idauteur=$qaval->getAuteur()->getId();		
 		$repAdmin=$qaval->getRepAdmin();
-		if($repAdmin<10 or $repAdmin>20 or $iduser!=$idauteur)
+		if($repAdmin<10 || $repAdmin>20 || $iduser!=$idauteur)
 			{return $this->redirect($this->generateUrl('mdquser_profileUAuto'));}
 			// pour ne pas sélectionner par l'URL des questions validées ou refusées.
 		$form = $this->createForm(new QaValiderType(), $qaval);
@@ -111,20 +101,14 @@ class QuestionController extends Controller
 	  if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 	  {
 		$id = $request->request->get('id');
-		  $selecteur = $request->request->get('select');
 			
-		  if ($id != null OR $id!=='Domaine')
+		  if ($id !==null || $id!=='Domaine')
 		  {   
 			$data = $this->getDoctrine()
 						   ->getManager()
 						   ->getRepository('MDQQuestionBundle:Question')
-						   ->recupTheme($id);
-			
-			  //return new JsonResponse($data);
-			  /*$data=[];
-			  $data[0]='Histoire Theme 1';
-			  $data[1]='Histoire Theme 2';*/
-			  
+						   ->recupTheme($id);			
+
 			   return new JsonResponse($data);
 		  }
 	  }
@@ -139,15 +123,15 @@ class QuestionController extends Controller
 	  }
 		$em = $this->getDoctrine()->getManager();
 		$gestion=$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
-	  if($gestion->getSignalE()==1 or $this->get('security.context')->isGranted('ROLE_ADMIN'))
+	  if($gestion->getSignalE()==1 || $this->get('security.context')->isGranted('ROLE_ADMIN'))
 	  {
 		$scuser=$user->getScUser();
 		$request = $this->getRequest();	 
-		if($request->isXmlHttpRequest() and $user->getAllowError==1) // pour vérifier la présence d'une requete Ajax
+		if($request->isXmlHttpRequest() && $user->getAllowError==1) // pour vérifier la présence d'une requete Ajax
 		{
 			$idQ = $request->request->get('idQ');	
 			$taberror = $request->request->get('taberror');	
-			if($idQ!=null and $taberror!=null)
+			if($idQ!==null && $taberror!==null)
 			{
 				
 				$question=$em->getRepository('MDQQuestionBundle:Question')
@@ -159,7 +143,7 @@ class QuestionController extends Controller
 					$id=$scuserb->getId();
 					array_push($tabIdUser_error, $id);
 				}
-				if(in_array($scuser->getId(), $tabIdUser_error)!=true)
+				if(in_array($scuser->getId(), $tabIdUser_error)!==true)
 				{
 					$taberrorQ=$question->getTaberror();
 					$taberrorQ[0]=$taberrorQ[0]+$taberror[0];
