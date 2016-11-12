@@ -3,7 +3,6 @@
 namespace MDQ\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use MDQ\UserBundle\Entity\ScUser;
 
 /**
  * ScUserRepository
@@ -113,7 +112,7 @@ class ScUserRepository extends EntityRepository
 			 // Au tout debut, me permet de choisir ceux que j'inclus ou non (les supprime, l'admin, ...)
 			
 		
-		if($crit=='MedMq' || $crit=='MedKm'or $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu')
+		if($crit=='MedMq' || $crit=='MedKm' || $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu')
 		{
 			if($crit=='MedMq'){$type='mq';$clsmt='highClassDayMq';}
 			elseif($crit=='MedKm'){$type='km'; $clsmt='highClassKM';}
@@ -222,7 +221,7 @@ class ScUserRepository extends EntityRepository
 			->andwhere('u.roles NOT LIKE :roles2')
 			->setParameter('roles1', '%"ROLE_ADMIN"%')
 			->setParameter('roles2', '%"ROLE_SUPER_ADMIN"%');
-		if($crit=='MedMq' || $crit=='MedKm'or $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu'){
+		if($crit=='MedMq' || $crit=='MedKm' || $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu'){
 			if($crit=='MedMq'){$clsmt='highClassDayMq';}
 			elseif($crit=='MedKm'){$clsmt='highClassKM';}
 			elseif($crit=='MedTm'){$clsmt='highClassDayTM';}
@@ -270,195 +269,10 @@ class ScUserRepository extends EntityRepository
 		}// tout ca pour n'envoyer qu'un tableau d'id.
 		return $tab2;
 	}
-/*
-	public function rangScofDay2($crit, ScUser $scUser)
-	{
-		if($crit=='MedMq' || $crit=='MedKm'or $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu'){
-			/*CALCULER LE RANG POUR LES MEDAILLES
-				- D'abord, ceux qui ont plus de medailles d'or,
-				- Puis parmis ceux qui en ont autant, ceux qui ont plus de medaille d'argent
-				- Puis parmis ceux qui ont autant d'argent et d'or, Bz
-				- Idem pour Ch,
-				- puis Pour Ct
-				- Puis si egalite, Id.
-				- Si 0 medailles, meilleur classement et si egalite : id
-				
-				Idee : plutot que toute cette partie, une fois que highscore tire, possibilite de 
-				mettre une boucle qui passe es resultats a partir du premier, jsuqu'a arriver a celui recherche
-				Si arrive au cherche : stop boucle, recuperation du rang.
-				Si n'y arrive pas car pas present (arrivent au bout de la liste : range 1
-				Du coup pour celui-ci, il faut plutot passer par le Gene controller.
-			*/
-/*			$results=['test'];
-		}
-		else
-	{	if($crit=='scofDayMq'){$score=$scUser->getScofDayMq();}
-		elseif($crit=='scTotMq'){$score=$scUser->getScTotMq();}
-		elseif($crit=='sumtop10month'){$score=$scUser->getSumtop10month();}
-		elseif($crit=='scMoyMq'){$score=$scUser->getScMoyMq();}
-		elseif($crit=='prctBrtotMq'){$score=$scUser->getPrctBrtotMq();}
-		elseif($crit=='monthHighScMq'){$score=$scUser->getMonthHighScMq();}
-		elseif($crit=='scMaxMq'){$score=$scUser->getScMaxMq();}
-		elseif($crit=='nbPMq'){$score=$scUser->getNbPMq();}
-		elseif($crit=='highClassDayMq'){$score=$scUser->getHighClassDayMq();}
-		elseif($crit=='nbBrtotMq'){$score=$scUser->getNbBrtotMq();}
-		elseif($crit=='scofDaySx'){$score=$scUser->getScofDaySx();}
-		elseif($crit=='scofDayTv'){$score=$scUser->getScofDayTv();}		
-		elseif($crit=='scMoySx'){$score=$scUser->getScMoySx();}
-		elseif($crit=='scMoyTv'){$score=$scUser->getScMoyTv();}		
-		elseif($crit=='scofDayTM'){$score=$scUser->getScofDayTM();}
-		elseif($crit=='scMaxTM'){$score=$scUser->getScMaxTM();}
-		elseif($crit=='highClassDayTM'){$score=$scUser->getHighClassDayTM();}
-		elseif($crit=='sumtop5weekMq'){$score=$scUser->getSumtop5weekMq();}
-		elseif($crit=='hightop5weekMq'){$score=$scUser->getHightop5weekMq();}
-		elseif($crit=='highClasstop5wMq'){$score=$scUser->getHighClasstop5wMq();}
-		elseif($crit=='scofDayMu'){$score=$scUser->getScofDayMu();}
-		elseif($crit=='scofDayAr'){$score=$scUser->getScofDayAr();}
-		elseif($crit=='scofDayFf'){$score=$scUser->getScofDayFf();}
-		elseif($crit=='scofDayLx'){$score=$scUser->getScofDayLx();}
-		elseif($crit=='scMoyLx'){$score=$scUser->getScMoyLx();}
-		elseif($crit=='scMoyAr'){$score=$scUser->getScMoyAr();}
-		elseif($crit=='scMoyFf'){$score=$scUser->getScMoyFf();}
-		elseif($crit=='scMoyMu'){$score=$scUser->getScMoyMu();}
-		elseif($crit=='kingMaster'){$score=$scUser->getKingMaster();}
-		$tab=$this->_em->createQueryBuilder();
-		$tab->select('s.'.$crit)
-			->from('MDQUserBundle:ScUser', 's')
-			->where('s.'.$crit.' IS NOT NULL');
-		if($crit=="prctBrtotMq") {$tab->andWhere('s.nbQtotMq>99');}
-		if($crit=="ScMoyMq") {$tab->andWhere('s.nbPMq>9');}
-		elseif($crit=="ScMoyAr") {$tab->andWhere('s.nbPAr>9');}
-		elseif($crit=="ScMoyLx") {$tab->andWhere('s.nbPLx>9');}
-		elseif($crit=="ScMoyMu") {$tab->andWhere('s.nbPMu>9');}
-		elseif($crit=="ScMoyFf") {$tab->andWhere('s.nbPFf>9');}
-		if($crit=="highClassDayMq") {$tab->andWhere('s.numHighClassDayMq IS NOT NULL')
-									     ->andWhere('s.numHighClassDayMq >0')
-										 ->andWhere('s.'.$crit.'< :score')			
-										->setParameter('score',$score)
-										->orderBy('s.'.$crit, 'ASC')
-										->addOrderBy('s.numHighClassDayMq','DESC');
-			}
-		elseif($crit=="highClasstop5wMq") {$tab->andWhere('s.numHighClasstop5wMq IS NOT NULL')
-									     ->andWhere('s.numHighClasstop5wMq >0')
-										 ->andWhere('s.'.$crit.'< :score')			
-										->setParameter('score',$score)
-										->orderBy('s.'.$crit, 'ASC')
-										->addOrderBy('s.numHighClasstop5wMq','DESC');
-			}
-		elseif($crit=="highClassDayTM") {$tab->andWhere('s.numHighClassDayTM IS NOT NULL')
-									     ->andWhere('s.numHighClassDayTM >0')
-										 ->andWhere('s.'.$crit.'< :score')			
-										->setParameter('score',$score)
-										->orderBy('s.'.$crit, 'ASC')
-										->addOrderBy('s.numHighClassDayTM','DESC');
-			}
-		else{
-		$tab->andWhere('s.'.$crit.'> :score')			
-			->setParameter('score',$score)
-			->orderBy('s.'.$crit, 'DESC');
-			}
-		$results=$tab->getQuery()->getResult();// Tous les Scores inferieurs aux score du User		  
-		$tab2=$this->_em->createQueryBuilder();
-		$tab2->select('s2.'.$crit)
-			 ->from('MDQUserBundle:ScUser', 's2')
-			 ->where('s2.'.$crit.'= :score')			
-			->setParameter('score',$score);
-		if($crit=="prctBrtotMq") {$tab2->andWhere('s2.nbQtotMq>99');}
-		if($crit=="ScMoyMq") {$tab2->andWhere('s2.nbPMq>9');}
-		if($crit=="highClassDayMq") {$tab2->andWhere('s2.numHighClassDayMq>:num')
-										->setParameter('num',$scUser->getNumHighClassDayMq())
-										->orderBy('s2.numHighClassDayMq','DESC');
-			}
-		elseif($crit=="highClasstop5wMq") {$tab2->andWhere('s2.numHighClasstop5wMq>:num')
-										->setParameter('num',$scUser->getNumHighClasstop5wMq())
-										->orderBy('s2.numHighClasstop5wMq','DESC');
-			}
-		elseif($crit=="highClassDayTM") {$tab2->andWhere('s2.numHighClassDayTM>:num')
-										->setParameter('num',$scUser->getNumHighClassDayTF())
-										->orderBy('s2.numHighClassDayTM','DESC');
-			}
-		else{
-		$tab2->andWhere('s2.id< :id')			
-			->setParameter('id',$scUser->getId())
-			->orderBy('s2.id', 'DESC');			
-			}
-		
-		$result2=$tab2->getQuery()->getResult();// Tous les scores egal au score user, avec un id inferieur - pour les core normaux ; pour les classement : meilleurs classement similaire, mais plus souvent.
-		foreach($result2 as $res)
-			{
-			array_push($results,$res);
-			}
-		$result3=[];
-		if($crit=="highClassDayMq")
-			{
-			$tab3=$this->_em->createQueryBuilder();
-			$tab3->select('s3.'.$crit)
-				->from('MDQUserBundle:ScUser', 's3')
-				->where('s3.'.$crit.'= :score')			
-				->setParameter('score',$score)
-				->andWhere('s3.numHighClassDayMq=:num')
-				->setParameter('num',$scUser->getNumHighClassDayMq())
-				->andWhere('s3.id< :id')			
-				->setParameter('id',$scUser->getId())
-				->orderBy('s3.id', 'DESC');
-			$tab3->addSelect('s3.numHighClassDayMq');// pour les tests
-			$tab3->leftJoin('s3.usermap', 'u3') // A enlever ensuite, pour tester pb.
-             ->addSelect('u3.username','u3.id');// test	
-			$result3=$tab3->getQuery()->getResult();// Pour les classements : si classement identique et nb de fois identique, classement par id.
-			foreach($result3 as $res)
-				{
-				array_push($results,$res);
-				}
-			}
-		elseif($crit=="highClasstop5wMq")
-			{
-			$tab3=$this->_em->createQueryBuilder();
-			$tab3->select('s3.'.$crit)
-				->from('MDQUserBundle:ScUser', 's3')
-				->where('s3.'.$crit.'= :score')			
-				->setParameter('score',$score)
-				->andWhere('s3.numHighClasstop5wMq=:num')
-				->setParameter('num',$scUser->getNumHighClasstop5wMq())
-				->andWhere('s3.id< :id')			
-				->setParameter('id',$scUser->getId())
-				->orderBy('s3.id', 'DESC');
-			$tab3->addSelect('s3.numHighClasstop5wMq');// pour les tests
-			$tab3->leftJoin('s3.usermap', 'u3') // A enlever ensuite, pour tester pb.
-             ->addSelect('u3.username','u3.id');// test	
-			$result3=$tab3->getQuery()->getResult();
-			foreach($result3 as $res)
-				{
-				array_push($results,$res);
-				}
-			}
-		elseif($crit=="highClassDayTM")
-			{
-			$tab3=$this->_em->createQueryBuilder();
-			$tab3->select('s3.'.$crit)
-				->from('MDQUserBundle:ScUser', 's3')
-				->where('s3.'.$crit.'= :score')			
-				->setParameter('score',$score)
-				->andWhere('s3.numHighClassDayTM=:num')
-				->setParameter('num',$scUser->getNumHighClassDayTF())
-				->andWhere('s3.id< :id')			
-				->setParameter('id',$scUser->getId())
-				->orderBy('s3.id', 'DESC');
-			$tab3->addSelect('s3.numHighClassDayTM');// pour les tests
-			$tab3->leftJoin('s3.usermap', 'u3') // A enlever ensuite, pour tester pb.
-             ->addSelect('u3.username','u3.id');// test	
-			$result3=$tab3->getQuery()->getResult();
-			foreach($result3 as $res)
-				{
-				array_push($results,$res);
-				}
-			}		
-	}	$rang=count($results)+1;		
-		return $rang;
-	//	return $results;
-	}*/
+
 	public function majBddScQ($scUser, $game, $dom1, $br)
 	{
-			function MajStatGame($scUser, $game, $br)
+			function MajStatGame(ScUser $scUser, $game, $br)
 			{
 				if($game=='MasterQuizz')
 				{
@@ -471,7 +285,7 @@ class ScUserRepository extends EntityRepository
 				}
 				return;
 			}
-			function MajNbQ($scUser, $dom1)
+			function MajNbQ(ScUser $scUser, $dom1)
 			{
 				if($dom1=='Histoire'){$nbQ=$scUser->getNbQhMq()+1;
 										$scUser->setNbQhMq($nbQ);}
@@ -499,7 +313,7 @@ class ScUserRepository extends EntityRepository
 										$scUser->setNbQSx($nbQ);}								
 				return $nbQ;
 			}
-			function MajNbBr($scUser, $dom1, $br)
+			function MajNbBr(ScUser $scUser, $dom1, $br)
 			{				
 				if($br==1){$scUser->setNbBrtot($scUser->getNbBrtot()+1);}
 				if($dom1=='Histoire'){$nbBr=$scUser->getNbBrhMq()+$br;
@@ -528,7 +342,7 @@ class ScUserRepository extends EntityRepository
 									$scUser->setNbBrSx($nbBr);}
 				return $nbBr;
 			}
-			function MajPrctBr($scUser, $dom1, $nbQ, $nbBr)
+			function MajPrctBr(ScUser $scUser, $dom1, $nbQ, $nbBr)
 			{
 				if($dom1=='Histoire'){$scUser->setPrctBrhMq($nbBr*100/$nbQ);}
 				elseif($dom1=='Géographie'){$scUser->setPrctBrgMq($nbBr*100/$nbQ);}
@@ -574,7 +388,7 @@ class ScUserRepository extends EntityRepository
 	public function majClassement($tabUsers, $clsmt, $tabMaitres)
 	{
 		include_once'ScUserFonctionsMajQuot.php';
-		$i=0;$j=0;$sc=0;$tab1[0]=null;$nbExae=0;$m=0;$n=0;//$h=0;
+		$i=0;$j=0;$sc=0;$tab1[0]=null;$nbExae=0;$m=0;$n=0;
 			//$i : variable boucle, $j: variable rang =$i sauf si egalite.
 			//$sc pour gerer les situations d'egalites de score
 			//$nbExae : nb de joueur exaeco - pas indispensable.
@@ -585,18 +399,15 @@ class ScUserRepository extends EntityRepository
 				$j=testEqual($clsmt, $scUser, $i, $j, $sc);
 				majHighScore($clsmt, $scUser, $j);
 				if($j<11){majMedailles($clsmt, $scUser, $j);}
-			//	if($i==1 && in_array($scUser, $tabMaitres)!=true){$tab1[0]=$scUser;$m=1;}
-				if($m==0 && in_array($scUser, $tabMaitres)!=true){$tab1[0]=$scUser;$m=1;}
+				if($m==0 && in_array($scUser, $tabMaitres)!==true){$tab1[0]=$scUser;$m=1;}
 			//	elseif($j==$h && $nbExae==($i-2) && in_array($scUser, $tabMaitres)!=true){array_push($tab1,$scUser);$nbExae++;}
-				elseif($m==1 && $n==0 && $j!=$i && in_array($scUser, $tabMaitres)!=true){array_push($tab1,$scUser);$nbExae++;}
+				elseif($m==1 && $n==0 && $j!=$i && in_array($scUser, $tabMaitres)!==true){array_push($tab1,$scUser);$nbExae++;}
 			//	elseif($m==1 && $n==0 && $j!=$i && in_array($scUser, $tabMaitres)=true){$n=0;}
 				elseif($m==1 && $n==0 && $j==$i){$n=1;}// Bien garder le $j==$i, comme ca si l'user est deja ans la tab maitre et que egalite de score, $n ne passe pas a 1.
 				//pour les suivant, tester aussi que $scUser n'appartient pas a tabMaitres.		
 		
 				calcOldScore($clsmt, $scUser);
 				remiseAzero($clsmt, $scUser);
-				
-			//	$h=$j;
 			}
 			$tabMaster=majTabMaitres($clsmt, $tabMaitres, $nbExae, $tab1);
 			

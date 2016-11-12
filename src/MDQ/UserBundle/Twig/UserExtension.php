@@ -2,8 +2,6 @@
 // src/MDQ/UserBundle/Twig/UserExtension.php
 
 namespace MDQ\UserBundle\Twig;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Bundle\TwigBundle\Loader\FilesystemLoader;
 
 class UserExtension extends \Twig_Extension
 {
@@ -15,7 +13,6 @@ class UserExtension extends \Twig_Extension
 	}
 	public function calculage($date)
 	{	
-	 // sscanf($date, "%4s/%2s/%2s", $an, $mois, $jour);
 	$dna=$date;
 	  
 	  $now = date("d/m/Y");

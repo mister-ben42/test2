@@ -5,12 +5,7 @@
 namespace MDQ\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use MDQ\UserBundle\Entity\CritEditU;
-use MDQ\UserBundle\Form\CritEditUType;
 use MDQ\UserBundle\Entity\User;
-use MDQ\UserBundle\Form\UserBlockType;
-use MDQ\AdminBundle\Entity\Gestion;
-use Symfony\Component\HttpFoundation\Request;
 
 
 class UserController extends Controller
@@ -18,9 +13,8 @@ class UserController extends Controller
 	public function profileUAction(User $user)
 	{
 		$user_connect = $this->container->get('security.context')->getToken()->getUser();
-        if ($user_connect===$user and $user_connect->getId()==$user->getId()) {
+        if ($user_connect===$user && $user_connect->getId()==$user->getId()) {
 			return $this->redirect($this->generateUrl('mdquser_profileUAuto'));
-            //throw new AccessDeniedException('This user does not have access to this section.');
         }
 		$session = $this->getRequest()->getSession();
 		$pagePrec="none";
@@ -43,8 +37,7 @@ class UserController extends Controller
 	{
 		$user = $this->container->get('security.context')->getToken()->getUser();
         if ($user===null) {// Ne fonctionne pas du tout 
-		// Il faut que si tentative de connection alors que pas connecté, retour à la page d'accueil.
-			return $this->redirect($this->generateUrl('mdqgene_accueil'));
+				return $this->redirect($this->generateUrl('mdqgene_accueil'));
         }
 		if (!$this->get('security.context')->isGranted('ROLE_USER')) {// ça ça marche.
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));

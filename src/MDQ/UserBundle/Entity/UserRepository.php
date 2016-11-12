@@ -23,12 +23,12 @@ class UserRepository extends EntityRepository
 				  ->andWhere('a.locked=0');}
 		elseif($compte==1){$qb->andWhere('a.supprime=1');}
 		elseif($compte==2){$qb->andWhere('a.locked=1');}
- 		if($nbP!="none" or $triStats!="none"){$qb->leftJoin('a.scUser','sc');}
+ 		if($nbP!="none" || $triStats!="none"){$qb->leftJoin('a.scUser','sc');}
 		if($nbP!="none"){$qb->andWhere('sc.nbPtot'.$nbP);}
 		if($triUser=="last_login"){$triUser="lastLogin";}
 		if($triStats=="none"){$qb->orderBy('a.'.$triUser, $sens);}
 		else{
-		      if($triStats=="totMed" or $triStats=="mq1"){
+		      if($triStats=="totMed" || $triStats=="mq1"){
 		      $qb->leftJoin('sc.medailles','med');
 		      $qb->orderBy('med.'.$triStats, $sens);
 		      }
@@ -46,7 +46,7 @@ class UserRepository extends EntityRepository
 		$tabdesNum=[]; $nbmax=$nbBotsSelect-1;
 		for($i=0;$i<$nbBots;$i++)
 		{
-			while (!isset($nbtire) OR in_array($nbtire, $tabdesNum)==true)
+			while (!isset($nbtire) OR in_array($nbtire, $tabdesNum)===true)
 			{
 			$nbtire=mt_rand(0,$nbmax);				
 			}		
@@ -59,10 +59,7 @@ class UserRepository extends EntityRepository
 				$qb->orWhere('u.id = :iduser'.$i)
 				->setParameter('iduser'.$i, $botsSelects2[$tabdesNum[$i]]);
 			}
-			/*$qb->orwhere('u.id = :iduser')
-				->setParameter('iduser', 4)
-			   ->orWhere('u.id = :iduser2')
-				->setParameter('iduser2', 5);*/
+
 
 		return $qb->getQuery()
 				->getResult();
