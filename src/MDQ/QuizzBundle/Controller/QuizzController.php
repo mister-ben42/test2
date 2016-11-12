@@ -32,21 +32,21 @@ class QuizzController extends Controller
 	$user = $this->container->get('security.context')->getToken()->getUser();
 	$em = $this->getDoctrine()->getManager();
 		$gestion=$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
-        if ($user===null or $game=="MasterQuizz" and $gestion->getMq()==0 and !$this->get('security.context')->isGranted('ROLE_ADMIN')
-			 or $game=="FfQuizz" and $gestion->getFf()==0 and !$this->get('security.context')->isGranted('ROLE_ADMIN')
-			 or $game=="ArQuizz" and $gestion->getAr()==0 and !$this->get('security.context')->isGranted('ROLE_ADMIN')
-			 or $game=="McQuizz" and $gestion->getMc()==0 and !$this->get('security.context')->isGranted('ROLE_ADMIN')
-			 or $game=="LxQuizz" and $gestion->getLx()==0 and !$this->get('security.context')->isGranted('ROLE_ADMIN'))
+        if ($user===null || $game=="MasterQuizz" && $gestion->getMq()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN')
+			 || $game=="FfQuizz" && $gestion->getFf()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN')
+			 || $game=="ArQuizz" && $gestion->getAr()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN')
+			 || $game=="McQuizz" && $gestion->getMc()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN')
+			 || $game=="LxQuizz" && $gestion->getLx()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN'))
         {// pas sûr que suffisant en terme de sécurité - bien différent de test que intance user (cf profilecontroller de FOSUser?
             return $this->redirect($this->generateUrl('mdqgene_accueil'));
         }
 		// **************** Gestion des Jetons ********* //////////////
 	/*	$nbJtotMq=$user->getScUser()->getNbJdayMq()+$user->getScUser()->getNbJMq();
 		$nbJtotQnF=$user->getScUser()->getNbJdayQnF()+$user->getScUser()->getNbJQnF();
-		if($game=="MasterQuizz" and $nbJtotMq==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));
+		if($game=="MasterQuizz" && $nbJtotMq==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
-		elseif($game=="MasterQuizz" and $user->getScUser()->getNbJdayMq()!=0){$user->getScUser()->setNbJdayMq($user->getScUser()->getNbJdayMq()-1);}
-		elseif($game=="MasterQuizz" and $user->getScUser()->getNbJMq()!=0){$user->getScUser()->setNbJMq($user->getScUser()->getNbJMq()-1);}
+		elseif($game=="MasterQuizz" && $user->getScUser()->getNbJdayMq()!=0){$user->getScUser()->setNbJdayMq($user->getScUser()->getNbJdayMq()-1);}
+		elseif($game=="MasterQuizz" && $user->getScUser()->getNbJMq()!=0){$user->getScUser()->setNbJMq($user->getScUser()->getNbJMq()-1);}
 		elseif($nbJtotQnF==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		elseif($user->getScUser()->getNbJdayQnF()!=0){$user->getScUser()->setNbJdayQnF($user->getScUser()->getNbJdayQnF()-1);}
 		else{$user->getScUser()->setNbJQnF($user->getScUser()->getNbJQnF()-1);}
@@ -58,9 +58,9 @@ class QuizzController extends Controller
 			// On récupère l'EntityManager
 		
 	    if($game=="MasterQuizz"){$nbP=5;$nbQ=10;}
-		elseif($game=="MuQuizz" or $game=="FfQuizz" or $game=="ArQuizz" or $game=="LxQuizz"){$nbP=1;$nbQ=8;}
-		elseif($game=="SexyQuizz" or $game=="TvQuizz"){$nbP=1;$nbQ=8;}
-		if($game=="FfQuizz" or $game=="LxQuizz"){$nbP=4;}// Temporaire à modifier ensuite
+		elseif($game=="MuQuizz" || $game=="FfQuizz" || $game=="ArQuizz" || $game=="LxQuizz"){$nbP=1;$nbQ=8;}
+		elseif($game=="SexyQuizz" || $game=="TvQuizz"){$nbP=1;$nbQ=8;}
+		if($game=="FfQuizz" || $game=="LxQuizz"){$nbP=4;}// Temporaire à modifier ensuite
 		$derPjoues = $em->getRepository('MDQQuizzBundle:PartieQuizz')
 					 ->getDerParties($iduser,$game,$nbP);
 		$tabDerQ=[];
@@ -266,7 +266,7 @@ class QuizzController extends Controller
 			$question = $em	->getRepository('MDQQuestionBundle:Question')				
 						->find($idQ);
 		// ************ définition du type de jeu **********************
-			if($question->getDom1()=='Histoire' OR $question->getDom1()=='Géographie' OR $question->getDom1()=='Sciences et nature' OR $question->getDom1()=='Arts et Littérature' OR $question->getDom1()=='Sports et loisirs' OR $question->getDom1()=='Divers')
+			if($question->getDom1()=='Histoire' || $question->getDom1()=='Géographie' || $question->getDom1()=='Sciences et nature' || $question->getDom1()=='Arts et Littérature' || $question->getDom1()=='Sports et loisirs' || $question->getDom1()=='Divers')
 				{$game='MasterQuizz'; $nbQparP=10; $dom1=$question->getDom1();}
 			elseif($question->getDom1()=='SexyQuizz'){$game='QuizzenFolie'; $dom1='SexyQuizz';$nbQparP=8;}
 			elseif($question->getDom1()=='TvQuizz'){$game='QuizzenFolie'; $dom1='TvQuizz';$nbQparP=8;}
@@ -328,7 +328,7 @@ class QuizzController extends Controller
 		/////// ************ mise à jour de la bdd userscore ************ ///////////////////
 
 			// Je tente avec les fonctions
-			if($game=='MediaQuizz' or $game=='QuizzenFolie' or $game=='MasterQuizz')
+			if($game=='MediaQuizz' || $game=='QuizzenFolie' || $game=='MasterQuizz')
 			{			
 			if($rep==$question->getBrep()){$br=1;}
 			else{$br=0;}

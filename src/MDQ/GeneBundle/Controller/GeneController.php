@@ -162,14 +162,14 @@ class GeneController extends Controller
 				$i++;
 				$j=$i;//j,h et sc, servent a gerer les situations de exaeco.
 				if($scUser->getSumtop10month()==$sc){$j=$h;}
-				if($scUser->getHighClassMonthMq()==NULL OR $j<$scUser->getHighClassMonthMq()){
+				if($scUser->getHighClassMonthMq()==NULL || $j<$scUser->getHighClassMonthMq()){
 				$scUser->setHighClassMonthMq($j);
 				$scUser->setNumHighClassMonthMq(1);
 				}
 				else if($j==$scUser->getHighClassMonthMq()){			
 					$scUser->setNumHighClassMonthMq($scUser->getNumHighClassMonthMq()+1);					
 				}
-				if($scUser->getMonthHighScMq()==NULL OR $scUser->getSumtop10month()>$scUser->getMonthHighScMq()){
+				if($scUser->getMonthHighScMq()==NULL || $scUser->getSumtop10month()>$scUser->getMonthHighScMq()){
 					$scUser->setMonthHighScMq($scUser->getSumtop10month());
 				}
 				$sc=$scUser->getSumtop10month();
@@ -358,18 +358,18 @@ class GeneController extends Controller
 			$id_connect=$user_connect->getScUser()->getId();
 		}
 		//idee : imaginer un moyen de voir ou se situe le user dans ce classement
-		if ($crit=="none" OR $crit!="scTotMq" AND $crit!="scofDayMq" AND $crit!="scMoyMq" 
-		AND $crit!="prctBrtotMq" AND $crit!="scMaxMq" AND $crit!="nbPMq" 
-		AND $crit!="nbBrtotMq" AND $crit!="scofDayLx" AND $crit!="scofDayAr"
-		AND $crit!="scofDayFf"AND $crit!="scofDayMu" AND $crit!="scofDayTM"  
-		AND $crit!="scMoyLx" AND $crit!="scMoyAr" AND $crit!="scMoyFf"AND $crit!="scMoyMu"
-		AND $crit!="scMaxLx" AND $crit!="scMaxAr" AND $crit!="scMaxFf"AND $crit!="scMaxMu"
-		AND $crit!="scMaxTM" AND $crit!="kingMaster"
-		AND $crit!="MedMq" AND $crit!="MedKm" AND $crit!="MedTm" AND $crit!="MedAr" AND $crit!="MedLx"
-		AND $crit!="MedFf" AND $crit!="MedMu" AND $crit!="highScKM" AND $crit!="nbQvalid"
-		AND $crit!="nbBrtot" AND $crit!="nbQtotMq" AND $crit!="totMed"
-		AND $crit!="prctBrhMq" AND $crit!="prctBrgMq" AND $crit!="prctBrdMq" AND $crit!="prctBrslMq"
-		AND $crit!="prctBralMq"AND $crit!="prctBrsnMq") 
+		if ($crit=="none" || $crit!="scTotMq" && $crit!="scofDayMq" && $crit!="scMoyMq" 
+		&& $crit!="prctBrtotMq" && $crit!="scMaxMq" && $crit!="nbPMq" 
+		&& $crit!="nbBrtotMq" && $crit!="scofDayLx" && $crit!="scofDayAr"
+		&& $crit!="scofDayFf"&& $crit!="scofDayMu" && $crit!="scofDayTM"  
+		&& $crit!="scMoyLx" && $crit!="scMoyAr" && $crit!="scMoyFf"&& $crit!="scMoyMu"
+		&& $crit!="scMaxLx" && $crit!="scMaxAr" && $crit!="scMaxFf"&& $crit!="scMaxMu"
+		&& $crit!="scMaxTM" && $crit!="kingMaster"
+		&& $crit!="MedMq" && $crit!="MedKm" && $crit!="MedTm" && $crit!="MedAr" && $crit!="MedLx"
+		&& $crit!="MedFf" && $crit!="MedMu" && $crit!="highScKM" && $crit!="nbQvalid"
+		&& $crit!="nbBrtot" && $crit!="nbQtotMq" && $crit!="totMed"
+		&& $crit!="prctBrhMq" && $crit!="prctBrgMq" && $crit!="prctBrdMq" && $crit!="prctBrslMq"
+		&& $crit!="prctBralMq"&& $crit!="prctBrsnMq") 
 		{//mettre none en defaut dans l'url et ensuite renvoyer sur la page d'accueil de hall of hame.	
 				return $this->redirect($this->generateUrl('mdqgene_accueilHighScore'));
 			}
@@ -438,15 +438,15 @@ class GeneController extends Controller
 						'prctBrslMq'=>'Pour figurer dans ce classement, il faut avoir répondu à 50 questions de la catégorie "Sports et loisirs" au MasterQuizz',
 						'prctBrsnMq'=>'Pour figurer dans ce classement, il faut avoir répondu à 50 questions de la catégorie "Sciences et nature" au MasterQuizz',
 						);
-		if($crit=='scMaxMq' or $crit=='scMaxMq' or $crit=='scMaxMu' or $crit=='scMaxLx' or $crit=='scMaxFf' or $crit=='scMaxAr' or $crit=='scMaxTM' or $crit=='highScKM')
+		if($crit=='scMaxMq' || $crit=='scMaxMq' || $crit=='scMaxMu' || $crit=='scMaxLx' || $crit=='scMaxFf' || $crit=='scMaxAr' || $crit=='scMaxTM' || $crit=='highScKM')
 		{$linecrit1='Meilleur score';}
-		elseif($crit=='MedMq' or $crit=='MedKm'or $crit=='MedTm' or $crit=='MedAr' or $crit=='MedFf' or $crit=='MedLx' or $crit=='MedMu')
+		elseif($crit=='MedMq' || $crit=='MedKm'or $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu')
 		{$linecrit1='Médailles';}
-		elseif($crit=='scofDayMq' or $crit=='scofDayMu' or $crit=='scofDayLx' or $crit=='scofDayFf' or $crit=='scofDayAr' or $crit=='scofDayTM')
+		elseif($crit=='scofDayMq' || $crit=='scofDayMu' || $crit=='scofDayLx' || $crit=='scofDayFf' || $crit=='scofDayAr' || $crit=='scofDayTM')
 		{$linecrit1='Score du jour';}
-		elseif($crit=='scMoyMq' or $crit=='scMoyMu' or $crit=='scMoyLx' or $crit=='scMoyFf' or $crit=='scMoyAr')
+		elseif($crit=='scMoyMq' || $crit=='scMoyMu' || $crit=='scMoyLx' || $crit=='scMoyFf' || $crit=='scMoyAr')
 		{$linecrit1='Score moyen';}
-		elseif($crit=='prctBrtotMq' or $crit=='prctBrhMq' or $crit=='prctBrgMq' or $crit=='prctBrdMq' or $crit=='prctBrsnMq' or $crit=='prctBralMq' or $crit=='prctBrslMq')
+		elseif($crit=='prctBrtotMq' || $crit=='prctBrhMq' || $crit=='prctBrgMq' || $crit=='prctBrdMq' || $crit=='prctBrsnMq' || $crit=='prctBralMq' || $crit=='prctBrslMq')
 		{$linecrit1='% de bonnes réponses';}		
 		else
 		{
@@ -461,19 +461,19 @@ class GeneController extends Controller
 			$linecrit1=$tabcrit1[$crit];
 		}
 		
-		if($crit=='prctBrtotMq' or $crit=='scMoyMq' or $crit=='scMaxMq' or $crit=='scofDayMq' or $crit=='nbBrtotMq' or $crit=='scTotMq' or $crit=='MedMq' or $crit=='nbQtotMq')
+		if($crit=='prctBrtotMq' || $crit=='scMoyMq' || $crit=='scMaxMq' || $crit=='scofDayMq' || $crit=='nbBrtotMq' || $crit=='scTotMq' || $crit=='MedMq' || $crit=='nbQtotMq')
 		{$linecrit2='au MasterQuizz';}
-		elseif($crit=='scofDayLx' or $crit=='scMoyLx' or $crit=='scMaxLx' or $crit=='MedLx')
+		elseif($crit=='scofDayLx' || $crit=='scMoyLx' || $crit=='scMaxLx' || $crit=='MedLx')
 		{$linecrit2='au Quizz Lieux du monde';}
-		elseif($crit=='scofDayMu' or $crit=='scMoyMu' or $crit=='scMaxMu' or $crit=='MedMu')
+		elseif($crit=='scofDayMu' || $crit=='scMoyMu' || $crit=='scMaxMu' || $crit=='MedMu')
 		{$linecrit2='au Quizz Musique';}
-		elseif($crit=='scofDayFf' or $crit=='scMoyFf' or $crit=='scMaxFf' or $crit=='MedFf')
+		elseif($crit=='scofDayFf' || $crit=='scMoyFf' || $crit=='scMaxFf' || $crit=='MedFf')
 		{$linecrit2='au Quizz Nature';}
-		elseif($crit=='scofDayAr' or $crit=='scMoyAr' or $crit=='scMaxAr' or $crit=='MedAr')
+		elseif($crit=='scofDayAr' || $crit=='scMoyAr' || $crit=='scMaxAr' || $crit=='MedAr')
 		{$linecrit2='au Quizz Art';}
-		elseif($crit=='scofDayTM' or $crit=='scMaxTM' or $crit=='MedTM')
+		elseif($crit=='scofDayTM' || $crit=='scMaxTM' || $crit=='MedTM')
 		{$linecrit2='Expert Média';}
-		elseif($crit=='kingMaster' or $crit=='highScKM' or $crit=='MedKm')
+		elseif($crit=='kingMaster' || $crit=='highScKM' || $crit=='MedKm')
 		{$linecrit2='au KingMaster';}
 		else
 		{

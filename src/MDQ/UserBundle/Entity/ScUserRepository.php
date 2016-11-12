@@ -113,7 +113,7 @@ class ScUserRepository extends EntityRepository
 			 // Au tout debut, me permet de choisir ceux que j'inclus ou non (les supprime, l'admin, ...)
 			
 		
-		if($crit=='MedMq' or $crit=='MedKm'or $crit=='MedTm' or $crit=='MedAr' or $crit=='MedFf' or $crit=='MedLx' or $crit=='MedMu')
+		if($crit=='MedMq' || $crit=='MedKm'or $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu')
 		{
 			if($crit=='MedMq'){$type='mq';$clsmt='highClassDayMq';}
 			elseif($crit=='MedKm'){$type='km'; $clsmt='highClassKM';}
@@ -222,7 +222,7 @@ class ScUserRepository extends EntityRepository
 			->andwhere('u.roles NOT LIKE :roles2')
 			->setParameter('roles1', '%"ROLE_ADMIN"%')
 			->setParameter('roles2', '%"ROLE_SUPER_ADMIN"%');
-		if($crit=='MedMq' or $crit=='MedKm'or $crit=='MedTm' or $crit=='MedAr' or $crit=='MedFf' or $crit=='MedLx' or $crit=='MedMu'){
+		if($crit=='MedMq' || $crit=='MedKm'or $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu'){
 			if($crit=='MedMq'){$clsmt='highClassDayMq';}
 			elseif($crit=='MedKm'){$clsmt='highClassKM';}
 			elseif($crit=='MedTm'){$clsmt='highClassDayTM';}
@@ -273,7 +273,7 @@ class ScUserRepository extends EntityRepository
 /*
 	public function rangScofDay2($crit, ScUser $scUser)
 	{
-		if($crit=='MedMq' or $crit=='MedKm'or $crit=='MedTm' or $crit=='MedAr' or $crit=='MedFf' or $crit=='MedLx' or $crit=='MedMu'){
+		if($crit=='MedMq' || $crit=='MedKm'or $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu'){
 			/*CALCULER LE RANG POUR LES MEDAILLES
 				- D'abord, ceux qui ont plus de medailles d'or,
 				- Puis parmis ceux qui en ont autant, ceux qui ont plus de medaille d'argent
@@ -585,12 +585,12 @@ class ScUserRepository extends EntityRepository
 				$j=testEqual($clsmt, $scUser, $i, $j, $sc);
 				majHighScore($clsmt, $scUser, $j);
 				if($j<11){majMedailles($clsmt, $scUser, $j);}
-			//	if($i==1 and in_array($scUser, $tabMaitres)!=true){$tab1[0]=$scUser;$m=1;}
-				if($m==0 and in_array($scUser, $tabMaitres)!=true){$tab1[0]=$scUser;$m=1;}
-			//	elseif($j==$h and $nbExae==($i-2) and in_array($scUser, $tabMaitres)!=true){array_push($tab1,$scUser);$nbExae++;}
-				elseif($m==1 and $n==0 and $j!=$i and in_array($scUser, $tabMaitres)!=true){array_push($tab1,$scUser);$nbExae++;}
-			//	elseif($m==1 and $n==0 and $j!=$i and in_array($scUser, $tabMaitres)=true){$n=0;}
-				elseif($m==1 and $n==0 and $j==$i){$n=1;}// Bien garder le $j==$i, comme ca si l'user est deja ans la tab maitre et que egalite de score, $n ne passe pas a 1.
+			//	if($i==1 && in_array($scUser, $tabMaitres)!=true){$tab1[0]=$scUser;$m=1;}
+				if($m==0 && in_array($scUser, $tabMaitres)!=true){$tab1[0]=$scUser;$m=1;}
+			//	elseif($j==$h && $nbExae==($i-2) && in_array($scUser, $tabMaitres)!=true){array_push($tab1,$scUser);$nbExae++;}
+				elseif($m==1 && $n==0 && $j!=$i && in_array($scUser, $tabMaitres)!=true){array_push($tab1,$scUser);$nbExae++;}
+			//	elseif($m==1 && $n==0 && $j!=$i && in_array($scUser, $tabMaitres)=true){$n=0;}
+				elseif($m==1 && $n==0 && $j==$i){$n=1;}// Bien garder le $j==$i, comme ca si l'user est deja ans la tab maitre et que egalite de score, $n ne passe pas a 1.
 				//pour les suivant, tester aussi que $scUser n'appartient pas a tabMaitres.		
 		
 				calcOldScore($clsmt, $scUser);

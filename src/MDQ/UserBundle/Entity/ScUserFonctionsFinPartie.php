@@ -30,43 +30,43 @@
 			}
 			function TestScMax($scUser, $dom1, $game, $scP, $date)
 			{
-				if($game=='MasterQuizz' and $scP>$scUser->getScMaxMQ()){$scUser->setScMaxMQ($scP);
+				if($game=='MasterQuizz' && $scP>$scUser->getScMaxMQ()){$scUser->setScMaxMQ($scP);
 																		$scUser->setDatescMaxMq($date);}
-				if($dom1=='MuQuizz' and $scP>$scUser->getScMaxMu()){$scUser->setScMaxMu($scP);}
-				elseif($dom1=='ArQuizz' and $scP>$scUser->getScMaxAr()){$scUser->setScMaxAr($scP);}
-				elseif($dom1=='FfQuizz' and $scP>$scUser->getScMaxFf()){$scUser->setScMaxFf($scP);}
-				elseif($dom1=='LxQuizz' and $scP>$scUser->getScMaxLx()){$scUser->setScMaxLx($scP);}				
-				elseif($dom1=='TvQuizz' and $scP>$scUser->getScMaxTv()){$scUser->setScMaxTv($scP);}
-				elseif($dom1=='SexyQuizz' and $scP>$scUser->getScMaxSx()){$scUser->setScMaxSx($scP);}
+				if($dom1=='MuQuizz' && $scP>$scUser->getScMaxMu()){$scUser->setScMaxMu($scP);}
+				elseif($dom1=='ArQuizz' && $scP>$scUser->getScMaxAr()){$scUser->setScMaxAr($scP);}
+				elseif($dom1=='FfQuizz' && $scP>$scUser->getScMaxFf()){$scUser->setScMaxFf($scP);}
+				elseif($dom1=='LxQuizz' && $scP>$scUser->getScMaxLx()){$scUser->setScMaxLx($scP);}				
+				elseif($dom1=='TvQuizz' && $scP>$scUser->getScMaxTv()){$scUser->setScMaxTv($scP);}
+				elseif($dom1=='SexyQuizz' && $scP>$scUser->getScMaxSx()){$scUser->setScMaxSx($scP);}
 				return;
 			}
 			function TestScDayAndWeek($scUser, $dom1, $game, $scP)
 			{
 				$test=0;
 				if($game=='MasterQuizz'){
-					if($scUser->getScofDayMq()==NULL or $scP>$scUser->getScofDayMq()){$scUser->setScofDayMq($scP);$test=1;}
+					if($scUser->getScofDayMq()==NULL || $scP>$scUser->getScofDayMq()){$scUser->setScofDayMq($scP);$test=1;}
 				}
 				if($dom1=='MuQuizz'){
-					if($scUser->getScofDayMu()==NULL or $scP>$scUser->getScofDayMu()){$scUser->setScofDayMu($scP);$test=1;}
-					if($scUser->getScofWeekMu()==NULL or $scP>$scUser->getScofWeekMu()){$scUser->setScofWeekMu($scP);}
+					if($scUser->getScofDayMu()==NULL || $scP>$scUser->getScofDayMu()){$scUser->setScofDayMu($scP);$test=1;}
+					if($scUser->getScofWeekMu()==NULL || $scP>$scUser->getScofWeekMu()){$scUser->setScofWeekMu($scP);}
 				}				
 				elseif($dom1=='ArQuizz'){
-					if($scUser->getScofDayAr()==NULL or $scP>$scUser->getScofDayAr()){$scUser->setScofDayAr($scP);$test=1;}
-					if($scUser->getScofWeekAr()==NULL or $scP>$scUser->getScofWeekAr()){$scUser->setScofWeekAr($scP);$test=1;}
+					if($scUser->getScofDayAr()==NULL || $scP>$scUser->getScofDayAr()){$scUser->setScofDayAr($scP);$test=1;}
+					if($scUser->getScofWeekAr()==NULL || $scP>$scUser->getScofWeekAr()){$scUser->setScofWeekAr($scP);$test=1;}
 				}
 				elseif($dom1=='FfQuizz'){
-					if($scUser->getScofDayFf()==NULL or $scP>$scUser->getScofDayFf()){$scUser->setScofDayFf($scP);$test=1;}
-					if($scUser->getScofWeekFf()==NULL or $scP>$scUser->getScofWeekFf()){$scUser->setScofWeekFf($scP);$test=1;}
+					if($scUser->getScofDayFf()==NULL || $scP>$scUser->getScofDayFf()){$scUser->setScofDayFf($scP);$test=1;}
+					if($scUser->getScofWeekFf()==NULL || $scP>$scUser->getScofWeekFf()){$scUser->setScofWeekFf($scP);$test=1;}
 				}
 				elseif($dom1=='LxQuizz'){
-					if($scUser->getScofDayLx()==NULL or $scP>$scUser->getScofDayLx()){$scUser->setScofDayLx($scP);$test=1;}
-					if($scUser->getScofWeekLx()==NULL or $scP>$scUser->getScofWeekLx()){$scUser->setScofWeekLx($scP);$test=1;}
+					if($scUser->getScofDayLx()==NULL || $scP>$scUser->getScofDayLx()){$scUser->setScofDayLx($scP);$test=1;}
+					if($scUser->getScofWeekLx()==NULL || $scP>$scUser->getScofWeekLx()){$scUser->setScofWeekLx($scP);$test=1;}
 				}
 				elseif($dom1=='TvQuizz'){
-					if($scUser->getScofDayTv()==NULL or $scP>$scUser->getScofDayTv()){$scUser->setScofDayTv($scP);$test=1;}
+					if($scUser->getScofDayTv()==NULL || $scP>$scUser->getScofDayTv()){$scUser->setScofDayTv($scP);$test=1;}
 				}
 				elseif($dom1=='SexyQuizz'){
-					if($scUser->getScofDaySx()==NULL or $scP>$scUser->getScofDaySx()){$scUser->setScofDaySx($scP);$test=1;}
+					if($scUser->getScofDaySx()==NULL || $scP>$scUser->getScofDaySx()){$scUser->setScofDaySx($scP);$test=1;}
 				}
 				return $test;
 			}
@@ -95,7 +95,7 @@
 				rsort($tab3topsc);
 				$testTM=$tab3topsc[0]+$tab3topsc[1]+$tab3topsc[2];
 				if($testTM>$scTMactu){$scUser->setScofDayTM($testTM);}
-				if($scUser->getScMaxTM()==null or $testTM>$scUser->getScMaxTM()){$scUser->setScMaxTM($testTM);}
+				if($scUser->getScMaxTM()==null || $testTM>$scUser->getScMaxTM()){$scUser->setScMaxTM($testTM);}
 				return;
 			}	
 			function MajKingMaster($scUser)
