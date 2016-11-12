@@ -1,0 +1,42 @@
+{# src/MDQ/UserBundle/Resources/views/User/profileUAdmin.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+	Compte de {{ user.username }}
+{% endblock %}
+
+
+{% block admin_body %}	
+
+		{{ include("MDQUserBundle:User:profileU.html.twig") }}
+		 
+	<div class="bloc">	
+		<p> date de naissance : {{ user.datenaissance|date('d/m/Y') }} </p>
+		<p> email : {{ user.email }}</p>
+		
+		<p> rôle : {{ user.roles.0 }} </p>
+	</div>
+	<div class="bloc">
+	  <div class="well">
+	  <form  method="post" {{ form_enctype(form) }}>
+		
+	  {# Génération de l'input. #}
+	  {{ form_widget(form.locked) }}
+		</div>
+		{{ form_rest(form) }}
+		<input type="submit" class="btn btn-primary" value="Valider" />
+		</form> 
+	</div>
+	<div class="bloc">
+		<p>Erreurs signalées au total : {{user.scuser.nbErrorSignalTot}}</p>
+		<p>Erreurs signalées en cours : {{user.scuser.nbErrorSignal}}</p>
+		{% if not user.scuser.questions_error.empty %}
+		{% for question in user.scuser.questions_error %}
+			<a href="{{ path('mdqadmin_modifQ', {'id': question.id}) }}">{{question.id}}</a>{% if not loop.last %}, {% endif %}
+		{% endfor %}
+		{% endif %}
+	</div>
+{% endblock %}
+
+

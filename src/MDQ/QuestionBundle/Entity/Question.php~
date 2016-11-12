@@ -1,0 +1,1085 @@
+<?php
+
+namespace MDQ\QuestionBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * Question
+ *
+ * @ORM\Table(name="bddqcm")
+ * @ORM\Entity(repositoryClass="MDQ\QuestionBundle\Entity\QuestionRepository")
+ */
+class Question
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="intitule", type="string", length=150)
+     */
+    private $intitule;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="brep", type="string", length=100)
+     */
+    private $brep;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mrep1", type="string", length=100)
+     */
+    private $mrep1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mrep2", type="string", length=100)
+     */
+    private $mrep2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mrep3", type="string", length=100)
+     */
+    private $mrep3;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="diff", type="integer")
+     */
+    private $diff;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaire", type="string", length=250)
+     */
+    private $commentaire;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="imageCom", type="string", length=50, nullable=true)
+     */
+    private $imageCom;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="theme", type="string", length=50)
+     */
+    private $theme;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dom1", type="string", length=30)
+     */
+    private $dom1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dom2", type="string", length=40)
+     */
+    private $dom2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dom3", type="string", length=40)
+     */
+    private $dom3;
+	
+	 /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=30)
+     */
+    private $type;
+	
+	 /**
+     * @var string
+     *
+     * @ORM\Column(name="media", type="string", length=50, nullable=true)
+     */
+    private $media;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbJoue", type="integer")
+     */
+    private $nbJoue;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbBrep", type="integer")
+     */
+    private $nbBrep;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prctBrep", type="decimal", scale=2)
+     */
+    private $prctBrep;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prct100j", type="decimal", scale=2)
+     */
+    private $prct100j;
+
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="prct500j", type="decimal", scale=2)
+     */
+    private $prct500j;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbMrep1", type="integer")
+     */
+    private $nbMrep1;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prctMrep1", type="decimal", scale=2)
+     */
+    private $prctMrep1;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbMrep2", type="integer")
+     */
+    private $nbMrep2;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prctMrep2", type="decimal", scale=2)
+     */
+    private $prctMrep2;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbMrep3", type="integer")
+     */
+    private $nbMrep3;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prctMrep3", type="decimal", scale=2)
+     */
+    private $prctMrep3;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="nbTout", type="integer")
+     */
+    private $nbTout;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prctTout", type="decimal", scale=2)
+     */
+    private $prctTout;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="delai", type="string", nullable=true)
+     */
+    private $delai;
+	
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="error", type="integer")
+     */
+    private $error;
+	
+	/**
+     * @var array
+	 *
+	 * @ORM\Column(name="taberror", type="array")
+     */
+    private $taberror;
+	
+	/**
+	* @ORM\ManyToMany(targetEntity="MDQ\UserBundle\Entity\ScUser", inversedBy="questions_error", cascade={"persist"})
+	* @ORM\JoinColumn(nullable=true)
+	*/
+	private $users_error;
+	
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="valid", type="integer")
+     */
+    private $valid;
+
+    /**     
+ 	 * @ORM\ManyToOne(targetEntity="MDQ\UserBundle\Entity\ScUser",inversedBy="qavaliders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $auteur;
+
+    /**
+     * @var \Date
+     *
+     * @ORM\Column(name="datecreate", type="date")
+     */
+    private $datecreate;
+	
+	public function __construct()
+	{
+	$this->type = "texte";
+	$this->media = null;
+	$this->nbJoue = 0;	
+	$this->nbBrep = 0;	
+	$this->prctBrep = 0;
+	$this->prct100j = 0;	
+	$this->prct500j = 0;
+	$this->nbMrep1 = 0;	
+	$this->prctMrep1 = 0;
+	$this->nbMrep2 = 0;	
+	$this->prctMrep2 = 0;	
+	$this->nbMrep3 = 0;	
+	$this->prctMrep3 = 0;
+	$this->nbTout = 0;	
+	$this->prctTout = 0;
+	$this->delai = null;
+	$this->error = 0;
+	$this->taberror=[0,0,0];
+	$this->users_error=new ArrayCollection();
+	$this->valid = 2;	
+	$this->datecreate = new \Datetime(); // Par défaut, la date de 	création est la date d'aujourd'hui
+
+	}
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set intitule
+     *
+     * @param string $intitule
+     * @return Question
+     */
+    public function setIntitule($intitule)
+    {
+        $this->intitule = $intitule;
+
+        return $this;
+    }
+
+    /**
+     * Get intitule
+     *
+     * @return string 
+     */
+    public function getIntitule()
+    {
+        return $this->intitule;
+    }
+
+    /**
+     * Set brep
+     *
+     * @param string $brep
+     * @return Question
+     */
+    public function setBrep($brep)
+    {
+        $this->brep = $brep;
+
+        return $this;
+    }
+
+    /**
+     * Get brep
+     *
+     * @return string 
+     */
+    public function getBrep()
+    {
+        return $this->brep;
+    }
+
+    /**
+     * Set mrep1
+     *
+     * @param string $mrep1
+     * @return Question
+     */
+    public function setMrep1($mrep1)
+    {
+        $this->mrep1 = $mrep1;
+
+        return $this;
+    }
+
+    /**
+     * Get mrep1
+     *
+     * @return string 
+     */
+    public function getMrep1()
+    {
+        return $this->mrep1;
+    }
+
+    /**
+     * Set mrep2
+     *
+     * @param string $mrep2
+     * @return Question
+     */
+    public function setMrep2($mrep2)
+    {
+        $this->mrep2 = $mrep2;
+
+        return $this;
+    }
+
+    /**
+     * Get mrep2
+     *
+     * @return string 
+     */
+    public function getMrep2()
+    {
+        return $this->mrep2;
+    }
+
+    /**
+     * Set mrep3
+     *
+     * @param string $mrep3
+     * @return Question
+     */
+    public function setMrep3($mrep3)
+    {
+        $this->mrep3 = $mrep3;
+
+        return $this;
+    }
+
+    /**
+     * Get mrep3
+     *
+     * @return string 
+     */
+    public function getMrep3()
+    {
+        return $this->mrep3;
+    }
+	
+	/**
+     * Set diff
+     *
+     * @param integer $diff
+     * @return Question
+     */
+    public function setDiff($diff)
+    {
+        $this->diff = $diff;
+
+        return $this;
+    }
+
+    /**
+     * Get diff
+     *
+     * @return integer 
+     */
+    public function getDiff()
+    {
+        return $this->diff;
+    }
+	
+    /**
+     * Set commentaire
+     *
+     * @param string $commentaire
+     * @return Question
+     */
+    public function setCommentaire($commentaire)
+    {
+        $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Get commentaire
+     *
+     * @return string 
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
+    }
+
+    /**
+     * Set theme
+     *
+     * @param string $theme
+     * @return Question
+     */
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
+
+        return $this;
+    }
+
+    /**
+     * Get theme
+     *
+     * @return string 
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * Set dom1
+     *
+     * @param string $dom1
+     * @return Question
+     */
+    public function setDom1($dom1)
+    {
+        $this->dom1 = $dom1;
+
+        return $this;
+    }
+
+    /**
+     * Get dom1
+     *
+     * @return string 
+     */
+    public function getDom1()
+    {
+        return $this->dom1;
+    }
+
+    /**
+     * Set dom2
+     *
+     * @param string $dom2
+     * @return Question
+     */
+    public function setDom2($dom2)
+    {
+        $this->dom2 = $dom2;
+
+        return $this;
+    }
+
+    /**
+     * Get dom2
+     *
+     * @return string 
+     */
+    public function getDom2()
+    {
+        return $this->dom2;
+    }
+
+    /**
+     * Set dom3
+     *
+     * @param string $dom3
+     * @return Question
+     */
+    public function setDom3($dom3)
+    {
+        $this->dom3 = $dom3;
+
+        return $this;
+    }
+
+    /**
+     * Get dom3
+     *
+     * @return string 
+     */
+    public function getDom3()
+    {
+        return $this->dom3;
+    }
+	
+	/**
+     * Set type
+     *
+     * @param string $type
+     * @return Question
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+	
+	/**
+     * Set media
+     *
+     * @param string $media
+     * @return Question
+     */
+    public function setMedia($media)
+    {
+        $this->media = $media;
+
+        return $this;
+    }
+
+    /**
+     * Get media
+     *
+     * @return string 
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+	
+    /**
+     * Set nbJoue
+     *
+     * @param integer $nbJoue
+     * @return Question
+     */
+    public function setNbJoue($nbJoue)
+    {
+        $this->nbJoue = $nbJoue;
+
+        return $this;
+    }
+
+    /**
+     * Get nbJoue
+     *
+     * @return integer 
+     */
+    public function getNbJoue()
+    {
+        return $this->nbJoue;
+    }
+
+    /**
+     * Set nbBrep
+     *
+     * @param integer $nbBrep
+     * @return Question
+     */
+    public function setNbBrep($nbBrep)
+    {
+        $this->nbBrep = $nbBrep;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrep
+     *
+     * @return integer 
+     */
+    public function getNbBrep()
+    {
+        return $this->nbBrep;
+    }
+
+    /**
+     * Set prctBrep
+     *
+     * @param decimal $prctBrep
+     * @return Question
+     */
+    public function setPrctBrep($prctBrep)
+    {
+        $this->prctBrep = $prctBrep;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrep
+     *
+     * @return decimal
+     */
+    public function getPrctBrep()
+    {
+        return $this->prctBrep;
+    }
+
+    /**
+     * Set prct100j
+     *
+     * @param decimal $prct100j
+     * @return Question
+     */
+    public function setPrct100j($prct100j)
+    {
+        $this->prct100j = $prct100j;
+
+        return $this;
+    }
+
+    /**
+     * Get prct100j
+     *
+     * @return decimal 
+     */
+    public function getPrct100j()
+    {
+        return $this->prct100j;
+    }
+
+    /**
+     * Set nbMrep1
+     *
+     * @param integer $nbMrep1
+     * @return Question
+     */
+    public function setNbMrep1($nbMrep1)
+    {
+        $this->nbMrep1 = $nbMrep1;
+
+        return $this;
+    }
+
+    /**
+     * Get nbMrep1
+     *
+     * @return integer 
+     */
+    public function getNbMrep1()
+    {
+        return $this->nbMrep1;
+    }
+
+    /**
+     * Set prctMrep1
+     *
+     * @param decimal $prctMrep1
+     * @return Question
+     */
+    public function setPrctMrep1($prctMrep1)
+    {
+        $this->prctMrep1 = $prctMrep1;
+
+        return $this;
+    }
+
+    /**
+     * Get prctMrep1
+     *
+     * @return decimal
+     */
+    public function getPrctMrep1()
+    {
+        return $this->prctMrep1;
+    }
+
+    /**
+     * Set nbMrep2
+     *
+     * @param integer $nbMrep2
+     * @return Question
+     */
+    public function setNbMrep2($nbMrep2)
+    {
+        $this->nbMrep2 = $nbMrep2;
+
+        return $this;
+    }
+
+    /**
+     * Get nbMrep2
+     *
+     * @return integer 
+     */
+    public function getNbMrep2()
+    {
+        return $this->nbMrep2;
+    }
+
+    /**
+     * Set prctMrep2
+     *
+     * @param decimal $prctMrep2
+     * @return Question
+     */
+    public function setPrctMrep2($prctMrep2)
+    {
+        $this->prctMrep2 = $prctMrep2;
+
+        return $this;
+    }
+
+    /**
+     * Get prctMrep2
+     *
+     * @return decimal
+     */
+    public function getPrctMrep2()
+    {
+        return $this->prctMrep2;
+    }
+
+    /**
+     * Set nbMrep3
+     *
+     * @param integer $nbMrep3
+     * @return Question
+     */
+    public function setNbMrep3($nbMrep3)
+    {
+        $this->nbMrep3 = $nbMrep3;
+
+        return $this;
+    }
+
+    /**
+     * Get nbMrep3
+     *
+     * @return integer 
+     */
+    public function getNbMrep3()
+    {
+        return $this->nbMrep3;
+    }
+
+    /**
+     * Set prctMrep3
+     *
+     * @param decimal $prctMrep3
+     * @return Question
+     */
+    public function setPrctMrep3($prctMrep3)
+    {
+        $this->prctMrep3 = $prctMrep3;
+
+        return $this;
+    }
+
+    /**
+     * Get prctMrep3
+     *
+     * @return decimal 
+     */
+    public function getPrctMrep3()
+    {
+        return $this->prctMrep3;
+    }
+	
+	    /**
+     * Set nbTout
+     *
+     * @param integer $nbTout
+     * @return Question
+     */
+    public function setNbTout($nbTout)
+    {
+        $this->nbTout = $nbTout;
+
+        return $this;
+    }
+
+    /**
+     * Get nbTout
+     *
+     * @return integer 
+     */
+    public function getNbTout()
+    {
+        return $this->nbTout;
+    }
+
+    /**
+     * Set prctTout
+     *
+     * @param decimal $prctTout
+     * @return Question
+     */
+    public function setPrctTout($prctTout)
+    {
+        $this->prctTout = $prctTout;
+
+        return $this;
+    }
+
+    /**
+     * Get prctTout
+     *
+     * @return decimal 
+     */
+    public function getPrctTout()
+    {
+        return $this->prctTout;
+    }
+	
+	/**
+     * Set delai
+     *
+     * @param string $delai
+     * @return Question
+     */
+    public function setDelai($delai)
+    {
+        $this->delai = $delai;
+
+        return $this;
+    }
+
+    /**
+     * Get delai
+     *
+     * @return string
+     */
+    public function getDelai()
+    {
+        return $this->delai;
+    }
+
+    /**
+     * Set error
+     *
+     * @param integer $error
+     * @return Question
+     */
+    public function setError($error)
+    {
+        $this->error = $error;
+
+        return $this;
+    }
+
+    /**
+     * Get error
+     *
+     * @return integer 
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
+
+	 /**
+     * Set taberror
+     *
+     * @param array $taberror
+     * @return ScUser
+     */
+    public function setTaberror($taberror)
+    {
+        $this->taberror = $taberror;
+
+        return $this;
+    }
+
+    /**
+     * Get taberror
+     *
+     * @return array 
+     */
+    public function getTaberror()
+    {
+        return $this->taberror;
+    }
+	
+	public function addUser_error(\MDQ\UserBundle\Entity\ScUser $ScUser)
+	{
+	// Ici, on utilise l'ArrayCollection vraiment comme un tableau
+		$this->users_error[] = $ScUser;
+		return $this;
+	}
+
+	public function removeUser_error(\MDQ\UserBundle\Entity\ScUser $ScUser)
+	{
+		// Ici on utilise une méthode de l'ArrayCollection, pour supprimer la catégorie en argument
+		$this->users_error->removeElement($ScUser);
+	}
+
+	  // Notez le pluriel, on récupère une liste de catégories ici !
+	public function getUsers_error()
+	{
+		return $this->users_error;
+	}
+	  
+    /**
+     * Set valid
+     *
+     * @param integer $valid
+     * @return Question
+     */
+    public function setValid($valid)
+    {
+        $this->valid = $valid;
+
+        return $this;
+    }
+
+    /**
+     * Get valid
+     *
+     * @return integer
+     */
+    public function getValid()
+    {
+        return $this->valid;
+    }
+
+    /**
+     * Set auteur
+     *
+     * @param string $auteur
+     * @return Question
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * Get auteur
+     *
+     * @return string 
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * Set datecreate
+     *
+     * @param \Date $datecreate
+     * @return Question
+     */
+    public function setDatecreate($datecreate)
+    {
+        $this->datecreate = $datecreate;
+
+        return $this;
+    }
+
+    /**
+     * Get datecreate
+     *
+     * @return \Date
+     */
+    public function getDatecreate()
+    {
+        return $this->datecreate;
+    }
+
+    /**
+     * Add users_error
+     *
+     * @param \MDQ\UserBundle\Entity\ScUser $usersError
+     * @return Question
+     */
+    public function addUsersError(\MDQ\UserBundle\Entity\ScUser $usersError)
+    {
+        $this->users_error[] = $usersError;
+
+        return $this;
+    }
+
+    /**
+     * Remove users_error
+     *
+     * @param \MDQ\UserBundle\Entity\ScUser $usersError
+     */
+    public function removeUsersError(\MDQ\UserBundle\Entity\ScUser $usersError)
+    {
+        $this->users_error->removeElement($usersError);
+    }
+
+    /**
+     * Get users_error
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsersError()
+    {
+        return $this->users_error;
+    }
+
+    /**
+     * Set imageCom
+     *
+     * @param string $imageCom
+     * @return Question
+     */
+    public function setImageCom($imageCom)
+    {
+        $this->imageCom = $imageCom;
+
+        return $this;
+    }
+
+    /**
+     * Get imageCom
+     *
+     * @return string 
+     */
+    public function getImageCom()
+    {
+        return $this->imageCom;
+    }
+}

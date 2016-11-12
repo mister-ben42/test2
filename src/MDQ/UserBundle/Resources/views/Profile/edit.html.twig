@@ -1,0 +1,65 @@
+{# src/MDQ/UserBundle/Resources/views/User/profileUAuto.html.twig #}
+
+{% extends "MDQUserBundle::layout.html.twig" %}
+
+{% block title %}
+  Votre compte
+{% endblock %}
+
+{% block fos_user_content %}
+
+		 <div id="formulaire_inscription">
+			<form method="post" {{ form_enctype(form) }}>
+			{{ form_errors(form) }}
+
+			<div id="registration_email" class="registration_ligne">
+				{{ form_label(form.email, "Adresse mail") }}			
+				{{ form_widget(form.email) }}			
+			</div>
+		{% if (form_errors(form.email))!="" %}	<div class="form_error">{{ form_errors(form.email) }}</div>{% endif %}
+		
+			<div id="registration_sexe" class="registration_ligne">
+				{{ form_label(form.sexe, "Sexe") }}
+				{{ form_widget(form.sexe) }}
+			</div>
+			<div id="registration_datenaissance" class="registration_ligne">
+				{{ form_label(form.datenaissance, "Date de naissance") }}
+				{{ form_widget(form.datenaissance) }}
+			</div>
+			<div id="registration_departement" class="registration_ligne">
+				{{ form_label(form.departement, "Département") }}
+				{{ form_widget(form.departement) }}
+			</div>
+{#			<div id="registration_devise"class="registration_ligne" >
+				{{ form_label(form.devise, "Devise") }}
+				{{ form_errors(form.devise) }}	
+				{{ form_widget(form.devise) }}
+			</div>
+#}			<div id="registration_password2"class="registration_ligne" >
+				{{ form_label(form.current_password, "Mot de passe actuel") }}				
+				{{ form_widget(form.current_password) }}
+			</div>
+		{% if (form_errors(form.current_password))!="" %}<div class="form_error">{{ form_errors(form.current_password) }}</div>	{% endif %}
+			 <div id="new_password" class="registration_ligne" ><a href="{{ path('mdquser_profileUPassword') }}">Changer mot de passe</a></div>
+			{{ form_rest(form) }}
+				<div id="inscription_valid" class="registration_ligne">
+					<input type="submit" value="Valider" />
+				</div>
+		</form>
+	  </div>
+	 </br>
+  
+ 
+ 
+  
+{% endblock %}
+{% block user_menu %}
+		<div class="bloc_menu">
+	  <ul>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png')}}" alt="bjaune" width="20px">Accueil</a></li>
+	  <li><a href="{{ path('mdquser_profileUAuto') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulebleue.png')}}" alt="bbleue" width="20px">Retour</a></li>
+
+	  </ul>
+	</div>
+{% endblock%}
+

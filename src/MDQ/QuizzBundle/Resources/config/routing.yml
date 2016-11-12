@@ -1,0 +1,18 @@
+mdqquizz_preGame:
+    path:  /preGame/{game}
+    defaults: { _controller: MDQQuizzBundle:Quizz:preGame }
+mdqquizz_accueil:
+    path:  /accueil/{game}
+    defaults: { _controller: MDQQuizzBundle:Quizz:newGame }
+mdqquizz_jeu:
+    path: /jeu/{game}
+    defaults: { _controller: MDQQuizzBundle:Quizz:jeuQuizz }
+mdqquizz_editQuestion:
+    path: /editQuestion
+    defaults: { _controller: MDQQuizzBundle:Quizz:editQuestion }
+mdqquizz_verifReponse:
+    path: /verifReponse
+    defaults: { _controller: MDQQuizzBundle:Quizz:verifReponse }
+mdqquizz_finPartie:
+    path: /finPartie
+    defaults: { _controller: MDQQuizzBundle:Quizz:finPartie }	

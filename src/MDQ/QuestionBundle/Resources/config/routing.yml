@@ -1,0 +1,12 @@
+mdqquestion_ajouterQ:
+    path:    /ajouterQ
+    defaults: { _controller: MDQQuestionBundle:Question:ajouterQ }	
+mdqquestion_modifQaval:
+    path:    /modifQaval/{id}
+    defaults: { _controller: MDQQuestionBundle:Question:modifQaval}	
+mdqquestion_adaptForm:
+    path:    /adaptForm
+    defaults: { _controller: MDQQuestionBundle:Question:adaptForm }
+mdqquestion_signalError:
+    path:    /signalError
+    defaults: { _controller: MDQQuestionBundle:Question:signalError }

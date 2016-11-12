@@ -1,0 +1,147 @@
+{# src/MDQ/QuizzBundle/Resources/views/Quizz/jeuQuizz.html.twig #}
+
+{% extends "MDQQuizzBundle::layoutQz.html.twig" %}
+	{% block haut_page %}	
+	<div id="haut_page">
+	<div id="bloc_titre">
+	  <a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/MDQ3b.png') }}" alt="titre" width="100%"></a>
+	</div>
+	<div id="jeu_bloc_score">
+		<div id="jeu_bloc_score_1">
+		<div id="jeu_bloc_score_titre">Score</div>
+		<div id="jeu_bloc_score_score">0</div>
+		<div id="modifScore"></div>
+		</div>
+		<div id="jeu_bloc_timer"><img src="../../../bundles/GeneBundle/maboulerouge.png" alt="brouge" width="100%"><img id="jeu_img_boule_noire" src="../../../bundles/GeneBundle/maboulenoire.png" alt="bnoire" width="100%"><div id="timer"></div></div>
+	</div>
+	</div>
+	{% endblock %}
+
+{% block body %}
+	{% if game=="MuQuizz" %}
+		<audio id="music_Q" style="display: none;" >
+			
+		</audio>
+	{% endif%}
+	<audio id="son_fondjeu" style="display: none;" >
+		{% if game=="SexyQuizz" %}
+			<source src="{{ asset('bundles/QuizzBundle/sons/fondSexy.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/fondSexy.ogg') }}" />	
+		{%elseif game!="MuQuizz" %}
+			<source src="{{ asset('bundles/QuizzBundle/sons/fondMq.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/fondMq.ogg') }}" />
+		{%endif%}
+	</audio>
+{#	<audio id="clic" style="display: none;">
+		<source src="sons/Bruitage/click3.wav" />
+		<!--<source src="sons/Bruitage/click3b.ogg" />-->
+	</audio>
+#}	<audio id="son_clicvalid" style="display: none;">
+		{% if game=="SexyQuizz" %}
+			<source src="{{ asset('bundles/QuizzBundle/sons/gemissementF.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/gemissementF.ogg') }}" />		
+		{% else %}
+			<source src="{{ asset('bundles/QuizzBundle/sons/valid8.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/valid8.ogg') }}" />
+		{%endif%}
+	</audio>
+	<audio id="son_fintps" style="display: none;">
+		{% if game=="SexyQuizz" %}
+			<source src="{{ asset('bundles/QuizzBundle/sons/ahh.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/ahh.ogg') }}" />			
+		{%else%}
+			<source src="{{ asset('bundles/QuizzBundle/sons/fintpsMq.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/fintpsMq.ogg') }}" />
+		{%endif%}
+	</audio>	
+	<audio id="son_echec" style="display: none;">
+		{% if game=="SexyQuizz" %}
+			<source src="{{ asset('bundles/QuizzBundle/sons/fouet.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/fouet.ogg') }}" />			
+		{%else%}
+			<source src="{{ asset('bundles/QuizzBundle/sons/echecMq.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/echecMq.ogg') }}" />
+		{%endif%}
+	</audio>
+	<audio id="son_succes" style="display: none;">
+		{% if game=="SexyQuizz" %}
+			<source src="{{ asset('bundles/QuizzBundle/sons/ohoui.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/ohoui.ogg') }}" />			
+		{%else%}
+			<source src="{{ asset('bundles/QuizzBundle/sons/succesMq.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/succesMq.ogg') }}" />
+		{%endif%}
+	</audio>				
+	<div id="marge_avt_bloc_question"></div>
+	{% if game=="MasterQuizz" or game=="MuQuizz" or game=="SexyQuizz" %}
+	<div id="bloc_question">	
+		<div id="bloc_question_haut">
+			<div id="bloc_question_dom"></div>
+			<div id="bloc_question_numQ"></div>
+		</div>
+		<div id="bloc_question_central">
+			<div id="bloc_question_theme_diff">
+				<div id="bloc_question_theme"></div>
+				<div id="bloc_question_diff"><img src="" alt="diff" height="10px"></div>
+			</div>
+			<div id="bloc_question_intitule"></div>
+			<div id="bloc_question_commentaire"></div>
+			<div id="bloc_question_photo"><img></div>
+		</div>
+		<div id="bloc_question_bas">
+			<div id="bloc_question_bas_txt"></div>
+		</div>
+		
+	</div>
+	{% else %}
+		
+	<div id="bloc_question_photo2">
+		<img id="bloc_question_photo2_img">
+		<div id="bloc_question_bas2">
+			<div id="bloc_question_bas_txt2"></div>
+		</div>
+		
+	</div>
+	<div id="bloc_question_bas3">
+		<div id="bloc_question_bas_txt3"></div>
+	</div>
+		
+	
+	{% endif %}
+	
+	
+  <div id="quizz_proposition">	
+		<div class="bloc_reponse"><div id="rep1"></div></div><!-- pour supprimer les white-spice entre les blocs accolés
+		--><div class="bloc_reponse"><div id="rep2"></div></div><!--
+		--><div class="bloc_reponse"><div id="rep3"></div></div><!--
+		--><div class="bloc_reponse"><div id="rep4"></div></div>
+	</div>
+		<div id="jeu_bloc_error_volume">
+	{% if app.user.AllowError==1 and signalE==1 or is_granted('ROLE_ADMIN') %} <div id="jeu_bloc_error"><img src="{{asset('bundles/GeneBundle/maboulejaune.png')}}" alt="bjaune" width="15px" title="Signaler une erreur"></div> {% endif %}
+	<div id="quizz_volume"><img src="{{asset('bundles/QuizzBundle/vol1.png')}}" alt="vol1" width="25px"></div>
+	</div>
+	<div id="jeu_bloc_bloc_valid"><div id="jeu_bloc_valid"><img src="{{asset('bundles/GeneBundle/buttonvalidMq.png')}}" alt="valider" width="100%" draggable='false' ondragstart="return false;"></div></div>
+
+	{% if app.user.AllowError==1 and signalE==1 or is_granted('ROLE_ADMIN') %}
+	<div id="jeu_bloc_bloc_precise_error"><div id="jeu_bloc_precise_error">
+	<div id="bloc_precise_error_titre">Erreur signalée</div>
+	
+	<form>
+		<p>
+		<label for="erreur">Réponse fausse</label><input type="checkbox" name="erreur" class="checkbox_error"/></br>
+		<label for="ortho">Faute d'orthographe</label><input type="checkbox" name="ortho" class="checkbox_error"/></br>
+		<label for="autre">Autre</label><input type="checkbox" name="autre" class="checkbox_error"/></br>
+		<input type="button" name="valider" value="Valider" id="button_valid_error" class="bloc_precise_error_button">
+		<input type="button" name="annuler" value="Annuler" id="button_annule_error" class="bloc_precise_error_button">
+		</p>
+	</form>
+	</div></div>
+	{% endif %}
+	
+  {% endblock %}
+  
+ {% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script	src="{{ asset('bundles/QuizzBundle/jeuquizz2.js') }}"></script>
+
+{% endblock %}

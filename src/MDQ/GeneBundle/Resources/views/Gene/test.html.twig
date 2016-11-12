@@ -1,0 +1,31 @@
+{# src/MDQ/GeneBundle/Resources/views/accueilJeu.html.twig #}
+
+{% extends "MDQGeneBundle::layoutG.html.twig" %}
+
+
+
+{% block body_gene %}
+
+	<div id="page_HighScore">
+	<div id="bloc_HighScore">
+	
+	 {% for scuser in rang %}
+		{% set number=loop.index %}
+	<div class="ligne_HSc"><span class="num_nom" >{{number}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></span><span class="score">{{scuser.highClassDayMq}} <span id="nbfois_highSC">({{scuser.numHighClassDayMq}} fois)</span></span></div>
+		
+	 {% endfor %}
+	 
+	
+	</div>
+	</div>
+	
+	
+	
+	
+
+	
+
+
+  
+
+{% endblock %}

@@ -1,0 +1,148 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/ajouterQ.html.twig #}
+
+{% extends "MDQQuestionBundle::layoutQ.html.twig" %}
+
+{% block title %}
+  Ajouter une question
+{% endblock %}
+
+{% block mdqquestion_body %}
+	<div id="flash_message">Reufs : Une question identique a déjà été proposée récemment.
+		<div id="flash_message_croix">x</div>
+	</div>
+	<div id="bloc_ajoutQ" class="bloc">
+{% if repAdmin is not defined %}<div class="titre_bloc">Proposer une question</div>
+{% else %}<div class="titre_bloc">Modifier une question</div>
+	{% if repAdmin>9 and repAdmin<20 %}
+		<div> Modifier votre question en tenant compte du critère suivant :</div>
+	{% endif %}
+		{% if repAdmin==10 %}<p>Corriger les fautes d'orthographe et de syntaxe.</p>
+		{% elseif repAdmin==11 %}<p>Revoir la formulation.</p>
+		{% elseif repAdmin==12 %}<p>Développer le commentaire.</p>
+		{% elseif repAdmin==13 %}<p>Choisir des propositons de réponse plus pertinentes</p>
+		{% endif %}
+{% endif %}
+<div id="bloc_ajoutQ_intro">Avant de rédiger une question, reportez-vous aux <a href="#bloc_ajoutQ_consigne">conignes de rédaction</a> ci-dessous.</div>
+
+<div id="form_ajoutQ">
+  <form  method="post"  {{ form_enctype(form) }}>
+
+{# Les erreurs générales du formulaire. #}
+{{ form_errors(form) }}
+
+<div id="form_ajoutQ_intitule" class="form_ligne">
+  {# Génération du label. #}
+  {{ form_label(form.intitule, "Intitulé de la question") }}
+
+  {# Affichage des erreurs pour ce champ précis. #}
+  {{ form_errors(form.intitule) }}
+
+  {# Génération de l'input. #}
+  {{ form_widget(form.intitule) }}
+  <div class="ligne_nb_lettre_ajoutQ">
+	  <div class="nb_lettre_ajoutQ">0</div>
+  </div>
+</div>
+
+
+{# Idem pour un autre champ. #}
+<div class="form_ligne">
+<div class="form_ajoutQ_rep">
+  {{ form_label(form.brep, "Bonne réponse") }}
+  {{ form_errors(form.brep) }}
+  {{ form_widget(form.brep) }}
+  <div class="ligne_nb_lettre_ajoutQ">
+	  <div class="nb_lettre_ajoutQ">0</div>
+  </div>
+</div>
+<div class="form_ajoutQ_rep">
+  {{ form_label(form.mrep1, "Mauvaise réponse 1") }}
+  {{ form_errors(form.mrep1) }}
+  {{ form_widget(form.mrep1) }}
+  <div class="ligne_nb_lettre_ajoutQ">
+	  <div class="nb_lettre_ajoutQ">0</div>
+  </div>
+</div>
+</div>
+<div class="form_ligne">
+<div class="form_ajoutQ_rep">
+  {{ form_label(form.mrep2, "Mauvaise réponse 2") }}
+  {{ form_errors(form.mrep2) }}
+  {{ form_widget(form.mrep2) }}
+ <div class="ligne_nb_lettre_ajoutQ">
+	  <div class="nb_lettre_ajoutQ">0</div>
+  </div>
+</div>
+<div class="form_ajoutQ_rep">
+  {{ form_label(form.mrep3, "Mauvaise réponse 3") }}
+  {{ form_errors(form.mrep3) }}
+  {{ form_widget(form.mrep3) }}
+  <div class="ligne_nb_lettre_ajoutQ">
+	  <div class="nb_lettre_ajoutQ">0</div>
+  </div>
+</div>
+</div>
+<div id="form_ajoutQ_com" class="form_ligne">
+  {{ form_label(form.commentaire, "Commentaire") }}
+  {{ form_errors(form.commentaire) }}
+  {{ form_widget(form.commentaire) }}
+  <div class="ligne_nb_lettre_ajoutQ">
+	  <div class="nb_lettre_ajoutQ">0</div>
+  </div>
+</div>
+<div class="form_ligne">
+<div class="form_ajoutQ_rep">
+  {{ form_label(form.diff, "Niveau de difficulté") }}
+  {{ form_errors(form.diff) }}
+  {{ form_widget(form.diff) }}
+</div>
+<div class="form_ajoutQ_rep">
+  {{ form_label(form.dom1, "Domaine") }}
+  {{ form_errors(form.dom1) }}
+  {{ form_widget(form.dom1) }}
+</div>
+</div>
+
+
+{{ form_rest(form) }}
+<div class="bouton_valid">
+<input type="submit"/>
+</div>
+</form>
+</div>
+<div id="ajoutQ_doublon_cache">{{ doublon }}</div>
+<div id="bloc_ajoutQ_consigne">
+	<h1>Consignes de rédaction</h1>
+	<p>Si les consignes de rédaction ne sont pas respectées, la question ne sera pas validée.<p>
+	<h2>Règles d'orthographe et de syntaxe</h2>
+	<p>- L'orthographe, la grammaire et la ponctuation doivent être correct(e ?)s.</p>
+	<p>- Les questions doivent se terminer par un point d'interrogation.</p>
+	<p>- Les réponses doivent commencer par une majuscule.</p>
+	<p>- Les personnes doivent être désignées soit par leur prénom et leur nom, soit par l'initiale 
+	de leur prénom et leur nom (ex : Georges Brassens ou G. Brassens). S'ils ont un pseudo, il est 
+	possible d'utiliser le pseudonyme.</p>
+	<p>- Les noms d'oeuvre doivent être mises entre guillemets.</p>
+	
+	<h2>Règles de rédaction des questions</h2>
+	<p>- La présence de 4 propositions de réponse et d'un commentaire est obligatoire.</p>
+	<p>- Nombres de caractères maximum : 100 pour les questions, 190 pour les commentaires, 40 pour les réponses.</p>
+	
+	<p>- Le commentaire doit venir apporter des précisions sur la bonne réponse, et/ou apporter des
+	informations annexes sur le thème de la question.</p>
+	<p>- Les questions ne doivent pas être trop simplistes dans leur énoncé. Ne sont pas acceptées
+	par exemple les question du type : "Quel est la préfecture de l'Aveyron ?"</p>
+	<p>- Les questions nécessitant la lecture des 4 propositions ne sont pas acceptées. 
+	Par conséquent, les questions du type : "Quel est l'intrus ... ?" ou "Parmi ses pays, lequel est le plus vastes ?" ne
+	sont pas acceptées.</p>
+	
+	
+	
+</div>
+
+  </div>
+{% endblock %}
+ {% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script	src="{{ asset('bundles/UserBundle/user.js') }}"></script>
+
+{% endblock %}

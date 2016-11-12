@@ -1,0 +1,52 @@
+{# src/MDQ/QuizzBundle/Resources/views/Quizz/preGame.html.twig #}
+
+{% extends "MDQQuizzBundle::layoutQz.html.twig" %}
+{% block meta %}
+<meta http-equiv="refresh" content="0;url=../accueil/{{game}}" />
+{% endblock %}
+	{% block bloc_page %}
+	<div id="bloc_page" class="{{bloc_page}} bloc_page_preGame" oncontextmenu="return false;" >
+	{% endblock %}
+{% block body %}
+
+				
+	<div id="marge_avt_bloc_question"></div>
+	
+	<div id="bloc_question">	
+		<div id="bloc_question_haut">
+			<div id="bloc_question_dom"></div>
+			<div id="bloc_question_numQ"></div>
+		</div>
+		<div id="bloc_question_central">
+			<div id="bloc_question_theme_diff">
+				<div id="bloc_question_theme"></div>
+				<div id="bloc_question_diff"><img src="" alt="diff" height="10px"></div>
+			</div>
+			<div id="bloc_question_intitule"></div>
+			<div id="bloc_question_commentaire"><img src="{{ asset('bundles/QuizzBundle/'~photo) }}" width=80px ></div>
+			<div id="bloc_question_photo"><img></div>
+		</div>
+		<div id="bloc_question_bas">
+			<div id="bloc_question_bas_txt">Chargement de la partie ...</div>
+		</div>
+		
+	</div>
+		
+
+	
+  <div id="quizz_proposition">	
+		<div class="bloc_reponse"><div id="rep1"></div></div><!-- pour supprimer les white-spice entre les blocs accolés
+		--><div class="bloc_reponse"><div id="rep2"></div></div><!--
+		--><div class="bloc_reponse"><div id="rep3"></div></div><!--
+		--><div class="bloc_reponse"><div id="rep4"></div></div>
+	</div>
+
+	<div id="jeu_bloc_bloc_valid"><div id="jeu_bloc_valid"><img src="{{asset('bundles/GeneBundle/buttonvalidMq.png')}}" alt="valider" width="100%"></div></div>
+
+
+
+		
+  {% endblock %}
+  
+
+ 

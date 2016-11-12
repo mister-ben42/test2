@@ -1,0 +1,7 @@
+parameters:
+#    mdq_gene.example.class: MDQ\GeneBundle\Example
+
+services:
+#    mdq_gene.example:
+#        class: %mdq_gene.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

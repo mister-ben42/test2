@@ -1,0 +1,18 @@
+parameters:
+#    mdq_user.example.class: MDQ\UserBundle\Example
+
+services:
+    mdq_user.registration.form.type:
+        class: MDQ\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: mdq_user_registration }
+    mdq_user.profile.form.type:
+        class: MDQ\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: mdq_user_profile }			
+    mdq_user.twig.mdq_extension:
+        class: MDQ\UserBundle\Twig\UserExtension
+        tags:
+            - { name: twig.extension }

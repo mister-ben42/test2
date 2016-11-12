@@ -1,0 +1,54 @@
+{# src/MDQ/QuizzBundle/Resources/views/Quizz/page1Quizz.html.twig #}
+
+{% extends "MDQQuizzBundle::layoutQz.html.twig" %}
+
+{# block meta %}
+<meta http-equiv="refresh" content="8;url=../" />
+{% endblock #}
+	{% block bloc_page %}
+	<div id="bloc_page" class="{{bloc_page}} bloc_page_preGame" oncontextmenu="return false;" >
+	{% endblock %}
+{% block body %}
+	<div id="bloc_question">	
+		<div id="bloc_question_haut">
+			<div id="bloc_question_dom">Fin de la partie</div>
+			<div id="bloc_question_numQ"></div>
+		</div>
+		<div id="bloc_question_central">
+			<div id="bloc_finPartie">	
+				{% if score>highscore or score>=10000 %}	
+				<div id="bloc_finPartie_feux">
+				{% else %}
+				<div id="bloc_finPartie_sans_feux">
+				{% endif %}
+				<!-- Si score Max et si pas la 1ère partie : Bravo, vous venez de réaliser ... -->
+				<p>{{ comFinal }}</p>
+				{% if score>highscore %}	
+				</br>
+				<p>Félicitation, c'est votre meilleur score au {{game}} !!!</p>
+				
+				{% endif %}
+				</br>
+				{% if rang=="none" %}<p>Vous n'avez pas amélorié votre meilleur score du jour au {{game}}.</p>
+				{%else%}<p>Vous vous classez au {{rang}}<sup>{% if rang==1 %}er{%else%}ème{%endif%}</sup> rang du classement quotidien du {{game}}.</p>
+				{%endif%}
+				</div>
+				</div>
+			</div>
+		
+		</div>
+		<div id="bloc_question_bas">
+			<div id="bloc_question_bas_txt"></div>
+		</div>
+		<div id="quizz_proposition" class="fin_partie_bloc_bas">
+		<div id="fin_partie_bloc_bas">
+		A bientôt, pour une nouvelle partie sur <img src="{{ asset('bundles/GeneBundle/MDQlogblc.png') }}" alt="titre" width="100px">
+		</div>
+		</div>
+			<div id="jeu_bloc_bloc_valid"><div id="jeu_bloc_valid"><a href="{{ path('mdqgene_accueil') }}"><img src="{{asset('bundles/GeneBundle/buttonvalidMq4.png')}}" alt="valider" width="100%"></a></div></div>
+	
+
+	</div>
+
+	
+ {% endblock %}

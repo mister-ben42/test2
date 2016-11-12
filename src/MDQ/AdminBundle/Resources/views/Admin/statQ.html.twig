@@ -1,0 +1,123 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/statQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Stats sur les questions
+{% endblock %}
+
+{% block admin_body %}
+	<div id="page_stats">
+	<h3>Stats sur les questions</h3>
+  <p>Il y a {{ stats.nbQt }} questions dans la base de données.</p>
+	<p>{{ stats.nbQMq }} pour le MasterQuizz, {{ stats.nbQQm }} pour les Quizz Médias, {{ stats.nbQQnF }} pour les Quizz'nFolie et {{stats.nbQa}} pour d'autres jeux.</p>
+	<h4>Stats au MasterQuizz</h4>
+		<table>
+		<caption>Analyse par type de validation</caption>		
+	   <tr><th>Type</th><th>Nb questions</th><th>% de Qtot</th></tr>
+		<tr><td class="td_titre">Validée</td><td>{{ stats.nbQMqv1 }}</td><td>{{ stats.pctQMqv1 }}</td></tr>
+		<tr><td class="td_titre">Passée</td><td>{{ stats.nbQMqv2 }}</td><td>{{ stats.pctQMqv2 }}</td></tr>
+		<tr><td class="td_titre">Refusée</td><td>{{ stats.nbQMqv0 }}</td><td>{{ stats.pctQMqv0 }}</td></tr>
+	   <tr><td class="td_titre">Pas étudiée</td><td>{{ stats.nbQMqv3 }}</td><td>{{ stats.pctQMqv3 }}</td></tr>
+	  </table>
+	<table>
+
+		<h4>Toutes les questions du MasterQuizz</h4>
+	<table>
+		<caption>Analyse par domaines</caption>		
+	   <tr><th>Domaine</th><th>Nb question </th><th>% de Qtot</th></tr>
+	   <tr><td class="td_titre">Histoire</td><td>{{ stats.nbQh }}</td><td>{{ stats.pctQh }}</td></tr>
+	   <tr><td class="td_titre">Sports et loisirs</td><td>{{ stats.nbQsl }}</td><td>{{ stats.pctQsl }}</td></tr>
+		<tr><td class="td_titre">Sciences et nature</td><td>{{ stats.nbQsn }}</td><td>{{ stats.pctQsn }}</td></tr>
+		<tr><td class="td_titre">Géographie</td><td>{{ stats.nbQg }}</td><td>{{ stats.pctQg }}</td></tr>
+		<tr><td class="td_titre">Arts et Littérature</td><td>{{ stats.nbQal }}</td><td>{{ stats.pctQal }}</td></tr>
+		<tr><td class="td_titre">Divers</td><td>{{ stats.nbQd }}</td><td>{{ stats.pctQd }}</td></tr>
+	 </table>
+	 
+	<table>
+		<caption>Analyse par difficulté</caption>		
+	   <tr><th>Niveau</th><th>Nb questions</th><th>% de Qtot</th></tr>
+	   <tr><td class="td_titre">1</td><td>{{ stats.nbQMqd1 }}</td><td>{{ stats.pctQMqd1 }}</td></tr>
+		<tr><td class="td_titre">2</td><td>{{ stats.nbQMqd2 }}</td><td>{{ stats.pctQMqd2 }}</td></tr>
+		<tr><td class="td_titre">3</td><td>{{ stats.nbQMqd3 }}</td><td>{{ stats.pctQMqd3 }}</td></tr>
+		<tr><td class="td_titre">4</td><td>{{ stats.nbQMqd4 }}</td><td>{{ stats.pctQMqd4 }}</td></tr>
+		<tr><td class="td_titre">5</td><td>{{ stats.nbQMqd5 }}</td><td>{{ stats.pctQMqd5 }}</td><td> </td></tr>
+	   </table>
+	   
+		<table>
+		<caption>Analyse par domaines et par diff</caption>		
+	   <tr><th>Domaine</th><th class="th_droite">1 (nb)</th><th class="th_gauche">1 (%)</th><th class="th_droite">2 (nb)</th><th class="th_gauche">2 (%)</th><th class="th_droite">3 (nb)</th><th class="th_gauche">3 (%)</th><th class="th_droite">4 (nb)</th><th class="th_gauche">4 (%)</th><th class="th_droite">5 (nb)</th><th class="th_gauche">5 (%)</th><th>Nb Q tot</th></tr>
+	   <tr><td class="td_titre">Histoire</td><td class="td_droite">{{stats.nbQhd1}}</td><td class="td_gauche">{{stats.pctQhd1}}</td><td class="td_droite">{{stats.nbQhd2}}</td><td class="td_gauche">{{stats.pctQhd2}}</td><td class="td_droite">{{stats.nbQhd3}}</td><td class="td_gauche">{{stats.pctQhd3}}</td><td class="td_droite">{{stats.nbQhd4}}</td><td class="td_gauche">{{stats.pctQhd4}}</td><td class="td_droite">{{stats.nbQhd5}}</td><td class="td_gauche">{{stats.pctQhd5}}</td><td>{{ stats.nbQh }}</</td></tr>
+	   <tr><td class="td_titre">Sports et loisirs</td><td class="td_droite">{{stats.nbQsld1}}</td><td class="td_gauche">{{stats.pctQsld1}}</td><td class="td_droite">{{stats.nbQsld2}}</td><td class="td_gauche">{{stats.pctQsld2}}</td><td class="td_droite">{{stats.nbQsld3}}</td><td class="td_gauche">{{stats.pctQsld3}}</td><td class="td_droite">{{stats.nbQsld4}}</td><td class="td_gauche">{{stats.pctQsld4}}</td><td class="td_droite">{{stats.nbQsld5}}</td><td class="td_gauche">{{stats.pctQsld5}}</td><td>{{ stats.nbQsl }}</td></tr>
+		<tr><td class="td_titre">Sciences et nature</td><td class="td_droite">{{stats.nbQsnd1}}</td><td class="td_gauche">{{stats.pctQsnd1}}</td><td class="td_droite">{{stats.nbQsnd2}}</td><td class="td_gauche">{{stats.pctQsnd2}}</td><td class="td_droite">{{stats.nbQsnd3}}</td><td class="td_gauche">{{stats.pctQsnd3}}</td><td class="td_droite">{{stats.nbQsnd4}}</td><td class="td_gauche">{{stats.pctQsnd4}}</td><td class="td_droite">{{stats.nbQsnd5}}</td><td class="td_gauche">{{stats.pctQsnd5}}</td><td>{{ stats.nbQsn }}</td></tr>
+		<tr><td class="td_titre">Géographie</td><td class="td_droite">{{stats.nbQgd1}}</td><td class="td_gauche">{{stats.pctQgd1}}</td><td class="td_droite">{{stats.nbQgd2}}</td><td class="td_gauche">{{stats.pctQgd2}}</td><td class="td_droite">{{stats.nbQgd3}}</td><td class="td_gauche">{{stats.pctQgd3}}</td><td class="td_droite">{{stats.nbQgd4}}</td><td class="td_gauche">{{stats.pctQgd4}}</td><td class="td_droite">{{stats.nbQgd5}}</td><td class="td_gauche">{{stats.pctQgd5}}</td><td>{{ stats.nbQg }}</td></tr>
+		<tr><td class="td_titre">Arts et Littérature</td><td class="td_droite">{{stats.nbQald1}}</td><td class="td_gauche">{{stats.pctQald1}}</td><td class="td_droite">{{stats.nbQald2}}</td><td class="td_gauche">{{stats.pctQald2}}</td><td class="td_droite">{{stats.nbQald3}}</td><td class="td_gauche">{{stats.pctQald3}}</td><td class="td_droite">{{stats.nbQald4}}</td><td class="td_gauche">{{stats.pctQald4}}</td><td class="td_droite">{{stats.nbQald5}}</td><td class="td_gauche">{{stats.pctQald5}}</td><td>{{ stats.nbQal }}</td></tr>
+		<tr><td class="td_titre">Divers</td><td class="td_droite">{{stats.nbQdd1}}</td><td class="td_gauche">{{stats.pctQdd1}}</td><td class="td_droite">{{stats.nbQdd2}}</td><td class="td_gauche">{{stats.pctQdd2}}</td><td class="td_droite">{{stats.nbQdd3}}</td><td class="td_gauche">{{stats.pctQdd3}}</td><td class="td_droite">{{stats.nbQdd4}}</td><td class="td_gauche">{{stats.pctQdd4}}</td><td class="td_droite">{{stats.nbQdd5}}</td><td class="td_gauche">{{stats.pctQdd5}}</td><td>{{ stats.nbQd }}</td></tr>
+		<tr class="tr_tout"><td class="td_titre">Total</td><td class="td_droite">{{stats.nbQMqd1}}</td><td class="td_gauche">{{stats.pctQMqd1}}</td><td class="td_droite">{{stats.nbQMqd2}}</td><td class="td_gauche">{{stats.pctQMqd2}}</td><td class="td_droite">{{stats.nbQMqd3}}</td><td class="td_gauche">{{stats.pctQMqd3}}</td><td class="td_droite">{{stats.nbQMqd4}}</td><td class="td_gauche">{{stats.pctQMqd4}}</td><td class="td_droite">{{stats.nbQMqd5}}</td><td class="td_gauche">{{stats.pctQMqd5}}</td><td>{{ stats.nbQMq }}</td></tr>
+
+		</table>
+		<h4>Questions validées du MasterQuizz</h4>
+	<table>
+		<caption>Analyse par domaines</caption>		
+	   <tr><th>Domaine</th><th>Nb question </th><th>% de Qtot</th></tr>
+	   <tr><td class="td_titre">Histoire</td><td>{{ stats.nbQhv1 }}</td><td>{{ stats.pctQhv1 }}</td></tr>
+	   <tr><td class="td_titre">Sports et loisirs</td><td>{{ stats.nbQslv1 }}</td><td>{{ stats.pctQslv1 }}</td></tr>
+		<tr><td class="td_titre">Sciences et nature</td><td>{{ stats.nbQsnv1 }}</td><td>{{ stats.pctQsnv1 }}</td></tr>
+		<tr><td class="td_titre">Géographie</td><td>{{ stats.nbQgv1 }}</td><td>{{ stats.pctQgv1 }}</td></tr>
+		<tr><td class="td_titre">Arts et Littérature</td><td>{{ stats.nbQalv1 }}</td><td>{{ stats.pctQalv1 }}</td></tr>
+		<tr><td class="td_titre">Divers</td><td>{{ stats.nbQdv1 }}</td><td>{{ stats.pctQdv1 }}</td></tr>
+	 </table>
+	 
+	<table>
+		<caption>Analyse par difficulté</caption>		
+	   <tr><th>Niveau</th><th>Nb questions</th><th>% de Qtot</th></tr>
+	   <tr><td class="td_titre">1</td><td>{{ stats.nbQMqd1v1 }}</td><td>{{ stats.pctQMqd1v1 }}</td></tr>
+		<tr><td class="td_titre">2</td><td>{{ stats.nbQMqd2v1 }}</td><td>{{ stats.pctQMqd2v1 }}</td></tr>
+		<tr><td class="td_titre">3</td><td>{{ stats.nbQMqd3v1 }}</td><td>{{ stats.pctQMqd3v1 }}</td></tr>
+		<tr><td class="td_titre">4</td><td>{{ stats.nbQMqd4v1 }}</td><td>{{ stats.pctQMqd4v1 }}</td></tr>
+		<tr><td class="td_titre">5</td><td>{{ stats.nbQMqd5v1 }}</td><td>{{ stats.pctQMqd5v1 }}</td><td> </td></tr>
+	   </table>
+	<table>
+		<caption>Analyse par domaines et par diff</caption>		
+	   <tr><th>Domaine</th><th class="th_droite">1 (nb)</th><th class="th_gauche">1 (%)</th><th class="th_droite">2 (nb)</th><th class="th_gauche">2 (%)</th><th class="th_droite">3 (nb)</th><th class="th_gauche">3 (%)</th><th class="th_droite">4 (nb)</th><th class="th_gauche">4 (%)</th><th class="th_droite">5 (nb)</th><th class="th_gauche">5 (%)</th><th>Nb Q tot</th></tr>
+	   <tr><td class="td_titre">Histoire</td><td class="td_droite">{{stats.nbQhd1v1}}</td><td class="td_gauche">{{stats.pctQhd1v1}}</td><td class="td_droite">{{stats.nbQhd2v1}}</td><td class="td_gauche">{{stats.pctQhd2v1}}</td><td class="td_droite">{{stats.nbQhd3v1}}</td><td class="td_gauche">{{stats.pctQhd3v1}}</td><td class="td_droite">{{stats.nbQhd4v1}}</td><td class="td_gauche">{{stats.pctQhd4v1}}</td><td class="td_droite">{{stats.nbQhd5v1}}</td><td class="td_gauche">{{stats.pctQhd5v1}}</td><td>{{ stats.nbQhv1 }}</</td></tr>
+	   <tr><td class="td_titre">Sports et loisirs</td><td class="td_droite">{{stats.nbQsld1v1}}</td><td class="td_gauche">{{stats.pctQsld1v1}}</td><td class="td_droite">{{stats.nbQsld2v1}}</td><td class="td_gauche">{{stats.pctQsld2v1}}</td><td class="td_droite">{{stats.nbQsld3v1}}</td><td class="td_gauche">{{stats.pctQsld3v1}}</td><td class="td_droite">{{stats.nbQsld4v1}}</td><td class="td_gauche">{{stats.pctQsld4v1}}</td><td class="td_droite">{{stats.nbQsld5v1}}</td><td class="td_gauche">{{stats.pctQsld5v1}}</td><td>{{ stats.nbQslv1 }}</td></tr>
+		<tr><td class="td_titre">Sciences et nature</td><td class="td_droite">{{stats.nbQsnd1v1}}</td><td class="td_gauche">{{stats.pctQsnd1v1}}</td><td class="td_droite">{{stats.nbQsnd2v1}}</td><td class="td_gauche">{{stats.pctQsnd2v1}}</td><td class="td_droite">{{stats.nbQsnd3v1}}</td><td class="td_gauche">{{stats.pctQsnd3v1}}</td><td class="td_droite">{{stats.nbQsnd4v1}}</td><td class="td_gauche">{{stats.pctQsnd4v1}}</td><td class="td_droite">{{stats.nbQsnd5v1}}</td><td class="td_gauche">{{stats.pctQsnd5v1}}</td><td>{{ stats.nbQsnv1 }}</td></tr>
+		<tr><td class="td_titre">Géographie</td><td class="td_droite">{{stats.nbQgd1v1}}</td><td class="td_gauche">{{stats.pctQgd1v1}}</td><td class="td_droite">{{stats.nbQgd2v1}}</td><td class="td_gauche">{{stats.pctQgd2v1}}</td><td class="td_droite">{{stats.nbQgd3v1}}</td><td class="td_gauche">{{stats.pctQgd3v1}}</td><td class="td_droite">{{stats.nbQgd4v1}}</td><td class="td_gauche">{{stats.pctQgd4v1}}</td><td class="td_droite">{{stats.nbQgd5v1}}</td><td class="td_gauche">{{stats.pctQgd5v1}}</td><td>{{ stats.nbQgv1 }}</td></tr>
+		<tr><td class="td_titre">Arts et Littérature</td><td class="td_droite">{{stats.nbQald1v1}}</td><td class="td_gauche">{{stats.pctQald1v1}}</td><td class="td_droite">{{stats.nbQald2v1}}</td><td class="td_gauche">{{stats.pctQald2v1}}</td><td class="td_droite">{{stats.nbQald3v1}}</td><td class="td_gauche">{{stats.pctQald3v1}}</td><td class="td_droite">{{stats.nbQald4v1}}</td><td class="td_gauche">{{stats.pctQald4v1}}</td><td class="td_droite">{{stats.nbQald5v1}}</td><td class="td_gauche">{{stats.pctQald5v1}}</td><td>{{ stats.nbQalv1 }}</td></tr>
+		<tr><td class="td_titre">Divers</td><td class="td_droite">{{stats.nbQdd1v1}}</td><td class="td_gauche">{{stats.pctQdd1v1}}</td><td class="td_droite">{{stats.nbQdd2v1}}</td><td class="td_gauche">{{stats.pctQdd2v1}}</td><td class="td_droite">{{stats.nbQdd3v1}}</td><td class="td_gauche">{{stats.pctQdd3v1}}</td><td class="td_droite">{{stats.nbQdd4v1}}</td><td class="td_gauche">{{stats.pctQdd4v1}}</td><td class="td_droite">{{stats.nbQdd5v1}}</td><td class="td_gauche">{{stats.pctQdd5v1}}</td><td>{{ stats.nbQdv1 }}</td></tr>
+		<tr class="tr_tout"><td class="td_titre">Total</td><td class="td_droite">{{stats.nbQMqd1v1}}</td><td class="td_gauche">{{stats.pctQMqd1v1}}</td><td class="td_droite">{{stats.nbQMqd2v1}}</td><td class="td_gauche">{{stats.pctQMqd2v1}}</td><td class="td_droite">{{stats.nbQMqd3v1}}</td><td class="td_gauche">{{stats.pctQMqd3v1}}</td><td class="td_droite">{{stats.nbQMqd4v1}}</td><td class="td_gauche">{{stats.pctQMqd4v1}}</td><td class="td_droite">{{stats.nbQMqd5v1}}</td><td class="td_gauche">{{stats.pctQMqd5v1}}</td><td>{{ stats.nbQMqv1 }}</td></tr>
+
+		</table>
+
+	<h4>Stats aux Quizz Média</h4>
+		<table>
+		<caption>Analyse par domaines et par diff</caption>		
+	   <tr><th>Domaine</th><th class="th_droite">1 (nb)</th><th class="th_gauche">1 (%)</th><th class="th_droite">2 (nb)</th><th class="th_gauche">2 (%)</th><th class="th_droite">3 (nb)</th><th class="th_gauche">3 (%)</th><th class="th_droite">4 (nb)</th><th class="th_gauche">4 (%)</th><th class="th_droite">5 (nb)</th><th class="th_gauche">5 (%)</th><th>Nb Q tot</th></tr>
+	   <tr><td class="td_titre">Quizz Art</td><td class="td_droite">{{stats.nbQard1}}</td><td class="td_gauche">{{stats.pctQard1}}</td><td class="td_droite">{{stats.nbQard2}}</td><td class="td_gauche">{{stats.pctQard2}}</td><td class="td_droite">{{stats.nbQard3}}</td><td class="td_gauche">{{stats.pctQard3}}</td><td class="td_droite">{{stats.nbQard4}}</td><td class="td_gauche">{{stats.pctQard4}}</td><td class="td_droite">{{stats.nbQard5}}</td><td class="td_gauche">{{stats.pctQard5}}</td><td>{{ stats.nbQar }}</</td></tr>
+	   <tr><td class="td_titre">Quizz Nature</td><td class="td_droite">{{stats.nbQffd1}}</td><td class="td_gauche">{{stats.pctQffd1}}</td><td class="td_droite">{{stats.nbQffd2}}</td><td class="td_gauche">{{stats.pctQffd2}}</td><td class="td_droite">{{stats.nbQffd3}}</td><td class="td_gauche">{{stats.pctQffd3}}</td><td class="td_droite">{{stats.nbQffd4}}</td><td class="td_gauche">{{stats.pctQffd4}}</td><td class="td_droite">{{stats.nbQffd5}}</td><td class="td_gauche">{{stats.pctQffd5}}</td><td>{{ stats.nbQff }}</td></tr>
+		<tr><td class="td_titre">Lieux du monde</td><td class="td_droite">{{stats.nbQlxd1}}</td><td class="td_gauche">{{stats.pctQlxd1}}</td><td class="td_droite">{{stats.nbQlxd2}}</td><td class="td_gauche">{{stats.pctQlxd2}}</td><td class="td_droite">{{stats.nbQlxd3}}</td><td class="td_gauche">{{stats.pctQlxd3}}</td><td class="td_droite">{{stats.nbQlxd4}}</td><td class="td_gauche">{{stats.pctQlxd4}}</td><td class="td_droite">{{stats.nbQlxd5}}</td><td class="td_gauche">{{stats.pctQlxd5}}</td><td>{{ stats.nbQlx }}</td></tr>
+		<tr><td class="td_titre">Musique Classique</td><td class="td_droite">{{stats.nbQmud1}}</td><td class="td_gauche">{{stats.pctQmud1}}</td><td class="td_droite">{{stats.nbQmud2}}</td><td class="td_gauche">{{stats.pctQmud2}}</td><td class="td_droite">{{stats.nbQmud3}}</td><td class="td_gauche">{{stats.pctQmud3}}</td><td class="td_droite">{{stats.nbQmud4}}</td><td class="td_gauche">{{stats.pctQmud4}}</td><td class="td_droite">{{stats.nbQmud5}}</td><td class="td_gauche">{{stats.pctQmud5}}</td><td>{{ stats.nbQmu }}</td></tr>
+		<tr class="tr_tout"><td class="td_titre">Total</td><td class="td_droite">{{stats.nbQQmd1}}</td><td class="td_gauche">{{stats.pctQQmd1}}</td><td class="td_droite">{{stats.nbQQmd2}}</td><td class="td_gauche">{{stats.pctQQmd2}}</td><td class="td_droite">{{stats.nbQQmd3}}</td><td class="td_gauche">{{stats.pctQQmd3}}</td><td class="td_droite">{{stats.nbQQmd4}}</td><td class="td_gauche">{{stats.pctQQmd4}}</td><td class="td_droite">{{stats.nbQQmd5}}</td><td class="td_gauche">{{stats.pctQQmd5}}</td><td>{{ stats.nbQQm }}</td></tr>
+		</table>
+	
+	<h4>Stats au Quizz'nFolie</h4>
+	 <table>
+		<caption>Analyse par domaines</caption>		
+	   <tr><th>Domaine</th><th>Nb question </th><th>% de Qtot</th><th>% de bonnes rép</th></tr>
+	   <tr><td class="td_titre">SexyQuizz</td><td>{{ stats.nbQsx }}</td><td></td><td> </td></tr>
+	   <tr><td class="td_titre">TvQuizz</td><td>{{ stats.nbQtv }}</td><td></td><td> </td></tr>
+	 </table>
+	 <table>
+		<caption>Analyse par domaines et par diff</caption>		
+	   <tr><th>Domaine</th><th class="th_droite">1 (nb)</th><th class="th_gauche">1 (%)</th><th class="th_droite">2 (nb)</th><th class="th_gauche">2 (%)</th><th class="th_droite">3 (nb)</th><th class="th_gauche">3 (%)</th><th class="th_droite">4 (nb)</th><th class="th_gauche">4 (%)</th><th class="th_droite">5 (nb)</th><th class="th_gauche">5 (%)</th><th>Nb Q tot</th></tr>
+	   <tr><td class="td_titre">TvQuizz</td><td class="td_droite">{{stats.nbQtvd1}}</td><td class="td_gauche">{{stats.pctQtvd1}}</td><td class="td_droite">{{stats.nbQtvd2}}</td><td class="td_gauche">{{stats.pctQtvd2}}</td><td class="td_droite">{{stats.nbQtvd3}}</td><td class="td_gauche">{{stats.pctQtvd3}}</td><td class="td_droite">{{stats.nbQtvd4}}</td><td class="td_gauche">{{stats.pctQtvd4}}</td><td class="td_droite">{{stats.nbQtvd5}}</td><td class="td_gauche">{{stats.pctQtvd5}}</td><td>{{ stats.nbQtv }}</</td></tr>
+		<tr><td class="td_titre">SexyQuizz</td><td class="td_droite">{{stats.nbQsxd1}}</td><td class="td_gauche">{{stats.pctQsxd1}}</td><td class="td_droite">{{stats.nbQsxd2}}</td><td class="td_gauche">{{stats.pctQsxd2}}</td><td class="td_droite">{{stats.nbQsxd3}}</td><td class="td_gauche">{{stats.pctQsxd3}}</td><td class="td_droite">{{stats.nbQsxd4}}</td><td class="td_gauche">{{stats.pctQsxd4}}</td><td class="td_droite">{{stats.nbQsxd5}}</td><td class="td_gauche">{{stats.pctQsxd5}}</td><td>{{ stats.nbQsx }}</td></tr>
+		<tr><td class="td_titre">Autre</td><td class="td_droite">{{stats.nbQad1}}</td><td class="td_gauche">{{stats.pctQad1}}</td><td class="td_droite">{{stats.nbQad2}}</td><td class="td_gauche">{{stats.pctQad2}}</td><td class="td_droite">{{stats.nbQad3}}</td><td class="td_gauche">{{stats.pctQad3}}</td><td class="td_droite">{{stats.nbQad4}}</td><td class="td_gauche">{{stats.pctQad4}}</td><td class="td_droite">{{stats.nbQad5}}</td><td class="td_gauche">{{stats.pctQad5}}</td><td>{{ stats.nbQa }}</td></tr>
+
+		</table>
+	
+	</div>
+{% endblock %}
+
+

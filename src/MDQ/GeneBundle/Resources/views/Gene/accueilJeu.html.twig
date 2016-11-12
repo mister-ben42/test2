@@ -1,0 +1,105 @@
+{# src/MDQ/GeneBundle/Resources/views/accueilJeu.html.twig #}
+
+{% extends "MDQGeneBundle::layoutG.html.twig" %}
+
+	{% block fixe_taille %}
+	<div id="page_accueil_jeu">
+	{% endblock %}
+	
+{% block body_gene %}
+
+	<div id="bloc_flash_message"><div id="flash_message">
+	  {% if app.user==null %}<strong id="mess_flash_1">Vous devez être connecté pour jouer à ce jeu.</strong>
+	  {%else%}<strong id="mess_flash_2">Vous n'avez plus de jetons pour jouer à ce jeu.</strong>
+		  <strong id="mess_flash_3">Ce jeu n'est pas disponible actuellement.</strong>
+	  {% endif%}
+	
+	<div id="flash_message_croix">x</div>
+	</div></div>
+	<div id="accueil_jeu_Mq" class="bloc accueil_jeu_bloc">
+	<div class="accueil_jeu_bloc_logo">
+	  <div class="accueil_jeu_logo"><img src="../bundles/GeneBundle/GrosLogoMq.png" alt="titreMQ" width="100%"></div>	
+	</div>	
+	<div id="accueil_jeu_bloc_boutonGo"><div id="accueil_jeu_boutonGo">
+	  {% if app.user!=null and gestion.Mq!=0 and app.user.scuser.nbJdayMq!=0 or is_granted('ROLE_ADMIN') %}
+	 <a href="{{ path('mdqquizz_preGame', {'game':'MasterQuizz'}) }}"> <img src="../bundles/GeneBundle/LogoMqGo.png" alt="titre" width="100%"> </a>
+	  {% else %}
+		  {% if app.user==null %} <strong class="affich_flash1">
+		 {% elseif app.user.scuser.nbJdayMq==0 %} <strong class="affich_flash2">
+		 {% elseif gestion.Mq==0 %} <strong class="affich_flash3">
+		 {% endif %}
+		  <img src="../bundles/GeneBundle/LogoMqGo.png" alt="titre" width="100%"> </strong></div>
+	 {% endif %}
+	
+	</div> </div></div>
+	<div class="bloc accueil_jeu_bloc">
+	   <div class="accueil_jeu_bloc_logo"><div class="accueil_jeu_logo"><img src="../bundles/GeneBundle/GrosLogoQm.png" alt="titreQM" width="100%"></div></div>
+	  <div id="accueil_jeu_bloc_QnF">
+	 <div id="accueil_jeu_bloc_QnF_1">
+	  {% if app.user!=null and gestion.Ar!=0 and app.user.scuser.nbJdayQnF+app.user.scuser.nbJQnF!=0 or is_granted('ROLE_ADMIN')%}
+	  <a href="{{ path('mdqquizz_preGame', {'game':'ArQuizz'}) }}"> <div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Tv"><img src="../bundles/GeneBundle/GrosLogoAr.png" alt="ArQuizz" width="100%"></div></a>
+	  {% else %}
+		  <div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Tv" >
+		  {% if app.user==null %} <strong class="affich_flash1">
+		 {% elseif app.user.scuser.nbJdayQnF+app.user.scuser.nbJQnF==0 %} <strong class="affich_flash2">
+		 {% elseif gestion.Ar==0 %} <strong class="affich_flash3">
+		 {% endif %}
+		  <img src="../bundles/GeneBundle/GrosLogoAr.png" alt="ArQuizz" width="100%"></strong></div>
+	 {% endif %}
+	  {% if app.user!=null and gestion.Ff!=0 and app.user.scuser.nbJdayQnF+app.user.scuser.nbJQnF!=0 or is_granted('ROLE_ADMIN')%}
+	  <a href="{{ path('mdqquizz_preGame', {'game':'FfQuizz'}) }}"> <div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Ey"><img src="../bundles/GeneBundle/GrosLogoFf3.png" alt="FfQuizz" width="100%"></div></a>
+	  {% else %}
+		  <div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Ey" >
+		  {% if app.user==null %} <strong class="affich_flash1">
+		 {% elseif app.user.scuser.nbJdayQnF+app.user.scuser.nbJQnF==0 %}<strong class="affich_flash2">
+		 {% elseif gestion.Ar==0 %} <strong class="affich_flash3">
+		 {% endif %}
+		  <img src="../bundles/GeneBundle/GrosLogoFf3.png" alt="FfQuizz" width="100%"></strong></div>
+	 {% endif %}
+	 </div>
+	 <div id="accueil_jeu_bloc_QnF_2">
+	  {% if app.user!=null and gestion.Mc!=0 and app.user.scuser.nbJdayQnF+app.user.scuser.nbJQnF!=0 or is_granted('ROLE_ADMIN')%}
+	  <a href="{{ path('mdqquizz_preGame', {'game':'MuQuizz'}) }}"> <div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Mc"><img src="../bundles/GeneBundle/GrosLogoMu.png" alt="MuQuizz" width="100%"></div></a>
+	  {% else %}
+		  <div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Mc" >
+		  {% if app.user==null %} <strong class="affich_flash1">
+		 {% elseif app.user.scuser.nbJdayQnF+app.user.scuser.nbJQnF==0 %} <strong class="affich_flash2">
+		 {% elseif gestion.Mc==0 %} <strong class="affich_flash3">
+		 {% endif %}
+		  <img src="../bundles/GeneBundle/GrosLogoMu.png" alt="ArQuizz" width="100%"></strong></div>
+	 {% endif %}
+	  {% if app.user!=null and gestion.Lx!=0 and app.user.scuser.nbJdayQnF+app.user.scuser.nbJQnF!=0 or is_granted('ROLE_ADMIN')%}
+	  <a href="{{ path('mdqquizz_preGame', {'game':'LxQuizz'}) }}"> <div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Sx"><img src="../bundles/GeneBundle/GrosLogoLx.png" alt="LxQuizz" width="100%"></div></a>
+	  {% else %}
+		  <div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Sx" >
+		  {% if app.user==null %} <strong class="affich_flash1">
+		 {% elseif app.user.scuser.nbJdayQnF+app.user.scuser.nbJQnF==0 %}<strong class="affich_flash2">
+		 {% elseif gestion.Lx==0 %} <strong class="affich_flash3">
+		 {% endif %}
+		  <img src="../bundles/GeneBundle/GrosLogoLx.png" alt="FfQuizz" width="100%"></strong></div>
+	 {% endif %}	 	  
+	  </div>
+	
+	  </div>
+	  <div id="accueil_jeu_QnF_comment">
+	     <div id="accueil_jeu_QnF_comment_txt"></div>
+	  </div>
+	</div>
+	<div id="accueil_jeu_bloc_menu">
+	<div class="bloc_menu">
+	  <ul>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png') }}" alt="bjaune" width="20px">Accueil</a></li>
+		</ul>
+	</div>
+	</div>
+	</div>
+{% endblock %}
+{% block bas_page %}
+	{% endblock%}
+	
+{% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script src="{{ asset('bundles/GeneBundle/scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+	<script	src="{{ asset('bundles/GeneBundle/gene.js') }}"></script>
+
+{% endblock %}

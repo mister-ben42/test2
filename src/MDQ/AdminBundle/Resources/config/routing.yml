@@ -12,51 +12,51 @@ mdqadmin_critvoirU:
     defaults: { _controller: MDQAdminBundle:Admin:critvoirU }
 mdqadmin_newNews:
     path:    /newNews
-    defaults: { _controller: MDQAdminBundle:Admin:newNews }	
+    defaults: { _controller: MDQAdminBundle:News:newNews }	
 mdqadmin_listNews:
     path:    /listNews
-    defaults: { _controller: MDQAdminBundle:Admin:listNews }
+    defaults: { _controller: MDQAdminBundle:News:listNews }
 mdqadmin_modifNews:
     path:    /modifNews/{id}
-    defaults: { _controller: MDQAdminBundle:Admin:modifNews }
+    defaults: { _controller: MDQAdminBundle:News:modifNews }
 mdqadmin_formListNews:
     path:    /formListNews
-    defaults: { _controller: MDQAdminBundle:Admin:formListNews }
+    defaults: { _controller: MDQAdminBundle:News:formListNews }
 mdqadmin_testQdouble:
     path:    /testQdouble
-    defaults: { _controller: MDQAdminBundle:Admin:testQdouble }
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:testQdouble }
 mdqadmin_voirQ:
     path:    /voirQ/{choice}/{page}/{error}/{valid}/{diff}/{game}/{dom1}/{theme}/{crit}/{sens}/{nbdeQ}/{nbmin}
-    defaults: { _controller: MDQAdminBundle:Admin:voirQ, choice:list, page:1, error:0, valid:3, diff:0, game:none, dom1:none, theme:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:voirQ, choice:list, page:1, error:0, valid:3, diff:0, game:none, dom1:none, theme:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
 mdqadmin_critvoirQ:
     path:    /critvoirQ/{choice}
-    defaults: { _controller: MDQAdminBundle:Admin:critvoirQ, choice:list }
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:critvoirQ, choice:list }
 mdqadmin_modifQ:
     path:    /modifQ/{id}/{choice}/{error}/{valid}/{diff}/{dom1}/{theme}/{crit}/{sens}/{nbdeQ}/{nbmin}
-    defaults: { _controller: MDQAdminBundle:Admin:modifQ, choice:list, error:0, valid:3, diff:0, dom1:none, theme:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:modifQ, choice:list, error:0, valid:3, diff:0, dom1:none, theme:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
     requirements:
         id: \d+
 mdqadmin_modifQajax:
     path:    /modifQajax
-    defaults: { _controller: MDQAdminBundle:Admin:modifQajax }
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:modifQajax }
 mdqadmin_critvoirQaVal:
     path:    /critvoirQaVal
-    defaults: { _controller: MDQAdminBundle:Admin:critvoirQaVal}
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:critvoirQaVal}
 mdqadmin_voirQaVal:
     path:    /voirQaVal/{page}/{repAdmin}/{diff}/{dom1}/{crit}/{sens}/{nbdeQ}/{nbmin}
-    defaults: { _controller: MDQAdminBundle:Admin:voirQaVal, page:1, repAdmin:4, diff:0, dom1:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:voirQaVal, page:1, repAdmin:4, diff:0, dom1:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
 mdqadmin_retourQaValajax:
     path:    /retourQaValajax
-    defaults: { _controller: MDQAdminBundle:Admin:retourQaValajax }
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:retourQaValajax }
 mdqadmin_insertQaValajax:
     path:    /insertQaValajax
-    defaults: { _controller: MDQAdminBundle:Admin:insertQaValajax }
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:insertQaValajax }
 mdqadmin_statQ:
     path:    /statQ
-    defaults: { _controller: MDQAdminBundle:Admin:statQ }
+    defaults: { _controller: MDQAdminBundle:Stats:statQ }
 mdqadmin_botGame:
     path:    /botGame/{nbBots}/{djajoue}/{type}
-    defaults: 	{ _controller: MDQAdminBundle:Admin:botPartie, nbBots:1, djajoue:1, type:Tous }
+    defaults: 	{ _controller: MDQAdminBundle:Bot:botPartie, nbBots:1, djajoue:1, type:Tous }
 mdqadmin_resetTheme:
     path:    /resetTheme
     defaults: { _controller: MDQAdminBundle:Admin:resetTheme }
@@ -65,7 +65,7 @@ mdqadmin_listeTheme:
     defaults: { _controller: MDQAdminBundle:Admin:listeTheme }
 mdqadmin_resetError:
     path:    /resetError
-    defaults: { _controller: MDQAdminBundle:Admin:resetError }
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:resetError }
 mdqadmin_testQdouble:
     path:    /testQdouble
     defaults: { _controller: MDQAdminBundle:Admin:testQdouble }
@@ -74,7 +74,7 @@ mdqadmin_gestion:
     defaults: { _controller: MDQAdminBundle:Admin:gestion, id:1 }
 mdqadmin_arbratheme:
     path:    /arbratheme/{dom1}/{entete}/{viewDom2}
-    defaults: { _controller: MDQAdminBundle:Admin:arbratheme, dom1:none, entete:1, viewDom2:0}
+    defaults: { _controller: MDQAdminBundle:Stats:arbratheme, dom1:none, entete:1, viewDom2:0}
 mdqadmin_mail:
     path:    /mail
     defaults: { _controller: MDQAdminBundle:Admin:mail }

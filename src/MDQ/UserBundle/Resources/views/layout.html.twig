@@ -1,0 +1,25 @@
+{# src/MDQ/UserBundle/Resources/views/layout.html.twig #}
+
+{# On étend notre layout #}
+	{% extends "::layout.html.twig" %}
+{% block stylesheets %}
+	  <link rel="stylesheet" href="{{ asset('bundles/GeneBundle/gene2.css') }}" type="text/css" />
+      <link rel="stylesheet" href="{{ asset('bundles/UserBundle/user.css') }}" type="text/css" />
+    {% endblock %}	
+	
+
+
+{% block body %}
+
+	
+	<div id="bloc_user">
+	{% if (user.username is defined) and (user.supprime==0) %} <div id="nom_du_joueur">{{ user.username }}</div>
+	{% elseif (user.username is defined) and user.supprime==1 %} <div id="nom_du_joueur">Supprimé</div>
+	{% endif %}
+{% block fos_user_content %}
+{% endblock fos_user_content %}
+	</div>
+{% block user_menu %}
+{% endblock %}
+
+{% endblock %}

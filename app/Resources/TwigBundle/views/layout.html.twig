@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}"/>
+        <meta name="robots" content="noindex,nofollow" />
+        <title>{% block title %}{% endblock %}</title>
+         {% block head %}{% endblock %}
+    </head>
+    <body>        
+
+            <div class="sf-reset">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

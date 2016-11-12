@@ -1,0 +1,37 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/ajouterQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Choix critères
+{% endblock %}
+
+{% block admin_body %}
+
+  <h2>Editer des questions</h2>
+
+  <h3>Choix des critères de sélection</h3>
+
+<div >
+  <form  method="post" class="formQ" {{ form_enctype(form) }}>
+
+{# Les erreurs générales du formulaire. #}
+{{ form_errors(form) }}
+
+
+{# Génération des champs pas encore écrits.
+   Dans cet exemple, ce serait « date », « auteur » et « publication »,
+   mais aussi le champ CSRF (géré automatiquement par Symfony !)
+   et tous les champs cachés (type « hidden »). #}
+{{ form_rest(form) }}
+<input type="submit" class="btnvalid"/>
+</form>
+</div>
+
+  <p>
+    Remplissez le formulaire et les questions seront éditées selon votre requête.
+  </p>
+
+  
+
+{% endblock %}

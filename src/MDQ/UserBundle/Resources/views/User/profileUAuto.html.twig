@@ -1,0 +1,81 @@
+{# src/MDQ/UserBundle/Resources/views/User/profileUAuto.html.twig #}
+
+{% extends "MDQUserBundle:User:profileU.html.twig" %}
+
+{% block title %}
+  Votre compte
+{% endblock %}
+
+{% block retour %}
+{% endblock %}
+
+{% block infoperso %}
+
+	<div class="bloc_profile_joueur" id="donnees_perso">
+		<div class="titre_bloc_joueur">Données personnelles</div>
+		<p> date de naissance : {{ user.datenaissance|date('d/m/Y') }} </p>
+		<p> email : {{ user.email }}</p>
+		</br>
+
+		
+		<a href="{{ path('mdquser_profileUAutoEdit') }}"><div class="profileUAuto_button">Modifier mes informations</div></a>
+	  </div>
+	<div class="bloc_profile_joueur" >
+		<div class="titre_bloc_joueur">Mes questions</div>
+		
+{% if user.scuser.nbPMq<5 %}
+		<div class="profileUAuto_button_inactive">Proposer une question</div>
+		<div class="profileUAuto_inactif">Vous devez avoir jouer plus de 5 parties au Masterquizz pour pouvoir
+		proposer des questions.</div>
+		</div>
+{% else %}
+	{% if nbQaval7j>4%}
+		<div class="profileUAuto_button_inactive">Proposer une question</div>
+		<div class="profileUAuto_inactif">Vous pouvez proposer au maximum 5 questions chaque semaine.</div>
+		</br></br>
+	{% else %}
+	<a href="{{path ('mdqquestion_ajouterQ')}}">	<div class="profileUAuto_button">Proposer une question</div></a>
+	{% endif %}
+	{% if user.scuser.nbQprop>0 %}
+		Vous avez proposé {{user.scuser.nbQprop}} {% if user.scuser.nbQprop==1 %}question{%else%}questions{%endif%},
+		et {% if user.scuser.nbQvalid==0 %}aucune n'a été validée.
+			{%elseif user.scuser.nbQvalid==1%} 1 a été validée et ajoutée à la base de données.
+			{%else %}{{user.scuser.nbQvalid}} ont été validées et ajoutées à la base de données.
+			{%endif%}
+		<table id="profileUAuto_table_Q">
+			<thead>
+			<tr>
+				<th class="profileUAuto_table_Q_intitule">Questions proposées</th>
+				<th>Réponses</th>
+			</tr>
+			</thead>
+			<tbody>
+		{% for question in qaval %}
+			<tr>
+				<td class="profileUAuto_table_Q_intitule">{{question.intitule}}</td>
+				<td class="profileUAuto_table_Q_rep">
+				{% if question.repAdmin==0 or question.retournee>0 %}<span style="color : rgb(255,255,0);">En attente</span>
+				{% elseif question.repAdmin>9 and question.repAdmin<20 %}<a href="{{ path('mdqquestion_modifQaval', {'id':question.id}) }}">Retournée</a>
+				{% elseif question.repAdmin<10 %}<span style="color : rgb(255,0,0);">Refusée</span>
+				{% elseif question.repAdmin==100%}<span style="color : rgb(0,255,0);">Validée</span>
+				{%endif%}</td>
+			</tr>
+		{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		Vous n'avez pas encore proposé de question.
+	{% endif %}
+		</div>
+{% endif %}
+	{% endblock %}
+{% block user_menu %}
+	<div class="bloc_menu">
+	  <ul>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png')}}" alt="bjaune" width="20px">Accueil</a></li>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulebleue.png')}}" alt="bbleue" width="20px">Retour</a></li>
+
+	  </ul>
+	</div>
+{%endblock %}
+

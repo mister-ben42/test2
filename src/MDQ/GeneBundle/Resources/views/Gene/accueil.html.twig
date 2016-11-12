@@ -1,0 +1,326 @@
+{# src/MDQ/GeneBundle/Resources/views/accueil.html.twig #}
+
+{% extends "MDQGeneBundle::layoutG.html.twig" %}
+
+{% block connexion %}
+	<div id="bloc_connexion" >	  
+	  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}	  	
+		<div id="accueil_connexion_titre"><div id="pseudo">{{ app.user.username }}</div></div>
+		<a href="{{ path('mdquser_profileUAuto') }}"> <div class="list_connexion">Mon compte</div></a>
+		<div class="list_connexion">{{app.user.scuser.nbJdayMq}} <img src="../bundles/GeneBundle/Jeton.png" alt="jeton" width="13px" style="display:inline-block"></div>
+		<div id="deconnexion"><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></div>	
+		<div id="accueil_connexion_date">{{datejour|date('d/m/Y')}}</div>
+		{% else %}
+		<div id="accueil_connexion_titre"><img src="../bundles/GeneBundle/Nonconnecté.jpg" alt="connexion" width="150px"></div>	
+		<div id="accueil_connexion_date">{{datejour|date('d/m/Y')}}</div>
+		{% if gestion.BlocageTot!=1 %}<div id="bloc_connextion_bouton">Se connecter</div>
+				<div id="inscrire">
+		{% else %}<div id="bloc_connextion_bouton" class="affich_flash3">Se connecter</div>
+				<div id="inscrire">
+		{% endif %}
+		{% if gestion.Inscription==0 %}<strong class="affich_flash1" style="color:yellow; font-weight:normal;" >Pas encore inscrit ?</strong>
+		{% else %}<a href="{{ path('fos_user_registration_register') }}">Pas encore inscrit ?</a>
+		
+		{% endif %}
+		</div>
+
+		
+		{% endif %}
+	
+	</div>
+{% endblock %}
+
+{% block body_gene %}
+       {% if (not is_granted("IS_AUTHENTICATED_REMEMBERED")) and (gestion.BlocageTot!=1) %}	
+	<div id="bandeau_form_connexion">
+	      <div id="bloc_form_connexion">
+		{{ render(controller("MDQUserBundle:User:loginBis")) }} 
+	{#	{{render (controller("FOSUserBundle:Security:login")) }}#}
+		<div id="inscrire">
+		{% if gestion.Inscription==0 %}<strong class="affich_flash1" style="color:yellow; font-weight:normal;" >Pas encore inscrit ?</strong>
+		{% else %}<a href="{{ path('fos_user_registration_register') }}">Pas encore inscrit ?</a>
+		{% endif %}
+		</div>
+		<div id="bloc_connexion_croix">x</div>
+	      </div>
+	</div>
+	{% endif %}
+	<div id="bloc_flash_message"><div id="flash_message">
+	  
+	  <strong id="mess_flash_1">Les inscriptions ne sont pas autorisées actuellement.</strong>
+	  <strong id="mess_flash_2">Cette rubrique n'est pas disponible actuellement.</strong> 
+	  <strong id="mess_flash_3">Il n'est pas possible de se connecter actuellement.</strong>  
+	
+	<div id="flash_message_croix">x</div>
+	</div></div>
+	
+	
+	<div id="accueil_bloc_centre">
+		<div id="accueil_bloc_centre_anim">
+			<div id="bloc_centre_anim1" class="bloc_centre_anim"></div>
+			<div id="bloc_centre_anim2" class="bloc_centre_anim"></div>
+		</div>
+	
+	</div>
+	<div id="bouton_jouer"><a href="{{ path('mdqgene_accueilJeu') }}">   
+	  <img src="{{ asset('bundles/GeneBundle/buttonjouer.png') }}" alt="bouton" width="100%">
+	  </a>
+	</div>
+	<div id="accueil_bloc1">
+	    <div id="accueil_bloc1_gauche">
+		<div id="accueil_maitre" class="bloc">
+		<div class="img_highscore"><img style="border:solid 1px rgb(243,248,78);" src="../bundles/GeneBundle/MaitresMDQ2.png" alt="QnF" width="100%"></div>
+		  <div id="accueil_maitre_ligne1">
+		    
+		    <div class="accueil_maitre_col1" id="accueil_maitre_savant">
+		    {% if tabMaitre.1 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.1.usermap.id}) }}">{% endif %}
+		     {% if tabMaitre.1 is null or tabMaitre.1.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/savant-H.png') }}" {% if tabMaitre.1 is null %} style="opacity:0.4"  {% endif %} alt="savant-H" width=68%>  <div class="accueil_maitre_txt">   <div class="accueil_maitre_txt_titre">Savant</div>
+			  {% else %}<img src="{{ asset('bundles/GeneBundle/savant-F.png') }}" alt="savant-F" width=68%>  <div class="accueil_maitre_txt"> <div class="accueil_maitre_txt_titre">Savante</div>
+			  {% endif %}
+			  
+				     <div {% if tabMaitre.1 is null or tabMaitre.1.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.1 is not null %}{{tabMaitre.1.usermap.username}}{% endif %}</div>
+			    </div>
+			   {% if tabMaitre.1 is not null %} </a>{% endif %}
+		    
+		    </div>
+		   
+		    <div class="accueil_maitre_col1">
+		     {% if tabMaitre.0 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.0.usermap.id}) }}">{% endif %}
+		     {% if tabMaitre.0 is null or tabMaitre.0.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/roi2.png') }}" {% if tabMaitre.0 is null %} style="opacity:0.4; margin-left:-8px" {% else %}style="margin-left:-8px"    {% endif %} alt="roi" width=121%>
+		     {% else %}<img style="margin-left:-8px" src="{{ asset('bundles/GeneBundle/reine3.png') }}" alt="roi" width=100%>
+		     {% endif %}
+			    <div class="accueil_maitre_txt">
+				    <div class="accueil_maitre_txt_titre">{% if tabMaitre.0 is null or tabMaitre.0.usermap.sexe==0 %}Roi{% else %}Reine{%endif%}</div>
+				    <div {% if tabMaitre.0 is null or tabMaitre.0.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.0 is not null %}{{tabMaitre.0.usermap.username}}{%endif%}</div>
+			    </div>
+			    {% if tabMaitre.0 is not null %}</a>{% endif %}
+		    
+		    </div>
+		    <div class="accueil_maitre_col1" id="accueil_maitre_ministre">
+			{% if tabMaitre.2 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.2.usermap.id}) }}">{% endif %}
+			 {% if tabMaitre.2 is null or tabMaitre.2.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/ministre-H.png') }}" {% if tabMaitre.2 is null %} style="opacity:0.4"  {% endif %} alt="ministre-H" width=68%>
+			  {% else %}<img src="{{ asset('bundles/GeneBundle/ministre-H.png') }}" alt="ministre-F" width=68% style="margin-left:-8px">
+			  {% endif %}
+		    
+			    <div class="accueil_maitre_txt">
+				    <div class="accueil_maitre_txt_titre">Ministre</div>
+				     <div {% if tabMaitre.2 is null or tabMaitre.2.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.2 is not null %}{{tabMaitre.2.usermap.username}}{% endif %}</div>
+			    </div>
+			{% if tabMaitre.2 is not null %}</a>{% endif %}
+		    </div>
+		</div>
+		  <div id="accueil_maitre_ligne2">		    
+		    <div class="accueil_maitre_col2">
+			{% if tabMaitre.3 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.3.usermap.id}) }}">{% endif %}
+			{% if tabMaitre.3 is null or tabMaitre.3.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/virtuose-H.png') }}" alt="virtuose-H" {% if tabMaitre.3 is null %} style="opacity:0.4; margin-bottom:-10px" {%else%}style="margin-bottom:-10px" {% endif %} width=100%>
+			{% else %}<img src="{{ asset('bundles/GeneBundle/virtuose-F.png') }}" alt="virtuose-F" style="margin-bottom:0px" width=88%x>
+			{% endif %}
+			    <div class="accueil_maitre_txt2">
+				    <div class="accueil_maitre_txt_titre">{% if tabMaitre.3 is null or tabMaitre.3.usermap.sexe==0 %}Musicien{% else %}Musicienne{% endif %}</div>
+				    <div {% if tabMaitre.3 is null or tabMaitre.3.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.3 is not null %}{{tabMaitre.3.usermap.username}}{% endif %}</div>
+			    </div>
+		    {% if tabMaitre.3 is not null %}</a>{% endif %}
+		    </div>
+			
+		    <div class="accueil_maitre_col2">
+			{% if tabMaitre.5 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.5.usermap.id}) }}">{% endif %}
+			{% if tabMaitre.5 is null or tabMaitre.5.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/nature-H.png') }}"  {% if tabMaitre.5 is null %} style="opacity:0.4" {% endif %} alt="nature-H" width=100%>
+			{% else %}<img src="{{ asset('bundles/GeneBundle/nature-F.png') }}" style="margin-bottom:-10px"  alt="nature-F" width=112%>
+			{% endif %}
+			    <div class="accueil_maitre_txt2">
+				    <div class="accueil_maitre_txt_titre">Ecologiste</div>
+				    <div {% if tabMaitre.5 is null or tabMaitre.5.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.5 is not null %} {{tabMaitre.5.usermap.username}}{% endif %}</div>
+			    </div>
+			{% if tabMaitre.5 is not null %}</a>{% endif %}
+		    </div>
+			
+		    <div class="accueil_maitre_col2">
+			{% if tabMaitre.4 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.4.usermap.id}) }}">{% endif %}
+			{% if tabMaitre.4 is null or tabMaitre.4.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/peintre-H.png') }}" alt="peintre-H" {% if tabMaitre.3 is null %} style="opacity:0.4; margin-bottom:0px" {%else%}style="margin-bottom:0px" {% endif %} width=100%>
+			{% else %}<img src="{{ asset('bundles/GeneBundle/peintre-F.png') }}" alt="peintre" width=100%>	
+			{% endif %}	    
+			    <div class="accueil_maitre_txt2">
+				    <div class="accueil_maitre_txt_titre">Peintre</div>
+				   <div {% if tabMaitre.4 is null or tabMaitre.4.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.4 is not null %}{{tabMaitre.4.usermap.username}}{% endif %}</div>
+			    </div>
+			{% if tabMaitre.4 is not null %}</a>{% endif %}
+		    </div>
+			
+		    <div class="accueil_maitre_col2">
+			{% if tabMaitre.6 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.6.usermap.id}) }}">{% endif %}
+			{% if tabMaitre.6 is null or tabMaitre.6.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/globeT-H2.png') }}" {% if tabMaitre.6 is null %} style="opacity:0.4"  {% endif %} alt="globeT" width=100%>	
+			{% else %}<img src="{{ asset('bundles/GeneBundle/globeT-F.png') }}" alt="globeT" width=112%>	
+			{% endif %}
+			    <div class="accueil_maitre_txt2">
+				    <div class="accueil_maitre_txt_titre">Globe-Trotter</div>
+				    <div {% if tabMaitre.6 is null or tabMaitre.6.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.6 is not null %}{{tabMaitre.6.usermap.username}}{% endif %}</div>
+			    </div>
+		    {% if tabMaitre.6 is not null %}</a>{% endif %}
+		    </div>
+		</div>
+		</div>
+	    </div>
+	    <div id="accueil_bloc1_droite">
+	    <div id="accueil_bloc_menu" class="bloc">
+		<div class="img_highscore"><img src="../bundles/GeneBundle/menu.jpg" alt="menu" width="200px"></div>
+		<ul>
+			<li><a href="{{ path('mdqgene_regleJeu') }}"><img src="../bundles/GeneBundle/petiteboulebleue.png" alt="menu" width="20px">Règles du jeu</a></li>
+			<li><a href="{{ path('mdqgene_accueilHighScore') }}"><img src="../bundles/GeneBundle/petiteboulerose.png" alt="menu" width="20px">Tableau d'honneur</a></li>
+			<li><a href="{{ path('mdqgene_news') }}"><img src="../bundles/GeneBundle/petitebouleverte.png" alt="info" width="20px">Info</strong></a></li>
+			<li><strong class="affich_flash2" style="font-weight:normal;"><img src="../bundles/GeneBundle/petiteboulejaune.png" alt="menu" width="20px">Forum</strong></li>
+			
+		</ul>
+	    </div>
+	    <div id="newslarge" class="bloc">
+		<div id="news_titre_img"><img src="../bundles/GeneBundle/infos.jpg" alt="infos" width="200px"></div>
+		<div id="bloc_news">
+			 
+
+		  {% for new in news %}
+			<div class="bloc_news_titre">{{ new.titre }}</div>
+			<div class="bloc_news_date">Le {{ new.dateCreate|date('d/m/Y') }}</div>
+			<div class="bloc_news_texte">{{ new.texte|nl2br }}</div>				
+			{% endfor %}
+		</div>  
+		<div id="bloc_news2_X"><a href="{{ path('mdqgene_news') }}"><img src="../bundles/GeneBundle/bouleverteplus.png" alt="menu" width="100%"></a></div>
+		<div id="bloc_news2">
+			 
+
+		  {% for new in news %}
+			<div class="bloc_news_titre">{{ new.titre }}</div>
+			<div class="bloc_news_date">Le {{ new.dateCreate|date('d/m/Y') }}</div>
+			<div class="bloc_news_texte">{{ new.texte|nl2br }}</div>				
+			{% endfor %}
+		
+		</div>  
+	    </div>
+	    </div>
+	</div>
+	<div id="accueil_bloc2">
+	      <div id="accueil_bloc2_gauche">
+		<div id="highScDay" class="bloc">
+	  <div class="img_highscore"><a href="{{ path('mdqgene_highScore', {'crit':'scofDayMq'}) }}"><img src="../bundles/GeneBundle/highScoreDay2.jpg" alt="scoredujour" width="200px"></a></div>
+		{% for user in highScDay %}
+		{%if loop.index==4 %}<div class="accueil_heighSC_col">
+		{% elseif loop.index==10 %}<div class="accueil_heighSC_col2">
+		{%endif%}
+		<div {% if loop.index==1 %}class="accueil_heighSC_1"{% elseif loop.index==2 %}class="accueil_heighSC_2"{% elseif loop.index==3 %}class="accueil_heighSC_3"{%else%}class="accueil_heighSC_tous"{%endif%}>
+			{% if loop.index==1 %}
+			<img src="../bundles/GeneBundle/coupeminiOr.png" alt="coupe" height="22px">
+			{% endif %}
+			{% if loop.index==2 %}
+			<img src="../bundles/GeneBundle/coupeminiAg.png" alt="coupe" height="18px">
+			{% endif %}
+			{% if loop.index==3 %}
+			<img src="../bundles/GeneBundle/coupeminiBz.png" alt="coupe" height="14px">
+			{% endif %}
+		{%if loop.index>3%}<div class="accueil_highSC_nom">{%endif%}{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+		{{user.username}} </a>{%if loop.index>3%}</div><div class="accueil_highSC_sc">{%else%} - {%endif%}{{user.scofDayMq}}{%if loop.index>3%}</div>{%endif%}
+		</div>
+		{%if loop.index==9 or loop.index==loop.length and loop.index>3%}</div>{%endif%}
+		{% endfor %}
+		</div>
+		<div id="highScMonth" class="bloc">
+		 <div class="img_highscore"><a href="{{ path('mdqgene_highScore', {'crit':'kingMaster'}) }}"><img src="../bundles/GeneBundle/highScoreWeek.jpg" alt="scoredujour" width="200px"></a></div>
+
+		{% for user in kingMaster %}
+		{%if loop.index==4 %}<div class="accueil_heighSC_col">
+		{% elseif loop.index==10 %}<div class="accueil_heighSC_col2">
+		{%endif%}
+		<div {% if loop.index==1 %}class="accueil_heighSC_1"{% elseif loop.index==2 %}class="accueil_heighSC_2"{% elseif loop.index==3 %}class="accueil_heighSC_3"{%else%}class="accueil_heighSC_tous"{%endif%}>
+			{% if loop.index==1 %}
+			<img src="../bundles/GeneBundle/coupeminiOr.png" alt="coupe" height="22px">
+			{% endif %}
+			{% if loop.index==2 %}
+			<img src="../bundles/GeneBundle/coupeminiAg.png" alt="coupe" height="18px">
+			{% endif %}
+			{% if loop.index==3 %}
+			<img src="../bundles/GeneBundle/coupeminiBz.png" alt="coupe" height="14px">
+			{% endif %}
+		{%if loop.index>3%}<div class="accueil_highSC_nom">{%endif%}{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+		{{user.username}} </a>{%if loop.index>3%}</div><div class="accueil_highSC_sc">{%else%} - {%endif%}{{user.kingMaster}}{%if loop.index>3%}</div>{%endif%}
+		</div>
+		{%if loop.index==9 or loop.index==loop.length and loop.index>3%}</div>{%endif%}
+		{% endfor %}
+		</div>
+	
+	  </div>
+	    <div id="accueil_bloc2_droite">
+	  <div id="bloc_QnF" class="bloc">
+		<div class="img_highscore"><img src="../bundles/GeneBundle/QnF.jpg" alt="QnF" width="200px"></div>
+		<div id="bloc_QnF_EM" >
+		</br>
+		<a href="{{ path('mdqgene_highScore', {'crit':'scofDayTM'}) }}">
+		<img src={{ asset('bundles/GeneBundle/LogoQuizzEm.png') }} alt="Expert Media" width="170px">
+		</a>
+		{% for user in highScDayTM %}
+		{%if loop.index==4 %}<div class="accueil_heighSC_col">
+		{% elseif loop.index==10 %}<div class="accueil_heighSC_col2">
+		{%endif%}
+		  <div {% if loop.index==1 %}class="accueil_heighSC_1"{% elseif loop.index==2 %}class="accueil_heighSC_2"{% elseif loop.index==3 %}class="accueil_heighSC_3"{%else%}class="accueil_heighSC_tous"{%endif%}>
+			{% if loop.index==1 %}
+			<img src="../bundles/GeneBundle/coupeminiOr.png" alt="coupe" height="22px">
+			{% endif %}
+			{% if loop.index==2 %}
+			<img src="../bundles/GeneBundle/coupeminiAg.png" alt="coupe" height="18px">
+			{% endif %}
+			{% if loop.index==3 %}
+			<img src="../bundles/GeneBundle/coupeminiBz.png" alt="coupe" height="14px">
+			{% endif %}
+		  {%if loop.index>3%}<div class="accueil_highSC_nom">{%endif%}{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+		  {{user.username}} </a>{%if loop.index>3%}</div><div class="accueil_highSC_sc">{%else%} - {%endif%}{{user.scofDayTM}}{%if loop.index>3%}</div>{%endif%}
+		  </div>
+		  {%if loop.index==9 or loop.index==loop.length and loop.index>3%}</div>{%endif%}
+		{% endfor %}
+		
+		</div>
+		<div id="accueil_QnF_bloc2">
+{#		<div class="QnF_col">
+			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayAr'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Ar"><img src={{ asset('bundles/GeneBundle/LogoQuizzAr2.png') }} alt="Art" width="120px"></div></a>
+			{% for user in highScDayAr %}
+			<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayAr}}</div>
+			</div>
+			{% endfor %}
+		</div>		
+#}		<div class="QnF_col">
+			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayFf'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Ff"><img src={{ asset('bundles/GeneBundle/LogoQuizzFf2.png') }} alt="Nature" width="120px"></div></a>
+			{% for user in highScDayFf %}
+			<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayFf}}</div>
+			</div>
+			{% endfor %}
+		</div>
+{#		<div class="QnF_col">
+			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayMu'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Mu"><img src={{ asset('bundles/GeneBundle/LogoQuizzMu2.png') }} alt="Musique" width="120px"></div></a>
+			{% for user in highScDayMu %}
+			<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayMu}}</div>
+			</div>
+			{% endfor %}
+		</div>
+#}		<div class="QnF_col">
+			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayLx'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Lx"><img src={{ asset('bundles/GeneBundle/LogoQuizzLx2.png') }} alt="Lieux" width="120px"></div></a>
+			{% for user in highScDayLx %}
+			<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayLx}}</div>
+			</div>
+			{% endfor %}
+		</div>
+		</div>
+		</div>
+	</div>
+	</div>
+	
+{% endblock %}
+
+{% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script src="{{ asset('bundles/GeneBundle/scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+	<script	src="{{ asset('bundles/GeneBundle/gene.js') }}"></script>
+
+{% endblock %}

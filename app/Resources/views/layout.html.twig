@@ -1,0 +1,51 @@
+{# app/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+  <head>
+	{% block meta %}
+    <meta name="meta" http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	{% endblock %}
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/GeneBundle/faviconMDQ.png') }}" /> 
+    <title>{% block title %}MDQ - Le Monde du Quizz{% endblock %}</title>
+
+    {% block stylesheets %}      
+    {% endblock %}
+  </head>
+
+  <body>
+	{% block fixe_taille %}
+	
+	{% endblock %}
+	
+	{% block bloc_page %}
+	<div id="bloc_page">
+	{% endblock %}
+	{% block haut_page %}	
+	<div id="haut_page">
+	<div id="bloc_titre">
+	  <a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/MDQ3b.png') }}" alt="titre" width="100%"></a>
+	</div>
+	{% block connexion %}
+	{% endblock %}
+	</div>
+	{% endblock %}
+	
+	
+    {% block body %}
+	{% endblock %}
+	{% block bas_page %}
+	<div id="pied_page" class="bloc">
+	<span class="pied_page_crit">Contact</span><span class="pied_page_crit">Règlement</span><span class="pied_page_crit">Mentions légales</span><span class="pied_page_crit">Aide</span><span class="pied_page_crit">Partenaire</span>
+	</div>
+	{% endblock%}
+	</div>
+	
+	
+  {% block javascripts %}
+    
+  {% endblock %}
+
+  </body>
+</html>

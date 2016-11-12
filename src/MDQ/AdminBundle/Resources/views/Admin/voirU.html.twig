@@ -1,0 +1,66 @@
+{# src/MDQ/UserBundle/Resources/views/User/voirU.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Voir les utilisateurs
+{% endblock %}
+
+{% block admin_body %}
+
+  <h3>Il y a {{ nbusers }} utilisateurs correspondant à votre requête.</h3>
+ <div id="result_requete">
+  <ul>
+	{% for user in users %}
+      <li>
+	  <div class="bloc_admin_listeU" {%if user.bot==1%}style="background-color:rgb(255,150,150)" {% else %} style="background-color:rgb(255,255,200)" {% endif %}>
+		<div><a href="{{ path('mdqadmin_profileUAdmin', {'id': user.id}) }}">{{ loop.index }} :{{ user.id }} - {{ user.username }} </a></div>
+		<div class="bloc_admin_listeU_gauche" {%if user.sexe==1%}style="background-color:rgb(255,220,245)" {% else %} style="background-color:rgb(220,250,255)" {% endif %}>
+		<p> {{ sexe(user.sexe) }}, {{ age(user.datenaissance|date('d/m/Y')) }} ans </p>
+		<p>{{ user.departement }}</p>
+		<div> date de naissance : <strong class="bloc_admin_listU_sc">{{ user.datenaissance|date('d/m/Y') }} </strong></div>
+		<div> date d'inscription :  <strong class="bloc_admin_listU_sc">{{ user.datecreate|date('d/m/Y') }} </strong></div>
+		<div> dernière connection :  <strong class="bloc_admin_listU_sc">{{ user.lastLogin|date('d/m/Y') }} </strong></div>
+		<p> devise : {{ user.devise }} </p>
+		{% if (user.locked==0) and (user.supprime==0) %} <p> Compte accessible </p>
+		{% elseif user.supprime==1 %}	<p> Compte supprimé </p>
+		{% elseif user.locked==1 %}	<p> Compte bloqué </p>
+		{% else %}<p> erreur concernant l'état du compte </p>
+		{% endif %}
+		</div>
+		<div class="bloc_admin_listeU_droite">
+		  <div class="bloc_admin_listeU_droite_1">
+		  <div>nb Parties : <strong class="bloc_admin_listU_sc">{{ user.scuser.nbPtot }} </strong></div>
+		  <div>Parties Mq : <strong class="bloc_admin_listU_sc">{{ user.scuser.nbPMq }} </strong></div>
+		  <div>Parties Ff : <strong class="bloc_admin_listU_sc">{{ user.scuser.nbPFf }} </strong></div>
+		  <div>Parties Lx : <strong class="bloc_admin_listU_sc">{{ user.scuser.nbPLx }} </strong></div>
+		  <div>Parties Ar: <strong class="bloc_admin_listU_sc">{{ user.scuser.nbPAr }} </strong></div>
+		  <div>Parties Mu : <strong class="bloc_admin_listU_sc">{{ user.scuser.nbPMu }} </strong></div>
+		  <div>P% B.Rep Mq : <strong class="bloc_admin_listU_sc">{{ user.scuser.prctBrtotMq }} </strong></div>
+		  <div>% B.Rep Ff : <strong class="bloc_admin_listU_sc">{{ user.scuser.prctBrFf }} </strong></div>
+		  <div>% B.Rep Lx : <strong class="bloc_admin_listU_sc">{{ user.scuser.prctBrLx }} </strong></div>
+		  <div>% B.Rep Ar: <strong class="bloc_admin_listU_sc">{{ user.scuser.prctBrAr }} </strong></div>
+		  <div>% B.Rep Mu : <strong class="bloc_admin_listU_sc">{{ user.scuser.prctBrMu }} </strong></div>
+		  </div>
+		  <div class="bloc_admin_listeU_droite_1">
+		  <div>Sc Max KM : <strong class="bloc_admin_listU_sc">{{ user.scuser.highScKm }} </strong></div>
+		  <div>Sc Max Mq : <strong class="bloc_admin_listU_sc">{{ user.scuser.scMaxMq }} </strong></div>
+		  <div>Sc Max Ff : <strong class="bloc_admin_listU_sc">{{ user.scuser.scMaxFf }} </strong></div>
+		  <div>Sc Max Lx : <strong class="bloc_admin_listU_sc">{{ user.scuser.scMaxLx }} </strong></div>
+		  <div>Sc Max Ar : <strong class="bloc_admin_listU_sc">{{ user.scuser.scMaxAr }} </strong></div>
+		  <div>Sc Max Mu : <strong class="bloc_admin_listU_sc">{{ user.scuser.scMaxMu }} </strong></div>
+		  <div>nb Médailles : <strong class="bloc_admin_listU_sc">{{ user.scuser.medailles.totMed }} </strong></div>
+		  </div>
+		</div>
+	  </div>
+      </li> 
+	
+    {% else %}
+      <li>Aucun utilisateur ne correspond à votre requête.</li>
+    {% endfor %}
+  </ul>	
+  </div>
+  
+{% endblock %}
+
+

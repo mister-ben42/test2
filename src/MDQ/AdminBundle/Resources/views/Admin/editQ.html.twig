@@ -1,0 +1,110 @@
+{# src/MDQ/AdminBundle/Resources/views/Admin/editQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Editer une question
+{% endblock %}
+
+{% block admin_body %}
+
+  <h3>Ajouter une question</h3>
+
+  	<p>Question n°<span id="editQ_idQ">{{question.id}}</span></p>
+
+<div>
+  <form  method="post" class="formQ" {{ form_enctype(form) }}>
+
+{# Les erreurs générales du formulaire. #}
+{{ form_errors(form) }}
+
+<div id="formQ_intitule">
+  {# Génération du label. #}
+  {{ form_label(form.intitule, "Intitulé de la question") }}
+
+  {# Affichage des erreurs pour ce champ précis. #}
+  {{ form_errors(form.intitule) }}
+
+  {# Génération de l'input. #}
+  {{ form_widget(form.intitule) }}
+<div class="formQ_nblettres"></div>
+</div>
+
+
+{# Idem pour un autre champ. #}
+<div>
+  {{ form_label(form.brep, "Bonne réponse") }}
+  {{ form_errors(form.brep) }}
+  {{ form_widget(form.brep) }}
+<div class="formQ_nblettres"></div>
+</div>
+<div>
+  {{ form_label(form.mrep1, "Mauvaise réponse 1") }}
+  {{ form_errors(form.mrep1) }}
+  {{ form_widget(form.mrep1) }}
+<div class="formQ_nblettres"></div>
+</div>
+<div>
+  {{ form_label(form.mrep2, "Mauvaise réponse 2") }}
+  {{ form_errors(form.mrep2) }}
+  {{ form_widget(form.mrep2) }}
+<div class="formQ_nblettres"></div>
+</div>
+<div>
+  {{ form_label(form.mrep3, "Mauvaise réponse 3") }}
+  {{ form_errors(form.mrep3) }}
+  {{ form_widget(form.mrep3) }}
+<div class="formQ_nblettres"></div>
+</div>
+<div>
+  {{ form_label(form.commentaire, "Commentaire") }}
+  {{ form_errors(form.commentaire) }}
+  {{ form_widget(form.commentaire) }}
+ <div class="formQ_nblettres"></div>
+</div>
+<div>
+  {{ form_label(form.diff, "Niveau de difficulté") }}
+  {{ form_errors(form.diff) }}
+  {{ form_widget(form.diff) }}
+</div>
+<div>
+  {{ form_label(form.dom1, "Domaine") }}
+  {{ form_errors(form.dom1) }}
+  {{ form_widget(form.dom1, {'attr' : {'class' : 'dom1class'}}) }}
+</div>
+<div>
+	<div id="formQ_theme_initial">{{question.theme}}</div>
+  {{ form_label(form.theme, "Theme") }}
+  {{ form_errors(form.theme) }}
+  {{ form_widget(form.theme, {'attr' : {'class' : 'themeclass'}}) }}
+</div>
+
+{# Génération des champs pas encore écrits.
+   Dans cet exemple, ce serait « date », « auteur » et « publication »,
+   mais aussi le champ CSRF (géré automatiquement par Symfony !)
+   et tous les champs cachés (type « hidden »). #}
+{{ form_rest(form) }}
+<input type="submit" class="btnvalid" />
+</form>
+</div>
+
+ <div id="admin_editQ_error">
+	<p>Nombre d'erreurs singalées : {{question.error}}</p>
+	<p>Rép fausse : {{question.taberror[0]}}, Ortho : {{question.taberror[1]}}, Autre : {{question.taberror[2]}}</p>
+	{% if not question.users_error.empty %}
+		  <p>
+			Joueurs ayant signalé une erreur : 
+			{% for scuser in question.users_error %}
+			<a href="{{ path('mdqadmin_profileUAdmin', {'id':scuser.usermap.id}) }}">{{ scuser.usermap.username }}</a>{% if not loop.last %}, {% endif %}
+			{% endfor %}
+		  </p>
+	{% endif %}	
+	<div class="admin_editQ_error_button">Remise à 0</div>
+ </div>
+ 
+{% endblock %}
+{% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script	src="{{ asset('bundles/QuestionBundle/adaptForm.js') }}"></script>
+
+{% endblock %}

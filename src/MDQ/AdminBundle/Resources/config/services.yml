@@ -1,0 +1,7 @@
+parameters:
+#    mdq_admin.example.class: MDQ\AdminBundle\Example
+
+services:
+#    mdq_admin.example:
+#        class: %mdq_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

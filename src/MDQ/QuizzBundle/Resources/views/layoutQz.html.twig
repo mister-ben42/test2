@@ -1,0 +1,23 @@
+{# src/MDQ/QuizzBundle/Resources/views/layoutQz.html.twig #}
+
+{# On étend notre layout #}
+	{% extends "::layout.html.twig" %}
+    
+
+    {% block stylesheets %}
+      <link rel="stylesheet" href="{{ asset('bundles/QuizzBundle/jeuquizz2.css') }}" type="text/css" />
+    {% endblock %}
+	{% block bloc_page %}
+	<div id="bloc_page" class={{bloc_page}} oncontextmenu="return false;" draggable="false" >
+	{% endblock %}
+
+	{% block body %}
+		
+	{% endblock %}
+	{% block bas_page %}
+	{% endblock %}
+  {% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    
+  {% endblock %}
+

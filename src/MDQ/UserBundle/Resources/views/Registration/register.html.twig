@@ -1,0 +1,16 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+<div id="nom_du_joueur">Inscription</div>
+<div id="formulaire_inscription">
+{% include "FOSUserBundle:Registration:register_content.html.twig" %}
+</div>
+
+{% endblock fos_user_content %}
+{% block user_menu %}
+<div class="bloc_menu">
+	  <ul>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png')}}" alt="bjaune" width="20px">Accueil</a></li>
+		</ul>
+	</div>
+{% endblock %}

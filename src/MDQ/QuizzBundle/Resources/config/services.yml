@@ -1,0 +1,7 @@
+parameters:
+#    mdq_quizz.example.class: MDQ\QuizzBundle\Example
+
+services:
+#    mdq_quizz.example:
+#        class: %mdq_quizz.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

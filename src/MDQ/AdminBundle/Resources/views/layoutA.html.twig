@@ -1,0 +1,29 @@
+{# src/Sdz/BlogBundle/Resources/views/layoutQ.html.twig #}
+
+{# On étend notre layout #}
+	{% extends "::layout.html.twig" %}
+
+
+    {% block title %}Partie admin {% endblock %}
+
+    {% block stylesheets %}
+      <link rel="stylesheet" href="{{ asset('bundles/AdminBundle/admin.css') }}" type="text/css" />
+    {% endblock %}
+	{% block haut_page %}
+	{% endblock %}
+	{% block body %}	
+	<div class="retour_accueil_admin"><a href="{{ path('mdqadmin_accueilAdmin') }}">Accueil Admin</a></div>
+	<div class="retour_accueil_admin"><a href="{{ path('mdqgene_accueil') }}">Accueil Jeu</a></div>
+
+	<h2>Partie Admin</h2>
+	<div id="adminbody">
+	{% block admin_body %}
+	
+	{% endblock %}
+   </div>
+	{% endblock %}
+  {% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    
+  {% endblock %}
+

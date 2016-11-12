@@ -1,0 +1,59 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/statQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Arbratheme
+{% endblock %}
+
+{% block admin_body %}
+	<h3>Arbratheme</h3>
+	<div id="arbra_bloc_onglet">
+	     {% if entete !=2 %}
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"Histoire"})}}"><div class="arbra_onglet">Histoire</div></a>
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"Géographie"})}}"><div class="arbra_onglet">Géographie</div></a>
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"Sciences et nature"})}}"><div class="arbra_onglet">Sciences et nature</div></a>
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"Arts et Littérature"})}}"><div class="arbra_onglet">Arts et Littérature</div></a>
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"Sports et loisirs"})}}"><div class="arbra_onglet">Sports et loisirs</div></a>
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"Divers"})}}"><div class="arbra_onglet">Divers</div></a>
+	    <a href="{{ path('mdqadmin_arbratheme', {'entete':2})}}"> <div class="arbra_onglet">Autres</div></a>
+	     {% else %}
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"FfQuizz", 'entete':2})}}"><div class="arbra_onglet">Quizz Nature</div></a>
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"LxQuizz", 'entete':2})}}"><div class="arbra_onglet">Lieux du monde</div></a>
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"ArQuizz", 'entete':2})}}"><div class="arbra_onglet">Quizz Art</div></a>
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"MuQuizz", 'entete':2})}}"><div class="arbra_onglet">Musique classique</div></a>
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"SexyQuizz", 'entete':2})}}"><div class="arbra_onglet">Sexy quizz</div></a>
+	     <a href="{{ path('mdqadmin_arbratheme', {'dom1':"TvQuizz", 'entete':2})}}"><div class="arbra_onglet">Quizz Tv</div></a>
+	    <a href="{{ path('mdqadmin_arbratheme', {'entete':1})}}"> <div class="arbra_onglet">Autres</div></a>	     
+	     {% endif %}
+	</div>
+	{% if dom1.nom=="none" %}Accueil
+	{% else %}
+	      {% if viewDom2==0 %}<a href="{{ path('mdqadmin_arbratheme', {'dom1':dom1.nom, 'entete':entete, 'viewDom2':1})}}"><div id="arbra_viewDom2">Voir Dom2</div></a>
+	      {% else %}<a href="{{ path('mdqadmin_arbratheme', {'dom1':dom1.nom, 'entete':entete, 'viewDom2':0})}}"><div id="arbra_viewDom2">Cacher Dom2</div></a>
+	      {% endif %}
+	      <h3>{{dom1.nom}}</h3>
+	      <div>{{dom1.nbQ}} questions - {{dom1.d1|round }} % | {{dom1.d2|round }} % | {{dom1.d3|round }} % | {{dom1.d4|round }} % | {{dom1.d5|round }} % </div>
+	      {% if entete !=2 %}
+	      <div><span class="arbra_stats_dom3" style="font-size:13px;">Base comparative 8 % | 12 % | 27 % | 27 % | 27 % </span></div>
+	      {% elseif dom1.nom=="LxQuizz" %}<div><span class="arbra_stats_dom3" style="font-size:13px;">Base comparative 0 % | 0 % | 33 % | 33 % | 33 % </span></div>
+	      {% elseif dom1.nom=="FfQuizz" %}<div><span class="arbra_stats_dom3" style="font-size:13px;">Base comparative 10 % | 0 % | 30 % | 30 % | 30 % </span></div>
+
+	      {% endif %}
+	      {% for theme in themes %}
+	      <div><div class="arbra_titre">{{theme.nom}}</div>
+	      <div>{{theme.nbQ}} questions - {{theme.prct1|round}} | {{theme.prct2|round}} | {{theme.prct3|round}} | {{theme.prct4|round}} | {{theme.prct5|round}}</div>
+	      </br>
+		{% for dom3 in theme.dom3map %}
+		<div style="text-indent:45px;">{{dom3.nom}}  <span class="arbra_stats_dom3">({{dom3.nbQ}} - {{dom3.prct1|round}} | {{dom3.prct2|round}} | {{dom3.prct3|round}} | {{dom3.prct4|round}} | {{dom3.prct5|round}})</span></div> 
+		    {% if viewDom2==1 %}
+			    {% for dom2 in dom3.dom2 %}
+				  <div style="text-indent:85px;"><span class="arbra_stats_dom3">{{dom2.1}}</span></div>
+			    {% endfor %}
+		    {% endif %}
+		{% endfor %}
+	      </div>
+	      {% endfor %}
+	{% endif %}
+{% endblock %}
+
