@@ -2,6 +2,7 @@
     "name": "benoit/monde-du-quizz",
     "license": "proprietary",
     "type": "project",
+    "description": "Tout ce qu'il faut pour mon site",
     "autoload": {
         "psr-4": {
             "": "src/"
@@ -22,7 +23,7 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "gregwar/captcha-bundle": "dev-master",
+         "gregwar/captcha-bundle": "2.0",
          "coresphere/console-bundle": "0.1.0"
     },
     "require-dev": {
