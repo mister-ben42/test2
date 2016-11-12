@@ -5,25 +5,8 @@
 namespace MDQ\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use MDQ\UserBundle\Entity\User;
-use MDQ\UserBundle\Form\UserBlockType;
-use MDQ\UserBundle\Entity\CritEditU;
-use MDQ\UserBundle\Form\CritEditUType;
 use MDQ\AdminBundle\Entity\News;
 use MDQ\AdminBundle\Form\NewsType;
-use MDQ\QuestionBundle\Entity\Question;
-use MDQ\QuestionBundle\Form\QuestionType;
-use MDQ\QuestionBundle\Entity\CritEditQ;
-use MDQ\QuestionBundle\Entity\CritEditQaVal;
-use MDQ\QuizzBundle\Entity\PartieQuizz;
-use MDQ\AdminBundle\Entity\Gestion;
-use MDQ\AdminBundle\Form\GestionType;
-use MDQ\QuestionBundle\Form\CritEditQType;
-use MDQ\QuestionBundle\Form\CritEditQaValType;
-use MDQ\QuestionBundle\Form\QuestionEditType;
-use MDQ\QuestionBundle\Entity\Theme;
-use MDQ\QuestionBundle\Entity\Dom3;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
 
 class NewsController extends Controller

@@ -5,9 +5,6 @@ namespace MDQ\QuizzBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\QuizzBundle\Entity\PartieQuizz;
-use MDQ\UserBundle\Entity\User;
-use MDQ\QuestionBundle\Entity\Question;
-use Symfony\Component\HttpFoundation\Request; // pour les requête ajax
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
 
 class QuizzController extends Controller

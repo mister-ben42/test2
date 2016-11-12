@@ -3,7 +3,6 @@
 namespace MDQ\QuestionBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * QuestionRepository
@@ -28,7 +27,7 @@ class QuestionRepository extends EntityRepository
 			elseif($dom1=="none"){
 				if($game!="none"){
 					if($game=="MasterQuizz"){
-					$qb->andWhere($qb->expr()->orX(// Indispensable pour que le OR ne soit pas exclusif.
+					$qb->andWhere($qb->expr()->orX(// Indispensable pour que le || ne soit pas exclusif.
 					$qb->expr()->eq('a.dom1', ':dom1a'),
 					$qb->expr()->eq('a.dom1', ':dom1b'),
 					$qb->expr()->eq('a.dom1', ':dom1c'),
@@ -42,21 +41,9 @@ class QuestionRepository extends EntityRepository
 					   ->setParameter('dom1e', "Sciences et nature")
 					   ->setParameter('dom1c', "Géographie")					   
 					  ->setParameter('dom1f', "Arts et Littérature");
-				/*	('a.dom1 = :dom1a')
-					->setParameter('dom1a', "Histoire");
-					$qb->orWhere('a.dom1 = :dom1b')
-					->setParameter('dom1b', "Géographie");
-					$qb->orWhere('a.dom1 = :dom1c')
-					->setParameter('dom1c', "Divers");
-					$qb->orWhere('a.dom1 = :dom1d')
-					->setParameter('dom1d', "Sports et loisirs");
-					$qb->orWhere('a.dom1 = :dom1e')
-					->setParameter('dom1e', "Sciences et nature");
-					$qb->orWhere('a.dom1 = :dom1f')
-					->setParameter('dom1f', "Arts et Littérature");
-				*/	}
+					}
 					elseif($game=="Quizz Média"){
-					$qb->andWhere($qb->expr()->orX(// Indispensable pour que le OR ne soit pas exclusif.
+					$qb->andWhere($qb->expr()->orX(// Indispensable pour que le || ne soit pas exclusif.
 					$qb->expr()->eq('a.dom1', ':dom1a'),
 					$qb->expr()->eq('a.dom1', ':dom1b'),
 					$qb->expr()->eq('a.dom1', ':dom1c'),
@@ -215,11 +202,10 @@ class QuestionRepository extends EntityRepository
     {
 	// Stats génrales
 	$nbQt=0; $nbQMq=0; $nbQQnF=0; $nbQQm=0;
-	//$nbQd1=0; $nbQd2=0; $nbQd3=0; $nbQd4=0; $nbQd5=0;//diff
-	$nbQv0=0; $nbQv1=0; $nbQv2=0; $nbQv4=0;//valide
+
 	
 	//Stats MasterQuizz
-	$nbQh=0; $nbQd=0; $nbQg=0; $nbQal=0; $nbQsp=0; $nbQsl=0; $nbQsn=0;
+	$nbQh=0; $nbQd=0; $nbQg=0; $nbQal=0; $nbQsl=0; $nbQsn=0;
 	$nbQMqd1=0; $nbQMqd2=0; $nbQMqd3=0; $nbQMqd4=0; $nbQMqd5=0;//diff
 	$nbQMqv0=0; $nbQMqv1=0; $nbQMqv2=0; $nbQMqv3=0;//valide
 	$nbQhd1=0; $nbQhd2=0; $nbQhd3=0; $nbQhd4=0; $nbQhd5=0;
@@ -257,15 +243,15 @@ class QuestionRepository extends EntityRepository
 		$dom1=$question->getDom1();
 		$diff=$question->getDiff();
 		$valid=$question->getValid();
-		if($dom1=='Histoire' or $dom1=='Géographie' or $dom1=='Divers' or $dom1=='Arts et Littérature' or $dom1=='Sports et loisirs' or $dom1=='Sciences et nature')
+		if($dom1=='Histoire' || $dom1=='Géographie' || $dom1=='Divers' || $dom1=='Arts et Littérature' || $dom1=='Sports et loisirs' || $dom1=='Sciences et nature')
 		{
 			$game="MasterQuizz";
 		}
-		elseif($dom1=='SexyQuizz' or $dom1=='TvQuizz')
+		elseif($dom1=='SexyQuizz' || $dom1=='TvQuizz')
 		{		
 			$game="QuizzEnFolie";
 		}
-		elseif($dom1=='ArQuizz' or $dom1=='MuQuizz' or $dom1=='FfQuizz' or $dom1=='LxQuizz')
+		elseif($dom1=='ArQuizz' || $dom1=='MuQuizz' || $dom1=='FfQuizz' || $dom1=='LxQuizz')
 		{
 			$game="MediaQuizz";
 		}
@@ -561,7 +547,6 @@ class QuestionRepository extends EntityRepository
 	$pctQsxd1=round((100*$nbQsxd1/$nbQsx),2);$pctQsxd2=round((100*$nbQsxd2/$nbQsx),2);$pctQsxd3=round((100*$nbQsxd3/$nbQsx),2);$pctQsxd4=round((100*$nbQsxd4/$nbQsx),2);$pctQsxd5=round((100*$nbQsxd5/$nbQsx),2);
 	$pctQad1=round((100*$nbQad1/$nbQa),2);$pctQad2=round((100*$nbQad2/$nbQa),2);$pctQad3=round((100*$nbQad3/$nbQa),2);$pctQad4=round((100*$nbQad4/$nbQa),2);$pctQad5=round((100*$nbQad5/$nbQa),2);
 	$pctQMqv0=round((100*$nbQMqv0/$nbQMq),2);$pctQMqv1=round((100*$nbQMqv1/$nbQMq),2);$pctQMqv2=round((100*$nbQMqv2/$nbQMq),2); $pctQMqv3=round((100*$nbQMqv3/$nbQMq),2);
-	$pctQQmv0=round((100*$nbQQmv0/$nbQQm),2);$pctQQmv1=round((100*$nbQQmv1/$nbQQm),2);$pctQQmv2=round((100*$nbQQmv2/$nbQQm),2); $pctQQmv3=round((100*$nbQQmv3/$nbQQm),2);
 	$pctQQmd1=round((100*$nbQQmd1/$nbQQm),2); $pctQQmd2=round((100*$nbQQmd2/$nbQQm),2); $pctQQmd3=round((100*$nbQQmd3/$nbQQm),2); $pctQQmd4=round((100*$nbQQmd4/$nbQQm),2);$pctQQmd5=round((100*$nbQQmd5/$nbQQm),2);
 	$pctQard1=round((100*$nbQard1/$nbQar),2);$pctQard2=round((100*$nbQard2/$nbQar),2);$pctQard3=round((100*$nbQard3/$nbQar),2);$pctQard4=round((100*$nbQard4/$nbQar),2);$pctQard5=round((100*$nbQard5/$nbQar),2);
 	$pctQffd1=round((100*$nbQffd1/$nbQff),2);$pctQffd2=round((100*$nbQffd2/$nbQff),2);$pctQffd3=round((100*$nbQffd3/$nbQff),2);$pctQffd4=round((100*$nbQffd4/$nbQff),2);$pctQffd5=round((100*$nbQffd5/$nbQff),2);
@@ -630,7 +615,7 @@ class QuestionRepository extends EntityRepository
 			$query->setParameter('dom1', $dom);
 			$query->setParameter('valid', 1);
 			$count=$query->getSingleScalarResult();
-		while (!isset($Q) OR in_array($D3, $tabdom3)==true OR in_array($T, $tabtheme)==true OR in_array($Q, $derQ)==true OR $test==false){		
+		while (!isset($Q) || in_array($D3, $tabdom3)===true || in_array($T, $tabtheme)===true || in_array($Q, $derQ)===true || $test===false){		
 			$test=true;			
 			$offset=intval(rand(0, $count-1));
 			$question=$this->_em->createQueryBuilder();
@@ -651,7 +636,7 @@ class QuestionRepository extends EntityRepository
 			$D3=$result['dom3'];
 			$T=$result['theme'];
 			for ($i=1;$i<$numQ;$i++) {
-			if ($Q<($tabQ[$i-1]+40) AND $Q>($tabQ[$i-1]-40)){
+			if ($Q<($tabQ[$i-1]+40) && $Q>($tabQ[$i-1]-40)){
 				$test=false;
 			}}		
 		}		
@@ -665,7 +650,7 @@ class QuestionRepository extends EntityRepository
 		$tabdiffTv=[1,1,3,3,3,3,5,5];
 		$tabdiffFf=[1,3,3,3,4,4,5,5];
 		$tabdiffLx=[3,3,3,4,4,4,5,5];
-		if($game=="MuQuizz" OR $game=="ArQuizz" OR $game=="LxQuizz" OR $game=="TvQuizz" OR $game=="SexyQuizz" ){$tabdom3=['x','x'];}
+		if($game=="MuQuizz" || $game=="ArQuizz" || $game=="LxQuizz" || $game=="TvQuizz" || $game=="SexyQuizz" ){$tabdom3=['x','x'];}
 		$qt = $this->_em->createQueryBuilder();// possibilité d'accélérer en ne comptant pas le nb de question pour chaque question
 				$qt	->select('q.id')
 					->from('MDQQuestionBundle:Question', 'q')
@@ -687,11 +672,9 @@ class QuestionRepository extends EntityRepository
 		$qt2=$qt->getQuery()->getResult();
 		$nbQ=count($qt2);
 		
-	//	while(!isset($Q) OR in_array($Q, $tabDerQ)==true OR in_array($Q,$tabidQ)==true OR in_array($T, $tabtheme)==true)
-		while(!isset($Q) OR in_array($Q, $tabDerQ)==true OR in_array($Q,$tabidQ)==true OR in_array($D, $tabdom3)==true)
+		while(!isset($Q) || in_array($Q, $tabDerQ)===true || in_array($Q,$tabidQ)===true || in_array($D, $tabdom3)===true)
 		{
 			$offset=intval(rand(0, $nbQ-1));
-			//$offset=5;
 			$question=$this->_em->createQueryBuilder();
 			$question->select('q.id, q.theme', 'q.dom3')
 				->from('MDQQuestionBundle:Question', 'q')
@@ -717,8 +700,7 @@ class QuestionRepository extends EntityRepository
 				->setFirstResult($offset);				
 			$result=$question->getQuery()
 			    ->getOneOrNullResult();								  
-			$Q=$result['id'];
-			$T=$result['theme'];
+			$Q=$result['id'];;
 			$D=$result['dom3'];
 		}
 		
@@ -727,7 +709,7 @@ class QuestionRepository extends EntityRepository
 	public function testEcartId($idQtire,$numQ,$tabQ) {
 		$ok=true;
 		for ($i=1;$i<$numQ;$i++) {
-			if ($idQtire<($tabQ[$i]+20) AND $idQtire>($tabQ[$i]-20)){
+			if ($idQtire<($tabQ[$i]+20) && $idQtire>($tabQ[$i]-20)){
 				$ok=false;
 			}		
 		return $ok;			
@@ -735,22 +717,19 @@ class QuestionRepository extends EntityRepository
 	}
 	public function recupTheme($dom1){
 		$query=$this->_em->createQuery('SELECT DISTINCT(q.theme) FROM MDQQuestionBundle:Question q WHERE q.dom1=:dom1');
-			$query->setParameter('dom1', $dom1);			
-		//$tab='Theme Histoire 1';		
+			$query->setParameter('dom1', $dom1);
 	return $query->getArrayResult();
 	}
 	public function recupDom3($dom1, $theme){
 		$query=$this->_em->createQuery('SELECT DISTINCT(q.dom3) FROM MDQQuestionBundle:Question q WHERE q.dom1=:dom1 AND q.theme=:theme AND q.valid=1');
 			$query->setParameter('dom1', $dom1)
 			      ->setParameter('theme', $theme);
-		//$tab='Theme Histoire 1';		
 	return $query->getArrayResult();
 	}
 	public function recupDom2($dom3, $theme){
 		$query=$this->_em->createQuery('SELECT DISTINCT(q.dom2) FROM MDQQuestionBundle:Question q WHERE q.dom3=:dom3 AND q.theme=:theme AND q.valid=1');
 			$query->setParameter('dom3', $dom3)
 			      ->setParameter('theme', $theme);
-		//$tab='Theme Histoire 1';		
 	return $query->getArrayResult();
 	}
 	public function recupDom2ouDom3($choice)
@@ -769,7 +748,7 @@ class QuestionRepository extends EntityRepository
 			if($choice=="dom2"){$domX=$question['dom2'];}
 			if($choice=="dom3"){$domX=$question['dom3'];}
 			
-			if(in_array($domX,$tabdomX)!=true)
+			if(in_array($domX,$tabdomX)!==true)
 			{
 					array_push($tabdomX,$domX);
 					if($choice=="dom2"){$tob['dom2']=$domX;}
@@ -799,7 +778,6 @@ class QuestionRepository extends EntityRepository
 	}
 	function testDoublon($bdd, $crit, $chaine)
 	{
-		$data=[];
 		//pour l'instant bdd sera toujours bddqcm
 		$question=$this->_em->createQueryBuilder();
 			if($bdd=="bddqcm"){
