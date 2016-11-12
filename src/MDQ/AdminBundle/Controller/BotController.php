@@ -41,14 +41,14 @@ class BotController extends Controller
 		$tabParties=[];$j=0;
 		foreach($botsSelects as $bot)
 		{
-			if($type=="Mq" or $type=="Tous")
+			if($type=="Mq" || $type=="Tous")
 			{
 				$partieMq=BotController::botgameMq($bot);
 				$tabParties[$j]=$partieMq;
 				$j++;
 			}
 			
-			if($type=="QM" or $type=="Tous")
+			if($type=="QM" || $type=="Tous")
 			{
 				$partieMq=BotController::botgameQM($bot);
 				$tabParties[$j]=$partieMq;
