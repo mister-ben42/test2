@@ -199,7 +199,7 @@ class GestionQuestionController extends Controller
 			$diff = $request->request->get('diff');
 			$type = $request->request->get('type');
 			$delai = $request->request->get('delai');
-			if($idQ!=null and $valid!=null)
+			if($idQ!=null && $valid!=null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				$question=$em->getRepository('MDQQuestionBundle:Question')
@@ -208,7 +208,7 @@ class GestionQuestionController extends Controller
 				$em->persist($question);
 				$em->flush();
 			}
-			else if($idQ!=null and $intitule!=null and $brep!=null)
+			else if($idQ!=null && $intitule!=null && $brep!=null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				$question=$em->getRepository('MDQQuestionBundle:Question')
@@ -325,7 +325,7 @@ class GestionQuestionController extends Controller
 		{
 			$idQ = $request->request->get('idQ');
 			$repAdmin = $request->request->get('repAdmin');
-			if($idQ!=null and $repAdmin!=null)
+			if($idQ!=null && $repAdmin!=null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				$question=$em->getRepository('MDQQuestionBundle:QaValider')
@@ -362,13 +362,13 @@ class GestionQuestionController extends Controller
 				$type = $request->request->get('type');
 				$delai = $request->request->get('delai');
 				$doublon = $request->request->get('doublon');	
-			if($idQ!=null and $intitule!=null and $brep!=null)
+			if($idQ!=null && $intitule!=null && $brep!=null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				// avant je vais tester si cette question existe déjà dans la Bdd
 				$doublons=$em->getRepository('MDQQuestionBundle:Question')
 							->testDoublon('bddqcm', 'intitule', $intitule);
-				if($doublons!=[] and $doublon==0){
+				if($doublons!=[] && $doublon==0){
 					return new JsonResponse($doublons);
 					}
 				if($repAdmin==100){$valid=1;}
