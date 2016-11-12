@@ -1,5 +1,5 @@
 <?php
-	public function testEqual($clsmt, $scUser, $i, $h, $sc)
+	function testEqual($clsmt, $scUser, $i, $h, $sc)
 		{
 			if($clsmt=='KingMaster' and $scUser->getKingMaster()==$sc){$j=$h;}
 			elseif($clsmt=='scofDayMq' and $scUser->getScofDayMq()==$sc){$j=$h;}
@@ -11,7 +11,7 @@
 			else{$j=$i;}
 			return $j;
 		}
-		public function majHighScore($clsmt, $scUser, $j)
+		function majHighScore($clsmt, $scUser, $j)
 		{
 			if($clsmt=='KingMaster')
 			{
@@ -85,7 +85,7 @@
 				}	
 			}
 		}
-		public function majMedailles($clsmt, $scUser, $j)
+		function majMedailles($clsmt, $scUser, $j)
 		{
 			$med=$scUser->getMedailles();
 			$med->setTotMed($med->getTotMed()+1);
@@ -146,7 +146,7 @@
 				elseif($j>5 and $j<11){$med->setLx5($med->getLx5()+1);}
 			}
 		}		
-		public function remiseAzero($clsmt, $scUser)
+		function remiseAzero($clsmt, $scUser)
 		{
 			if($clsmt=='KingMaster'){
 				$scUser->setSumtop5weekMq(NULL);
@@ -170,7 +170,7 @@
 			elseif($clsmt=='FfQuizz'){$scUser->setScofDayFf(NULL);}
 			elseif($clsmt=='LxQuizz'){$scUser->setScofDayLx(NULL);}
 		}
-		public function calcOldScore($clsmt, $scUser)
+		function calcOldScore($clsmt, $scUser)
 		{
 			if($clsmt=='KingMaster'){$sc=$scUser->getKingMaster();}
 			elseif($clsmt=='scofDayMq'){$sc=$scUser->getScofDayMq();}
@@ -181,7 +181,7 @@
 			elseif($clsmt=='LxQuizz'){$sc=$scUser->getScofDayLx();}
 			return $sc;
 		}
-		public function majTabMaitres($clsmt, $tabMaitres, $nbExae, $tab1)
+		function majTabMaitres($clsmt, $tabMaitres, $nbExae, $tab1)
 		{
 			if($nbExae>0){shuffle($tab1);}
 			if($clsmt=='KingMaster'){$tabMaitres[0]=$tab1[0];}

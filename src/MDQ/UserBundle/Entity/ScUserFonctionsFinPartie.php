@@ -1,5 +1,5 @@
 <?php
-			public function MajScTot($scUser, $dom1, $game, $scoreP)
+			function MajScTot($scUser, $dom1, $game, $scoreP)
 			{
 				if($game=='MasterQuizz'){$scTot=$scUser->getScTotMq()+$scoreP;
 									$scUser->setScTotMq($scTot);}
@@ -17,7 +17,7 @@
 									$scUser->setScTotSx($scTot);}
 				return $scTot;
 			}
-			public function MajScMoy($scUser, $dom1, $game, $scTot)
+			function MajScMoy($scUser, $dom1, $game, $scTot)
 			{
 				if($game=='MasterQuizz'){$scUser->setScMoyMq($scTot/($scUser->getNbPMq()+1));}
 				if($dom1=='MuQuizz'){$scUser->setScMoyMu($scTot/($scUser->getNbPMu()+1));}
@@ -28,7 +28,7 @@
 				elseif($dom1=='SexyQuizz'){$scUser->setScMoySx($scTot/($scUser->getNbPSx()+1));}
 				return;// VERIFIER FORMULE AU DESSUS, SI BESOIN du +1.
 			}
-			public function TestScMax($scUser, $dom1, $game, $scP, $date)
+			function TestScMax($scUser, $dom1, $game, $scP, $date)
 			{
 				if($game=='MasterQuizz' and $scP>$scUser->getScMaxMQ()){$scUser->setScMaxMQ($scP);
 																		$scUser->setDatescMaxMq($date);}
@@ -40,7 +40,7 @@
 				elseif($dom1=='SexyQuizz' and $scP>$scUser->getScMaxSx()){$scUser->setScMaxSx($scP);}
 				return;
 			}
-			public function TestScDayAndWeek($scUser, $dom1, $game, $scP)
+			function TestScDayAndWeek($scUser, $dom1, $game, $scP)
 			{
 				$test=0;
 				if($game=='MasterQuizz'){
@@ -70,7 +70,7 @@
 				}
 				return $test;
 			}
-			public function MajsumTop5($scUser, $scP)
+			function MajsumTop5($scUser, $scP)
 			{
 				$top5week=$scUser->getTop5weekMq();	// test du classement semaine			
 				if($scP>$top5week[0]){
@@ -80,7 +80,7 @@
 				}
 				return;
 			}
-			public function MajTM($scUser, $dom1, $scP)
+			function MajTM($scUser, $dom1, $scP)
 			{
 				if($dom1=='ArQuizz'){$scQM1=$scP;}
 				else{$scQM1=$scUser->getScofDayAr();if($scQM1==null){$scQM1==0;}}
@@ -98,7 +98,7 @@
 				if($scUser->getScMaxTM()==null or $testTM>$scUser->getScMaxTM()){$scUser->setScMaxTM($testTM);}
 				return;
 			}	
-			public function MajKingMaster($scUser)
+			function MajKingMaster($scUser)
 			{
 				if($scUser->getScofWeekMu()!=Null){$tabTM[0]=$scUser->getScofWeekMu();}
 				else{$tabTM[0]=0;}
