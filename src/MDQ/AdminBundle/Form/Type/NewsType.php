@@ -1,6 +1,6 @@
 <?php
 
-namespace MDQ\AdminBundle\Form;
+namespace MDQ\AdminBundle\Form\Type;
 
 
 use Symfony\Component\Form\AbstractType;

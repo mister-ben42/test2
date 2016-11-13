@@ -6,7 +6,7 @@ namespace MDQ\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\AdminBundle\Entity\News;
-use MDQ\AdminBundle\Form\NewsType;
+use MDQ\AdminBundle\Form\Type\NewsType;
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
 
 class NewsController extends Controller

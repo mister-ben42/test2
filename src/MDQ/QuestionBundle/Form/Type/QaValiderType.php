@@ -1,6 +1,6 @@
 <?php
 
-namespace MDQ\QuestionBundle\Form;
+namespace MDQ\QuestionBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -6,11 +6,11 @@ namespace MDQ\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\UserBundle\Entity\User;
-use MDQ\UserBundle\Form\UserBlockType;
+use MDQ\UserBundle\Form\Type\UserBlockType;
 use MDQ\UserBundle\Entity\CritEditU;
-use MDQ\UserBundle\Form\CritEditUType;
+use MDQ\UserBundle\Form\Type\CritEditUType;
 use MDQ\AdminBundle\Entity\Gestion;
-use MDQ\AdminBundle\Form\GestionType;
+use MDQ\AdminBundle\Form\Type\GestionType;
 use MDQ\QuestionBundle\Entity\Theme;
 use MDQ\QuestionBundle\Entity\Dom3;
 
@@ -219,7 +219,7 @@ class AdminController extends Controller
     public function mailAction()
     {
 	    mail('bigbenf42@yahoo.fr', 'mail2', 'methode php', null, 'mondeduquizz@gmail.com');
-	  // $name="Benoit";
+
 	   $message = \Swift_Message::newInstance()
         ->setSubject('Hello Email')
         ->setFrom('mondeduquizz@gmail.com')

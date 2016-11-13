@@ -1,7 +1,7 @@
 <?php
 // src/MDQ/QuestionBundle/Form/QuestionEditType.php
 
-namespace MDQ\QuestionBundle\Form;
+namespace MDQ\QuestionBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 

@@ -6,7 +6,7 @@ namespace MDQ\QuestionBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\QuestionBundle\Entity\QaValider;
-use MDQ\QuestionBundle\Form\QaValiderType;
+use MDQ\QuestionBundle\Form\Type\QaValiderType;
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
 
 class QuestionController extends Controller
