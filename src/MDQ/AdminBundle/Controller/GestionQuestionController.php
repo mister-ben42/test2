@@ -10,7 +10,7 @@ use MDQ\QuestionBundle\Entity\CritEditQ;
 use MDQ\QuestionBundle\Entity\CritEditQaVal;
 use MDQ\QuestionBundle\Form\Type\CritEditQType;
 use MDQ\QuestionBundle\Form\Type\CritEditQaValType;
-use MDQ\QuestionBundle\Form\\Type\QuestionEditType;
+use MDQ\QuestionBundle\Form\Type\QuestionEditType;
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
 
 class GestionQuestionController extends Controller
