@@ -186,7 +186,7 @@ class GestionQuestionController extends Controller
 			$diff = $request->request->get('diff');
 			$type = $request->request->get('type');
 			$delai = $request->request->get('delai');
-			if($idQ!=null && $valid!=null)
+			if($idQ!==null && $valid!==null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				$question=$em->getRepository('MDQQuestionBundle:Question')
@@ -195,7 +195,7 @@ class GestionQuestionController extends Controller
 				$em->persist($question);
 				$em->flush();
 			}
-			else if($idQ!=null && $intitule!=null && $brep!=null)
+			else if($idQ!==null && $intitule!==null && $brep!==null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				$question=$em->getRepository('MDQQuestionBundle:Question')
@@ -312,7 +312,7 @@ class GestionQuestionController extends Controller
 		{
 			$idQ = $request->request->get('idQ');
 			$repAdmin = $request->request->get('repAdmin');
-			if($idQ!=null && $repAdmin!=null)
+			if($idQ!==null && $repAdmin!==null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				$question=$em->getRepository('MDQQuestionBundle:QaValider')
@@ -322,7 +322,6 @@ class GestionQuestionController extends Controller
 				$em->persist($question);
 				$em->flush();
 			}
-			$date='ok';
 			return new JsonResponse($data);
 		}
 		$data='error';
@@ -349,7 +348,7 @@ class GestionQuestionController extends Controller
 				$type = $request->request->get('type');
 				$delai = $request->request->get('delai');
 				$doublon = $request->request->get('doublon');	
-			if($idQ!=null && $intitule!=null && $brep!=null)
+			if($idQ!==null && $intitule!==null && $brep!==null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				// avant je vais tester si cette question existe déjà dans la Bdd
@@ -382,7 +381,6 @@ class GestionQuestionController extends Controller
 				$question->setDatecreate($datecreate);
 				$question->setAuteur($auteur);
 				$em->persist($question);
-				//$em->remove($qaval);
 				$qaval->setRepAdmin(100);
 				$qaval->setRetournee(0);
 				$auteur=$qaval->getAuteur();
@@ -391,8 +389,7 @@ class GestionQuestionController extends Controller
 				$auteur->setNbJQnF($auteur->getNbJQnF()+1);
 				$em->persist($auteur);
 				$em->persist($qaval);
-				$em->flush();			
-			//return new JsonResponse($idQ);
+				$em->flush();
 			$data='ok';
 			return new JsonResponse($data);
 			}
@@ -408,7 +405,7 @@ class GestionQuestionController extends Controller
 		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 		{
 			$idQ = $request->request->get('idQ');
-			if($idQ!=null)
+			if($idQ!==null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				$question=$em->getRepository('MDQQuestionBundle:Question')
@@ -418,7 +415,6 @@ class GestionQuestionController extends Controller
 				{
 					$question->removeUser_error($scuser);					
 					$scuser->setNbErrorSignal($scuser->getNbErrorSignal()-1);
-					//$scuser->removeQuestion_error($question);
 				}
 				$question->setError(0);
 				$question->setTaberror([0,0,0]);

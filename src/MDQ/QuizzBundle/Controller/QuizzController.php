@@ -13,9 +13,6 @@ class QuizzController extends Controller
 	{
 		$bloc_page="bloc_page_MasterQuizz";
 		$photo="attenteMq.gif";
-	/*	if($game=="MasterQuizz"){$photo="attenteMq.gif";
-								 $bloc_page="bloc_page_MasterQuizz";}
-	*/
 		if($game=="SexyQuizz"){	$photo="attenteMq.gif";
 								 $bloc_page="bloc_page_SexyQuizz";}
 		return $this->render('MDQQuizzBundle:Quizz:preGame.html.twig', array(
@@ -38,15 +35,15 @@ class QuizzController extends Controller
             return $this->redirect($this->generateUrl('mdqgene_accueil'));
         }
 		// **************** Gestion des Jetons ********* //////////////
-	/*	$nbJtotMq=$user->getScUser()->getNbJdayMq()+$user->getScUser()->getNbJMq();
-		$nbJtotQnF=$user->getScUser()->getNbJdayQnF()+$user->getScUser()->getNbJQnF();
-		if($game=="MasterQuizz" && $nbJtotMq==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));
-		}
-		elseif($game=="MasterQuizz" && $user->getScUser()->getNbJdayMq()!=0){$user->getScUser()->setNbJdayMq($user->getScUser()->getNbJdayMq()-1);}
-		elseif($game=="MasterQuizz" && $user->getScUser()->getNbJMq()!=0){$user->getScUser()->setNbJMq($user->getScUser()->getNbJMq()-1);}
-		elseif($nbJtotQnF==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		elseif($user->getScUser()->getNbJdayQnF()!=0){$user->getScUser()->setNbJdayQnF($user->getScUser()->getNbJdayQnF()-1);}
-		else{$user->getScUser()->setNbJQnF($user->getScUser()->getNbJQnF()-1);}
+	/*ss	$nbJtotMq=$user->getScUser()->getNbJdayMq()+$user->getScUser()->getNbJMq();
+	ss	$nbJtotQnF=$user->getScUser()->getNbJdayQnF()+$user->getScUser()->getNbJQnF();
+	ss	if($game=="MasterQuizz" && $nbJtotMq==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));
+	ss	}
+	ss	elseif($game=="MasterQuizz" && $user->getScUser()->getNbJdayMq()!=0){$user->getScUser()->setNbJdayMq($user->getScUser()->getNbJdayMq()-1);}
+	ss	elseif($game=="MasterQuizz" && $user->getScUser()->getNbJMq()!=0){$user->getScUser()->setNbJMq($user->getScUser()->getNbJMq()-1);}
+	ss	elseif($nbJtotQnF==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
+	ss	elseif($user->getScUser()->getNbJdayQnF()!=0){$user->getScUser()->setNbJdayQnF($user->getScUser()->getNbJdayQnF()-1);}
+	ss	else{$user->getScUser()->setNbJQnF($user->getScUser()->getNbJQnF()-1);}
 	*/
 		$nbJ=$user->getScUser()->getNbJdayMq();
 		if($nbJ==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
@@ -146,13 +143,7 @@ class QuizzController extends Controller
 		return $this->redirect($this->generateUrl('mdqquizz_jeu', array(
 		'game'=>$game,
 		)));
-	/*	return $this->render('MDQQuizzBundle:Quizz:page1Quizz.html.twig', array(
-		'tabQ'=>$tabDerQ,
-		'qtire'=>$qtire,
-		'qpartie'=>$tabidQ,
-		'nbQ'=>$nbQ,
-		));
-	*/
+
    }
    public function jeuQuizzAction($game)
    {
@@ -198,7 +189,7 @@ class QuizzController extends Controller
 		$numQ = $request->request->get('numQ');	
 		// dans ma démarche, je vais récupérer l'id dans un table, puis la question correspondante dans une autre. Possibilité de joindre ?
 		// j'ai essayer les jointure, avec relation many to many, bcp de choses, sans doute pas loin
-		 if ($numQ != null )
+		 if ($numQ !== null )
 		  {   
 			$idQ = $this->getDoctrine()
 						   ->getManager()
@@ -363,10 +354,10 @@ class QuizzController extends Controller
 	}
 	public function finPartieAction(){
 		$session = $this->getRequest()->getSession();
-	/*	if($session->get('page')!='Mquizz'){
+		if($session->get('page')!='Mquizz'){
 			$session->set('page', 'finPartie');
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
-		}*/
+		}
 		$session->set('page', 'finPartie');
 		$user = $this->container->get('security.context')->getToken()->getUser();
         if ($user===null) {// pas sûr que suffisant en terme de sécurité ?			
@@ -440,14 +431,7 @@ class QuizzController extends Controller
 				$rang=$i;
 			}
 		else {$rang="none";}
-	/*	if($scofDayUser<$score)
-		{
-			$rang=$this->getDoctrine()
-							->getManager()
-							->getRepository('MDQUserBundle:ScUser')
-							->rangScofDay($game, $score);
-		}
-		else {$rang="none";}*/
+
 		return $this->render('MDQQuizzBundle:Quizz:finPartie.html.twig', array(
 			'user'=>$user,
 			'comFinal'=>$comFinal,

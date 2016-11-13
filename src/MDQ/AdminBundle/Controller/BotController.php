@@ -60,7 +60,7 @@ class BotController extends Controller
 				->find(1);
 			if($gestion->getMq()==0){return ;}
 			$tabPartie['bot']=$bot->getUsername();
-			$tabdesQ=[]; $tabdom3=[]; $tabtheme=[]; $tabidQ=[];$tabdom=['x','x','x']; $derQjoues=[];
+			$tabdom3=[]; $tabtheme=[]; $tabidQ=[];$tabdom=['x','x','x']; $derQjoues=[];
 			$tabscore=[100,200,500,1000,2000]; $tabdiff=[1,2,2,3,3,3,4,4,5,5]; $score=0;
 			$scUser=$bot->getScUser();			
 			$NbQtot=$scUser->getNbQtotMq();	$NbBrtot=$scUser->getNbBrtotMq();
@@ -79,10 +79,6 @@ class BotController extends Controller
 				$tabcoef=$scUser->getTabCoefBot();
 				$tabdom1=array('Histoire'=>0, 'Géographie'=>1, 'Sciences et nature'=>2, 'Arts et Littérature'=>3, 'Sports et loisirs'=>4, 'Divers'=>5);
 				$coefa=$tabcoef[$tabdom1[$dom[0]]];
-			/*	$tabcoeffdiff=[40,20,0,-15,-30];
-				$coefb=$coefa+$tabcoeffdiff[($tabdiff[$numQ-1])-1];*/
-			/*	$tabcoeffdiff=[1.5,1.25,0.9,0.65,0.40];				
-				$coefb=25+$coefa*$tabcoeffdiff[($tabdiff[$numQ-1])-1]*75/100;*/
 				$tabcoeffdiff=[1.5,1,0.75,0.50,0.30];				
 				$coefb=25+$coefa*$tabcoeffdiff[($tabdiff[$numQ-1])-1];
 				$coefs=array(0=>(100-$coefb),1=>$coefb);
@@ -138,33 +134,33 @@ class BotController extends Controller
 			if ($NbQSL!=0){$scUser->setNbQslMq($NbQSL)->setNbBrslMq($NbBrSL)->setPrctBrslMq($NbBrSL*100/$NbQSL);}
 			if ($NbQAL!=0){$scUser->setNbQalMq($NbQAL)->setNbBralMq($NbBrAL)->setPrctBralMq($NbBrAL*100/$NbQAL);}
 			$scUser->setNbBrtot($nbBrtot);
-			$majbddscU= $em->getRepository('MDQUserBundle:ScUser')
+			$em->getRepository('MDQUserBundle:ScUser')
 						->majBddScfinP($scUser, 'MasterQuizz', 'MasterQuizz', $partie);
-		/*	$scTot=$scUser->getScTotMq()+$score;
-			$scUser->setScTotMq($scTot);
-			$scUser->setScMoyMq($scTot/$scUser->getNbPMq());
-			if($scUser->getScofDayMq()==NULL OR $score>$scUser->getScofDayMq()){
-					$scUser->setScofDayMq($score);
-			}
-			if($score>$scUser->getScMaxMq()){
-					$scUser->setScMaxMq($score);
-					$scUser->setDatescMaxMq($partie->getDate());
-			}
-			$top5weekMq=$scUser->getTop5weekMq();
-			if($score>$top5weekMq[0]){
-				$top5weekMq[0]=$score;
-				$scUser->setTop5weekMq($top5weekMq);
-				$scUser->setSumtop5weekMq(array_sum($top5weekMq));
-				if($scUser->getHightop5weekMq()==null OR $score>$scUser->getHightop5weekMq()){
-					$scUser->setHightop5weekMq($score);
-					}
-			}
-		/*	$top10mois=$scUser->getTop10month();
-			if($score>$top10mois[0]){
-				$top10mois[0]=$score;
-				$scUser->setTop10month($top10mois);
-				$scUser->setSumtop10month(array_sum($top10mois));
-			}*/
+	/*	+ 	$scTot=$scUser->getScTotMq()+$score;
+		+	$scUser->setScTotMq($scTot);
+		+	$scUser->setScMoyMq($scTot/$scUser->getNbPMq());
+		+	if($scUser->getScofDayMq()==NULL OR $score>$scUser->getScofDayMq()){
+		+			$scUser->setScofDayMq($score);
+		+	}
+		+	if($score>$scUser->getScMaxMq()){
+		+			$scUser->setScMaxMq($score);
+		+			$scUser->setDatescMaxMq($partie->getDate());
+		+	}
+		+	$top5weekMq=$scUser->getTop5weekMq();
+		+	if($score>$top5weekMq[0]){
+		+		$top5weekMq[0]=$score;
+		+		$scUser->setTop5weekMq($top5weekMq);
+		+		$scUser->setSumtop5weekMq(array_sum($top5weekMq));
+		+		if($scUser->getHightop5weekMq()==null OR $score>$scUser->getHightop5weekMq()){
+		+			$scUser->setHightop5weekMq($score);
+		+			}
+		+	}
+		+	$top10mois=$scUser->getTop10month();
+		+	if($score>$top10mois[0]){
+		+		$top10mois[0]=$score;
+		+		$scUser->setTop10month($top10mois);
+		+		$scUser->setSumtop10month(array_sum($top10mois));
+		+	}*/
 			$em->persist($scUser);
 			$em->persist($partie);
 			$em->flush();
@@ -211,7 +207,6 @@ class BotController extends Controller
 			$nbQLx=$scUser->getNbQLx();	$nbBrLx=$scUser->getNbBrLx();
 			$nbQMu=$scUser->getNbQMu();	$nbBrMu=$scUser->getNbBrMu();
 			$nbBrtot=$scUser->getNbBrtot();
-			$testTF=0;
 			for($numQ=1; $numQ<9; $numQ++)
 			{
 				$qtire=$em->getRepository('MDQQuestionBundle:Question')
@@ -270,7 +265,7 @@ class BotController extends Controller
 			$partie2->setUsername($bot->getUsername());
 			$partie2->setQ1($tabidQ[0])->setQ2($tabidQ[1])->setQ3($tabidQ[2])->setQ4($tabidQ[3])->setQ5($tabidQ[4])->setQ6($tabidQ[5])->setQ7($tabidQ[6])->setQ8($tabidQ[7])->setQ9(null)->setQ10(null);		
 			$partie2->setUser($bot)->setScore($scoreP)->setValid(true)->setType($game);
-			$majbddscU= $em->getRepository('MDQUserBundle:ScUser')
+			$em->getRepository('MDQUserBundle:ScUser')
 						->majBddScfinP($scUser, $game, 'MediaQuizz', $partie2);
 			$tabPartie2['sctot']=$scoreP;
 			$tabPartie2['scQ9']="none";$tabPartie2['scQ10']="none";

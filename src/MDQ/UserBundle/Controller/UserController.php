@@ -50,7 +50,6 @@ class UserController extends Controller
 		$nbQaval7j=$em 	->getRepository('MDQQuestionBundle:QaValider')
 						->nbQaval7j($user->getId());
 		$dateref=$em->getRepository('MDQGeneBundle:DateReference')->find(1);
-	//	$nbQaval7j=5;
 		return $this->render('MDQUserBundle:User:profileUAuto.html.twig', array(
 		  'user'   => $user,	  
 		  'derParties'=>$derPartieUser,

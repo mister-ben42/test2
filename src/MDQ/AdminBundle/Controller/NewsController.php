@@ -41,11 +41,6 @@ class NewsController extends Controller
 	public function listNewsAction()
 	{
 		// Toujours ce pb : l'entité news n'est pas reliées à son repository ... bizarre.
-		/*$newsA = $this->getDoctrine()
-						 ->getManager()
-						 ->getRepository('MDQAdminBundle:News')
-						 ->recupNews();
-		*/
 		$em=$this->getDoctrine()->getManager();
 		$news=$em->createQueryBuilder()
 				->select('n')
@@ -84,16 +79,9 @@ class NewsController extends Controller
 		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 		{			
 			$tabresult = $request->request->get('tabresult');	
-			if($tabresult!=null)
+			if($tabresult!==null)
 			{
 				$em=$this->getDoctrine()->getManager();
-			/*	$new=$em->createQueryBuilder()
-						->select('n')
-						->from('MDQAdminBundle:News', 'n')
-						->where('n.id = :idNews')
-						->setParameter('idNews', $tabresult[0]);
-				$news=$new->getQuery()->getOneResult();
-			*/
 				$news=$em->getRepository('MDQAdminBundle:News')
 							->findOneById($tabresult[0]);
 				$news->setPublication($tabresult[1]);

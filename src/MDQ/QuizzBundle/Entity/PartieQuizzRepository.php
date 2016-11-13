@@ -16,7 +16,7 @@ class PartieQuizzRepository extends EntityRepository
 	
 	public function tiragedudom($tab){//tirage au sort et test du domaine
 		$tabtheme=['Histoire','Sports et loisirs','Géographie','Arts et Littérature','Sciences et nature','Divers'];
-		while (!isset($nbtire) OR in_array($dom, $tab)==true)
+		while (!isset($nbtire) OR in_array($dom, $tab)===true)
 			{
 			$nbtire=mt_rand(0,5);
 			$dom=$tabtheme[$nbtire];			
@@ -63,17 +63,7 @@ class PartieQuizzRepository extends EntityRepository
 		return $qb->getQuery()
 				->getSingleResult();	
 	}
-	
-	
-/*	public function recupDerPartie(){// plus utilisée
-		  $qb = $this->createQueryBuilder('p')				
-				->where('p.valid = :valid')	
-				->setParameter('valid', true)
-				->orderBy('p.id', 'DESC')
-				->setMaxResults(3);    
-		return $qb->getQuery()
-				->getResult();	
-	}*/
+
 	public function recupPNonValid(){
 		  $qb = $this->createQueryBuilder('p')				
 				->where('p.valid = :valid')	

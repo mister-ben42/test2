@@ -776,21 +776,5 @@ class QuestionRepository extends EntityRepository
 			return $question->getQuery()
 			    ->getOneOrNullResult();	
 	}
-	function testDoublon($bdd, $crit, $chaine)
-	{
-		//pour l'instant bdd sera toujours bddqcm
-		$question=$this->_em->createQueryBuilder();
-			if($bdd=="bddqcm"){
-			$question->select('q.id, q.intitule, q.brep, q.mrep1, q.mrep2, q.mrep3, q.dom1, q.theme, q.diff, q.commentaire, q.type, q.media')
-				->from('MDQQuestionBundle:Question', 'q');
-			}
-			elseif ($bdd=="bddqaval"){
-			$question->select('q.id, q.intitule, q.brep, q.mrep1, q.mrep2, q.mrep3, q.dom1')
-				->from('MDQQuestionBundle:QaValider', 'q');
-			}
-			$question->where('q.'.$crit.' = :crit')
-				->setParameter('crit', $chaine);
-		$tabdoublon=$question->getQuery()->getArrayResult();
-		return $tabdoublon;
-	}
+
 }

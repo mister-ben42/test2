@@ -121,7 +121,7 @@ class AdminController extends Controller
 					->recupTheme($dom1);
 			foreach($themes as $theme)
 			{
-				if(in_array($theme, $tabtheme)!=true)
+				if(in_array($theme, $tabtheme)!==true)
 				{
 					$objTheme=new Theme();
 					$objTheme->setNom($theme[1]);
@@ -151,7 +151,6 @@ class AdminController extends Controller
 					foreach($dom3s as $dom3)
 					{
 					     $objDom3=new Dom3();
-					   //  $objTheme->addDom3map($objDom3);
 					     $objDom3->setNom($dom3[1]);
 					     $objDom3->setDom1($dom1);
 					    $objDom3->setTheme($objTheme);
@@ -187,7 +186,6 @@ class AdminController extends Controller
 					->recupDom2ouDom3('dom2');
 		$tabdom3=$em->getRepository('MDQQuestionBundle:Question')
 					->recupDom2ouDom3('dom3');
-		//return $this->redirect($this->generateUrl('mdqadmin_accueilAdmin'));
 		return $this->render('MDQAdminBundle:Admin:listeTheme.html.twig', array(
 			'tabtheme' => $tabtheme,
 			'tabdom2' => $tabdom2,
@@ -221,7 +219,7 @@ class AdminController extends Controller
     public function mailAction()
     {
 	    mail('bigbenf42@yahoo.fr', 'mail2', 'methode php', null, 'mondeduquizz@gmail.com');
-	   $name="Benoit";
+	  // $name="Benoit";
 	   $message = \Swift_Message::newInstance()
         ->setSubject('Hello Email')
         ->setFrom('mondeduquizz@gmail.com')
@@ -254,14 +252,5 @@ class AdminController extends Controller
     }
 }
     
-/*
-Utilisation :
 
-    <?php
-    $coefs = array('bleu' => 5, 'jaune' => 1, 'rouge' => 3);
-    echo rand_coef($coefs); // Renvoie bleu, jaune ou rouge aléatoirement mais avec plus de chances de tomber sur bleu que sur rouge, et plus de chances de tomber sur rouge que sur jaune
-    // Ou encore :
-    echo rand_coef(array('pile' => 7, 'face' => 3)); // a 70% de chances de renvoyer pile et 30% de renvoyer face
-    ?>
-*/
 ?>

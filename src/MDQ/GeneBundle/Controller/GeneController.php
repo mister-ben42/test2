@@ -26,8 +26,6 @@ class GeneController extends Controller
 			$intcontrol = new \DateInterval('PT10M');// Definition d'un intervalle de 10 minutes
 			$dateactu= new \DateTime();
 			$datepartie=$partie->getDate();
-			/*$intreel=new \DateInterval();
-			$intreel=$dateactu->diff($datepartie);*/
 			if($dateactu->sub($intcontrol)>$datepartie){
 				$partie->setValid(true);
 				$user=$partie->getUser();
@@ -36,7 +34,7 @@ class GeneController extends Controller
 				if($game=='MasterQuizz'){$dom1='none';}
 				else{$dom1=$game;
 					$game='MediaQuizz';}
-				$majbddscU=$em->getRepository('MDQUserBundle:ScUser')
+				$em->getRepository('MDQUserBundle:ScUser')
 							->majBddScfinP($scUser, $dom1, $game, $partie);
 
 			}
@@ -113,7 +111,7 @@ class GeneController extends Controller
 			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
 						->majClassement($listeUser, 'KingMaster', $tabMaitres);
 			$week1= new \DateInterval('P7D');
-			$newW=$datebdd->getWeek()->add($week1);
+			$datebdd->getWeek()->add($week1);
 			$datebdd->setWeek($datejour->add($int)->add($week1));
 		}
 	//****************************** Mise a jour, donnees du jour.*******************************
@@ -370,10 +368,7 @@ class GeneController extends Controller
 		if($nbHighScore==0){$nbPage=1;}//gère le cas ou aucun highscore.
 		if($id!=0)
 		{			
-/*			$scUser=$em->getRepository('MDQUserBundle:ScUser')
-						->findOneById($id);			
-			$rang=$em->getRepository('MDQUserBundle:ScUser')
-						->rangScofDay2($crit, $scUser);*/
+
 			$i=0;$j=0;
 			foreach($highScoreTous as $user)
 			{
