@@ -366,20 +366,19 @@ class ScUserRepository extends EntityRepository
 		return 1;
 	}
 	
-	public function majBddScfinP(ScUser $scUser, $dom1, $game, $partie)
+	public function majBddScfinP($scUser, $dom1, $game, $partie)
 	{		
-		include_once'ScUserFonctionsFinPartie.php';
 		$scP=$partie->getScore();
 		$partie->setValid(true);				
-		$testDay=TestScDayAndWeek($scUser, $dom1, $game, $scP);
-		$scTot=MajScTot($scUser, $dom1, $game, $scP);
-		MajScMoy($scUser,$dom1, $game, $scTot);
+		$testDay=$scUser->testScDayAndWeek($dom1, $game, $scP);
+		$scTot=$scUser->majScTot($dom1, $game, $scP);
+		$scUser->majScMoy($dom1, $game, $scTot);
 		if($testDay==1)// Si meilleur score du jour
 		{
-			TestScMax($scUser, $dom1, $game, $scP, $partie->getDate());
-			if($game=='MasterQuizz'){MajsumTop5($scUser, $scP);}
-			elseif($game=='MediaQuizz'){MajTM($scUser, $dom1, $scP);}
-			MajKingMaster($scUser);
+			$scUser->testScMax($dom1, $game, $scP, $partie->getDate());
+			if($game=='MasterQuizz'){$scUser->majsumTop5($scP);}
+			elseif($game=='MediaQuizz'){$scUser->majTM($dom1, $scP);}
+			$scUser->majKingMaster();
 		}
 		return 1;
 	}
@@ -387,7 +386,7 @@ class ScUserRepository extends EntityRepository
 		
 	public function majClassement($tabUsers, $clsmt, $tabMaitres)
 	{
-		include_once'ScUserFonctionsMajQuot.php';
+
 		$i=0;$j=0;$sc=0;$tab1[0]=null;$nbExae=0;$m=0;$n=0;
 			//$i : variable boucle, $j: variable rang =$i sauf si egalite.
 			//$sc pour gerer les situations d'egalites de score
@@ -396,22 +395,27 @@ class ScUserRepository extends EntityRepository
 			//$n devient positif qd tests d'aglites termines, pour ne pas tester pour tous les joueurs suivants.
 			foreach($tabUsers as $scUser){
 				$i++;
-				$j=testEqual($clsmt, $scUser, $i, $j, $sc);
-				majHighScore($clsmt, $scUser, $j);
-				if($j<11){majMedailles($clsmt, $scUser, $j);}
+				$j=$scUser->testEqual($clsmt, $i, $j, $sc);
+				$scUser->majHighScore($clsmt, $j);
+				if($j<11){$scUser->majMedailles($clsmt, $j);}
 				if($m==0 && in_array($scUser, $tabMaitres)!==true){$tab1[0]=$scUser;$m=1;}
-			//	elseif($j==$h && $nbExae==($i-2) && in_array($scUser, $tabMaitres)!=true){array_push($tab1,$scUser);$nbExae++;}
 				elseif($m==1 && $n==0 && $j!=$i && in_array($scUser, $tabMaitres)!==true){array_push($tab1,$scUser);$nbExae++;}
-			//	elseif($m==1 && $n==0 && $j!=$i && in_array($scUser, $tabMaitres)=true){$n=0;}
 				elseif($m==1 && $n==0 && $j==$i){$n=1;}// Bien garder le $j==$i, comme ca si l'user est deja ans la tab maitre et que egalite de score, $n ne passe pas a 1.
 				//pour les suivant, tester aussi que $scUser n'appartient pas a tabMaitres.		
 		
-				calcOldScore($clsmt, $scUser);
-				remiseAzero($clsmt, $scUser);
+				$scUser->calcOldScore($clsmt);
+				$scUser->remiseAzero($clsmt);
 			}
-			$tabMaster=majTabMaitres($clsmt, $tabMaitres, $nbExae, $tab1);
+			if($nbExae>0){shuffle($tab1);}
+			if($clsmt=='KingMaster'){$tabMaitres[0]=$tab1[0];}
+			elseif($clsmt=='scofDayMq'){$tabMaitres[1]=$tab1[0];}
+			elseif($clsmt=='TotalMedia'){$tabMaitres[2]=$tab1[0];}
+			elseif($clsmt=='MuQuizz'){$tabMaitres[3]=$tab1[0];}
+			elseif($clsmt=='ArQuizz'){$tabMaitres[4]=$tab1[0];}
+			elseif($clsmt=='FfQuizz'){$tabMaitres[5]=$tab1[0];}
+			elseif($clsmt=='LxQuizz'){$tabMaitres[6]=$tab1[0];}
 			
-			return $tabMaster;
+			return $tabMaitres;
 		
 	}
 }

@@ -948,6 +948,308 @@ class ScUser
 	$this->nbQvalid=0;
 	$this->medailles = new Medailles();
 	}
+	// *************************** Fonction MAJ fin de partie *********************************************
+		public	function testScDayAndWeek($dom1, $game, $scP)
+			{
+				$test=0;
+				if($game=='MasterQuizz'){
+					if($this->getScofDayMq()===NULL || $scP>$this->getScofDayMq()){$this->setScofDayMq($scP);$test=1;}
+				}
+				if($dom1=='MuQuizz'){
+					if($this->getScofDayMu()===NULL || $scP>$this->getScofDayMu()){$this->setScofDayMu($scP);$test=1;}
+					if($this->getScofWeekMu()===NULL || $scP>$this->getScofWeekMu()){$this->setScofWeekMu($scP);}
+				}				
+				elseif($dom1=='ArQuizz'){
+					if($this->getScofDayAr()===NULL || $scP>$this->getScofDayAr()){$this->setScofDayAr($scP);$test=1;}
+					if($this->getScofWeekAr()===NULL || $scP>$this->getScofWeekAr()){$this->setScofWeekAr($scP);$test=1;}
+				}
+				elseif($dom1=='FfQuizz'){
+					if($this->getScofDayFf()===NULL || $scP>$this->getScofDayFf()){$this->setScofDayFf($scP);$test=1;}
+					if($this->getScofWeekFf()===NULL || $scP>$this->getScofWeekFf()){$this->setScofWeekFf($scP);$test=1;}
+				}
+				elseif($dom1=='LxQuizz'){
+					if($this->getScofDayLx()===NULL || $scP>$this->getScofDayLx()){$this->setScofDayLx($scP);$test=1;}
+					if($this->getScofWeekLx()===NULL || $scP>$this->getScofWeekLx()){$this->setScofWeekLx($scP);$test=1;}
+				}
+				elseif($dom1=='TvQuizz'){
+					if($this->getScofDayTv()===NULL || $scP>$this->getScofDayTv()){$this->setScofDayTv($scP);$test=1;}
+				}
+				elseif($dom1=='SexyQuizz'){
+					if($this->getScofDaySx()===NULL || $scP>$this->getScofDaySx()){$this->setScofDaySx($scP);$test=1;}
+				}
+				return $test;
+			}
+		public function majScTot($dom1, $game, $scoreP)
+			{
+				if($game=='MasterQuizz'){$scTot=$this->getScTotMq()+$scoreP;
+									$this->setScTotMq($scTot);}
+				if($dom1=='MuQuizz'){$scTot=$this->getScTotMu()+$scoreP;
+									$this->setScTotMu($scTot);}				
+				elseif($dom1=='ArQuizz'){$scTot=$this->getScTotAr()+$scoreP;
+									$this->setScTotAr($scTot);}
+				elseif($dom1=='FfQuizz'){$scTot=$this->getScTotFf()+$scoreP;
+									$this->setScTotFf($scTot);}
+				elseif($dom1=='LxQuizz'){$scTot=$this->getScTotLx()+$scoreP;
+									$this->setScTotLx($scTot);}
+				elseif($dom1=='TvQuizz'){$scTot=$this->getScTotTv()+$scoreP;
+									$this->setScTotTv($scTot);}
+				elseif($dom1=='SexyQuizz'){$scTot=$this->getScTotSx()+$scoreP;
+									$this->setScTotSx($scTot);}
+				return $scTot;
+			}
+		public function majScMoy($dom1, $game, $scTot)
+			{
+				if($game=='MasterQuizz'){$this->setScMoyMq($scTot/($this->getNbPMq()+1));}
+				if($dom1=='MuQuizz'){$this->setScMoyMu($scTot/($this->getNbPMu()+1));}
+				elseif($dom1=='ArQuizz'){$this->setScMoyAr($scTot/($this->getNbPAr()+1));}
+				elseif($dom1=='FfQuizz'){$this->setScMoyFf($scTot/($this->getNbPFf()+1));}
+				elseif($dom1=='LxQuizz'){$this->setScMoyLx($scTot/($this->getNbPLx()+1));}
+				elseif($dom1=='TvQuizz'){$this->setScMoyTv($scTot/($this->getNbPTv()+1));}
+				elseif($dom1=='SexyQuizz'){$this->setScMoySx($scTot/($this->getNbPSx()+1));}
+				return;// VERIFIER FORMULE AU DESSUS, SI BESOIN du +1.
+			}
+		public function testScMax($dom1, $game, $scP, $date)
+			{
+				if($game=='MasterQuizz' && $scP>$this->getScMaxMQ()){$this->setScMaxMQ($scP);
+									$this->setDatescMaxMq($date);}
+				if($dom1=='MuQuizz' && $scP>$this->getScMaxMu()){$this->setScMaxMu($scP);}
+				elseif($dom1=='ArQuizz' && $scP>$this->getScMaxAr()){$this->setScMaxAr($scP);}
+				elseif($dom1=='FfQuizz' && $scP>$this->getScMaxFf()){$this->setScMaxFf($scP);}
+				elseif($dom1=='LxQuizz' && $scP>$this->getScMaxLx()){$this->setScMaxLx($scP);}				
+				elseif($dom1=='TvQuizz' && $scP>$this->getScMaxTv()){$this->setScMaxTv($scP);}
+				elseif($dom1=='SexyQuizz' && $scP>$this->getScMaxSx()){$this->setScMaxSx($scP);}
+				return;
+			}
+
+		public function majsumTop5($scP)
+			{
+				$top5week=$this->getTop5weekMq();	// test du classement semaine			
+				if($scP>$top5week[0]){
+				$top5week[0]=$scP;
+				$this->setTop5weekMq($top5week);
+				$this->setSumtop5weekMq(array_sum($top5week));
+				}
+				return;
+			}
+		public function majTM($dom1, $scP)
+			{
+				if($dom1=='ArQuizz'){$scQM1=$scP;}
+				else{$scQM1=$this->getScofDayAr();if($scQM1===NULL){$scQM1==0;}}
+				if($dom1=='FfQuizz'){$scQM2=$scP;}
+				else{$scQM2=$this->getScofDayFf();if($scQM2===NULL){$scQM2==0;}}
+				if($dom1=='MuQuizz'){$scQM3=$scP;}
+				else{$scQM3=$this->getScofDayMu();if($scQM3===NULL){$scQM3==0;}}
+				if($dom1=='LxQuizz'){$scQM4=$scP;}
+				else{$scQM4=$this->getScofDayLx();if($scQM4===NULL){$scQM4==0;}}
+				$scTMactu=$this->getScofDayTM();if($scTMactu===NULL){$scTMactu==0;}
+				$tab3topsc=[$scQM1,$scQM2,$scQM3,$scQM4];
+				rsort($tab3topsc);
+				$testTM=$tab3topsc[0]+$tab3topsc[1]+$tab3topsc[2];
+				if($testTM>$scTMactu){$this->setScofDayTM($testTM);}
+				if($this->getScMaxTM()===NULL || $testTM>$this->getScMaxTM()){$this->setScMaxTM($testTM);}
+				return;
+			}	
+		public function majKingMaster()
+			{
+				if($this->getScofWeekMu()!==NULL){$tabTM[0]=$this->getScofWeekMu();}
+				else{$tabTM[0]=0;}
+				if($this->getScofWeekAr()!==NULL){$tabTM[1]=$this->getScofWeekAr();}
+				else{$tabTM[1]=0;}
+				if($this->getScofWeekFf()!==NULL){$tabTM[2]=$this->getScofWeekFf();}
+				else{$tabTM[2]=0;}
+				if($this->getScofWeekLx()!==NULL){$tabTM[3]=$this->getScofWeekLx();}
+				else{$tabTM[3]=0;}
+				//$tabTM=[$this->getScofWeekMu(),$this->getScofWeekAr(),$this->getScofWeekFf(),$this->getScofWeekLx()]; // ne sert pas
+				rsort($tabTM);
+				$kingMaster=$this->getSumtop5weekMq()+$tabTM[0]+$tabTM[1]+$tabTM[2];
+				if($kingMaster>$this->getKingMaster()){$this->setKingMaster($kingMaster);}
+				if($kingMaster>$this->getHighScKM()){$this->setHighScKM($kingMaster);}
+				return;
+			}
+	// ************************************* Fonctions Maj Quotidienne *************************************** ///
+		public function testEqual($clsmt, $i, $h, $sc)
+		{
+			if($clsmt=='KingMaster' && $this->getKingMaster()==$sc){$j=$h;}
+			elseif($clsmt=='scofDayMq' && $this->getScofDayMq()==$sc){$j=$h;}
+			elseif($clsmt=='TotalMedia' && $this->getScofDayTM()==$sc){$j=$h;}
+			elseif($clsmt=='MuQuizz' && $this->getScofDayMu()==$sc){$j=$h;}
+			elseif($clsmt=='ArQuizz' && $this->getScofDayAr()==$sc){$j=$h;}
+			elseif($clsmt=='FfQuizz' && $this->getScofDayFf()==$sc){$j=$h;}
+			elseif($clsmt=='LxQuizz' && $this->getScofDayLx()==$sc){$j=$h;}
+			else{$j=$i;}
+			return $j;
+		}
+		public function majHighScore($clsmt,$j)
+		{
+			if($clsmt=='KingMaster')
+			{
+				if($this->getHighClassKM()===NULL || $j<$this->getHighClassKM()){
+					$this->setHighClassKM($j);
+					$this->setNumHighClassKM(1);
+				}
+				else if($j==$this->getHighClassKM()){			
+					$this->setNumHighClassKM($this->getNumHighClassKM()+1);					
+				}
+			}
+			elseif($clsmt=='scofDayMq')
+			{
+				if($this->getHighClassDayMq()===NULL || $j<$this->getHighClassDayMq()){
+					$this->setHighClassDayMq($j);
+					$this->setNumHighClassDayMq(1);
+				}
+				else if($j==$this->getHighClassDayMq()){			
+					$this->setNumHighClassDayMq($this->getNumHighClassDayMq()+1);					
+				}
+				
+			}
+			elseif($clsmt=='TotalMedia')
+			{
+				if($this->getHighClassDayTM()===NULL || $j<$this->getHighClassDayTM()){
+					$this->setHighClassDayTM($j);
+					$this->setNumHighClassDayTM(1);
+				}
+				else if($j==$this->getHighClassDayTM()){			
+					$this->setNumHighClassDayTM($this->getNumHighClassDayTM()+1);					
+				}	
+			}
+			elseif($clsmt=='MuQuizz')
+			{
+				if($this->getHighClassDayMu()===NULL || $j<$this->getHighClassDayMu()){
+					$this->setHighClassDayMu($j);
+					$this->setNumHighClassDayMu(1);
+				}
+				else if($j==$this->getHighClassDayMu()){			
+					$this->setNumHighClassDayMu($this->getNumHighClassDayMu()+1);					
+				}	
+			}
+			elseif($clsmt=='ArQuizz')
+			{
+				if($this->getHighClassDayAr()===NULL || $j<$this->getHighClassDayAr()){
+					$this->setHighClassDayAr($j);
+					$this->setNumHighClassDayAr(1);
+				}
+				else if($j==$this->getHighClassDayAr()){			
+					$this->setNumHighClassDayAr($this->getNumHighClassDayAr()+1);					
+				}	
+			}
+			elseif($clsmt=='FfQuizz')
+			{
+				if($this->getHighClassDayFf()===NULL || $j<$this->getHighClassDayFf()){
+					$this->setHighClassDayFf($j);
+					$this->setNumHighClassDayFf(1);
+				}
+				else if($j==$this->getHighClassDayFf()){			
+					$this->setNumHighClassDayFf($this->getNumHighClassDayFf()+1);					
+				}	
+			}
+			elseif($clsmt=='LxQuizz')
+			{
+				if($this->getHighClassDayLx()===NULL || $j<$this->getHighClassDayLx()){
+					$this->setHighClassDayLx($j);
+					$this->setNumHighClassDayLx(1);
+				}
+				else if($j==$this->getHighClassDayLx()){			
+					$this->setNumHighClassDayLx($this->getNumHighClassDayLx()+1);					
+				}	
+			}
+		}
+		public function majMedailles($clsmt, $j)
+		{
+			$med=$this->getMedailles();
+			$med->setTotMed($med->getTotMed()+1);
+			if($clsmt=='KingMaster')
+			{
+				if($j==1){$med->setKm1($med->getKm1()+1);}
+				elseif($j==2){$med->setKm2($med->getKm2()+1);}
+				elseif($j==3){$med->setKm3($med->getKm3()+1);}
+				elseif($j==4 || $j==5){$med->setKm4($med->getKm4()+1);}
+				elseif($j>5 && $j<11){$med->setKm5($med->getKm5()+1);}
+			}
+			elseif($clsmt=='scofDayMq')
+			{
+				if($j==1){$med->setMq1($med->getMq1()+1);}
+				elseif($j==2){$med->setMq2($med->getMq2()+1);}
+				elseif($j==3){$med->setMq3($med->getMq3()+1);}
+				elseif($j==4 || $j==5){$med->setMq4($med->getMq4()+1);}
+				elseif($j>5 && $j<11){$med->setMq5($med->getMq5()+1);}
+			}
+			elseif($clsmt=='TotalMedia')
+			{
+				if($j==1){$med->setTm1($med->getTm1()+1);}
+				elseif($j==2){$med->setTm2($med->getTm2()+1);}
+				elseif($j==3){$med->setTm3($med->getTm3()+1);}
+				elseif($j==4 || $j==5){$med->setTm4($med->getTm4()+1);}
+				elseif($j>5 && $j<11){$med->setTm5($med->getTm5()+1);}
+			}
+			elseif($clsmt=='MuQuizz')
+			{
+				if($j==1){$med->setMu1($med->getMu1()+1);}
+				elseif($j==2){$med->setMu2($med->getMu2()+1);}
+				elseif($j==3){$med->setMu3($med->getMu3()+1);}
+				elseif($j==4 || $j==5){$med->setMu4($med->getMu4()+1);}
+				elseif($j>5 && $j<11){$med->setMu5($med->getMu5()+1);}
+			}
+			elseif($clsmt=='ArQuizz')
+			{
+				if($j==1){$med->setAr1($med->getAr1()+1);}
+				elseif($j==2){$med->setAr2($med->getAr2()+1);}
+				elseif($j==3){$med->setAr3($med->getAr3()+1);}
+				elseif($j==4 || $j==5){$med->setAr4($med->getAr4()+1);}
+				elseif($j>5 && $j<11){$med->setAr5($med->getAr5()+1);}
+			}
+			elseif($clsmt=='FfQuizz')
+			{
+				if($j==1){$med->setFf1($med->getFf1()+1);}
+				elseif($j==2){$med->setFf2($med->getFf2()+1);}
+				elseif($j==3){$med->setFf3($med->getFf3()+1);}
+				elseif($j==4 || $j==5){$med->setFf4($med->getFf4()+1);}
+				elseif($j>5 && $j<11){$med->setFf5($med->getFf5()+1);}
+			}
+			elseif($clsmt=='LxQuizz')
+			{
+				if($j==1){$med->setLx1($med->getLx1()+1);}
+				elseif($j==2){$med->setLx2($med->getLx2()+1);}
+				elseif($j==3){$med->setLx3($med->getLx3()+1);}
+				elseif($j==4 || $j==5){$med->setLx4($med->getLx4()+1);}
+				elseif($j>5 && $j<11){$med->setLx5($med->getLx5()+1);}
+			}
+		}		
+		public function remiseAzero($clsmt)
+		{
+			if($clsmt=='KingMaster'){
+				$this->setSumtop5weekMq(NULL);
+				$this->setTop5weekMq([0,0,0,0,0]);
+				$this->setKingMaster(NULL);
+				$this->setScofWeekMu(NULL);
+				$this->setScofWeekAr(NULL);
+				$this->setScofWeekFf(NULL);
+				$this->setScofWeekLx(NULL);
+			}
+			elseif($clsmt=='scofDayMq'){
+				$this->setScofDayMq(NULL);
+				// Remise en ordre du tableau top5week en ordre croissant
+				$top5weekMq=$this->getTop5weekMq();				
+					sort($top5weekMq);
+					$this->setTop5weekMq($top5weekMq);				
+			}
+			elseif($clsmt=='TotalMedia'){$this->setScofDayTM(NULL);}
+			elseif($clsmt=='MuQuizz'){$this->setScofDayMu(NULL);}
+			elseif($clsmt=='ArQuizz'){$this->setScofDayAr(NULL);}
+			elseif($clsmt=='FfQuizz'){$this->setScofDayFf(NULL);}
+			elseif($clsmt=='LxQuizz'){$this->setScofDayLx(NULL);}
+		}
+		public function calcOldScore($clsmt)
+		{
+			if($clsmt=='KingMaster'){$sc=$this->getKingMaster();}
+			elseif($clsmt=='scofDayMq'){$sc=$this->getScofDayMq();}
+			elseif($clsmt=='TotalMedia'){$sc=$this->getScofDayTM();}
+			elseif($clsmt=='MuQuizz'){$sc=$this->getScofDayMu();}
+			elseif($clsmt=='ArQuizz'){$sc=$this->getScofDayAr();}
+			elseif($clsmt=='FfQuizz'){$sc=$this->getScofDayFf();}
+			elseif($clsmt=='LxQuizz'){$sc=$this->getScofDayLx();}
+			return $sc;
+		}
+
     /**
      * Get id
      *

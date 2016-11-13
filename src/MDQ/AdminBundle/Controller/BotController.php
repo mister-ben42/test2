@@ -201,7 +201,7 @@ class BotController extends Controller
 			else if($game=='FfQuizz'){$coefJ=$tabcoef[8];}
 			else if($game=='LxQuizz'){$coefJ=$tabcoef[9];}
 			$coefs=array(0=>(100-$coefJ),1=>$coefJ);
-			$tabtheme=['x','x'];$tabidQ=[];$tabDerQ=[];$scoreP=0; $tabdom3=['x','x','x'];
+			$tabtheme=['x','x'];$tabidQ=[];$tabDerQ=[];$scoreP=0; $tabdom3=['x','x','x']; $tabMedia=['x','x'];
 			$nbQAr=$scUser->getNbQAr();	$nbBrAr=$scUser->getNbBrAr();
 			$nbQFf=$scUser->getNbQFf();	$nbBrFf=$scUser->getNbBrFf();
 			$nbQLx=$scUser->getNbQLx();	$nbBrLx=$scUser->getNbBrLx();
@@ -210,7 +210,7 @@ class BotController extends Controller
 			for($numQ=1; $numQ<9; $numQ++)
 			{
 				$qtire=$em->getRepository('MDQQuestionBundle:Question')
-							->tirageduneQ($game,$tabDerQ,$tabtheme,$tabdom3,$tabidQ, $numQ);
+							->tirageduneQ($game,$tabDerQ,$tabtheme,$tabdom3,$tabidQ, $numQ, $tabMedia);
 				$tabidQ[($numQ-1)]=$qtire['id'];
 				$rep=BotController::rand_coef($coefs);
 				if($rep==1){$nbBrtot++;}
