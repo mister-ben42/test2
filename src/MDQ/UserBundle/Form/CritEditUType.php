@@ -5,8 +5,6 @@ namespace MDQ\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use MDQ\UserBundle\Entity\User;
-use MDQ\UserBundle\Entity\UserRepository;
 
 class CritEditUType extends AbstractType
 {

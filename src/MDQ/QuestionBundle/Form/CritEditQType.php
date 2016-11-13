@@ -5,8 +5,6 @@ namespace MDQ\QuestionBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use MDQ\QuestionBundle\Entity\Theme;
-use MDQ\QuestionBundle\Entity\ThemeRepository;
 
 class CritEditQType extends AbstractType
 {

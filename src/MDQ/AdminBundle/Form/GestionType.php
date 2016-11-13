@@ -2,8 +2,6 @@
 
 namespace MDQ\AdminBundle\Form;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use MDQ\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

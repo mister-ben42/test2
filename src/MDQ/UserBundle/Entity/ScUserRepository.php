@@ -366,7 +366,7 @@ class ScUserRepository extends EntityRepository
 		return 1;
 	}
 	
-	public function majBddScfinP($scUser, $dom1, $game, $partie)
+	public function majBddScfinP(ScUser $scUser, $dom1, $game, $partie)
 	{		
 		include_once'ScUserFonctionsFinPartie.php';
 		$scP=$partie->getScore();

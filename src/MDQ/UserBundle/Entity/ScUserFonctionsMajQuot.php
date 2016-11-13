@@ -15,7 +15,7 @@
 		{
 			if($clsmt=='KingMaster')
 			{
-				if($scUser->getHighClassKM()==NULL || $j<$scUser->getHighClassKM()){
+				if($scUser->getHighClassKM()===NULL || $j<$scUser->getHighClassKM()){
 					$scUser->setHighClassKM($j);
 					$scUser->setNumHighClassKM(1);
 				}
@@ -25,7 +25,7 @@
 			}
 			elseif($clsmt=='scofDayMq')
 			{
-				if($scUser->getHighClassDayMq()==NULL || $j<$scUser->getHighClassDayMq()){
+				if($scUser->getHighClassDayMq()===NULL || $j<$scUser->getHighClassDayMq()){
 					$scUser->setHighClassDayMq($j);
 					$scUser->setNumHighClassDayMq(1);
 				}
@@ -36,7 +36,7 @@
 			}
 			elseif($clsmt=='TotalMedia')
 			{
-				if($scUser->getHighClassDayTM()==NULL || $j<$scUser->getHighClassDayTM()){
+				if($scUser->getHighClassDayTM()===NULL || $j<$scUser->getHighClassDayTM()){
 					$scUser->setHighClassDayTM($j);
 					$scUser->setNumHighClassDayTM(1);
 				}
@@ -46,7 +46,7 @@
 			}
 			elseif($clsmt=='MuQuizz')
 			{
-				if($scUser->getHighClassDayMu()==NULL || $j<$scUser->getHighClassDayMu()){
+				if($scUser->getHighClassDayMu()===NULL || $j<$scUser->getHighClassDayMu()){
 					$scUser->setHighClassDayMu($j);
 					$scUser->setNumHighClassDayMu(1);
 				}
@@ -56,7 +56,7 @@
 			}
 			elseif($clsmt=='ArQuizz')
 			{
-				if($scUser->getHighClassDayAr()==NULL || $j<$scUser->getHighClassDayAr()){
+				if($scUser->getHighClassDayAr()===NULL || $j<$scUser->getHighClassDayAr()){
 					$scUser->setHighClassDayAr($j);
 					$scUser->setNumHighClassDayAr(1);
 				}
@@ -66,7 +66,7 @@
 			}
 			elseif($clsmt=='FfQuizz')
 			{
-				if($scUser->getHighClassDayFf()==NULL || $j<$scUser->getHighClassDayFf()){
+				if($scUser->getHighClassDayFf()===NULL || $j<$scUser->getHighClassDayFf()){
 					$scUser->setHighClassDayFf($j);
 					$scUser->setNumHighClassDayFf(1);
 				}
@@ -76,7 +76,7 @@
 			}
 			elseif($clsmt=='LxQuizz')
 			{
-				if($scUser->getHighClassDayLx()==NULL || $j<$scUser->getHighClassDayLx()){
+				if($scUser->getHighClassDayLx()===NULL || $j<$scUser->getHighClassDayLx()){
 					$scUser->setHighClassDayLx($j);
 					$scUser->setNumHighClassDayLx(1);
 				}

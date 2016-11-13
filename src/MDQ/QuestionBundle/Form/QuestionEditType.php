@@ -4,7 +4,6 @@
 namespace MDQ\QuestionBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class QuestionEditType extends QuestionType // Ici, on hérite de QuestionType - on hérite du contenu de'ArticleType
 {
