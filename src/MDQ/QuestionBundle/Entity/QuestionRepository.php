@@ -643,7 +643,7 @@ class QuestionRepository extends EntityRepository
 		
 		return $result;
 	}
-	public function tirageduneQ($game,$tabDerQ,$tabtheme, $tabdom3, $tabidQ, $numQ)
+	public function tirageduneQ($game,$tabDerQ,$tabtheme, $tabdom3, $tabidQ, $numQ, $tabMedia)
 	{
 		
 		$dom1=$game;		
@@ -672,11 +672,11 @@ class QuestionRepository extends EntityRepository
 		$qt2=$qt->getQuery()->getResult();
 		$nbQ=count($qt2);
 		
-		while(!isset($Q) || in_array($Q, $tabDerQ)===true || in_array($Q,$tabidQ)===true || in_array($D, $tabdom3)===true)
+		while(!isset($Q) || in_array($Q, $tabDerQ)===true || in_array($Q,$tabidQ)===true || in_array($D, $tabdom3)===true || in_array($M, $tabMedia)===true)
 		{
 			$offset=intval(rand(0, $nbQ-1));
 			$question=$this->_em->createQueryBuilder();
-			$question->select('q.id, q.theme', 'q.dom3')
+			$question->select('q.id, q.theme', 'q.dom3', 'q.media')
 				->from('MDQQuestionBundle:Question', 'q')
 				->where('q.dom1 = :dom1')
 				->setParameter('dom1', $dom1);
@@ -700,8 +700,9 @@ class QuestionRepository extends EntityRepository
 				->setFirstResult($offset);				
 			$result=$question->getQuery()
 			    ->getOneOrNullResult();								  
-			$Q=$result['id'];;
+			$Q=$result['id'];
 			$D=$result['dom3'];
+			$M=$result['media'];
 		}
 		
 		return $result;

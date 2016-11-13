@@ -92,15 +92,16 @@ class QuizzController extends Controller
 			elseif($game=="FfQuizz"){$scUser->setNbPFf($scUser->getNbPFf()+1);}
 			elseif($game=="ArQuizz"){$scUser->setNbPAr($scUser->getNbPAr()+1);}
 			elseif($game=="LxQuizz"){$scUser->setNbPLx($scUser->getNbPLx()+1);}
-			$tabtheme=['x','x'];$tabidQ=[]; $tabdom3=[]; 
+			$tabtheme=['x','x'];$tabidQ=[]; $tabdom3=[]; $tabMedia=[];
 			for($numQ=1; $numQ<$nbQ+1; $numQ++)
 			{
 				$qtire=$em->getRepository('MDQQuestionBundle:Question')
-							->tirageduneQ($game,$tabDerQ,$tabtheme, $tabdom3, $tabidQ, $numQ);
+							->tirageduneQ($game,$tabDerQ,$tabtheme, $tabdom3, $tabidQ, $numQ, $tabMedia);
 				$tabidQ[($numQ-1)]=$qtire['id'];
 				$tabdom3[$numQ-1]=$qtire['dom3'];
 				$tabtheme[1]=$tabtheme[0];
 				$tabtheme[0]=$qtire['theme'];	
+				$tabMedia[($numQ-1)]=$qtire['media'];
 			}
 		}
 		$scUser->setNbPtot($scUser->getNbPtot()+1);
