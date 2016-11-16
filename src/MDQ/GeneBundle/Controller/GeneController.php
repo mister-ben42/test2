@@ -345,25 +345,14 @@ class GeneController extends Controller
 		$nbHighScore=count($highScoreTous);
 		if($id!=0){$page=$highScServ->defPage($id, $highScoreTous, $nbparPage);}
 		$pagi=$highScServ->pagination($nbparPage, $nbHighScore, $page);
-		$highScores=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,$page,$nbparPage);		
-		if($crit=="MedMq" || $crit=="MedKm" || $crit=="MedTm" || $crit=="MedAr" || $crit=="MedFf" || $crit=="MedLx" || $crit=="MedMu")
-		{
-		      return $this->render('MDQGeneBundle:Gene:HighScore/medailles'.$crit.'.html.twig', array(
+		$highScores=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,$page,$nbparPage);
+		      return $this->render('MDQGeneBundle:Gene:HighScore/'.$data['nomPage'].'.html.twig', array(
 		      'scusers' => $highScores,
 		      'pagi' => $pagi,
 		      'data' => $data,
 		      'id_search'=>$id,
 		      'id_connect'=>$id_connect,
 		      ));
-		 }		
-		else{
-		      return $this->render('MDQGeneBundle:Gene:HighScore/pasMedailles.html.twig', array(
-		      'scusers' => $highScores,
-		      'pagi' => $pagi,
-		      'data' => $data,
-		      'id_search'=>$id,
-		      'id_connect'=>$id_connect,
-		));}
 	}
 	public function regleJeuAction()
 	{
