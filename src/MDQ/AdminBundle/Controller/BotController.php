@@ -7,6 +7,7 @@ namespace MDQ\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\UserBundle\Entity\User;
 use MDQ\QuizzBundle\Entity\PartieQuizz;
+use MDQ\AdminBundle\Services\BotGame;
 
 class BotController extends Controller
 {
@@ -82,7 +83,9 @@ class BotController extends Controller
 				$tabcoeffdiff=[1.5,1,0.75,0.50,0.30];				
 				$coefb=25+$coefa*$tabcoeffdiff[($tabdiff[$numQ-1])-1];
 				$coefs=array(0=>(100-$coefb),1=>$coefb);
-				$bRep=BotController::rand_coef($coefs);
+				$botGame = $this->container->get('mdq_admin.services');
+				$bRep=$botGame->rand_coef($coefs);
+			//	$bRep=BotController::rand_coef($coefs);
 				if($bRep==1){
 					$nbBrtot++;
 					$scdebase=$tabscore[($tabdiff[$numQ-1])-1];
