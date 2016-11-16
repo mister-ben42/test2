@@ -332,23 +332,20 @@ class GeneController extends Controller
 	}
 	public function highScoreAction($crit, $page, $id)
 	{
-		$id_connect=0;
+		$id_connect=0;$nbparPage=20;
 		if ($this->get('security.context')->isGranted('ROLE_USER')) {// ca ca marche.
 			$user_connect = $this->container->get('security.context')->getToken()->getUser();
 			$id_connect=$user_connect->getScUser()->getId();
 		}
 		$highScServ = $this->container->get('mdq_gene.services');
 		$data=$highScServ->editTxt($crit);
-		if ($data['crit']=="none") {return $this->redirect($this->generateUrl('mdqgene_accueilHighScore'));}
-		$nbparPage=20;
+		if ($data['crit']=="none") {return $this->redirect($this->generateUrl('mdqgene_accueilHighScore'));}		
 		$em=$this->getDoctrine()->getManager();
 		$highScoreTous=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,1,0);
 		$nbHighScore=count($highScoreTous);
 		if($id!=0){$page=$highScServ->defPage($id, $highScoreTous, $nbparPage);}
-
 		$pagi=$highScServ->pagination($nbparPage, $nbHighScore, $page);
-		$highScores=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,$page,$nbparPage);
-		
+		$highScores=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,$page,$nbparPage);		
 		if($crit=="MedMq" || $crit=="MedKm" || $crit=="MedTm" || $crit=="MedAr" || $crit=="MedFf" || $crit=="MedLx" || $crit=="MedMu")
 		{
 		      return $this->render('MDQGeneBundle:Gene:HighScore/medailles'.$crit.'.html.twig', array(
@@ -358,8 +355,7 @@ class GeneController extends Controller
 		      'id_search'=>$id,
 		      'id_connect'=>$id_connect,
 		      ));
-		 }
-		
+		 }		
 		else{
 		      return $this->render('MDQGeneBundle:Gene:HighScore/pasMedailles.html.twig', array(
 		      'scusers' => $highScores,
@@ -368,8 +364,6 @@ class GeneController extends Controller
 		      'id_search'=>$id,
 		      'id_connect'=>$id_connect,
 		));}
-	
-
 	}
 	public function regleJeuAction()
 	{

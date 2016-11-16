@@ -18,30 +18,20 @@
 			{% if scuser.mu1+scuser.mu2+scuser.mu3+scuser.mu4+scuser.mu5==0 %}
 				Meilleur classement : {{scuser.highClassDayMu}}ème
 			{% else %}
-				<span class="bloc_med">
-					{% if scuser.mu1>0 %}
+				<span class="bloc_med">					
 					<img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.mu1}}
-					{% endif %}
 				</span>
 				<span class="bloc_med">
-					{% if scuser.mu2>0 %}
 					<img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.mu2}}
-					{% endif %}
 				</span>
 				<span class="bloc_med">
-					{% if scuser.mu3>0 %}
 					<img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.mu3}}
-					{% endif %}
 				</span>
 				<span class="bloc_med">
-					{% if scuser.mu4>0 %}
 					<img src={{ asset('bundles/UserBundle/MedCh0.png') }} alt="Med">x{{scuser.mu4}}
-					{% endif %}
 				</span>
 				<span class="bloc_med">
-					{% if scuser.mu5>0 %}
 					<img src={{ asset('bundles/UserBundle/MedCt0.png') }} alt="Med">x{{scuser.mu5}}
-					{% endif %}
 				</span>
 			{% endif %}
 		</span></div>

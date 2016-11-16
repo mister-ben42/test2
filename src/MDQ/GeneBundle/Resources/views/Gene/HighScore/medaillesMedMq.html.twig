@@ -19,29 +19,19 @@
 				Meilleur classement : {{scuser.highClassDayMq}}ème
 			{% else %}
 				<span class="bloc_med">
-					{% if scuser.mq1>0 %}
 					<img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.mq1}}
-					{% endif %}
 				</span>
 				<span class="bloc_med">
-					{% if scuser.mq2>0 %}
 					<img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.mq2}}
-					{% endif %}
 				</span>
 				<span class="bloc_med">
-					{% if scuser.mq3>0 %}
 					<img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.mq3}}
-					{% endif %}
 				</span>
 				<span class="bloc_med">
-					{% if scuser.mq4>0 %}
 					<img src={{ asset('bundles/UserBundle/MedCh0.png') }} alt="Med">x{{scuser.mq4}}
-					{% endif %}
 				</span>
 				<span class="bloc_med">
-					{% if scuser.mq5>0 %}
 					<img src={{ asset('bundles/UserBundle/MedCt0.png') }} alt="Med">x{{scuser.mq5}}
-					{% endif %}
 				</span>
 			{% endif %}
 		</span></div>
