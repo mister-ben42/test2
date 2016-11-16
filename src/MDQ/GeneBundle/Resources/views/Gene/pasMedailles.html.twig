@@ -1,0 +1,20 @@
+{# src/MDQ/GeneBundle/Resources/views/pasMedailles.html.twig #}
+
+{% extends "MDQGeneBundle:Gene:layoutHighSc.html.twig" %}
+
+
+
+{% block liste_scores %}
+
+
+		 {% for scuser in scusers %}
+		{% set number=loop.index+(pagi.page-1)*pagi.nbParPage %}
+		<div class="ligne_HSc">
+		<span class="num_nom" >{{number}}- 
+		<a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}" {%if scuser.id==id_connect %}style="color:rgb(128,255,255);"{%elseif scuser.id==id_search %} style="color:rgb(255,168,168);" {%endif%}> {{scuser.username}} </a></span>
+		<span class="score">{{scuser[data.crit]}} </span>
+		
+		</div>
+			
+		 {% endfor %}
+{% endblock %} 

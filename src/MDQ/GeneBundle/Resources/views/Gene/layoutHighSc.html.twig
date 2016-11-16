@@ -1,0 +1,59 @@
+{# src/MDQ/GeneBundle/Resources/views/accueilJeu.html.twig #}
+
+{% extends "MDQGeneBundle::layoutG.html.twig" %}
+
+
+
+{% block body_gene %}
+
+	<div id="page_HighScore">
+	
+	<div id="bloc_HighScore">
+		<div class="highScore_aide">{{data.aide}}</div>
+	<h3>{{ data.titre1 }}</br>{{ data.titre2 }}</h3>
+		<div class="sigle_aide">?</div>
+		
+{% block liste_scores %}
+{% endblock %}
+
+	 <div class="pagination">
+		<ul>
+
+		<li class="num_page"><a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'page': 1}) }}"><<</a></li>
+		<li class="num_page">{% if pagi.page !=1 %}<a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'page': (pagi.page)-1}) }}"><</a>{% else %}-{% endif %}</li>
+
+		{# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+		{% for p in range(pagi.page_min, pagi.page_max) %}
+		<li{% if p == pagi.page %} class="num_page_active"{% else %} class="num_page"{% endif %}>
+		<a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'page': p}) }}">{{ p }}</a>
+		</li>
+		{% endfor %}
+		<li class="num_page">{% if pagi.page !=pagi.nbPage %}<a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'page': (pagi.page)+1}) }}">></a>{% else %}-{% endif %}</li>
+		<li class="num_page"><a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'page': pagi.nbPage}) }}">>></a></li>
+		{% if id_connect!=0 %}<li class="num_page" title="Voir mon classement"><a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'id': id_connect}) }}"><img src="{{ asset('bundles/GeneBundle/smiley3.png') }}" alt="face" width="15px"></a></li>
+		{% endif %}
+
+
+		</ul>
+	</div>
+	</div>
+	
+	
+	<div class="bloc_menu">
+	  <ul>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png')}}" alt="bjaune" width="20px">Accueil</a></li>
+	  <li><a href="{{ path('mdqgene_accueilHighScore') }}" title="Tableau d'honneur"><img src="{{ asset('bundles/GeneBundle/petiteboulerose.png') }}" alt="brose" width="20px" >Tableau</a></li>
+		</ul>
+	</div>
+	
+
+	</div>
+
+
+ {% endblock %}
+ {% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script src="{{ asset('bundles/GeneBundle/scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+	<script	src="{{ asset('bundles/GeneBundle/gene.js') }}"></script>
+
+{% endblock %}

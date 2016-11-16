@@ -46,14 +46,7 @@ class BotController extends Controller
 		));
 	}
 
-	private function calcScQ($scoreB)// Pour partie bot
-	{
-		$tabtpsrep=[3,4,6,10];
-		$tpsrep=15-$tabtpsrep[mt_rand(0,3)];				
-		$bonus=round(($scoreB/2*$tpsrep/15),0);
-		$scoreQ=$scoreB+$bonus;
-		return $scoreQ;
-	}
+
 	private function botgameMq(User $bot)
 	{
 			$em=$this->getDoctrine()->getManager();
@@ -85,11 +78,10 @@ class BotController extends Controller
 				$coefs=array(0=>(100-$coefb),1=>$coefb);
 				$botGame = $this->container->get('mdq_admin.services');
 				$bRep=$botGame->rand_coef($coefs);
-			//	$bRep=BotController::rand_coef($coefs);
 				if($bRep==1){
 					$nbBrtot++;
 					$scdebase=$tabscore[($tabdiff[$numQ-1])-1];
-					$scoreQ=BotController::calcScQ($scdebase);
+					$scoreQ=$botGame->calcScQ($scdebase);
 					$score=$score+$scoreQ;
 					$NbBrtot=$NbBrtot+1;
 				}
@@ -215,23 +207,24 @@ class BotController extends Controller
 				$qtire=$em->getRepository('MDQQuestionBundle:Question')
 							->tirageduneQ($game,$tabDerQ,$tabtheme,$tabdom3,$tabidQ, $numQ, $tabMedia);
 				$tabidQ[($numQ-1)]=$qtire['id'];
-				$rep=BotController::rand_coef($coefs);
+				$botGame = $this->container->get('mdq_admin.services');
+				$rep=$botGame->rand_coef($coefs);
 				if($rep==1){$nbBrtot++;}
 				if($game=='ArQuizz'){	
 					$nbQAr++; $scoreQ=0;
-					if($rep==1){$nbBrAr++;$scoreQ=BotController::calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
+					if($rep==1){$nbBrAr++;$scoreQ=$botGame->calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
 				}
 				if($game=='FfQuizz'){	
 					$nbQFf++; $scoreQ=0;
-					if($rep==1){$nbBrFf++;$scoreQ=BotController::calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
+					if($rep==1){$nbBrFf++;$scoreQ=$botGame->calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
 				}
 				if($game=='LxQuizz'){	
 					$nbQLx++; $scoreQ=0;
-					if($rep==1){$nbBrLx++;$scoreQ=BotController::calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
+					if($rep==1){$nbBrLx++;$scoreQ=$botGame->calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
 				}
 				if($game=='MuQuizz'){	
 					$nbQMu++; $scoreQ=0;
-					if($rep==1){$nbBrMu++;$scoreQ=BotController::calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
+					if($rep==1){$nbBrMu++;$scoreQ=$botGame->calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
 				}
 				$tabPartie2['scQ'.$numQ]=$scoreQ;
 			}	
@@ -279,28 +272,8 @@ class BotController extends Controller
 			return $tabPartie2;
 	}
 
-    private function rand_coef($coefs)// tirage au sort avec applicatio de coefficient sous fore de tableau - pour partie bot.
-    {
-      $rang = mt_rand(1, array_sum($coefs));
-      $tot = 0;  
-      foreach ($coefs as $key => $coef)
-      {
-        $tot += $coef;
-        if ($tot >= $rang)
-          return $key;
-      }
-    }
- 
+  
 }
     
-/*
-Utilisation :
 
-    <?php
-    $coefs = array('bleu' => 5, 'jaune' => 1, 'rouge' => 3);
-    echo rand_coef($coefs); // Renvoie bleu, jaune ou rouge aléatoirement mais avec plus de chances de tomber sur bleu que sur rouge, et plus de chances de tomber sur rouge que sur jaune
-    // Ou encore :
-    echo rand_coef(array('pile' => 7, 'face' => 3)); // a 70% de chances de renvoyer pile et 30% de renvoyer face
-    ?>
-*/
 ?>

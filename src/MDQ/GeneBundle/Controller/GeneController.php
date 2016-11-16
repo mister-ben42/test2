@@ -6,6 +6,7 @@ namespace MDQ\GeneBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\GeneBundle\Entity\StatsQuot;
+use MDQ\GeneBundle\Services\HighScore;
 
 
 class GeneController extends Controller
@@ -281,10 +282,7 @@ class GeneController extends Controller
 		'gestion'=>$gestion,
 		));
   }
-	public function accueilAdminAction()
-	{
-		return $this->render('MDQGeneBundle:Gene:accueilA.html.twig');	
-	}
+
 	public function accueilHighScoreAction()
 	{
 		$em=$this->getDoctrine()->getManager();
@@ -340,154 +338,38 @@ class GeneController extends Controller
 			$user_connect = $this->container->get('security.context')->getToken()->getUser();
 			$id_connect=$user_connect->getScUser()->getId();
 		}
-		//idee : imaginer un moyen de voir ou se situe le user dans ce classement
-		if ($crit=="none" || $crit!="scTotMq" && $crit!="scofDayMq" && $crit!="scMoyMq" 
-		&& $crit!="prctBrtotMq" && $crit!="scMaxMq" && $crit!="nbPMq" 
-		&& $crit!="nbBrtotMq" && $crit!="scofDayLx" && $crit!="scofDayAr"
-		&& $crit!="scofDayFf"&& $crit!="scofDayMu" && $crit!="scofDayTM"  
-		&& $crit!="scMoyLx" && $crit!="scMoyAr" && $crit!="scMoyFf"&& $crit!="scMoyMu"
-		&& $crit!="scMaxLx" && $crit!="scMaxAr" && $crit!="scMaxFf"&& $crit!="scMaxMu"
-		&& $crit!="scMaxTM" && $crit!="kingMaster"
-		&& $crit!="MedMq" && $crit!="MedKm" && $crit!="MedTm" && $crit!="MedAr" && $crit!="MedLx"
-		&& $crit!="MedFf" && $crit!="MedMu" && $crit!="highScKM" && $crit!="nbQvalid"
-		&& $crit!="nbBrtot" && $crit!="nbQtotMq" && $crit!="totMed"
-		&& $crit!="prctBrhMq" && $crit!="prctBrgMq" && $crit!="prctBrdMq" && $crit!="prctBrslMq"
-		&& $crit!="prctBralMq"&& $crit!="prctBrsnMq") 
-		{//mettre none en defaut dans l'url et ensuite renvoyer sur la page d'accueil de hall of hame.	
-				return $this->redirect($this->generateUrl('mdqgene_accueilHighScore'));
-			}
+		$highScServ = $this->container->get('mdq_gene.services');
+		$data=$highScServ->editTxt($crit);
+		if ($data['crit']=="none") {return $this->redirect($this->generateUrl('mdqgene_accueilHighScore'));}
 		$nbparPage=20;
-		// Reprendre tout ca : D'abord tirage de tous les highs scores, possibilite d'utliser la fonction existante avec un truc special si nb par page de 0 apr exemple.
-		// puis les passer en revue et compter le rang si un id est rechercher et le nb total avec count ?
-		// Enfin, prendre uniquement ceux necessaire (en fonction de la page).
 		$em=$this->getDoctrine()->getManager();
-		$highScoreTous=$em->getRepository('MDQUserBundle:ScUser')
-							->recupHighScore($crit,1,0);
+		$highScoreTous=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,1,0);
 		$nbHighScore=count($highScoreTous);
-		$nbPage=ceil($nbHighScore/$nbparPage);
-		if($nbHighScore==0){$nbPage=1;}//gère le cas ou aucun highscore.
-		if($id!=0)
-		{			
+		if($id!=0){$page=$highScServ->defPage($id, $highScoreTous, $nbparPage);}
 
-			$i=0;$j=0;
-			foreach($highScoreTous as $user)
-			{
-				if($j==0){$i++;}
-				if($user['id']==$id){$j=1;}
-			}
-			if($j==0){$i=1;}// en fait si score du joeur pas présent, on commence par les premiers.
-
-			$rang=$i;
-			$page=ceil($rang/$nbparPage);//arrondit a l'unite superieure.
-		}
-		// prquoi pas : nb de questions jouees
-		//Virer : ceux qui n'ont pas assez de parties jouer (prct),
-		$highScores=$em->getRepository('MDQUserBundle:ScUser')
-					->recupHighScore($crit,$page,$nbparPage);
-	//	$nbHighScore=$em->getRepository('MDQUserBundle:ScUser')
-	//				->nbHighScore($crit);// pas possible plutot de compter le nb d'objets du precedent ?
-
-
+		$pagi=$highScServ->pagination($nbparPage, $nbHighScore, $page);
+		$highScores=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,$page,$nbparPage);
 		
-		$tabaide=array(
-						'scofDayMq'=>'Meilleur score au MasterQuizz dans la journée en cours.',
-						'scMaxMq'=>'none',
-						'kingMaster'=>'Le score au KingMaster est un score hebdomadaire égal à la somme des 5 meilleurs scores du jour au Masterquizz et des meilleurs scores de la semaine dans 3 épreuves des MédiaQuizz',
-						'scMoyMq'=>'Pour figurer dans ce classement, il faut avoir jouer au moins 10 parties de MasterQuizz.',
-						'prctBrtotMq'=>'Pour figurer dans ce classement, il faut avoir répondu au moins à 100 questions au MasterQuizz.',
-						'nbBrtotMq'=>'none',
-						'scofDayLx'=>'Meilleur score au Quizz Globe dans la journée en cours.',
-						'scofDayAr'=>'Meilleur score au Quizz Art dans la journée en cours.',
-						'scofDayFf'=>'Meilleur score au Quizz Nature dans la journée en cours.',
-						'scofDayMu'=>'Meilleur score au Quizz Musique dans la journée en cours.',
-						'scMoyLx'=>'Pour figurer dans ce classement, il faut avoir jouer au moins 10 parties au Quizz "Lieux du monde".',
-						'scMoyAr'=>'Pour figurer dans ce classement, il faut avoir jouer au moins 10 parties au Quizz Art.',
-						'scMoyMu'=>'Pour figurer dans ce classement, il faut avoir jouer au moins 10 parties au Quizz Musique.',
-						'scMoyFf'=>'Pour figurer dans ce classement, il faut avoir jouer au moins 10 parties au Quizz Nature.',
-						'scMaxTM' =>'Le score "Expert Média" est la somme des meilleurs scores du jour dans 3 épreuves des Quizz Médias.',
-						'scMaxLx'=>'none','scMaxFf'=>'none','scMaxMu'=>'none','scMaxAr'=>'none',
-						'scofDayTM' =>'Le score "Expert Média" est la somme des meilleurs scores du jour dans 3 épreuves des Quizz Médias.',
-						'scTotMq'=>'Total de tous les scores réalisés au MasterQuizz',
-						'MedMq'=>'none','MedKm'=>'none','MedTm'=>'none','MedAr'=>'none','totMed'=>'none',
-						'MedFf'=>'none','MedLx'=>'none','MedMu'=>'none','highScKM'=>'none',
-						'nbQvalid'=>'none','nbBrtot'=>'none','nbQtotMq'=>'none',
-						'prctBrhMq'=>'Pour figurer dans ce classement, il faut avoir répondu à 50 questions de la catégorie "Histoire" au MasterQuizz',
-						'prctBrgMq'=>'Pour figurer dans ce classement, il faut avoir répondu à 50 questions de la catégorie "Géographie" au MasterQuizz',
-						'prctBrdMq'=>'Pour figurer dans ce classement, il faut avoir répondu à 50 questions de la catégorie "Divers" au MasterQuizz',
-						'prctBralMq'=>'Pour figurer dans ce classement, il faut avoir répondu à 50 questions de la catégorie "Arts et Littérature" au MasterQuizz',
-						'prctBrslMq'=>'Pour figurer dans ce classement, il faut avoir répondu à 50 questions de la catégorie "Sports et loisirs" au MasterQuizz',
-						'prctBrsnMq'=>'Pour figurer dans ce classement, il faut avoir répondu à 50 questions de la catégorie "Sciences et nature" au MasterQuizz',
-						);
-		if($crit=='scMaxMq' || $crit=='scMaxMq' || $crit=='scMaxMu' || $crit=='scMaxLx' || $crit=='scMaxFf' || $crit=='scMaxAr' || $crit=='scMaxTM' || $crit=='highScKM')
-		{$linecrit1='Meilleur score';}
-		elseif($crit=='MedMq' || $crit=='MedKm' || $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu')
-		{$linecrit1='Médailles';}
-		elseif($crit=='scofDayMq' || $crit=='scofDayMu' || $crit=='scofDayLx' || $crit=='scofDayFf' || $crit=='scofDayAr' || $crit=='scofDayTM')
-		{$linecrit1='Score du jour';}
-		elseif($crit=='scMoyMq' || $crit=='scMoyMu' || $crit=='scMoyLx' || $crit=='scMoyFf' || $crit=='scMoyAr')
-		{$linecrit1='Score moyen';}
-		elseif($crit=='prctBrtotMq' || $crit=='prctBrhMq' || $crit=='prctBrgMq' || $crit=='prctBrdMq' || $crit=='prctBrsnMq' || $crit=='prctBralMq' || $crit=='prctBrslMq')
-		{$linecrit1='% de bonnes réponses';}		
-		else
-		{
-			$tabcrit1=array(			
-			'totMed'=>'Nombre total',
-			'nbQvalid'=>'Nombre de questions ajoutées',
-			'nbBrtotMq'=>'Nombre de bonnes réponses',
-			'scTotMq'=>'Score total',
-			'kingMaster'=>'Score actuel',
-			'nbQtotMq'=>'Nombre de questions jouées',
-			);		
-			$linecrit1=$tabcrit1[$crit];
-		}
+		if($crit=="MedMq" or $crit=="MedKm" or $crit=="MedTm" or $crit=="MedAr" or $crit=="MedFf" or $crit=="MedLx" or $crit=="MedMu")
+		{		      return $this->render('MDQGeneBundle:Gene:medailles.html.twig', array(
+		      'scusers' => $highScores,
+		      'pagi' => $pagi,
+		      'data' => $data,
+		      'id_search'=>$id,
+		      'id_connect'=>$id_connect,
+		      ));
+		 }
 		
-		if($crit=='prctBrtotMq' || $crit=='scMoyMq' || $crit=='scMaxMq' || $crit=='scofDayMq' || $crit=='nbBrtotMq' || $crit=='scTotMq' || $crit=='MedMq' || $crit=='nbQtotMq')
-		{$linecrit2='au MasterQuizz';}
-		elseif($crit=='scofDayLx' || $crit=='scMoyLx' || $crit=='scMaxLx' || $crit=='MedLx')
-		{$linecrit2='au Quizz Lieux du monde';}
-		elseif($crit=='scofDayMu' || $crit=='scMoyMu' || $crit=='scMaxMu' || $crit=='MedMu')
-		{$linecrit2='au Quizz Musique';}
-		elseif($crit=='scofDayFf' || $crit=='scMoyFf' || $crit=='scMaxFf' || $crit=='MedFf')
-		{$linecrit2='au Quizz Nature';}
-		elseif($crit=='scofDayAr' || $crit=='scMoyAr' || $crit=='scMaxAr' || $crit=='MedAr')
-		{$linecrit2='au Quizz Art';}
-		elseif($crit=='scofDayTM' || $crit=='scMaxTM' || $crit=='MedTM')
-		{$linecrit2='Expert Média';}
-		elseif($crit=='kingMaster' || $crit=='highScKM' || $crit=='MedKm')
-		{$linecrit2='au KingMaster';}
-		else
-		{
-			$tabcrit=array(			
-			'totMed'=>'de médailles',
-			'nbQvalid'=>'dans la base de données',
-			'nbBrtot'=>'de bonnes réponses',
-			'prctBrhMq'=>'catégorie Histoire',
-			'prctBrgMq'=>'catégorie Géographie',
-			'prctBrdMq'=>'catégorie Divers',
-			'prctBralMq'=>'catégorie Arts et Littérature',
-			'prctBrslMq'=>'catégorie Sports et loisirs',
-			'prctBrsnMq'=>'catégorie Sciences et nature',
-			);		
-			$linecrit2=$tabcrit[$crit];
-		}
-		$aide=$tabaide[$crit];
-		return $this->render('MDQGeneBundle:Gene:highScore.html.twig', array(
-		  'scusers' => $highScores,
-		  'page' => $page,
-		  'nombrePage' => $nbPage,
-		  'crit'=>$crit,
-		  'aide'=>$aide,
-		  'linecrit1'=>$linecrit1,
-		  'linecrit2'=>$linecrit2,
-		  'nbparPage' =>$nbparPage,
-		  'id_search'=>$id,
-		  'id_connect'=>$id_connect,
-		//  'rang'=>$rang,
-		));
+		else{
+		      return $this->render('MDQGeneBundle:Gene:pasMedailles.html.twig', array(
+		      'scusers' => $highScores,
+		      'pagi' => $pagi,
+		      'data' => $data,
+		      'id_search'=>$id,
+		      'id_connect'=>$id_connect,
+		));}
 	
-	//	return $this->render('MDQGeneBundle:Gene:test.html.twig', array(
-	//	  'rang' => $rang,
-	//	));
+
 	}
 	public function regleJeuAction()
 	{
