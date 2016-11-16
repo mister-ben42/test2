@@ -6,7 +6,6 @@ namespace MDQ\GeneBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\GeneBundle\Entity\StatsQuot;
-use MDQ\GeneBundle\Services\HighScore;
 
 
 class GeneController extends Controller
@@ -350,8 +349,9 @@ class GeneController extends Controller
 		$pagi=$highScServ->pagination($nbparPage, $nbHighScore, $page);
 		$highScores=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,$page,$nbparPage);
 		
-		if($crit=="MedMq" or $crit=="MedKm" or $crit=="MedTm" or $crit=="MedAr" or $crit=="MedFf" or $crit=="MedLx" or $crit=="MedMu")
-		{		      return $this->render('MDQGeneBundle:Gene:medailles.html.twig', array(
+		if($crit=="MedMq" || $crit=="MedKm" || $crit=="MedTm" || $crit=="MedAr" || $crit=="MedFf" || $crit=="MedLx" || $crit=="MedMu")
+		{
+		      return $this->render('MDQGeneBundle:Gene:HighScore/medailles'.$crit.'.html.twig', array(
 		      'scusers' => $highScores,
 		      'pagi' => $pagi,
 		      'data' => $data,
@@ -361,7 +361,7 @@ class GeneController extends Controller
 		 }
 		
 		else{
-		      return $this->render('MDQGeneBundle:Gene:pasMedailles.html.twig', array(
+		      return $this->render('MDQGeneBundle:Gene:HighScore/pasMedailles.html.twig', array(
 		      'scusers' => $highScores,
 		      'pagi' => $pagi,
 		      'data' => $data,

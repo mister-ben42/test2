@@ -7,7 +7,6 @@ namespace MDQ\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\UserBundle\Entity\User;
 use MDQ\QuizzBundle\Entity\PartieQuizz;
-use MDQ\AdminBundle\Services\BotGame;
 
 class BotController extends Controller
 {
