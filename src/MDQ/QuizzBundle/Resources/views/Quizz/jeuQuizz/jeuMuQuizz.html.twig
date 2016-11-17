@@ -1,0 +1,29 @@
+{# src/MDQ/QuizzBundle/Resources/views/Quizz/jeuQuizz.html.twig #}
+
+{% extends "MDQQuizzBundle:Quizz:layoutjeuQ.html.twig" %}
+
+	{% block audio %}
+		<audio id="music_Q" style="display: none;" >
+		</audio>
+		<audio id="son_fondjeu" style="display: none;" >
+		</audio>
+		<audio id="son_clicvalid" style="display: none;">
+			<source src="{{ asset('bundles/QuizzBundle/sons/valid8.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/valid8.ogg') }}" />
+		</audio>
+		<audio id="son_fintps" style="display: none;">
+			<source src="{{ asset('bundles/QuizzBundle/sons/fintpsMq.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/fintpsMq.ogg') }}" />
+		</audio>	
+		<audio id="son_echec" style="display: none;">
+			<source src="{{ asset('bundles/QuizzBundle/sons/echecMq.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/echecMq.ogg') }}" />
+		</audio>
+		<audio id="son_succes" style="display: none;">
+			<source src="{{ asset('bundles/QuizzBundle/sons/succesMq.mp3') }}" />
+			<source src="{{ asset('bundles/QuizzBundle/sons/succesMq.ogg') }}" />
+		</audio>	
+	{% endblock%}
+	      {% block question %}
+	{% include "MDQQuizzBundle:Quizz:jeuQuizz/jeuPartieQ1.html.twig" %}	
+      {% endblock %}

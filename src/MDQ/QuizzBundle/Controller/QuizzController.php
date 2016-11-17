@@ -14,7 +14,7 @@ class QuizzController extends Controller
 		$bloc_page="bloc_page_MasterQuizz";
 		$photo="attenteMq.gif";
 		if($game=="SexyQuizz"){	$photo="attenteMq.gif";
-								 $bloc_page="bloc_page_SexyQuizz";}
+					$bloc_page="bloc_page_SexyQuizz";}
 		return $this->render('MDQQuizzBundle:Quizz:preGame.html.twig', array(
 		'game'=>$game,
 		'photo'=>$photo,
@@ -148,9 +148,8 @@ class QuizzController extends Controller
    }
    public function jeuQuizzAction($game)
    {
-		//test d'arriver de la page tirage des Q par la session
 		$session = $this->getRequest()->getSession();
-		if($session->get('page')!='tirageQ'){
+		if($session->get('page')!='tirageQ' or $game!="MasterQuizz" && $game!="MuQuizz" && $game!="SexyQuizz" && $game!="FfQuizz" && $game!="ArQuizz" && $game!="LxQuizz"  && $game!="TvQuizz"){
 			$session->set('page', 'Mquizz');
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
@@ -159,17 +158,20 @@ class QuizzController extends Controller
 		$gestion=$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
 		$signalE=$gestion->getSignalE();
 		$user = $this->container->get('security.context')->getToken()->getUser();
-        if ($user===null) {// pas sûr que suffisant en terme de sécurité ?			
-            return $this->redirect($this->generateUrl('mdqgene_accueil'));
-        } 
-		
-		if($game=="SexyQuizz"){	$bloc_page="bloc_page_SexyQuizz";}
-		else{$bloc_page="bloc_page_MasterQuizz";}
-		return $this->render('MDQQuizzBundle:Quizz:jeuQuizz.html.twig', array(
+	      if ($user===null) {return $this->redirect($this->generateUrl('mdqgene_accueil'));	} 		
+
+		if($game=="MasterQuizz" || $game=="MuQuizz" || $game=="SexyQuizz")
+		{
+				return $this->render('MDQQuizzBundle:Quizz:jeuQuizz\jeu'.$game.'.html.twig', array(
+		    'game'=>$game,
+		    'signalE'=>$signalE,
+		    ));		
+		}
+		else {
+		return $this->render('MDQQuizzBundle:Quizz:jeuQuizz\photoQuizz.html.twig', array(
 		'game'=>$game,
-		'bloc_page'=>$bloc_page,
 		'signalE'=>$signalE,
-		));
+		));}
    }
    public function editQuestionAction()// va chercher la question dasn la partie concernée.
    {

@@ -671,6 +671,7 @@ class QuestionRepository extends EntityRepository
 					}
 		$qt2=$qt->getQuery()->getResult();
 		$nbQ=count($qt2);
+		if($game=="SexyQuizz"){$tabMedia=['x','x'];}
 		
 		while(!isset($Q) || in_array($Q, $tabDerQ)===true || in_array($Q,$tabidQ)===true || in_array($D, $tabdom3)===true || in_array($M, $tabMedia)===true)
 		{
