@@ -173,23 +173,17 @@ class QuizzController extends Controller
 		'signalE'=>$signalE,
 		));}
    }
-   public function editQuestionAction()// va chercher la question dasn la partie concernée.
-   {
-		$session = $this->getRequest()->getSession();		
+   public function editQuestionAction(){
+		$session = $this->getRequest()->getSession(); $request = $this->getRequest();	 	
 		$quizzServ = $this->container->get('mdq_quizz.services');
 		$user = $this->container->get('security.context')->getToken()->getUser();		
 		if($quizzServ->testSession($session)==1 || $user===null){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		$iduser=$user->getId();		
-	  $request = $this->getRequest();	 
-	  if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
-	  {
+	  if($request->isXmlHttpRequest())  {
 		$numQ = $request->request->get('numQ');	
 		$em=$this->getDoctrine()->getManager();
-		 if ($numQ !== null )
-		  {   
-			$idQ = $em->getRepository('MDQQuizzBundle:PartieQuizz')->recupQ($numQ,$iduser);
-			$partie=$em->getRepository('MDQQuizzBundle:PartieQuizz')->recupPartie($iduser);
-			//controle - pas sur que efficace si 2 partie du même joeur simultanée
+		 if ($numQ !== null ){   
+			$idQ = $em->getRepository('MDQQuizzBundle:PartieQuizz')->recupQ($numQ,$user->getId());
+			$partie=$em->getRepository('MDQQuizzBundle:PartieQuizz')->recupPartie($user->getId());
 			if($numQ!=$partie->getNbQjoue()+1){$data['id']="error";
 							    return new JsonResponse($data);}
 			$data = $em->getRepository('MDQQuestionBundle:Question')->recupDataQ($idQ);
@@ -199,14 +193,12 @@ class QuizzController extends Controller
 	  }
 	  return "erreur";        
 	}
-	public function verifReponseAction(){// Va chercher la bonne réponse, et traite le résultat coté serveur. Envoyer aussi le score ?
-		$session = $this->getRequest()->getSession();		
+	public function verifReponseAction(){
+		$session = $this->getRequest()->getSession();$request = $this->getRequest();	 		
 		$quizzServ = $this->container->get('mdq_quizz.services');
 		$user = $this->container->get('security.context')->getToken()->getUser();		
 		if($quizzServ->testSession($session)==1 || $user===null){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		$request = $this->getRequest();	 
-		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
-		{
+		if($request->isXmlHttpRequest())		{
 			$em=$this->getDoctrine()->getManager();					
 			$requete=$quizzServ->analyseReq($request);
 			$question = $em	->getRepository('MDQQuestionBundle:Question')->majVerifRep($requete);
