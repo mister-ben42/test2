@@ -80,6 +80,12 @@ class AjaxQuizz
 		else{$finP=0;}
 		return $finP;
 	}
+	public function testSession($session)
+	{
+		$data=0;
+		if($session->get('page')!='Mquizz'){$data=1;}
+		return $data;
+	}
 }
 
 

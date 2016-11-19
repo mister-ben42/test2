@@ -149,7 +149,7 @@ class QuizzController extends Controller
    public function jeuQuizzAction($game)
    {
 		$session = $this->getRequest()->getSession();
-		if($session->get('page')!='tirageQ' or $game!="MasterQuizz" && $game!="MuQuizz" && $game!="SexyQuizz" && $game!="FfQuizz" && $game!="ArQuizz" && $game!="LxQuizz"  && $game!="TvQuizz"){
+		if($session->get('page')!='tirageQ' || $game!="MasterQuizz" && $game!="MuQuizz" && $game!="SexyQuizz" && $game!="FfQuizz" && $game!="ArQuizz" && $game!="LxQuizz"  && $game!="TvQuizz"){
 			$session->set('page', 'Mquizz');
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
@@ -175,15 +175,11 @@ class QuizzController extends Controller
    }
    public function editQuestionAction()// va chercher la question dasn la partie concernée.
    {
-		$session = $this->getRequest()->getSession();
-		if($session->get('page')!='Mquizz'){
-			$session->set('page', 'Mquizz');
-			return $this->redirect($this->generateUrl('mdqgene_accueil'));
-		}
-		$user = $this->container->get('security.context')->getToken()->getUser();
-        if ($user===null) { return $this->redirect($this->generateUrl('mdqgene_accueil')); }
-		$iduser=$user->getId();
-		
+		$session = $this->getRequest()->getSession();		
+		$quizzServ = $this->container->get('mdq_quizz.services');
+		$user = $this->container->get('security.context')->getToken()->getUser();		
+		if($quizzServ->testSession($session)==1 || $user===null){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
+		$iduser=$user->getId();		
 	  $request = $this->getRequest();	 
 	  if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 	  {
@@ -197,47 +193,33 @@ class QuizzController extends Controller
 			if($numQ!=$partie->getNbQjoue()+1){$data['id']="error";
 							    return new JsonResponse($data);}
 			$data = $em->getRepository('MDQQuestionBundle:Question')->recupDataQ($idQ);
-			$quizzServ = $this->container->get('mdq_quizz.services');
 			$datab=$quizzServ->dataEditQ($data);
 			   return new JsonResponse($datab);
 		 }
 	  }
-	  $data='error';
-	  return $data;        
+	  return "erreur";        
 	}
 	public function verifReponseAction(){// Va chercher la bonne réponse, et traite le résultat coté serveur. Envoyer aussi le score ?
-		$session = $this->getRequest()->getSession();
-		if($session->get('page')!='Mquizz'){
-			$session->set('page', 'Mquizz');
-			return $this->redirect($this->generateUrl('mdqgene_accueil'));
-		}
-		$user = $this->container->get('security.context')->getToken()->getUser();
-		if ($user===null) {return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		$iduser=$user->getId();		
+		$session = $this->getRequest()->getSession();		
+		$quizzServ = $this->container->get('mdq_quizz.services');
+		$user = $this->container->get('security.context')->getToken()->getUser();		
+		if($quizzServ->testSession($session)==1 || $user===null){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$request = $this->getRequest();	 
 		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 		{
-			$em=$this->getDoctrine()->getManager();			
-			$quizzServ = $this->container->get('mdq_quizz.services');
+			$em=$this->getDoctrine()->getManager();					
 			$requete=$quizzServ->analyseReq($request);
-			$question = $em	->getRepository('MDQQuestionBundle:Question')->majVerifRep($requete);			
-		// ************ définition du type de jeu **********************
+			$question = $em	->getRepository('MDQQuestionBundle:Question')->majVerifRep($requete);
 			$gameType=$quizzServ->getTypeVerifR($question->getDom1());
-		// *********** mise à jour du score de la bdd partie ***********
 			$scoreQ=$quizzServ->calcScVerifR($requete, $question->getBrep(), $gameType['game']);
-			$partie= $em->getRepository('MDQQuizzBundle:PartieQuizz')->majFinPartie($iduser, $scoreQ);
+			$partie= $em->getRepository('MDQQuizzBundle:PartieQuizz')->majFinPartie($user->getId(), $scoreQ);
 			$finP=$quizzServ->testfinP($partie->getNbQjoue(), $gameType['nbQparP']);
-		/////// ************ mise à jour de la bdd userscore ************ ///////////////////				
-			$scUser=$user->getScUser();
-			$majbddscU=$em->getRepository('MDQUserBundle:ScUser')->majBddVerifRep($scUser, $gameType['game'], $gameType['dom1'], $requete['rep'], $question->getBrep(), $partie, $finP);
-		// ************ flush final, exécute toutes les mises à jour ******* ////
+			$majbddscU=$em->getRepository('MDQUserBundle:ScUser')->majBddVerifRep($user->getScUser(), $gameType['game'], $gameType['dom1'], $requete['rep'], $question->getBrep(), $partie, $finP);
 			$em->flush();
-		// ********** préparation des données à envoyer **********
 			$datab=$quizzServ->dataVerifQ($question, $partie->getScore(), $scoreQ, $finP);
-				return new JsonResponse($datab);
+			return new JsonResponse($datab);
 		}
-		$data='error';
-		return $data;// il faudrait retourner à l'accueil dans ce cas/
+		return "erreur";// il faudrait retourner à l'accueil dans ce cas/
 	}
 	public function finPartieAction(){
 		$session = $this->getRequest()->getSession();
