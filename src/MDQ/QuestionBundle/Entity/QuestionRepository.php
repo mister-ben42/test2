@@ -778,5 +778,40 @@ class QuestionRepository extends EntityRepository
 			return $question->getQuery()
 			    ->getOneOrNullResult();	
 	}
+	public function majVerifRep($requete)
+	{
+		$quest = $this->_em->createQueryBuilder();
+			$quest->select('q')
+				->from('MDQQuestionBundle:Question', 'q')
+				->where('q.id = :id')
+				->setParameter('id', $requete['idQ']);
+			$question=$quest->getQuery()->getSingleResult();
+		// ************ mise à jour de la bdd question ***********
+			$newnbBrep=$question->getNbBrep();
+			$newnbMrep1=$question->getNbMrep1();
+			$newnbMrep2=$question->getNbMrep2();
+			$newnbMrep3=$question->getNbMrep3();
+			$newnbTout=$question->getNbTout();
+			$newnbJoue=$question->getNbJoue()+1;
+				$question->setNbJoue($newnbJoue);
+			if ($requete['rep']==$question->getBrep()){$newnbBrep=$question->getNbBrep()+1;
+											$question->setNbBrep($newnbBrep);}
+			else if ($requete['rep']==$question->getMrep1()){$newnbMrep1=$question->getNbMrep1()+1;
+											$question->setNbMrep1($newnbMrep1);}
+			else if ($requete['rep']==$question->getMrep2()){$newnbMrep2=$question->getNbMrep2()+1;
+											$question->setNbMrep2($newnbMrep2);}
+			else if ($requete['rep']==$question->getMrep3()){$newnbMrep3=$question->getNbMrep3()+1;
+											$question->setNbMrep3($newnbMrep3);}
+			else if ($requete['rep']=="none"){$newnbTout=$question->getNbTout()+1;
+											$question->setNbTout($newnbTout);}
+			$question->setPrctBrep($newnbBrep*100/$newnbJoue);
+			$question->setPrctMrep1($newnbMrep1*100/$newnbJoue);
+			$question->setPrctMrep2($newnbMrep2*100/$newnbJoue);
+			$question->setPrctMrep3($newnbMrep3*100/$newnbJoue);
+			$question->setPrctTout($newnbTout*100/$newnbJoue);			
+			if ($newnbJoue<101){$question->setPrct100j($newnbBrep*100/$newnbJoue);}
+			if ($newnbJoue<501){$question->setPrct500j($newnbBrep*100/$newnbJoue);}
+		return $question;
+	}
 
 }

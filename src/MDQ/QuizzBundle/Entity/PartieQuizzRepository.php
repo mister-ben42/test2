@@ -63,7 +63,21 @@ class PartieQuizzRepository extends EntityRepository
 		return $qb->getQuery()
 				->getSingleResult();	
 	}
-
+	public function majFinPartie($iduser, $scoreQ)
+	{
+		 $qb = $this->createQueryBuilder('p')				
+				->where('p.user = :iduser')	
+				->setParameter('iduser', $iduser)
+				->orderBy('p.id', 'DESC')
+				->setMaxResults(1); 
+		$partie=$qb->getQuery()->getSingleResult();
+		$oldnbQjoue=$partie->getNbQjoue();
+			$oldscore=$partie->getScore();
+			$newscore=$oldscore+$scoreQ;
+		$partie->setScore($newscore);
+		$partie->setNbQjoue($oldnbQjoue+1);	
+		return $partie;
+	}
 	public function recupPNonValid(){
 		  $qb = $this->createQueryBuilder('p')				
 				->where('p.valid = :valid')	

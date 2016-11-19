@@ -181,51 +181,24 @@ class QuizzController extends Controller
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
 		$user = $this->container->get('security.context')->getToken()->getUser();
-        if ($user===null) {// pas sûr que suffisant en terme de sécurité ?
-            return $this->redirect($this->generateUrl('mdqgene_accueil'));
-        }
+        if ($user===null) { return $this->redirect($this->generateUrl('mdqgene_accueil')); }
 		$iduser=$user->getId();
 		
 	  $request = $this->getRequest();	 
 	  if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 	  {
 		$numQ = $request->request->get('numQ');	
-		// dans ma démarche, je vais récupérer l'id dans un table, puis la question correspondante dans une autre. Possibilité de joindre ?
-		// j'ai essayer les jointure, avec relation many to many, bcp de choses, sans doute pas loin
+		$em=$this->getDoctrine()->getManager();
 		 if ($numQ !== null )
 		  {   
-			$idQ = $this->getDoctrine()
-						   ->getManager()
-						   ->getRepository('MDQQuizzBundle:PartieQuizz')
-						   ->recupQ($numQ,$iduser);
-			$partie=$this->getDoctrine()
-					  ->getManager()
-					  ->getRepository('MDQQuizzBundle:PartieQuizz')
-					  ->recupPartie($iduser);
+			$idQ = $em->getRepository('MDQQuizzBundle:PartieQuizz')->recupQ($numQ,$iduser);
+			$partie=$em->getRepository('MDQQuizzBundle:PartieQuizz')->recupPartie($iduser);
 			//controle - pas sur que efficace si 2 partie du même joeur simultanée
 			if($numQ!=$partie->getNbQjoue()+1){$data['id']="error";
 							    return new JsonResponse($data);}
-
-			$data = $this->getDoctrine()
-						->getManager()
-						->getRepository('MDQQuestionBundle:Question')
-				// Là, je peux rajouter un erreur si numQ différent du numQ de la bdd et
-				//ajouter un numQ dans la bdd - updater la bdd.
-						->recupDataQ($idQ);
-			$tablamlg=array($data['brep'],$data['mrep1'],$data['mrep2'],$data['mrep3']);	
-			shuffle($tablamlg);
-			$datab['id']=$data['id'];
-			$datab['intitule']=$data['intitule']; 
-			$datab['rep1']=$tablamlg[0];
-			$datab['rep2']=$tablamlg[1];
-			$datab['rep3']=$tablamlg[2];
-			$datab['rep4']=$tablamlg[3];
-			$datab['dom1']=$data['dom1']; 
-			$datab['theme']=$data['theme']; 
-			$datab['diff']=$data['diff'];
-			$datab['type']=$data['type'];
-			$datab['media']=$data['media'];
-			
+			$data = $em->getRepository('MDQQuestionBundle:Question')->recupDataQ($idQ);
+			$quizzServ = $this->container->get('mdq_quizz.services');
+			$datab=$quizzServ->dataEditQ($data);
 			   return new JsonResponse($datab);
 		 }
 	  }
@@ -239,121 +212,32 @@ class QuizzController extends Controller
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
 		$user = $this->container->get('security.context')->getToken()->getUser();
-        if ($user===null) {// pas sûr que suffisant en terme de sécurité ?
-            return $this->redirect($this->generateUrl('mdqgene_accueil'));
-        }
-		$iduser=$user->getId();
-		
+		if ($user===null) {return $this->redirect($this->generateUrl('mdqgene_accueil'));}
+		$iduser=$user->getId();		
 		$request = $this->getRequest();	 
 		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 		{
-			$em=$this->getDoctrine()->getManager();
-			$idQ = $request->request->get('idQ');
-			$rep = $request->request->get('rep');
-			$tpsrep = $request->request->get('temps');
-			$numQ = $request->request->get('numQ');
-			$finP=0;// variable qui permet de controler la fin de Partie.
-		// ************ récupération de la question ***********			
-			$question = $em	->getRepository('MDQQuestionBundle:Question')				
-						->find($idQ);
+			$em=$this->getDoctrine()->getManager();			
+			$quizzServ = $this->container->get('mdq_quizz.services');
+			$requete=$quizzServ->analyseReq($request);
+			$question = $em	->getRepository('MDQQuestionBundle:Question')->majVerifRep($requete);			
 		// ************ définition du type de jeu **********************
-			if($question->getDom1()=='Histoire' || $question->getDom1()=='Géographie' || $question->getDom1()=='Sciences et nature' || $question->getDom1()=='Arts et Littérature' || $question->getDom1()=='Sports et loisirs' || $question->getDom1()=='Divers')
-				{$game='MasterQuizz'; $nbQparP=10; $dom1=$question->getDom1();}
-			elseif($question->getDom1()=='SexyQuizz'){$game='QuizzenFolie'; $dom1='SexyQuizz';$nbQparP=8;}
-			elseif($question->getDom1()=='TvQuizz'){$game='QuizzenFolie'; $dom1='TvQuizz';$nbQparP=8;}
-			elseif($question->getDom1()=='MuQuizz'){$game='MediaQuizz'; $dom1='MuQuizz';$nbQparP=8;}
-			elseif($question->getDom1()=='ArQuizz'){$game='MediaQuizz'; $dom1='ArQuizz';$nbQparP=8;}
-			elseif($question->getDom1()=='FfQuizz'){$game='MediaQuizz'; $dom1='FfQuizz';$nbQparP=8;}
-			elseif($question->getDom1()=='LxQuizz'){$game='MediaQuizz'; $dom1='LxQuizz';$nbQparP=8;}
-		// ************ mise à jour de la bdd question ***********
-			$newnbBrep=$question->getNbBrep();
-			$newnbMrep1=$question->getNbMrep1();
-			$newnbMrep2=$question->getNbMrep2();
-			$newnbMrep3=$question->getNbMrep3();
-			$newnbTout=$question->getNbTout();
-			$newnbJoue=$question->getNbJoue()+1;
-				$question->setNbJoue($newnbJoue);
-			if ($rep==$question->getBrep()){$newnbBrep=$question->getNbBrep()+1;
-											$question->setNbBrep($newnbBrep);}
-			else if ($rep==$question->getMrep1()){$newnbMrep1=$question->getNbMrep1()+1;
-											$question->setNbMrep1($newnbMrep1);}
-			else if ($rep==$question->getMrep2()){$newnbMrep2=$question->getNbMrep2()+1;
-											$question->setNbMrep2($newnbMrep2);}
-			else if ($rep==$question->getMrep3()){$newnbMrep3=$question->getNbMrep3()+1;
-											$question->setNbMrep3($newnbMrep3);}
-			else if ($rep=="none"){$newnbTout=$question->getNbTout()+1;
-											$question->setNbTout($newnbTout);}
-			$question->setPrctBrep($newnbBrep*100/$newnbJoue);
-			$question->setPrctMrep1($newnbMrep1*100/$newnbJoue);
-			$question->setPrctMrep2($newnbMrep2*100/$newnbJoue);
-			$question->setPrctMrep3($newnbMrep3*100/$newnbJoue);
-			$question->setPrctTout($newnbTout*100/$newnbJoue);			
-			if ($newnbJoue<101){$question->setPrct100j($newnbBrep*100/$newnbJoue);}
-			if ($newnbJoue<501){$question->setPrct500j($newnbBrep*100/$newnbJoue);}
-			
+			$gameType=$quizzServ->getTypeVerifR($question->getDom1());
 		// *********** mise à jour du score de la bdd partie ***********
-				if ($rep!=$question->getBrep()){				
-					$scoreQ=0;
-				}
-				else {						
-					if($game=='MasterQuizz')
-					{
-						$tabscore=[100,200,500,1000,2000];			
-						$tabdiff=[1,2,2,3,3,3,4,4,5,5];
-						$scdebase=$tabscore[($tabdiff[$numQ-1])-1];
-					}
-					else{$scdebase=1000;}
-					$bonus=round(($scdebase/2*$tpsrep/150),0);
-					$scoreQ=$scdebase+$bonus;
-				}
-			
-			$partie= $em->getRepository('MDQQuizzBundle:PartieQuizz')
-						->recupPartie($iduser);
-				$oldnbQjoue=$partie->getNbQjoue();
-				$oldscore=$partie->getScore();
-				$newscore=$oldscore+$scoreQ;
-			$partie->setScore($newscore);
-			$partie->setNbQjoue($oldnbQjoue+1);			
-			$scUser=$user->getScUser();	
-			
-		/////// ************ mise à jour de la bdd userscore ************ ///////////////////
-
-			// Je tente avec les fonctions
-			if($game=='MediaQuizz' || $game=='QuizzenFolie' || $game=='MasterQuizz')
-			{			
-			if($rep==$question->getBrep()){$br=1;}
-			else{$br=0;}
-		
-			$majbddscU=$em->getRepository('MDQUserBundle:ScUser')
-						->majBddScQ($scUser, $game, $dom1, $br);
-						
-			if($oldnbQjoue+1==$nbQparP){
-				$finP=1;
-				$majbddscU=$em->getRepository('MDQUserBundle:ScUser')
-						->majBddScfinP($scUser, $dom1, $game, $partie);
-			}
-			
-			}
+			$scoreQ=$quizzServ->calcScVerifR($requete, $question->getBrep(), $gameType['game']);
+			$partie= $em->getRepository('MDQQuizzBundle:PartieQuizz')->majFinPartie($iduser, $scoreQ);
+			$finP=$quizzServ->testfinP($partie->getNbQjoue(), $gameType['nbQparP']);
+		/////// ************ mise à jour de la bdd userscore ************ ///////////////////				
+			$scUser=$user->getScUser();
+			$majbddscU=$em->getRepository('MDQUserBundle:ScUser')->majBddVerifRep($scUser, $gameType['game'], $gameType['dom1'], $requete['rep'], $question->getBrep(), $partie, $finP);
 		// ************ flush final, exécute toutes les mises à jour ******* ////
 			$em->flush();
 		// ********** préparation des données à envoyer **********
-			$datab['brep']=$question->getBrep();
-			$prepacom=($question->getCommentaire());
-			$datab['commentaire']=$prepacom;//Permet Le/n dans MySql euh non !
-			$datab['scoreQ']=$scoreQ;
-			$datab['score']=$newscore;
-			$datab['id']=$question->getId();
-			$datab['finP']=$finP;
-			$datab['imageCom']=$question->getImageCom();
-			$datab['dom1']=$question->getDom1();
-			//$datab['game']=$game;//surtout pour controler
-			//$datab['top10mois']=$top10mois;// juste pour tester
-			//$datab['nbval']=$nbval;// juste pour tester
-			// Envoyer aussi le score quand il sera calculé
+			$datab=$quizzServ->dataVerifQ($question, $partie->getScore(), $scoreQ, $finP);
 				return new JsonResponse($datab);
 		}
 		$data='error';
-		return $data;// il faurait retourner à l'accueil dans ce cas/
+		return $data;// il faudrait retourner à l'accueil dans ce cas/
 	}
 	public function finPartieAction(){
 		$session = $this->getRequest()->getSession();
