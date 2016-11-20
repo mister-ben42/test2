@@ -459,7 +459,7 @@ class ScUserRepository extends EntityRepository
 		$newnbQ=MajNbQ($scUser,$dom1);			
 		$newnbBr=MajNbBr($scUser,$dom1,$br);
 		MajPrctBr($scUser, $dom1, $newnbQ, $newnbBr);
-		if($finP==1){majBddScfinP($scUser, $dom1, $game, $partie);}
+		if($finP==1){$this->majBddScfinP($scUser, $dom1, $game, $partie);}
 		
 		return 1;
 	}

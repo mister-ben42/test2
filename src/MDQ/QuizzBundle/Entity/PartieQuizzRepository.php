@@ -164,7 +164,85 @@ class PartieQuizzRepository extends EntityRepository
 				->orderBy('p.id', 'DESC');
 				
 		return $qb->getQuery()->getSingleScalarResult();	
-	}	
+	}
+	public function createNewP($game, $user)
+	{
+		if($game=="MasterQuizz"){$nbP=5;$nbQ=10;}
+		elseif($game=="MuQuizz" || $game=="FfQuizz" || $game=="ArQuizz" || $game=="LxQuizz"){$nbP=1;$nbQ=8;}
+		elseif($game=="SexyQuizz" || $game=="TvQuizz"){$nbP=1;$nbQ=8;}
+		if($game=="FfQuizz" || $game=="LxQuizz"){$nbP=4;}// Temporaire à modifier ensuite
+		$derPjoues=$this->getDerParties($user->getId(),$game,$nbP);
+		$tabDerQ=[];
+		foreach($derPjoues as $partie)
+		{
+			for($numQ=1; $numQ<($nbQ+1); $numQ++)
+			{
+			$idQ=$partie['q'.$numQ];
+			array_push($tabDerQ, $idQ);
+			}
+		}
+		if($game=="MasterQuizz")
+		{
+			$tabdom3=[]; $tabtheme=[]; $tabidQ=[];$tabdom=['x','x','x'];
+			for($numQ=1; $numQ<11; $numQ++) {
+				$dom=$this->tiragedudom($tabdom);
+				$questionRepository=$this->getEntityManager()->getRepository('MDQQuestionBundle:Question');
+				//$qtire=$this->getDoctrine()->getManager()->getRepository('MDQQuestionBundle:Question')
+				$qtire=$questionRepository->tirageduneQMq($numQ, $dom[0], $tabdom3, $tabtheme, $tabDerQ, $tabidQ);
+				$tabdom=$dom;			 
+				$tabidQ[$numQ-1]=$qtire['id'];			
+				$tabdom3[$numQ-1]=$qtire['dom3'];
+				$tabtheme[$numQ-1]=$qtire['theme'];
+			}
+			$scUser=$user->getScUser();
+			$scUser->setNbPMq($scUser->getNbPMq()+1);
+		}
+		else
+		{
+			$scUser=$user->getScUser();
+			if($game=="TvQuizz"){$scUser->setNbPTv($scUser->getNbPTv()+1);}
+			elseif($game=="SexyQuizz"){$scUser->setNbPSx($scUser->getNbPSx()+1);}
+			elseif($game=="MuQuizz"){$scUser->setNbPMu($scUser->getNbPMu()+1);}
+			elseif($game=="FfQuizz"){$scUser->setNbPFf($scUser->getNbPFf()+1);}
+			elseif($game=="ArQuizz"){$scUser->setNbPAr($scUser->getNbPAr()+1);}
+			elseif($game=="LxQuizz"){$scUser->setNbPLx($scUser->getNbPLx()+1);}
+			$tabtheme=['x','x'];$tabidQ=[]; $tabdom3=[]; $tabMedia=[];
+			for($numQ=1; $numQ<$nbQ+1; $numQ++)
+			{
+				$qtire=$em->getRepository('MDQQuestionBundle:Question')
+							->tirageduneQ($game,$tabDerQ,$tabtheme, $tabdom3, $tabidQ, $numQ, $tabMedia);
+				$tabidQ[($numQ-1)]=$qtire['id'];
+				$tabdom3[$numQ-1]=$qtire['dom3'];
+				$tabtheme[1]=$tabtheme[0];
+				$tabtheme[0]=$qtire['theme'];	
+				$tabMedia[($numQ-1)]=$qtire['media'];
+			}
+		}
+		$scUser->setNbPtot($scUser->getNbPtot()+1);
+		$pseudo=$user->getUsername();
+		$partie=new PartieQuizz();
+		$partie->setUsername($pseudo);
+	
+
+		$partie->setQ1($tabidQ[0]);			
+		$partie->setQ2($tabidQ[1]);
+		$partie->setQ3($tabidQ[2]);
+		$partie->setQ4($tabidQ[3]);
+		$partie->setQ5($tabidQ[4]);
+		$partie->setQ6($tabidQ[5]);
+		$partie->setQ7($tabidQ[6]);
+		$partie->setQ8($tabidQ[7]);
+		if($nbQ>8){$partie->setQ9($tabidQ[8]);}
+		if($nbQ>9){$partie->setQ10($tabidQ[9]);}
+		//$partie->setQ1(1);//pour faire des essais sur l'affichage
+		//$partie->setQ2(2);//pour faire des essais sur l'affichage
+		//$partie->setQ3(3);//pour faire des essais sur l'affichage
+		$partie->setType($game);
+		$partie->setUser($user);
+		
+		return $partie;
+	
+	}
 	
 /*	public function nbParties($game, $date, $type_user){
 		if($date!==0){

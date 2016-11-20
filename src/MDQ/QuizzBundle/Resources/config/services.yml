@@ -6,5 +6,8 @@ services:
 #        class: %mdq_quizz.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
 
-     mdq_quizz.services:
+     mdq_quizz.services:         
+         class: MDQ\QuizzBundle\Services\QuizzServ
+         
+     mdq_quizz.ajax:         
          class: MDQ\QuizzBundle\Services\AjaxQuizz

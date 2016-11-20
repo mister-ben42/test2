@@ -2,7 +2,7 @@
 
 {% extends "MDQQuizzBundle::layoutQz.html.twig" %}
 
-{# block meta %}
+{% block meta %}
 <meta http-equiv="refresh" content="8;url=../" />
 {% endblock #}
 	{% block bloc_page %}
@@ -16,24 +16,20 @@
 		</div>
 		<div id="bloc_question_central">
 			<div id="bloc_finPartie">	
-				{% if score>highscore or score>=10000 %}	
+				{% if com.feu==1 %}	
 				<div id="bloc_finPartie_feux">
 				{% else %}
 				<div id="bloc_finPartie_sans_feux">
 				{% endif %}
-				<!-- Si score Max et si pas la 1ère partie : Bravo, vous venez de réaliser ... -->
-				<p>{{ comFinal }}</p>
-				{% if score>highscore %}	
-				</br>
-				<p>Félicitation, c'est votre meilleur score au {{game}} !!!</p>
 				
-				{% endif %}
+				<p>{{ com.phrase1 }}</p>	
+				</br>				
+				<p>{{ com.phrase2 }}</p>	
 				</br>
-				{% if rang=="none" %}<p>Vous n'avez pas amélorié votre meilleur score du jour au {{game}}.</p>
-				{%else%}<p>Vous vous classez au {{rang}}<sup>{% if rang==1 %}er{%else%}ème{%endif%}</sup> rang du classement quotidien du {{game}}.</p>
-				{%endif%}
+				<p>{{ com.phrase3 }}</p>	
+				</br>
 				</div>
-				</div>
+			</div>
 			</div>
 		
 		</div>
