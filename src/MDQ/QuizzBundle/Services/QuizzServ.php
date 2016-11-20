@@ -17,19 +17,20 @@ class QuizzServ
 	    }      
 	    return $page;
       }
-      public function testAutoriseNewG($gestion, $game, $user)
+      public function testAutoriseNewG($Gestion, $game, $user, $admin)
       {
 	    $test=1;
-	     if ($user===null || $game=="MasterQuizz" && $gestion->getMq()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN')
-			 || $game=="FfQuizz" && $gestion->getFf()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN')
-			 || $game=="ArQuizz" && $gestion->getAr()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN')
-			 || $game=="McQuizz" && $gestion->getMc()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN')
-			 || $game=="LxQuizz" && $gestion->getLx()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN'))
+	     if ($user===null || $game=="MasterQuizz" && $Gestion->getMq()==0 && $admin==0
+			 || $game=="FfQuizz" && $Gestion->getFf()==0 && $admin==0
+			 || $game=="ArQuizz" && $Gestion->getAr()==0 && $admin==0
+			 || $game=="McQuizz" && $Gestion->getMc()==0 && $admin==0
+			 || $game=="LxQuizz" && $Gestion->getLx()==0 && $admin==0)
 		{$test=0;}
 	    return $test;
       }
-      public function testJeton($game, $user)
+      public function testJeton($game, $User)
       {
+		$game="none"; // en attendant de répartir les jetons selon les jeux.
 	/*ss	$nbJtotMq=$user->getScUser()->getNbJdayMq()+$user->getScUser()->getNbJMq();
 	ss	$nbJtotQnF=$user->getScUser()->getNbJdayQnF()+$user->getScUser()->getNbJQnF();
 	ss	if($game=="MasterQuizz" && $nbJtotMq==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));
@@ -40,12 +41,12 @@ class QuizzServ
 	ss	elseif($user->getScUser()->getNbJdayQnF()!=0){$user->getScUser()->setNbJdayQnF($user->getScUser()->getNbJdayQnF()-1);}
 	ss	else{$user->getScUser()->setNbJQnF($user->getScUser()->getNbJQnF()-1);}
 	*/
-		$nbJ=$user->getScUser()->getNbJdayMq();
+		$nbJ=$User->getScUser()->getNbJdayMq();
 		if($nbJ==0){$test=0;}
 		else{$test=1;}
 		return $test;
       }
-      public function comFinP($scofDayUser, $scMaxUser, $score, $game, $highScoreTous, $user)
+      public function comFinP($scofDayUser, $scMaxUser, $score, $game, $highScoreTous, $userId)
       {
 				if($game=='MasterQuizz'){$nameGame='MasterQuizz';}
 				elseif($game=='MuQuizz'){$nameGame='Quizz Musique';}
@@ -67,7 +68,7 @@ class QuizzServ
 				foreach($highScoreTous as $userA)
 				{
 					if($j==0){$i++;}
-					if($userA['id']==$user->getId()){$j=1;}
+					if($userA['id']==$userId){$j=1;}
 				}
 				$rang=$i;
 		if($rang==1){$com['phrase3']='Vous êtes à la 1ère place au classement du '.$nameGame.'.';}
@@ -86,50 +87,49 @@ class QuizzServ
 				elseif($game=='TvQuizz'){$crit='scofDayTv';}
 	      return $crit;
       }
-      public function testAccessFinP($session, $user)
+      public function testAccessFinP($Session, $User)
       {
 	      $test=1;	      
-	      if ($user===null){$test=0;}
-	      if($session->get('page')!='Mquizz'){$test=0;}
+	      if ($User===null){$test=0;}
+	      if($Session->get('page')!='Mquizz'){$test=0;}
 	     return $test;
       }
-      public function recupScFinP($user, $game)
+      public function recupScFinP($User, $game)
       {
 	      	if($game=="MasterQuizz")
 		{
-			$scofDayUser=$user->getScUser()->getScofDayMq();
-			$highscore=$user->getScUser()->getScMaxMq();
+			$scofDayUser=$User->getScUser()->getScofDayMq();
+			$highscore=$User->getScUser()->getScMaxMq();
 		}		
 		elseif($game=="MuQuizz")
 		{
-				$scofDayUser=$user->getScUser()->getScofDayMu();
-				$highscore=$user->getScUser()->getScMaxMu();
+				$scofDayUser=$User->getScUser()->getScofDayMu();
+				$highscore=$User->getScUser()->getScMaxMu();
 		}
 		elseif($game=="ArQuizz")
 		{
-				$scofDayUser=$user->getScUser()->getScofDayAr();
-				$highscore=$user->getScUser()->getScMaxAr();
+				$scofDayUser=$User->getScUser()->getScofDayAr();
+				$highscore=$User->getScUser()->getScMaxAr();
 		}
 		elseif($game=="FfQuizz")
 		{
-				$scofDayUser=$user->getScUser()->getScofDayFf();
-				$highscore=$user->getScUser()->getScMaxFf();
+				$scofDayUser=$User->getScUser()->getScofDayFf();
+				$highscore=$User->getScUser()->getScMaxFf();
 		}
 		elseif($game=="LxQuizz")
 		{
-				$scofDayUser=$user->getScUser()->getScofDayLx();
-				$highscore=$user->getScUser()->getScMaxLx();
+				$scofDayUser=$User->getScUser()->getScofDayLx();
+				$highscore=$User->getScUser()->getScMaxLx();
 		}
 		elseif($game=="SexyQuizz")
 		{
-				$scofDayUser=$user->getScUser()->getScofDaySx();
-				$highscore=$user->getScUser()->getScMaxSx();
-				$bloc_page="bloc_page_SexyQuizz";
+				$scofDayUser=$User->getScUser()->getScofDaySx();
+				$highscore=$User->getScUser()->getScMaxSx();
 		}
 		elseif($game=="TvQuizz")
 		{
-				$scofDayUser=$user->getScUser()->getScofDayTv();
-				$highscore=$user->getScUser()->getScMaxTv();
+				$scofDayUser=$User->getScUser()->getScofDayTv();
+				$highscore=$User->getScUser()->getScMaxTv();
 		}
 	      $tabScore['ScDay']=$scofDayUser;
 	      $tabScore['ScMax']=$highscore;

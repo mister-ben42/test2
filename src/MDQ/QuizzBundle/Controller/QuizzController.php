@@ -4,7 +4,6 @@
 namespace MDQ\QuizzBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use MDQ\QuizzBundle\Entity\PartieQuizz;
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
 
 class QuizzController extends Controller
@@ -25,14 +24,16 @@ class QuizzController extends Controller
 	$em = $this->getDoctrine()->getManager();
 	$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
 	$quizzServ = $this->container->get('mdq_quizz.services');
-        if(!$quizzServ->testAutoriseNewG($gestion, $game, $user)) {return $this->redirect($this->generateUrl('mdqgene_accueil'));}
+	if($this->get('security.context')->isGranted('ROLE_ADMIN')){$admin=1;}
+	else{$admin=0;}
+        if(!$quizzServ->testAutoriseNewG($gestion, $game, $user, $admin)) {return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		
 		if(!$quizzServ->testJeton($game,$user)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$user->getScUser()->setNbJdayMq($user->getScUser()->getNbJdayMq()-1);
 		$partie=$em->getRepository('MDQQuizzBundle:PartieQuizz')->createNewP($game,$user);
 		$em->persist($partie); 
 		$em->flush();
-		$session = $this->getRequest()->getSession()->set('page', 'tirageQ');
+		$this->getRequest()->getSession()->set('page', 'tirageQ');
 		return $this->redirect($this->generateUrl('mdqquizz_jeu', array(
 		'game'=>$game,
 		)));
@@ -89,8 +90,7 @@ class QuizzController extends Controller
 			$scoreQ=$quizzServ->calcScVerifR($requete, $question->getBrep(), $gameType['game']);
 			$partie= $em->getRepository('MDQQuizzBundle:PartieQuizz')->majFinPartie($user->getId(), $scoreQ);
 			$finP=$quizzServ->testfinP($partie->getNbQjoue(), $gameType['nbQparP']);
-			$finP=1;
-			$majbddscU=$em->getRepository('MDQUserBundle:ScUser')->majBddVerifRep($user->getScUser(), $gameType['game'], $gameType['dom1'], $requete['rep'], $question->getBrep(), $partie, $finP);
+			$em->getRepository('MDQUserBundle:ScUser')->majBddVerifRep($user->getScUser(), $gameType['game'], $gameType['dom1'], $requete['rep'], $question->getBrep(), $partie, $finP);
 			$em->flush();
 			$datab=$quizzServ->dataVerifQ($question, $partie->getScore(), $scoreQ, $finP);
 			return new JsonResponse($datab);
@@ -109,7 +109,7 @@ class QuizzController extends Controller
 		else{$bloc_page="bloc_page_MasterQuizz";}
 		$tabScore=$quizzServ->recupScFinP($user, $game);		
 		$highScoreTous=$this->getDoctrine()->getManager()->getRepository('MDQUserBundle:ScUser')->recupHighScore($quizzServ->defCritFinP($game),1,0);
-		$com=$quizzServ->comFinP($tabScore['ScDay'], $tabScore['ScMax'], $partieJoue->getScore(), $game, $highScoreTous, $user);
+		$com=$quizzServ->comFinP($tabScore['ScDay'], $tabScore['ScMax'], $partieJoue->getScore(), $game, $highScoreTous, $user->getId());
 
 		return $this->render('MDQQuizzBundle:Quizz:finPartie.html.twig', array(
 			'com'=>$com,

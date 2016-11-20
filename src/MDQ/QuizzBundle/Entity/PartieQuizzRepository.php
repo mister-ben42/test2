@@ -187,7 +187,6 @@ class PartieQuizzRepository extends EntityRepository
 			for($numQ=1; $numQ<11; $numQ++) {
 				$dom=$this->tiragedudom($tabdom);
 				$questionRepository=$this->getEntityManager()->getRepository('MDQQuestionBundle:Question');
-				//$qtire=$this->getDoctrine()->getManager()->getRepository('MDQQuestionBundle:Question')
 				$qtire=$questionRepository->tirageduneQMq($numQ, $dom[0], $tabdom3, $tabtheme, $tabDerQ, $tabidQ);
 				$tabdom=$dom;			 
 				$tabidQ[$numQ-1]=$qtire['id'];			
@@ -209,8 +208,8 @@ class PartieQuizzRepository extends EntityRepository
 			$tabtheme=['x','x'];$tabidQ=[]; $tabdom3=[]; $tabMedia=[];
 			for($numQ=1; $numQ<$nbQ+1; $numQ++)
 			{
-				$qtire=$em->getRepository('MDQQuestionBundle:Question')
-							->tirageduneQ($game,$tabDerQ,$tabtheme, $tabdom3, $tabidQ, $numQ, $tabMedia);
+				$questionRepository=$this->getEntityManager()->getRepository('MDQQuestionBundle:Question');
+				$qtire=$questionRepository->tirageduneQ($game,$tabDerQ,$tabtheme, $tabdom3, $tabidQ, $numQ, $tabMedia);
 				$tabidQ[($numQ-1)]=$qtire['id'];
 				$tabdom3[$numQ-1]=$qtire['dom3'];
 				$tabtheme[1]=$tabtheme[0];

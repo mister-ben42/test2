@@ -18,8 +18,8 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('mdq_quizz');
-
+     //   $rootNode = $treeBuilder->root('mdq_quizz'); // Sensio lab : pb de définitiond e variable inutile. Je la remplace par celle d'en dessous.
+	$treeBuilder->root('mdq_quizz');
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
