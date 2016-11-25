@@ -1,18 +1,24 @@
 mdqgene_accueil:
     pattern:  /
     defaults: { _controller: MDQGeneBundle:Gene:accueil }
+    methods:  [GET]
 mdqgene_accueilJeu:
     path:  /accueilJeu
     defaults: { _controller: MDQGeneBundle:Gene:accueilJeu }
+    methods:  [GET]
 mdqgene_accueilHighScore:
     path: /accueilHighScore
     defaults: { _controller: MDQGeneBundle:Gene:accueilHighScore }
+    methods:  [GET]
 mdqgene_highScore:
     path: /highScore/{crit}/{page}/{id}
     defaults: { _controller: MDQGeneBundle:Gene:highScore, crit:none, page:1, id:0 }
+    methods:  [GET]
 mdqgene_regleJeu:
     path: /regleJeu
     defaults: { _controller: MDQGeneBundle:Gene:regleJeu }
+    methods:  [GET]
 mdqgene_news:
     path: /news
     defaults: { _controller: MDQGeneBundle:Gene:afficheNews }
+    methods:  [GET]

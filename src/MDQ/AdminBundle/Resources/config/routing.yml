@@ -1,80 +1,106 @@
 mdqadmin_accueilAdmin:
     path:  /
     defaults: { _controller: MDQAdminBundle:Admin:accueilAdmin }
+    methods:  [GET]
 mdqadmin_profileUAdmin:
     path:    /profileUAdmin/{id}
     defaults: { _controller: MDQAdminBundle:Admin:profileUAdmin }
+    methods:  [GET]
 mdqadmin_voirU:
     path:    /voirU/{type}/{compte}/{sexe}/{departement}/{age}/{last_login}/{role}/{nbP}/{triUser}/{triStats}/{sens}/{nbdeU}/{nbmin}
     defaults: { _controller: MDQAdminBundle:Admin:voirU}
+    methods:  [GET]
 mdqadmin_critvoirU:
     path:    /critvoirU
     defaults: { _controller: MDQAdminBundle:Admin:critvoirU }
+    methods:  [GET, POST]
 mdqadmin_newNews:
     path:    /newNews
-    defaults: { _controller: MDQAdminBundle:News:newNews }	
+    defaults: { _controller: MDQAdminBundle:News:newNews }
+    methods:  [GET, POST]
 mdqadmin_listNews:
     path:    /listNews
     defaults: { _controller: MDQAdminBundle:News:listNews }
+    methods:  [GET]
 mdqadmin_modifNews:
     path:    /modifNews/{id}
     defaults: { _controller: MDQAdminBundle:News:modifNews }
+    methods:  [GET, POST]
 mdqadmin_formListNews:
     path:    /formListNews
     defaults: { _controller: MDQAdminBundle:News:formListNews }
+    methods:  [GET, POST]
 mdqadmin_testQdouble:
     path:    /testQdouble
     defaults: { _controller: MDQAdminBundle:GestionQuestion:testQdouble }
+    methods:  [GET]
 mdqadmin_voirQ:
     path:    /voirQ/{choice}/{page}/{error}/{valid}/{diff}/{game}/{dom1}/{theme}/{crit}/{sens}/{nbdeQ}/{nbmin}
     defaults: { _controller: MDQAdminBundle:GestionQuestion:voirQ, choice:list, page:1, error:0, valid:3, diff:0, game:none, dom1:none, theme:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
+    methods:  [GET]
 mdqadmin_critvoirQ:
     path:    /critvoirQ/{choice}
     defaults: { _controller: MDQAdminBundle:GestionQuestion:critvoirQ, choice:list }
+    methods:  [GET, POST]
 mdqadmin_modifQ:
     path:    /modifQ/{id}/{choice}/{error}/{valid}/{diff}/{dom1}/{theme}/{crit}/{sens}/{nbdeQ}/{nbmin}
     defaults: { _controller: MDQAdminBundle:GestionQuestion:modifQ, choice:list, error:0, valid:3, diff:0, dom1:none, theme:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
     requirements:
         id: \d+
+    methods:  [GET, POST]
 mdqadmin_modifQajax:
     path:    /modifQajax
     defaults: { _controller: MDQAdminBundle:GestionQuestion:modifQajax }
+    methods:  [GET, POST]
 mdqadmin_critvoirQaVal:
     path:    /critvoirQaVal
     defaults: { _controller: MDQAdminBundle:GestionQuestion:critvoirQaVal}
+    methods:  [GET, POST]
 mdqadmin_voirQaVal:
     path:    /voirQaVal/{page}/{repAdmin}/{diff}/{dom1}/{crit}/{sens}/{nbdeQ}/{nbmin}
     defaults: { _controller: MDQAdminBundle:GestionQuestion:voirQaVal, page:1, repAdmin:4, diff:0, dom1:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
+    methods:  [GET]
 mdqadmin_retourQaValajax:
     path:    /retourQaValajax
     defaults: { _controller: MDQAdminBundle:GestionQuestion:retourQaValajax }
+    methods:  [GET, POST]
 mdqadmin_insertQaValajax:
     path:    /insertQaValajax
     defaults: { _controller: MDQAdminBundle:GestionQuestion:insertQaValajax }
+    methods:  [GET, POST]
 mdqadmin_statQ:
     path:    /statQ
     defaults: { _controller: MDQAdminBundle:Stats:statQ }
+    methods:  [GET]
 mdqadmin_botGame:
     path:    /botGame/{nbBots}/{djajoue}/{type}
     defaults: 	{ _controller: MDQAdminBundle:Bot:botPartie, nbBots:1, djajoue:1, type:Tous }
+    methods:  [GET]
 mdqadmin_resetTheme:
     path:    /resetTheme
     defaults: { _controller: MDQAdminBundle:Admin:resetTheme }
+    methods:  [GET]
 mdqadmin_listeTheme:
     path:    /listeTheme
     defaults: { _controller: MDQAdminBundle:Admin:listeTheme }
+    methods:  [GET]
 mdqadmin_resetError:
     path:    /resetError
     defaults: { _controller: MDQAdminBundle:GestionQuestion:resetError }
+    methods:  [GET, POST]
 mdqadmin_testQdouble:
     path:    /testQdouble
     defaults: { _controller: MDQAdminBundle:Admin:testQdouble }
+    methods:  [GET]
 mdqadmin_gestion:
     path:    /gestion/{id}
     defaults: { _controller: MDQAdminBundle:Admin:gestion, id:1 }
+    methods:  [GET, POST]
 mdqadmin_arbratheme:
     path:    /arbratheme/{dom1}/{entete}/{viewDom2}
     defaults: { _controller: MDQAdminBundle:Stats:arbratheme, dom1:none, entete:1, viewDom2:0}
+    methods:  [GET]
 mdqadmin_mail:
     path:    /mail
     defaults: { _controller: MDQAdminBundle:Admin:mail }
+    methods:  [GET]

@@ -1,14 +1,18 @@
 mdquser_profileU:
     path:    /profileU/{id}
     defaults: { _controller: MDQUserBundle:User:profileU }
+    methods:  [GET]
 mdquser_profileUAuto:
     path:    /profileUAuto
     defaults: { _controller: MDQUserBundle:User:profileUAuto }	
+    methods:  [GET]
 mdquser_profileUAutoEdit:
     path:    /profileUAutoEdit
-    defaults: { _controller: MDQUserBundle:User:profileUAutoEdit }		
+    defaults: { _controller: MDQUserBundle:User:profileUAutoEdit }
+    methods:  [GET]
 mdquser_profileUPassword:
     path:    /profileUPassword
     defaults: { _controller: MDQUserBundle:User:profileUPassword }
+    methods:  [GET]
 
 
