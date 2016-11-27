@@ -19,16 +19,20 @@ class UserExtension extends \Twig_Extension
 	public function getFunctions(){
 		return array(
 		  'age' => new \Twig_Function_Method($this, 'calculage'),
-		  'sexe' => new \Twig_Function_Method($this, 'calculSexe'),
+		  'colorSexe' => new \Twig_Function_Method($this, 'colorSexe'),
 		  'tabMed' => new \Twig_Function_Method($this, 'tabMedailles'),
-		  'affichPartie' => new \Twig_Function_Method($this, 'affichPartieType'),
+		  'spanMed' => new \Twig_Function_Method($this, 'spanMedailles'),
+		  'spanDerPartie' => new \Twig_Function_Method($this, 'spanDerPartie'),
 		  'testMaitre' => new \Twig_Function_Method($this, 'testMaitre'),
 	      );
 	}
 	    public function getFilters()
 	{
 	    return array(
-		'chgeNull' => new \Twig_Filter_Method($this, 'chgeNullto0')
+		'chgeNull' => new \Twig_Filter_Method($this, 'chgeNullto0'),
+		  'sexe' => new \Twig_Filter_Method($this, 'calculSexe'),
+		'affichePartie' => new \Twig_Filter_Method($this, 'affichePartieType')
+		
 	    );
 	}
 	public function calculage($date)
@@ -46,9 +50,16 @@ class UserExtension extends \Twig_Extension
 	}
 	public function calculSexe($sexe)
 	{
-		if ($sexe==1) {$sex='<span id="sexe_femme">Femme</span>';}
-		else if($sexe==0) {$sex='<span id="sexe_homme">Homme</span>';}
-		else {$sex='<span id="sexe_homme">No sex</span>';}
+		if ($sexe==1) {$sex="Femme";}
+		else if($sexe==0) {$sex="Homme";}
+		else {$sex= "Pas de sexe !";}
+		return $sex;
+	}
+	public function colorSexe($sexe)
+	{
+		if ($sexe==1) {$sex='id=sexe_femme';}
+		else if($sexe==0) {$sex='id=sexe_homme';}
+		else {$sex='id=sexe_homme';}
 		return $sex;
 	}
 
@@ -57,26 +68,40 @@ class UserExtension extends \Twig_Extension
 	    if($data==0){$balise="";}
 	    elseif($data<6)
 	    {
-		  $balise='<img src="../../../../web/bundles/UserBundle/Med'.$type.$data.'.png" alt="Med" width="60px">';
+		  $balise='src=../../../../web/bundles/UserBundle/Med'.$type.$data.'.png alt=Med width=60px>';
 	    }
 	    else
 	    {
-		  $balise='<img src="../../../../web/bundles/UserBundle/Med'.$type.'5.png" alt="Med" width="60px"><div class="user_tab_med">'.$data.'</div>';
+		  $balise='src=../../../../web/bundles/UserBundle/Med'.$type.'5.png alt=Med width=60px>';
 	    }
             return $balise;
 	}
+	public function spanMedailles($data)
+	{
+	    if($data<6){$data='';}
+	    return $data;
+	}
+	
 	public function chgeNullto0($data)
 	{
 	    if($data===Null){$data=0;}
 	    
 	    return $data;
 	}
-	public function affichPartieType($partieType)
+	public function affichePartieType($partieType)
 	{
-	      if($partieType=="MasterQuizz"){$data='<span style="color:rgb(255,255,0);">MasterQuizz</span>';}
-	      elseif($partieType=="FfQuizz"){$data='<span style="color:rgb(0,255,0);">Quizz Nature</span>';}
-	      elseif($partieType=="LxQuizz"){$data='<span style="color:rgb(0,255,255);">Lieux du monde</span>';}
-	      else{$data='<span style="color:rgb(255,255,255);">Autre</span>';}
+	      if($partieType=="MasterQuizz"){$data='MasterQuizz';}
+	      elseif($partieType=="FfQuizz"){$data='Quizz Nature';}
+	      elseif($partieType=="LxQuizz"){$data='Lieux du monde';}
+	      else{$data='Autre';}
+	      return $data;
+	}
+	public function spanDerPartie($partieType)
+	{
+	      if($partieType=="MasterQuizz"){$data='style=color:rgb(255,255,0)';}
+	      elseif($partieType=="FfQuizz"){$data='style=color:rgb(0,255,0)';}
+	      elseif($partieType=="LxQuizz"){$data='style=color:rgb(0,255,255)';}
+	      else{$data='style=color:rgb(255,255,255)';}
 	      return $data;
 	}
 	/*
@@ -90,9 +115,33 @@ class UserExtension extends \Twig_Extension
 	  {
 		$data='';
 		$dateRef=$this->dateRefRepository->findOneById(1);
-		if($user->getId()==$dateRef->getRMDQ()->getId()){
-			 if($user->getSexe()==1){$data='<img style="margin-top:-50px" src="../../../../web/bundles/GeneBundle/reine3.png" alt="reine" width="100%" title="Reine de MDQ">';}
-			 else{$data='<img style="margin-top:-50px" src="../../../../web/bundles/GeneBundle/roi2.png" alt="roi" width=100% title="Roi de MDQ">';}
+		if($dateRef->getRMDQ()!==Null && $user->getId()==$dateRef->getRMDQ()->getId()){
+			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/reine3.png alt=reine width=100% title=Reine de MDQ';}
+			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/roi2.png alt=roi width=100% title=Roi de MDQ';}
+			 }
+		elseif($dateRef->getSMDQ()!==Null && $user->getId()==$dateRef->getSMDQ()->getId()){
+			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/savant-F.png alt=Savante width=100% title=Savante de MDQ';}
+			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/savant-H.png alt=Savant width=100% title=Savant MDQ';}
+			 }
+		elseif($dateRef->getMMDQ()!==Null && $user->getId()==$dateRef->getMMDQ()->getId()){
+			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/ministre-F.png alt=ministre-F width=100% title=Ministre de Mdq';}
+			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/ministre-H.png alt=ministre-H width=100% title=Ministre de Mdq';}
+			 }
+		elseif($dateRef->getMuMDQ()!==Null && $user->getId()==$dateRef->getMuMDQ()->getId()){
+			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/virtuose-F.png alt=virtuose-F width=100% title=virtuose de MDQ';}
+			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/virtuose-H.png alt=virtuose-H width=100% title=virtuose de MDQ';}
+			 }
+		elseif($dateRef->getFfMDQ()!==Null && $user->getId()==$dateRef->getFfMDQ()->getId()){
+			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/nature-F.png alt=nature-F width=100% title=Ecologiste de MDQ';}
+			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/nature-H.png alt=nature-H width=100% title=Ecologiste de MDQ';}
+			 }
+		elseif($dateRef->getArMDQ()!==Null && $user->getId()==$dateRef->getArMDQ()->getId()){
+			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/peintre-F.png alt=peintre-F width=100% title=peintre de MDQ';}
+			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/peintre-H.png alt=peintre-H width=100% title=peintre de MDQ';}
+			 }
+		elseif($dateRef->getLxMDQ()!==Null && $user->getId()==$dateRef->getLxMDQ()->getId()){
+			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/globeT-F.png alt=globeT-F width=100% title=Globe-trotter de MDQ';}
+			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/globeT-H2.png alt=globeT-H2 width=100% title=Globe-trotter de MDQ';}
 			 }
 		return $data;
 			 
