@@ -25,11 +25,15 @@ class UserController extends Controller
 		$dateref=$em->getRepository('MDQGeneBundle:DateReference')->find(1);
 		$derPartieUser=$em->getRepository('MDQQuizzBundle:PartieQuizz')
 						  ->recupDerPartieUser($user->getId());
+		$medailles=$user->getScUser()->getMedailles();
+		$userServ = $this->container->get('mdq_user.services');
+		$data=$userServ->recupData($user->getScUser()->getMedailles());
 		return $this->render('MDQUserBundle:User:profileU.html.twig', array(
-      'user'   => $user,
+	   'user'   => $user,
 	  'pageprec'=> $pagePrec,
 	  'derParties'=>$derPartieUser,
 	  'dateref'=>$dateref,
+	  'data'=>$data
     ));
 	}
 

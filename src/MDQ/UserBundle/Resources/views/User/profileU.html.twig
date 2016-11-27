@@ -12,12 +12,7 @@
 	  <div class="bloc_profile_joueur" id="profile_joueur">
 	  <div id="profil_partie_gauche">
 		{# <div class="titre_bloc_joueur">Profil</div> #}
-		<p>
-		{% if user.sexe==1 %}
-		<span id="sexe_femme">
-		{% else %}
-		<span id="sexe_homme">
-		{% endif %}{{ sexe(user.sexe) }}</span></p>
+		<p>{{ sexe(user.sexe)|raw }}</p>
 		<p>{{ age(user.datenaissance|date('d/m/Y')) }} ans, 
 		{{ user.departement }}</p>
 		</br>
@@ -55,10 +50,7 @@
 		{% elseif user.scUser==dateref.lxMDQ and user.sexe==1 %}
 		<img style="margin-top:-50px" src="{{ asset('bundles/GeneBundle/globeT-F.png') }}" alt="globeT-F" width=100% title="Globe-trotter de MDQ">
 		{%endif%}
-{#		{% if user.devise!=NULL %}
-		<p><div id="devise_joueur"><span id="devise_joueur_txt">{{ user.devise }}</span></div> </p>
-		{% endif %}
-#}
+
 		</div>
 		<div id="profil_partie_droite">
 
@@ -86,312 +78,63 @@
 					
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedKm', 'id':user.scuser.id}) }}">King Master</a></td>
-						<td class="tab_med_med">
-							
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Km1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Km1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Km1}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						       {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Km2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Km2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Km2}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Km3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Km3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Km3}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med tab_med_med_Ch">
-							{% for i in 1..5%} 
-						       {% if user.scuser.medailles.Km4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.Km4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Km4}}</div>
-								{% endif %}
-						</td>	
-						<td class="tab_med_med tab_med_med_Ct">
-								{% for i in 1..5%} 
-						       {% if user.scuser.medailles.Km5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.Km5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Km5}}</div>
-								{% endif %}
-						</td>		
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Km1,'Or')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Km2,'Ag')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Km3,'Bz')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Km4,'Ch')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Km5,'Ct')|raw}}</td>	
 					</tr>
 					
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedMq', 'id':user.scuser.id}) }}">MasterQuizz</a></td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Mq1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Mq1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Mq1}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						       {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Mq2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Mq2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Mq2}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Mq3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Mq3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Mq3}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med tab_med_med_Ch">
-							{% for i in 1..5%} 
-						       {% if user.scuser.medailles.Mq4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.Mq4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Mq4}}</div>
-								{% endif %}
-						</td>	
-						<td class="tab_med_med tab_med_med_Ct">
-								{% for i in 1..5%} 
-						       {% if user.scuser.medailles.Mq5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.Mq5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Mq5}}</div>
-								{% endif %}
-						</td>	
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Mq1,'Or')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Mq2,'Ag')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Mq3,'Bz')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Mq4,'Ch')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Mq5,'Ct')|raw}}</td>
 					</tr>
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedTm', 'id':user.scuser.id}) }}">Expert Medias</a></td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Tm1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Tm1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Tm1}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						       {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Tm2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Tm2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Tm2}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Tm3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Tm3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Tm3}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med tab_med_med_Ch">
-							{% for i in 1..5%} 
-						       {% if user.scuser.medailles.Tm4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.Tm4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Tm4}}</div>
-								{% endif %}
-						</td>	
-						<td class="tab_med_med tab_med_med_Ct">
-								{% for i in 1..5%} 
-						       {% if user.scuser.medailles.Tm5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.Tm5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Tm5}}</div>
-								{% endif %}
-						</td>		
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Tm1,'Or')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Tm2,'Ag')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Tm3,'Bz')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Tm4,'Ch')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Tm5,'Ct')|raw}}</td>
 					</tr>
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedAr', 'id':user.scuser.id}) }}">Quizz Art</a></td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.ar1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.ar1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.ar1}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						       {% for i in 1..5%} 
-						       {% if user.scuser.medailles.ar2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.ar2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.ar2}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.ar3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.ar3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.ar3}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med tab_med_med_Ch">
-							{% for i in 1..5%} 
-						       {% if user.scuser.medailles.ar4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.ar4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.ar4}}</div>
-								{% endif %}
-						</td>	
-						<td class="tab_med_med tab_med_med_Ct">
-								{% for i in 1..5%} 
-						       {% if user.scuser.medailles.ar5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.ar5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.ar5}}</div>
-								{% endif %}
-						</td>	
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Ar1,'Or')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Ar2,'Ag')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Ar3,'Bz')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Ar4,'Ch')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Ar5,'Ct')|raw}}</td>
 					</tr>
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedFf', 'id':user.scuser.id}) }}">Quizz Nature</a></td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.ff1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.ff1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.ff1}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						       {% for i in 1..5%} 
-						       {% if user.scuser.medailles.ff2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.ff2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.ff2}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.ff3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.ff3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.ff3}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med tab_med_med_Ch">
-							{% for i in 1..5%} 
-						       {% if user.scuser.medailles.ff4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.ff4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.ff4}}</div>
-								{% endif %}
-						</td>	
-						<td class="tab_med_med tab_med_med_Ct">
-								{% for i in 1..5%} 
-						       {% if user.scuser.medailles.ff5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.ff5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.ff5}}</div>
-								{% endif %}
-						</td>	
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Ff1,'Or')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Ff2,'Ag')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Ff3,'Bz')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Ff4,'Ch')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Ff5,'Ct')|raw}}</td>
 					</tr>
 					<tr>
-						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedLx', 'id':user.scuser.id}) }}">Lieux du monde</a></td>						
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.lx1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.lx1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.lx1}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						       {% for i in 1..5%} 
-						       {% if user.scuser.medailles.lx2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.lx2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.lx2}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.lx3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.lx3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.lx3}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med tab_med_med_Ch">
-							{% for i in 1..5%} 
-						       {% if user.scuser.medailles.lx4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.lx4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.lx4}}</div>
-								{% endif %}
-						</td>	
-						<td class="tab_med_med tab_med_med_Ct">
-								{% for i in 1..5%} 
-						       {% if user.scuser.medailles.lx5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.lx5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.lx5}}</div>
-								{% endif %}
-						</td>	
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedLx', 'id':user.scuser.id}) }}">Lieux du monde</a></td>				<td class="tab_med_med">{{tabMed(user.scuser.medailles.Lx1,'Or')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Lx2,'Ag')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Lx3,'Bz')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Lx4,'Ch')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Lx5,'Ct')|raw}}</td>
 					</tr>
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedMu', 'id':user.scuser.id}) }}">Musique classique</a></td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Mu1==i %}<img src={{ asset('bundles/UserBundle/MedOr'~i~'.png') }} alt="Med" width="60px">{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Mu1>5 %}<img src={{ asset('bundles/UserBundle/MedOr5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Mu1}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						       {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Mu2==i %}<img src={{ asset('bundles/UserBundle/MedAg'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Mu2>5 %}<img src={{ asset('bundles/UserBundle/MedAg5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Mu2}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med">
-						      {% for i in 1..5%} 
-						       {% if user.scuser.medailles.Mu3==i %}<img src={{ asset('bundles/UserBundle/MedBz'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-								{% if user.scuser.medailles.Mu3>5 %}<img src={{ asset('bundles/UserBundle/MedBz5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Mu3}}</div>
-								{% endif %}
-						</td>
-						<td class="tab_med_med tab_med_med_Ch">
-							{% for i in 1..5%} 
-						       {% if user.scuser.medailles.Mu4==i %}<img src={{ asset('bundles/UserBundle/MedCh'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.Mu4>5 %}<img src={{ asset('bundles/UserBundle/MedCh5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Mu4}}</div>
-								{% endif %}
-						</td>	
-						<td class="tab_med_med tab_med_med_Ct">
-								{% for i in 1..5%} 
-						       {% if user.scuser.medailles.Mu5==i %}<img src={{ asset('bundles/UserBundle/MedCt'~i~'.png') }} alt="Med" >{% endif %}
-						      {% endfor %}
-							  {% if user.scuser.medailles.Mu5>5 %}<img src={{ asset('bundles/UserBundle/MedCt5.png') }} alt="Med" width="60px">
-																	<div class="user_tab_med">{{user.scuser.medailles.Mu5}}</div>
-								{% endif %}
-						</td>		
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Mu1,'Or')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Mu2,'Ag')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Mu3,'Bz')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Mu4,'Ch')|raw}}</td>
+						<td class="tab_med_med">{{tabMed(user.scuser.medailles.Mu5,'Ct')|raw}}</td>
 					</tr>
 			</table>
 			</div>
-			<div>Nombre total de médailles : {% if user.scuser.medailles.totMed>0%}<a href="{{ path('mdqgene_highScore', {'crit':'totMed', 'id':user.scuser.id}) }}">{{user.scuser.medailles.totMed}}</a>
-										{% else %}0
-											{% endif %}
+			<div> <a href="{{ path('mdqgene_highScore', {'crit':'totMed', 'id':user.scuser.id}) }}">Nombre total de médailles : {{user.scuser.medailles.totMed|chgeNull}}</a>
 			</div>
 		</div>
 		
@@ -399,7 +142,7 @@
 		<div id="user_stats_titre_MqKm" class="user_stats_titre">MasterQuizz et King Master</div>
 		<div id="stats_bloc1">
 			<div class="user_stats_titre_Mq">MasterQuizz</div>
-			<div class="profile_user_type">Score du jour :<a href="{{ path('mdqgene_highScore', {'crit':'scofDayMq', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayMq>0 %}{{user.scUser.scofDayMq}}{%else%}0{%endif%}</span></div></a>
+			<div class="profile_user_type">Score du jour :<a href="{{ path('mdqgene_highScore', {'crit':'scofDayMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scofDayMq|chgeNull}}</span></div></a>
 
 			<div class="profile_user_type">Meilleur score : <a href="{{ path('mdqgene_highScore', {'crit':'scMaxMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scMaxMq}}</span></div></a>
 			<div id="stats_date_hsc">({{user.scUser.datescMaxMq|date('d/m/Y') }})</div>			
@@ -415,7 +158,7 @@
 			</br>
 			<div id="stats_masters">
 			<div class="user_stats_titre_Mq" style="margin-top:10px;">King Master</div>
-			<div class="profile_user_type"> Score actuel :<a href="{{ path('mdqgene_highScore', {'crit':'kingMaster', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.kingMaster >0 %}{{user.scUser.kingMaster}}{% else %}0{% endif %}  </span></a></div>
+			<div class="profile_user_type"> Score actuel :<a href="{{ path('mdqgene_highScore', {'crit':'kingMaster', 'id':user.scuser.id}) }}"><span class="score_profile"> {{user.scUser.kingMaster|chgeNull}} </span></a></div>
 			<div class="profile_user_type"> Meilleur score :<a href="{{ path('mdqgene_highScore', {'crit':'highScKM', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.highScKM}}</span></a></div>
 			</div>
 		</div>
@@ -436,7 +179,7 @@
 				<div id="user_stats_QnF_TF">
 					<img src={{ asset('bundles/GeneBundle/LogoQuizzEm.png') }} alt="Expert Media" width="170px">
 					<div class="user_stats_QnF_col_line">
-						<span class="user_stats_QnF_crit">Score du jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayTM', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayTM>0 %}{{user.scuser.scofdayTM}}{%else%}0{%endif%}</span></a>
+						<span class="user_stats_QnF_crit">Score du jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayTM', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayTM|chgeNull}}</span></a>
 					</div>
 					<div class="user_stats_QnF_col_line">
 						<span class="user_stats_QnF_crit">Meilleur score :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxTM', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxTM}}</span></a>
@@ -447,7 +190,7 @@
 			<div class="user_stats_QnF_col">
 				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzAr2.png') }} alt="Art" width="120px"></div>
 				<div class="user_stats_QnF_col_line">
-					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayAr', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayAr>0 %}{{user.scuser.scofdayAr}}{%else%}0{%endif%}</span></a>
+					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayAr', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayAr|chgeNull}}</span></a>
 				</div>
 				<div class="user_stats_QnF_col_line">
 					<span class="user_stats_QnF_crit">Score max :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxAr', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxAr}}</span></a>
@@ -459,7 +202,7 @@
 			<div class="user_stats_QnF_col">
 				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzFf2.png') }} alt="Nature" width="120px"></div>
 				<div class="user_stats_QnF_col_line">
-					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayFf', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayFf>0 %}{{user.scuser.scofdayFf}}{%else%}0{%endif%}</span></a>
+					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayFf', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayFf|chgeNull}}</span></a>
 				</div>
 				<div class="user_stats_QnF_col_line">
 				<span class="user_stats_QnF_crit">Score max :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxFf', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxFf}}</span></a>
@@ -471,7 +214,7 @@
 			<div class="user_stats_QnF_col">
 				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzMu2.png') }} alt="Musique" width="120px"></div>
 				<div class="user_stats_QnF_col_line">
-					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayMu', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayMu>0 %}{{user.scuser.scofdayMu}}{%else%}0{%endif%}</span></a>
+					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayMu', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayMu|chgeNull}}</span></a>
 				</div>
 				<div class="user_stats_QnF_col_line">
 					<span class="user_stats_QnF_crit">Score max :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxMu', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxMu}}</span></a>
@@ -483,7 +226,7 @@
 			<div class="user_stats_QnF_col">
 				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzLx2.png') }} alt="Lieux" width="120px"></div>
 				<div class="user_stats_QnF_col_line">
-					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayLx', 'id':user.scuser.id}) }}"><span class="score_profile">{% if user.scUser.scofDayLx>0 %}{{user.scuser.scofdayLx}}{%else%}0{%endif%}</span></a>
+					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayLx', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayLx|chgeNull}}</span></a>
 				</div>
 				<div class="user_stats_QnF_col_line">
 					<span class="user_stats_QnF_crit">Score max :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxLx', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxLx}}</span></a>
@@ -500,13 +243,7 @@
 		{% if derParties is defined %}
 		{% for partie in derParties %}
 			<div id="partie{{loop.index}}" class="derpartie">
-			{% if partie.type=="FfQuizz" %}<span style="color:rgb(0,255,0);">Quizz Nature</span>
-			{% elseif partie.type=="MuQuizz" %}<span style="color:rgb(255,128,255);">Musique class.</span>
-			{% elseif partie.type=="ArQuizz" %}<span style="color:rgb(255,121,0);">Quizz Art</span>
-			{% elseif partie.type=="LxQuizz" %}<span style="color:rgb(0,255,255);">Lieux du monde</span>
-			{% elseif partie.type=="MasterQuizz" %}<span style="color:rgb(255,255,0);">{{partie.type}}</span>
-			{% else %}Autre
-			{% endif %}
+			{{affichPartie(partie.type)|raw}}
 			: {{partie.score}} <span style="font-size:9px;">-{{partie.date|date('d/m/Y')}}</span></div>
 		{% endfor %}
 		{% endif %}

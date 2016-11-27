@@ -14,5 +14,11 @@ services:
             - { name: form.type, alias: mdq_user_profile }			
     mdq_user.twig.mdq_extension:
         class: MDQ\UserBundle\Twig\UserExtension
+        arguments: [@mdq_gene.repository.date_ref]
         tags:
             - { name: twig.extension }
+    mdq_user.services:         
+        class: MDQ\UserBundle\Services\UserServ
+        arguments: [@mdq_gene.repository.date_ref]
+
+         

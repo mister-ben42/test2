@@ -116,7 +116,7 @@ class HighScore
 			            }	
 	else if ($crit=="totMed") {$data['titre1']="Nombre total";
 			            $data['titre2']="de Médailles";
-			            $data['aide']="Nombre total de Médailles tout classements confondus";
+			            $data['aide']="Nombre total de médailles tous classements confondus";
 			            $data['nomPage']="highScore";
 			            }	
 /*	else if ($crit=="scTotMq") {$data['titre1']==
