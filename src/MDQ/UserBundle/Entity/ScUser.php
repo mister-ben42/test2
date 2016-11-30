@@ -2148,7 +2148,7 @@ class ScUser
      * @param \MDQ\QuestionBundle\Entity\Question $questionsError
      * @return ScUser
      */
-    public function addQuestion_error(\MDQ\QuestionBundle\Entity\Question $questionsError)
+    public function addQuestionError(\MDQ\QuestionBundle\Entity\Question $questionsError)
     {
         $this->questions_error[] = $questionsError;
 
@@ -2160,7 +2160,7 @@ class ScUser
      *
      * @param \MDQ\QuestionBundle\Entity\Question $questionsError
      */
-    public function removeQuestion_error(\MDQ\QuestionBundle\Entity\Question $questionsError)
+    public function removeQuestionError(\MDQ\QuestionBundle\Entity\Question $questionsError)
     {
         $this->questions_error->removeElement($questionsError);
     }
@@ -2170,7 +2170,7 @@ class ScUser
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getQuestions_error()
+    public function getQuestionsError()
     {
         return $this->questions_error;
     }
@@ -2198,15 +2198,6 @@ class ScUser
         $this->questions_error->removeElement($questionsError);
     }
 
-    /**
-     * Get questions_error
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getQuestionsError()
-    {
-        return $this->questions_error;
-    }
 
     /**
      * Add qavaliders

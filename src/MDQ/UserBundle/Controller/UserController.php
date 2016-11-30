@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\UserBundle\Entity\User;
 
 
+
 class UserController extends Controller
 {
 	public function profileUAction(User $user)
@@ -22,17 +23,13 @@ class UserController extends Controller
 			$pagePrec=$session->get('page');
 		}
 		$em=$this->getDoctrine()->getManager();
-		$dateref=$em->getRepository('MDQGeneBundle:DateReference')->find(1);
 		$derPartieUser=$em->getRepository('MDQQuizzBundle:PartieQuizz')
 						  ->recupDerPartieUser($user->getId());
-		$medailles=$user->getScUser()->getMedailles();
 		$userServ = $this->container->get('mdq_user.services');
 		$data=$userServ->recupData($user->getScUser()->getMedailles());
 		return $this->render('MDQUserBundle:User:profileU.html.twig', array(
 	   'user'   => $user,
-	  'pageprec'=> $pagePrec,
 	  'derParties'=>$derPartieUser,
-	  'dateref'=>$dateref,
 	  'data'=>$data
     ));
 	}
@@ -40,10 +37,7 @@ class UserController extends Controller
 	public function profileUAutoAction()
 	{
 		$user = $this->container->get('security.context')->getToken()->getUser();
-        if ($user===null) {// Ne fonctionne pas du tout 
-				return $this->redirect($this->generateUrl('mdqgene_accueil'));
-        }
-		if (!$this->get('security.context')->isGranted('ROLE_USER')) {// ça ça marche.
+		if ($user===null || !$this->get('security.context')->isGranted('ROLE_USER')) {// ça ça marche.
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
 		$em=$this->getDoctrine()->getManager();
@@ -53,13 +47,13 @@ class UserController extends Controller
 						->recupQaval($user->getId());
 		$nbQaval7j=$em 	->getRepository('MDQQuestionBundle:QaValider')
 						->nbQaval7j($user->getId());
-		$dateref=$em->getRepository('MDQGeneBundle:DateReference')->find(1);
+		$gestionQProp=$em->getRepository('MDQAdminBundle:Gestion')->findOneById(1)->getPropQ();
 		return $this->render('MDQUserBundle:User:profileUAuto.html.twig', array(
 		  'user'   => $user,	  
 		  'derParties'=>$derPartieUser,
 		  'qaval'=>$qavalUser,
 		  'nbQaval7j'=>$nbQaval7j,
-		  'dateref'=>$dateref,
+		  'gestionQProp'=>$gestionQProp,
 		));	
 	}
 	public function profileUAutoEditAction()
@@ -76,9 +70,6 @@ class UserController extends Controller
 	return $this->redirect($this->generateUrl('fos_user_security_login'));
 
 	}
-
-
-
 	public function loginBisAction()// A garder, pour le render le page accueil
 	{
 		

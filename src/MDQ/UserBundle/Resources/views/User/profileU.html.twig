@@ -21,7 +21,8 @@
 
 		</div>
 		<div id="profil_partie_centre">
-		<img {{testMaitre(user)}} >
+		
+		<img style="margin-top:-50px" src="{{ asset(testMaitre(user)) }}" alt="Maitre" width=100% title="Maitre de MDQ"  >
 
 
 		</div>
@@ -51,59 +52,59 @@
 					
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedKm', 'id':user.scuser.id}) }}">King Master</a></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Km1,'Or')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km1)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Km2,'Ag')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km2)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Km3,'Bz')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km3)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Km4,'Ch')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km4)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Km5,'Ct')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km5)}}</div></td>	
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Km1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Km2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Km3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km3)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Km4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km4)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Km5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km5)}}</div></td>	
 					</tr>
 					
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedMq', 'id':user.scuser.id}) }}">MasterQuizz</a></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Mq1,'Or')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq1)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Mq2,'Ag')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq2)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Mq3,'Bz')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq3)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Mq4,'Ch')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq4)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Mq5,'Ct')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq5)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mq1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mq2,'Ag'))}} alt="Med" width="60px" ><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mq3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq3)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mq4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq4)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mq5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq5)}}</div></td>
 					</tr>
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedTm', 'id':user.scuser.id}) }}">Expert Medias</a></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Tm1,'Or')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm1)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Tm2,'Ag')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm2)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Tm3,'Bz')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm3)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Tm4,'Ch')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm4)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Tm5,'Ct')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm5)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Tm1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Tm2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Tm3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm3)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Tm4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm4)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Tm5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm5)}}</div></td>
 					</tr>
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedAr', 'id':user.scuser.id}) }}">Quizz Art</a></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Ar1,'Or')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar1)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Ar2,'Ag')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar2)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Ar3,'Bz')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar3)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Ar4,'Ch')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar4)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Ar5,'Ct')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar5)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ar1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ar2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ar3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar3)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ar4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar4)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ar5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar5)}}</div></td>
 					</tr>
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedFf', 'id':user.scuser.id}) }}">Quizz Nature</a></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Ff1,'Or')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff1)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Ff2,'Ag')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff2)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Ff3,'Bz')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff3)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Ff4,'Ch')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff4)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Ff5,'Ct')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff5)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ff1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ff2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ff3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff3)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ff4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff4)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ff5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff5)}}</div></td>
 					</tr>
 					<tr>
-						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedLx', 'id':user.scuser.id}) }}">Lieux du monde</a></td>				<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Lx1,'Or')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx1)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Lx2,'Ag')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx2)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Lx3,'Bz')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx3)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Lx4,'Ch')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx4)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Lx5,'Ct')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx5)}}</div></td>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedLx', 'id':user.scuser.id}) }}">Lieux du monde</a></td>				<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Lx1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Lx2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Lx3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx3)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Lx4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx4)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Lx5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx5)}}</div></td>
 					</tr>
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedMu', 'id':user.scuser.id}) }}">Musique classique</a></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Mu1,'Or')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu1)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Mu2,'Ag')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu2)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Mu3,'Bz')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu3)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Mu4,'Ch')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu4)}}</div></td>
-						<td class="tab_med_med"><img {{tabMed(user.scuser.medailles.Mu5,'Ct')}}><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu5)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mu1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mu2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mu3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu3)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mu4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu4)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mu5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu5)}}</div></td>
 					</tr>
 			</table>
 			</div>
@@ -120,12 +121,9 @@
 			<div class="profile_user_type">Meilleur score : <a href="{{ path('mdqgene_highScore', {'crit':'scMaxMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scMaxMq}}</span></div></a>
 			<div id="stats_date_hsc">({{user.scUser.datescMaxMq|date('d/m/Y') }})</div>			
 			
-			<div class="profile_user_type"> % de bonnes réponses : {% if user.scuser.nbQtotMq>99 %}<a href="{{ path('mdqgene_highScore', {'crit':'prctBrtotMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.prctBrtotMq}}</span></div></a>
-											{% else %}<span class="score_profile" style="cursor:pointer;" title="Il faut avoir répondu à plus de 100 questions pour que le pourcentage soit calculé">-</span></div>
-											{% endif %}
-			<div class="profile_user_type"> Score moyen : {% if user.scuser.nbPMq>10 %}<a href="{{ path('mdqgene_highScore', {'crit':'scMoyMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scMoyMq}}</span></div></a>
-								{% else %}<span class="score_profile" style="cursor:pointer;" title="Il faut avoir joué plus de 10 partie au MasterQuizz pour que la moyenne soit calculée">-</span></div>
-								{% endif %}
+			<div class="profile_user_type"> % de bonnes réponses :<a href="{{ path('mdqgene_highScore', {'crit':'prctBrtotMq', 'id':user.scuser.id}) }}"><span class="score_profile"><span {{testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés."  >{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrtotMq)}}</span></span></a></div>							
+			<div class="profile_user_type"> Score moyen : <a href="{{ path('mdqgene_highScore', {'crit':'scMoyMq', 'id':user.scuser.id}) }}"><span {{testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés." class="score_profile">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.scMoyMq)}}</span></a></div>
+								
 			<div class="profile_user_type"> Nombre de questions jouées : <a href="{{ path('mdqgene_highScore', {'crit':'nbQtotMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.nbQtotMq}}</span></a></div>
 
 			</br>
@@ -136,13 +134,13 @@
 			</div>
 		</div>
 		<div id="graph_bande_stats" >
-			<div id="user_graphstats_titre" class="infobulle" aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les moyennes soient calculées.">% de bonnes réponses par catégorie</div>
-			<div id="bande_H"><a href="{{ path('mdqgene_highScore', {'crit':'prctBrhMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Histoire</div><div class="base"><div class="bande_score" id="bande_score_H"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_H">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBrhMq}}{% else %}0{%endif%}</span> %</div></a></div>
-			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrgMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Géographie </div><div class="base"><div class="bande_score" id="bande_score_G"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_G">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBrgMq}}{% else %}0{%endif%}</span> %</div></a></div>
-			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrsnMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sciences et nature </div><div class="base"><div class="bande_score" id="bande_score_SN"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SN">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBrsnMq}}{% else %}0{%endif%}</span> %</div></a></div>
-			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBralMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Arts et Littérature </div><div class="base"><div class="bande_score" id="bande_score_AL"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_AL">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBralMq}}{% else %}0{%endif%}</span> %</div></a></div>
-			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrslMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sports et loisirs </div><div class="base"><div class="bande_score" id="bande_score_SL"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SL">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBrslMq}}{% else %}0{%endif%}</span> %</div></a></div>
-			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrdMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Divers </div><div class="base"><div class="bande_score" id="bande_score_D"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_D">{% if user.scuser.nbQtotMq>99 %}{{user.scUser.prctBrdMq}}{% else %}0{%endif%}</span> %</div></a></div>
+			<div id="user_graphstats_titre" {{testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés.">% de bonnes réponses par catégorie</div>
+			<div id="bande_H"><a href="{{ path('mdqgene_highScore', {'crit':'prctBrhMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Histoire</div><div class="base"><div class="bande_score" id="bande_score_H"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_H">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrhMq)}}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrgMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Géographie </div><div class="base"><div class="bande_score" id="bande_score_G"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_G">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrgMq)}}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrsnMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sciences et nature </div><div class="base"><div class="bande_score" id="bande_score_SN"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SN">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrsnMq)}}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBralMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Arts et Littérature </div><div class="base"><div class="bande_score" id="bande_score_AL"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_AL">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBralMq)}}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrslMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sports et loisirs </div><div class="base"><div class="bande_score" id="bande_score_SL"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SL">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrslMq)}}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrdMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Divers </div><div class="base"><div class="bande_score" id="bande_score_D"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_D">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrdMq)}}</span> %</div></a></div>
 		</div>
 		</div>
 		</div>

@@ -24,6 +24,11 @@ class UserExtension extends \Twig_Extension
 		  'spanMed' => new \Twig_Function_Method($this, 'spanMedailles'),
 		  'spanDerPartie' => new \Twig_Function_Method($this, 'spanDerPartie'),
 		  'testMaitre' => new \Twig_Function_Method($this, 'testMaitre'),
+		  'testSup99Mq'=> new \Twig_Function_Method($this, 'testSup99Mq'),
+		  'testInfobulle99'=> new \Twig_Function_Method($this, 'testInfobulle99'),
+		  'testPropQ'=> new \Twig_Function_Method($this, 'testPropQ'),
+		  'txtRefusPropQ'=> new \Twig_Function_Method($this, 'txtRefusPropQ'),
+		  'phraseQaval'=> new \Twig_Function_Method($this, 'phraseQaval'),
 	      );
 	}
 	    public function getFilters()
@@ -65,14 +70,14 @@ class UserExtension extends \Twig_Extension
 
 	public function tabMedailles($data, $type)
 	{
-	    if($data==0){$balise="";}
+	    if($data==0){$balise='bundles/UserBundle/Med0.png';}
 	    elseif($data<6)
 	    {
-		  $balise='src=../../../../web/bundles/UserBundle/Med'.$type.$data.'.png alt=Med width=60px>';
+		  $balise='bundles/UserBundle/Med'.$type.$data.'.png';
 	    }
 	    else
 	    {
-		  $balise='src=../../../../web/bundles/UserBundle/Med'.$type.'5.png alt=Med width=60px>';
+		  $balise='bundles/UserBundle/Med'.$type.'5.png';
 	    }
             return $balise;
 	}
@@ -116,36 +121,80 @@ class UserExtension extends \Twig_Extension
 		$data='';
 		$dateRef=$this->dateRefRepository->findOneById(1);
 		if($dateRef->getRMDQ()!==Null && $user->getId()==$dateRef->getRMDQ()->getId()){
-			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/reine3.png alt=reine width=100% title=Reine de MDQ';}
-			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/roi2.png alt=roi width=100% title=Roi de MDQ';}
+			 if($user->getSexe()==1){$data='bundles/GeneBundle/reine3.png';}
+			 else{$data='bundles/GeneBundle/roi2.png';}
 			 }
 		elseif($dateRef->getSMDQ()!==Null && $user->getId()==$dateRef->getSMDQ()->getId()){
-			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/savant-F.png alt=Savante width=100% title=Savante de MDQ';}
-			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/savant-H.png alt=Savant width=100% title=Savant MDQ';}
+			 if($user->getSexe()==1){$data='bundles/GeneBundle/savant-F.png';}
+			 else{$data='bundles/GeneBundle/savant-H.png';}
 			 }
 		elseif($dateRef->getMMDQ()!==Null && $user->getId()==$dateRef->getMMDQ()->getId()){
-			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/ministre-F.png alt=ministre-F width=100% title=Ministre de Mdq';}
-			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/ministre-H.png alt=ministre-H width=100% title=Ministre de Mdq';}
+			 if($user->getSexe()==1){$data='bundles/GeneBundle/ministre-F.png';}
+			 else{$data='bundles/GeneBundle/ministre-H.png';}
 			 }
 		elseif($dateRef->getMuMDQ()!==Null && $user->getId()==$dateRef->getMuMDQ()->getId()){
-			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/virtuose-F.png alt=virtuose-F width=100% title=virtuose de MDQ';}
-			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/virtuose-H.png alt=virtuose-H width=100% title=virtuose de MDQ';}
+			 if($user->getSexe()==1){$data='bundles/GeneBundle/virtuose-F.png';}
+			 else{$data='bundles/GeneBundle/virtuose-H.png';}
 			 }
 		elseif($dateRef->getFfMDQ()!==Null && $user->getId()==$dateRef->getFfMDQ()->getId()){
-			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/nature-F.png alt=nature-F width=100% title=Ecologiste de MDQ';}
-			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/nature-H.png alt=nature-H width=100% title=Ecologiste de MDQ';}
+			 if($user->getSexe()==1){$data='bundles/GeneBundle/nature-F.png';}
+			 else{$data='bundles/GeneBundle/nature-H.png';}
 			 }
 		elseif($dateRef->getArMDQ()!==Null && $user->getId()==$dateRef->getArMDQ()->getId()){
-			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/peintre-F.png alt=peintre-F width=100% title=peintre de MDQ';}
-			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/peintre-H.png alt=peintre-H width=100% title=peintre de MDQ';}
+			 if($user->getSexe()==1){$data='bundles/GeneBundle/peintre-F.png';}
+			 else{$data='bundles/GeneBundle/peintre-H.png';}
 			 }
 		elseif($dateRef->getLxMDQ()!==Null && $user->getId()==$dateRef->getLxMDQ()->getId()){
-			 if($user->getSexe()==1){$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/globeT-F.png alt=globeT-F width=100% title=Globe-trotter de MDQ';}
-			 else{$data='style=margin-top:-50px src=../../../../web/bundles/GeneBundle/globeT-H2.png alt=globeT-H2 width=100% title=Globe-trotter de MDQ';}
+			 if($user->getSexe()==1){$data='bundles/GeneBundle/globeT-F.png';}
+			 else{$data='bundles/GeneBundle/globeT-H2.png';}
 			 }
+		return $data;			
+	  
+	  }
+	  public function testSup99Mq($nbQMq, $data)
+	  {
+		if($nbQMq<100){$data="-";}
 		return $data;
-			 
-			
+	  }
+	  public function testInfobulle99($nbQMq)
+	  {
+		if($nbQMq<100){$data='class=infobulle';}
+		else{$data="";}
+		return $data;
+	  }
+	  public function testPropQ($nbPMq, $nbQaval7j, $gestionPropQ)
+	  {
+		$test=1;
+		if($nbPMq<5){$test=0;}
+		elseif($nbQaval7j>4){$test=0;}
+		elseif($gestionPropQ==0){$test=0;}
+		return $test;
+	  
+	  }
+	  public function txtRefusPropQ($nbPMq, $nbQaval7j, $gestionPropQ)// il faudra que je rajoute l'autorisation du joueur connecté.
+	  {
+		if($gestionPropQ==0){$txt="Il n'est pas possible de proposer des questions actuellement.";}
+		elseif($nbPMq<5){$txt="Il faut avoir joué au moins 5 parties pour pouvoir proposer des questions.";}
+		elseif($nbQaval7j>4){$txt="Vous ne pouvez pas proposer plus de 5 questions par semaine.";}
+		else{$txt="Non autorisé.";}
+		return $txt;
+	  }
+	  public function phraseQaval($nbQProp, $nbQval)
+	  {
+		if($nbQProp==0){$txt="Vous n'avez proposé aucune question.";}
+		else{
+		      if($nbQProp==1){$txt1='Vous avez proposé 1 question ';}
+		      else{$txt1='Vous avez poposé '.$nbQProp.' questions ';}
+		      if($nbQval==0){$txt2='et aucune n\'a été validée.';}
+		      elseif($nbQval==1){$txt2='et 1 a été validée.';}
+		      else{$txt2='et '.$nbQval.' ont été validées.';}
+		      $txt=$txt1.$txt2;
+		 }
+		
+		return $txt;
+	  
 	  
 	  }
 }
+
+

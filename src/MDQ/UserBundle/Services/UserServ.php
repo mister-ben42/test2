@@ -18,7 +18,7 @@ class UserServ
 	      $data['medKmBz']=$medailles->getKm3();
 	      $data['medKmCh']=$medailles->getKm4();
 	      $data['medKmCt']=$medailles->getKm5();
-	      $dateref=$this->myrepository->findById(1);
+	      //$dateref=$this->myrepository->findById(1);// juste pour essayer
       
 
 	      return $data;

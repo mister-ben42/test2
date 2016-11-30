@@ -269,10 +269,7 @@ class ScUserRepository extends EntityRepository
 		}// tout ca pour n'envoyer qu'un tableau d'id.
 		return $tab2;
 	}
-
-	public function majBddScQ($scUser, $game, $dom1, $br)
-	{
-			function MajStatGame(ScUser $scUser, $game, $br)
+			private function MajStatGame(ScUser $scUser, $game, $br)
 			{
 				if($game=='MasterQuizz')
 				{
@@ -285,7 +282,7 @@ class ScUserRepository extends EntityRepository
 				}
 				return;
 			}
-			function MajNbQ(ScUser $scUser, $dom1)
+			private function MajNbQ(ScUser $scUser, $dom1)
 			{
 				if($dom1=='Histoire'){$nbQ=$scUser->getNbQhMq()+1;
 										$scUser->setNbQhMq($nbQ);}
@@ -313,7 +310,7 @@ class ScUserRepository extends EntityRepository
 										$scUser->setNbQSx($nbQ);}								
 				return $nbQ;
 			}
-			function MajNbBr(ScUser $scUser, $dom1, $br)
+			private function MajNbBr(ScUser $scUser, $dom1, $br)
 			{				
 				if($br==1){$scUser->setNbBrtot($scUser->getNbBrtot()+1);}
 				if($dom1=='Histoire'){$nbBr=$scUser->getNbBrhMq()+$br;
@@ -342,7 +339,7 @@ class ScUserRepository extends EntityRepository
 									$scUser->setNbBrSx($nbBr);}
 				return $nbBr;
 			}
-			function MajPrctBr(ScUser $scUser, $dom1, $nbQ, $nbBr)
+			private function MajPrctBr(ScUser $scUser, $dom1, $nbQ, $nbBr)
 			{
 				if($dom1=='Histoire'){$scUser->setPrctBrhMq($nbBr*100/$nbQ);}
 				elseif($dom1=='Géographie'){$scUser->setPrctBrgMq($nbBr*100/$nbQ);}
@@ -358,10 +355,13 @@ class ScUserRepository extends EntityRepository
 				elseif($dom1=='SexyQuizz'){$scUser->setPrctBrSx($nbBr*100/$nbQ);}
 				return;
 			}
-		if($game=='MasterQuizz'){MajStatGame($scUser, $game, $br);}
-		$newnbQ=MajNbQ($scUser,$dom1);			
-		$newnbBr=MajNbBr($scUser,$dom1,$br);
-		MajPrctBr($scUser, $dom1, $newnbQ, $newnbBr);
+	public function majBddScQ($scUser, $game, $dom1, $br)
+	{
+
+		if($game=='MasterQuizz'){ScUserRepository::MajStatGame($scUser, $game, $br);}
+		$newnbQ=$this->MajNbQ($scUser,$dom1);			
+		$newnbBr=$this->MajNbBr($scUser,$dom1,$br);
+		$this->MajPrctBr($scUser, $dom1, $newnbQ, $newnbBr);
 		
 		return 1;
 	}
@@ -369,101 +369,16 @@ class ScUserRepository extends EntityRepository
 	{
 	      if($rep==$bRep){$br=1;}
 	      else{$br=0;}
-			function MajStatGame(ScUser $scUser, $game, $br)
-			{
-				if($game=='MasterQuizz')
-				{
-				$NbQtot=$scUser->getNbQtotMq();			
-				$NbBrTot=$scUser->getNbBrtotMq();
-				$scUser->setNbQtotMq($NbQtot+1);
-				$NbBrTot=$NbBrTot+$br;
-				$scUser->setNbBrtotMq($NbBrTot);
-				$scUser->setPrctBrtotMq($NbBrTot*100/($NbQtot+1));
-				}
-				return;
-			}
-			function MajNbQ(ScUser $scUser, $dom1)
-			{
-				if($dom1=='Histoire'){$nbQ=$scUser->getNbQhMq()+1;
-										$scUser->setNbQhMq($nbQ);}
-				elseif($dom1=='Géographie'){$nbQ=$scUser->getNbQgMq()+1;
-										$scUser->setNbQgMq($nbQ);}
-				elseif($dom1=='Divers'){$nbQ=$scUser->getNbQdMq()+1;
-										$scUser->setNbQdMq($nbQ);}
-				elseif($dom1=='Arts et Littérature'){$nbQ=$scUser->getNbQalMq()+1;
-										$scUser->setNbQalMq($nbQ);}
-				elseif($dom1=='Sports et loisirs'){$nbQ=$scUser->getNbQslMq()+1;
-										$scUser->setNbQslMq($nbQ);}	
-				elseif($dom1=='Sciences et nature'){$nbQ=$scUser->getNbQsnMq()+1;
-										$scUser->setNbQsnMq($nbQ);}											
-				elseif($dom1=='MuQuizz'){$nbQ=$scUser->getNbQMu()+1;
-									$scUser->setNbQMu($nbQ);}				
-				elseif($dom1=='ArQuizz'){$nbQ=$scUser->getNbQAr()+1;
-										$scUser->setNbQAr($nbQ);}
-				elseif($dom1=='FfQuizz'){$nbQ=$scUser->getNbQFf()+1;
-										$scUser->setNbQFf($nbQ);}
-				elseif($dom1=='LxQuizz'){$nbQ=$scUser->getNbQLx()+1;
-										$scUser->setNbQLx($nbQ);}
-				elseif($dom1=='TvQuizz'){$nbQ=$scUser->getNbQTv()+1;
-										$scUser->setNbQTv($nbQ);}
-				elseif($dom1=='SexyQuizz'){$nbQ=$scUser->getNbQSx()+1;
-										$scUser->setNbQSx($nbQ);}								
-				return $nbQ;
-			}
-			function MajNbBr(ScUser $scUser, $dom1, $br)
-			{				
-				if($br==1){$scUser->setNbBrtot($scUser->getNbBrtot()+1);}
-				if($dom1=='Histoire'){$nbBr=$scUser->getNbBrhMq()+$br;
-									$scUser->setNbBrhMq($nbBr);}
-				elseif($dom1=='Géographie'){$nbBr=$scUser->getNbBrgMq()+$br;
-									$scUser->setNbBrgMq($nbBr);}
-				elseif($dom1=='Divers'){$nbBr=$scUser->getNbBrdMq()+$br;
-									$scUser->setNbBrdMq($nbBr);}
-				elseif($dom1=='Arts et Littérature'){$nbBr=$scUser->getNbBralMq()+$br;
-									$scUser->setNbBralMq($nbBr);}
-				elseif($dom1=='Sports et loisirs'){$nbBr=$scUser->getNbBrslMq()+$br;
-									$scUser->setNbBrslMq($nbBr);}
-				elseif($dom1=='Sciences et nature'){$nbBr=$scUser->getNbBrsnMq()+$br;
-									$scUser->setNbBrsnMq($nbBr);}
-				elseif($dom1=='MuQuizz'){$nbBr=$scUser->getNbBrMu()+$br;
-									$scUser->setNbBrMu($nbBr);}
-				elseif($dom1=='ArQuizz'){$nbBr=$scUser->getNbBrAr()+$br;
-									$scUser->setNbBrAr($nbBr);}
-				elseif($dom1=='FfQuizz'){$nbBr=$scUser->getNbBrFf()+$br;
-									$scUser->setNbBrFf($nbBr);}
-				elseif($dom1=='LxQuizz'){$nbBr=$scUser->getNbBrLx()+$br;
-									$scUser->setNbBrLx($nbBr);}				
-				elseif($dom1=='TvQuizz'){$nbBr=$scUser->getNbBrTv()+$br;
-									$scUser->setNbBrTv($nbBr);}				
-				elseif($dom1=='SexyQuizz'){$nbBr=$scUser->getNbBrSx()+$br;
-									$scUser->setNbBrSx($nbBr);}
-				return $nbBr;
-			}
-			function MajPrctBr(ScUser $scUser, $dom1, $nbQ, $nbBr)
-			{
-				if($dom1=='Histoire'){$scUser->setPrctBrhMq($nbBr*100/$nbQ);}
-				elseif($dom1=='Géographie'){$scUser->setPrctBrgMq($nbBr*100/$nbQ);}
-				elseif($dom1=='Divers'){$scUser->setPrctBrdMq($nbBr*100/$nbQ);}
-				elseif($dom1=='Arts et Littérature'){$scUser->setPrctBralMq($nbBr*100/$nbQ);}
-				elseif($dom1=='Sports et loisirs'){$scUser->setPrctBrslMq($nbBr*100/$nbQ);}
-				elseif($dom1=='Sciences et nature'){$scUser->setPrctBrsnMq($nbBr*100/$nbQ);}
-				elseif($dom1=='MuQuizz'){$scUser->setPrctBrMu($nbBr*100/$nbQ);}
-				elseif($dom1=='ArQuizz'){$scUser->setPrctBrAr($nbBr*100/$nbQ);}
-				elseif($dom1=='FfQuizz'){$scUser->setPrctBrFf($nbBr*100/$nbQ);}
-				elseif($dom1=='LxQuizz'){$scUser->setPrctBrLx($nbBr*100/$nbQ);}				
-				elseif($dom1=='TvQuizz'){$scUser->setPrctBrTv($nbBr*100/$nbQ);}				
-				elseif($dom1=='SexyQuizz'){$scUser->setPrctBrSx($nbBr*100/$nbQ);}
-				return;
-			}
-		if($game=='MasterQuizz'){MajStatGame($scUser, $game, $br);}
-		$newnbQ=MajNbQ($scUser,$dom1);			
-		$newnbBr=MajNbBr($scUser,$dom1,$br);
-		MajPrctBr($scUser, $dom1, $newnbQ, $newnbBr);
+
+		if($game=='MasterQuizz'){ScUserRepository::MajStatGame($scUser, $game, $br);}
+		$newnbQ=$this->MajNbQ($scUser,$dom1);			
+		$newnbBr=ScUserRepository::MajNbBr($scUser,$dom1,$br);
+		ScUserRepository::MajPrctBr($scUser, $dom1, $newnbQ, $newnbBr);
 		if($finP==1){$this->majBddScfinP($scUser, $dom1, $game, $partie);}
 		
 		return 1;
 	}
-	
+
 	public function majBddScfinP($scUser, $dom1, $game, $partie)// sert aussi pour les bots.
 	{		
 		$scP=$partie->getScore();

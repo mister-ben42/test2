@@ -23,25 +23,15 @@
 	<div class="bloc_profile_joueur" >
 		<div class="titre_bloc_joueur">Mes questions</div>
 		
-{% if user.scuser.nbPMq<5 %}
+      {% if testPropQ(user.scuser.nbPMq, nbQaval7j, gestionQProp)==0 and (not is_granted('ROLE_ADMIN')) %}
 		<div class="profileUAuto_button_inactive">Proposer une question</div>
-		<div class="profileUAuto_inactif">Vous devez avoir jouer plus de 5 parties au Masterquizz pour pouvoir
-		proposer des questions.</div>
+		<div class="profileUAuto_inactif">{{ txtRefusPropQ(user.scuser.nbPMq, nbQaval7j, gestionQProp)}}</div>
 		</div>
-{% else %}
-	{% if nbQaval7j>4%}
-		<div class="profileUAuto_button_inactive">Proposer une question</div>
-		<div class="profileUAuto_inactif">Vous pouvez proposer au maximum 5 questions chaque semaine.</div>
-		</br></br>
 	{% else %}
 	<a href="{{path ('mdqquestion_ajouterQ')}}">	<div class="profileUAuto_button">Proposer une question</div></a>
 	{% endif %}
 	{% if user.scuser.nbQprop>0 %}
-		Vous avez proposé {{user.scuser.nbQprop}} {% if user.scuser.nbQprop==1 %}question{%else%}questions{%endif%},
-		et {% if user.scuser.nbQvalid==0 %}aucune n'a été validée.
-			{%elseif user.scuser.nbQvalid==1%} 1 a été validée et ajoutée à la base de données.
-			{%else %}{{user.scuser.nbQvalid}} ont été validées et ajoutées à la base de données.
-			{%endif%}
+		{{phraseQaval(user.scuser.nbQprop,user.scuser.nbQvalid)}}
 		<table id="profileUAuto_table_Q">
 			<thead>
 			<tr>
@@ -67,7 +57,6 @@
 		Vous n'avez pas encore proposé de question.
 	{% endif %}
 		</div>
-{% endif %}
 	{% endblock %}
 {% block user_menu %}
 	<div class="bloc_menu">
