@@ -23,8 +23,12 @@ class QuizzServ
 	     if ($user===null || $game=="MasterQuizz" && $Gestion->getMq()==0 && $admin==0
 			 || $game=="FfQuizz" && $Gestion->getFf()==0 && $admin==0
 			 || $game=="ArQuizz" && $Gestion->getAr()==0 && $admin==0
-			 || $game=="McQuizz" && $Gestion->getMc()==0 && $admin==0
-			 || $game=="LxQuizz" && $Gestion->getLx()==0 && $admin==0)
+			 || $game=="MuQuizz" && $Gestion->getMc()==0 && $admin==0
+			 || $game=="LxQuizz"  && $Gestion->getLx()==0 && $admin==0
+			 || $game=="SexyQuizz" && $admin==0
+			 || $game=="TvQuizz" && $admin==0)
+		{$test=0;}
+	    if ($game!="MasterQuizz" && $game!="FfQuizz" && $game!="ArQuizz" && $game!="MuQuizz" && $game!="LxQuizz" && $game!="SexyQuizz" && $game!="TvQuizz")
 		{$test=0;}
 	    return $test;
       }

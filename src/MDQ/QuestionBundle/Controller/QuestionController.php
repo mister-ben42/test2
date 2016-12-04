@@ -41,8 +41,8 @@ class QuestionController extends Controller
 							->testDoublon('bddqaval', 'intitule', $intitule);
 			if ($doublons!=[]){
 				return $this->render('MDQQuestionBundle:Question:ajouterQ.html.twig', array(
-						'form' => $form->createView(),
-						'doublon' =>1,
+						'form'=>$form->createView(),
+						'doublon'=>1,
 							));
 			}
 			if ($form->isValid()) {
@@ -57,7 +57,7 @@ class QuestionController extends Controller
 		}
 		return $this->render('MDQQuestionBundle:Question:ajouterQ.html.twig', array(
 		  'form' => $form->createView(),
-		  'doublon' =>0,
+		  'doublon'=>0,
 		));
 	}
 	public function modifQavalAction(Qavalider $qaval)
@@ -91,6 +91,7 @@ class QuestionController extends Controller
 		return $this->render('MDQQuestionBundle:Question:ajouterQ.html.twig', array(
 		  'form'    => $form->createView(),
 		  'repAdmin'=>$repAdmin,
+		  'doublon'=>0,
 		));
    	}
 

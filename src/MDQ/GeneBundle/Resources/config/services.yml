@@ -8,3 +8,9 @@ services:
 
      mdq_gene.services:
          class: MDQ\GeneBundle\Services\HighScore
+         
+     mdq_gene.twig.mdq_extension:
+        class: MDQ\GeneBundle\Twig\GeneExtension
+        arguments: [@mdq_admin.repository.gestion, @mdq_gene.service.role]
+        tags:
+            - { name: twig.extension }

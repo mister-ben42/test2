@@ -43,11 +43,9 @@
 		{% for question in qaval %}
 			<tr>
 				<td class="profileUAuto_table_Q_intitule">{{question.intitule}}</td>
-				<td class="profileUAuto_table_Q_rep">
-				{% if question.repAdmin==0 or question.retournee>0 %}<span style="color : rgb(255,255,0);">En attente</span>
-				{% elseif question.repAdmin>9 and question.repAdmin<20 %}<a href="{{ path('mdqquestion_modifQaval', {'id':question.id}) }}">Retournée</a>
-				{% elseif question.repAdmin<10 %}<span style="color : rgb(255,0,0);">Refusée</span>
-				{% elseif question.repAdmin==100%}<span style="color : rgb(0,255,0);">Validée</span>
+				<td class="profileUAuto_table_Q_rep">				
+				{% if question.repAdmin>9 and question.repAdmin<20 %}<a href="{{ path('mdqquestion_modifQaval', {'id':question.id}) }}">Retournée</a>
+				{% else %}<span style="color : {{retourQavalColor(question.repAdmin, question.retournee)}}">{{retourQavalTxt(question.repAdmin, question.retournee)}}</span>
 				{%endif%}</td>
 			</tr>
 		{% endfor %}

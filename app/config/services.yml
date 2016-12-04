@@ -15,4 +15,13 @@ services:
         factory_method: getRepository
         arguments: ['MDQGeneBundle:DateReference']
 
-            
+    mdq_admin.repository.gestion:
+        class: MDQ\AdminBundle\Entity\Gestion
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['MDQAdminBundle:Gestion']      
+
+    mdq_gene.service.role:
+        class: MDQ\GeneBundle\Services\RoleService
+        arguments: [@security.role_hierarchy]
+        

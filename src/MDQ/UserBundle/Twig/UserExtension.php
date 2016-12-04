@@ -5,12 +5,7 @@ namespace MDQ\UserBundle\Twig;
 
 class UserExtension extends \Twig_Extension
 {
-/*	private $dateRef;
-	public function __construct(DateRef $dateRef)
-	{
-	    $this->dateRef = $dateRef;
-	}	
-*/	
+
 	private $dateRefRepository;
  
 	public function __construct($dateRefRepository ) {
@@ -29,6 +24,8 @@ class UserExtension extends \Twig_Extension
 		  'testPropQ'=> new \Twig_Function_Method($this, 'testPropQ'),
 		  'txtRefusPropQ'=> new \Twig_Function_Method($this, 'txtRefusPropQ'),
 		  'phraseQaval'=> new \Twig_Function_Method($this, 'phraseQaval'),
+		  'retourQavalTxt'=> new \Twig_Function_Method($this, 'retourQavalTxt'),
+		  'retourQavalColor'=> new \Twig_Function_Method($this, 'retourQavalColor'),
 	      );
 	}
 	    public function getFilters()
@@ -191,10 +188,22 @@ class UserExtension extends \Twig_Extension
 		      $txt=$txt1.$txt2;
 		 }
 		
-		return $txt;
-	  
-	  
+		return $txt;	  
 	  }
+	public function retourQavalTxt($repAdmin, $Qretour)
+	{
+		if($repAdmin==0 || $Qretour>0){$txt="En attente";}
+		elseif($repAdmin<10){$txt="Refusée";}
+		elseif($repAdmin==100){$txt="Validée";}
+		return $txt;	
+	}
+	public function retourQavalColor($repAdmin, $Qretour)
+	{
+		if($repAdmin==0 || $Qretour>0){$color="rgb(255,255,0);";}
+		elseif($repAdmin<10){$color="rgb(255,0,0);";}
+		elseif($repAdmin==100){$color="rgb(0,255,0);";}
+		return $color;	
+	}	
 }
 
 
