@@ -2,6 +2,9 @@
 
 namespace MDQ\QuizzBundle\Services;
 
+use MDQ\AdminBundle\Entity\Gestion;
+use MDQ\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class QuizzServ
 {    
@@ -17,14 +20,14 @@ class QuizzServ
 	    }      
 	    return $page;
       }
-      public function testAutoriseNewG($Gestion, $game, $user, $admin)
+      public function testAutoriseNewG(Gestion $gestion, $game, $user, $admin)
       {
 	    $test=1;
-	     if ($user===null || $game=="MasterQuizz" && $Gestion->getMq()==0 && $admin==0
-			 || $game=="FfQuizz" && $Gestion->getFf()==0 && $admin==0
-			 || $game=="ArQuizz" && $Gestion->getAr()==0 && $admin==0
-			 || $game=="MuQuizz" && $Gestion->getMc()==0 && $admin==0
-			 || $game=="LxQuizz"  && $Gestion->getLx()==0 && $admin==0
+	     if ($user===null || $game=="MasterQuizz" && $gestion->getMq()==0 && $admin==0
+			 || $game=="FfQuizz" && $gestion->getFf()==0 && $admin==0
+			 || $game=="ArQuizz" && $gestion->getAr()==0 && $admin==0
+			 || $game=="MuQuizz" && $gestion->getMc()==0 && $admin==0
+			 || $game=="LxQuizz"  && $gestion->getLx()==0 && $admin==0
 			 || $game=="SexyQuizz" && $admin==0
 			 || $game=="TvQuizz" && $admin==0)
 		{$test=0;}
@@ -32,7 +35,7 @@ class QuizzServ
 		{$test=0;}
 	    return $test;
       }
-      public function testJeton($game, $User)
+      public function testJeton($game, User $user)
       {
 		$game="none"; // en attendant de répartir les jetons selon les jeux.
 	/*ss	$nbJtotMq=$user->getScUser()->getNbJdayMq()+$user->getScUser()->getNbJMq();
@@ -45,7 +48,7 @@ class QuizzServ
 	ss	elseif($user->getScUser()->getNbJdayQnF()!=0){$user->getScUser()->setNbJdayQnF($user->getScUser()->getNbJdayQnF()-1);}
 	ss	else{$user->getScUser()->setNbJQnF($user->getScUser()->getNbJQnF()-1);}
 	*/
-		$nbJ=$User->getScUser()->getNbJdayMq();
+		$nbJ=$user->getScUser()->getNbJdayMq();
 		if($nbJ==0){$test=0;}
 		else{$test=1;}
 		return $test;
@@ -91,49 +94,49 @@ class QuizzServ
 				elseif($game=='TvQuizz'){$crit='scofDayTv';}
 	      return $crit;
       }
-      public function testAccessFinP($Session, $User)
+      public function testAccessFinP(Session $session, User $user)
       {
 	      $test=1;	      
-	      if ($User===null){$test=0;}
-	      if($Session->get('page')!='Mquizz'){$test=0;}
+	      if ($user===null){$test=0;}
+	      if($session->get('page')!='Mquizz'){$test=0;}
 	     return $test;
       }
-      public function recupScFinP($User, $game)
+      public function recupScFinP(User $user, $game)
       {
 	      	if($game=="MasterQuizz")
 		{
-			$scofDayUser=$User->getScUser()->getScofDayMq();
-			$highscore=$User->getScUser()->getScMaxMq();
+			$scofDayUser=$user->getScUser()->getScofDayMq();
+			$highscore=$user->getScUser()->getScMaxMq();
 		}		
 		elseif($game=="MuQuizz")
 		{
-				$scofDayUser=$User->getScUser()->getScofDayMu();
-				$highscore=$User->getScUser()->getScMaxMu();
+				$scofDayUser=$user->getScUser()->getScofDayMu();
+				$highscore=$user->getScUser()->getScMaxMu();
 		}
 		elseif($game=="ArQuizz")
 		{
-				$scofDayUser=$User->getScUser()->getScofDayAr();
-				$highscore=$User->getScUser()->getScMaxAr();
+				$scofDayUser=$user->getScUser()->getScofDayAr();
+				$highscore=$user->getScUser()->getScMaxAr();
 		}
 		elseif($game=="FfQuizz")
 		{
-				$scofDayUser=$User->getScUser()->getScofDayFf();
-				$highscore=$User->getScUser()->getScMaxFf();
+				$scofDayUser=$user->getScUser()->getScofDayFf();
+				$highscore=$user->getScUser()->getScMaxFf();
 		}
 		elseif($game=="LxQuizz")
 		{
-				$scofDayUser=$User->getScUser()->getScofDayLx();
-				$highscore=$User->getScUser()->getScMaxLx();
+				$scofDayUser=$user->getScUser()->getScofDayLx();
+				$highscore=$user->getScUser()->getScMaxLx();
 		}
 		elseif($game=="SexyQuizz")
 		{
-				$scofDayUser=$User->getScUser()->getScofDaySx();
-				$highscore=$User->getScUser()->getScMaxSx();
+				$scofDayUser=$user->getScUser()->getScofDaySx();
+				$highscore=$user->getScUser()->getScMaxSx();
 		}
 		elseif($game=="TvQuizz")
 		{
-				$scofDayUser=$User->getScUser()->getScofDayTv();
-				$highscore=$User->getScUser()->getScMaxTv();
+				$scofDayUser=$user->getScUser()->getScofDayTv();
+				$highscore=$user->getScUser()->getScMaxTv();
 		}
 	      $tabScore['ScDay']=$scofDayUser;
 	      $tabScore['ScMax']=$highscore;

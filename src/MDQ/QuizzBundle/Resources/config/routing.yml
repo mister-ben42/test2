@@ -5,7 +5,7 @@ mdqquizz_preGame:
 mdqquizz_accueil:
     path:  /accueil/{game}
     defaults: { _controller: MDQQuizzBundle:Quizz:newGame }
-    methods:  [GET]
+    methods:  [GET, PUT]
 mdqquizz_jeu:
     path: /jeu/{game}
     defaults: { _controller: MDQQuizzBundle:Quizz:jeuQuizz }

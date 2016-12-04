@@ -5,7 +5,7 @@ mdqadmin_accueilAdmin:
 mdqadmin_profileUAdmin:
     path:    /profileUAdmin/{id}
     defaults: { _controller: MDQAdminBundle:Admin:profileUAdmin }
-    methods:  [GET]
+    methods:  [GET, PUT]
 mdqadmin_voirU:
     path:    /voirU/{type}/{compte}/{sexe}/{departement}/{age}/{last_login}/{role}/{nbP}/{triUser}/{triStats}/{sens}/{nbdeU}/{nbmin}
     defaults: { _controller: MDQAdminBundle:Admin:voirU}
@@ -79,11 +79,11 @@ mdqadmin_botGame:
 mdqadmin_resetTheme:
     path:    /resetTheme
     defaults: { _controller: MDQAdminBundle:Admin:resetTheme }
-    methods:  [GET]
+    methods:  [GET, DELETE]
 mdqadmin_listeTheme:
     path:    /listeTheme
     defaults: { _controller: MDQAdminBundle:Admin:listeTheme }
-    methods:  [GET]
+    methods:  [GET, PUT]
 mdqadmin_resetError:
     path:    /resetError
     defaults: { _controller: MDQAdminBundle:GestionQuestion:resetError }
@@ -104,3 +104,5 @@ mdqadmin_mail:
     path:    /mail
     defaults: { _controller: MDQAdminBundle:Admin:mail }
     methods:  [GET]
+
+    

@@ -25,12 +25,9 @@ class UserController extends Controller
 		$em=$this->getDoctrine()->getManager();
 		$derPartieUser=$em->getRepository('MDQQuizzBundle:PartieQuizz')
 						  ->recupDerPartieUser($user->getId());
-		$userServ = $this->container->get('mdq_user.services');
-		$data=$userServ->recupData($user->getScUser()->getMedailles());
 		return $this->render('MDQUserBundle:User:profileU.html.twig', array(
 	   'user'   => $user,
 	  'derParties'=>$derPartieUser,
-	  'data'=>$data
     ));
 	}
 

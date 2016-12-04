@@ -2,6 +2,9 @@
 
 namespace MDQ\QuizzBundle\Services;
 
+use MDQ\QuestionBundle\Entity\Question;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 class AjaxQuizz
 {    
@@ -23,25 +26,25 @@ class AjaxQuizz
 		$datab['media']=$data['media'];		
 	return $datab;
 	}
-	public function analyseReq($Request)
+	public function analyseReq(Request $request)
 	{
-	  $requete['idQ'] = $Request->request->get('idQ');
-	  $requete['rep'] = $Request->request->get('rep');
-	  $requete['numQ'] = $Request->request->get('numQ');
-	  $requete['tpsrep'] = $Request->request->get('temps');
+	  $requete['idQ'] = $request->request->get('idQ');
+	  $requete['rep'] = $request->request->get('rep');
+	  $requete['numQ'] = $request->request->get('numQ');
+	  $requete['tpsrep'] = $request->request->get('temps');
 	return $requete;
 	}
-	public function dataVerifQ($Question, $newscore, $scoreQ, $finP)
+	public function dataVerifQ(Question $question, $newscore, $scoreQ, $finP)
 	{
-		$datab['brep']=$Question->getBrep();
-		$prepacom=($Question->getCommentaire());
+		$datab['brep']=$question->getBrep();
+		$prepacom=($question->getCommentaire());
 		$datab['commentaire']=$prepacom;//Permet Le/n dans MySql euh non !
 		$datab['scoreQ']=$scoreQ;
 		$datab['score']=$newscore;
-		$datab['id']=$Question->getId();
+		$datab['id']=$question->getId();
 		$datab['finP']=$finP;
-		$datab['imageCom']=$Question->getImageCom();
-		$datab['dom1']=$Question->getDom1();
+		$datab['imageCom']=$question->getImageCom();
+		$datab['dom1']=$question->getDom1();
 		return $datab;
 	}
 	public function getTypeVerifR($dom1)
@@ -80,10 +83,10 @@ class AjaxQuizz
 		else{$finP=0;}
 		return $finP;
 	}
-	public function testSession($Session)
+	public function testSession(Session $session)
 	{
 		$data=0;
-		if($Session->get('page')!='Mquizz'){$data=1;}
+		if($session->get('page')!='Mquizz'){$data=1;}
 		return $data;
 	}
 }

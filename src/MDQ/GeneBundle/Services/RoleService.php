@@ -4,6 +4,7 @@ namespace MDQ\GeneBundle\Services;
 
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
+use MDQ\UserBundle\Entity\User;
 
 class RoleService
 {
@@ -26,7 +27,7 @@ class RoleService
      * @param $user
      * @return bool
      */
-    public function isGranted($role, $user) {
+    public function isGranted($role, User $user) {
 
         if($user===Null){return false;}
         $role = new Role($role);
