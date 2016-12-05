@@ -9,55 +9,11 @@
 	
 	<div id="bloc_accueil_HighScore">
 		<div id="bloc_titre_accueil_HighScore"><div id="titre_accueil_HighScore">Tableau d'honneur</div></div>
-		<div class="sous_bloc_accueil_HighScore">
-			<a href="{{ path('mdqgene_highScore', {'crit':'MedKm'}) }}"><div class="titre_sous_bloc_accueil_HighScore">Médailles</br>au King Master</div></a>
-			{% for scuser in MedKm %}
-			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Med">
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.km1}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.km2}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.km3}}</div>
-			</div></div>
-			{% endfor %}
-		</div>
-		<div class="sous_bloc_accueil_HighScore">
-			<a href="{{ path('mdqgene_highScore', {'crit':'MedMq'}) }}"><div class="titre_sous_bloc_accueil_HighScore">Médailles</br>au MasterQuizz</div></a>
-			{% for scuser in MedMq %}
-			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}">{{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Med">
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.mq1}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.mq2}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.mq3}}</div>
-			</div></div>
-			{% endfor %}
-		</div>
-		<div class="sous_bloc_accueil_HighScore">
-			<a href="{{ path('mdqgene_highScore', {'crit':'MedTm'}) }}"><div class="titre_sous_bloc_accueil_HighScore">Médailles</br> Expert Média</div></a>
-			{% for scuser in MedTm %}
-			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}">{{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Med">
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.tm1}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.tm2}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.tm3}}</div>
-			</div></div>
-			{% endfor %}
-		</div>
-		<!--	<div class="sous_bloc_accueil_HighScore_QnF">
-			<a href="{{ path('mdqgene_highScore', {'crit':'MedAr'}) }}"><div class="titre_sous_bloc_accueil_HighScore"><div class="titre_sous_bloc_accueil_HighScore_txt">Médailles</br>au Quizz Art</div></div></a>
-			{% for scuser in MedAr %}
-			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Med">
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.ar1}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.ar2}}</div>
-			</div></div>
-			{% endfor %}
-		</div>-->
-	{% include("MDQGeneBundle:Gene:accueilHighScoreBas.html.twig") %}
 		
+	{% include("MDQGeneBundle:Gene/AccueilHs:accueilHighScoreHaut.html.twig") %}
+	{% include("MDQGeneBundle:Gene/AccueilHs:accueilHighScoreMilieu.html.twig") %}
+	{% include("MDQGeneBundle:Gene/AccueilHs:accueilHighScoreBas.html.twig") %}
+	
 	</div>
 	
 	

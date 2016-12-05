@@ -41,32 +41,3 @@
 			</div>
 			{% endfor %}
 		</div>
-		
-		<div class="sous_bloc_accueil_HighScore_QnF">
-			<a href="{{ path('mdqgene_highScore', {'crit':'prctBrtotMq'}) }}"><div class="titre_sous_bloc_accueil_HighScore"><div class="titre_sous_bloc_accueil_HighScore_txt">% de bonnes réponses</br>au Masterquizz</div></div></a>
-			{% for scuser in prctBrtotMq %}
-			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}} - <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Score">{{scuser.prctBrtotMq }}</div>
-			</div>
-			{% endfor %}
-		</div>
-		<div class="sous_bloc_accueil_HighScore_QnF">
-			<a href="{{ path('mdqgene_highScore', {'crit':'nbBrtot'}) }}"><div class="titre_sous_bloc_accueil_HighScore"><div class="titre_sous_bloc_accueil_HighScore_txt">Nombre total</br>de bonnes réponses</div></div></a>
-			{% for scuser in nbBrtot %}
-			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}} - <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Score">{{scuser.nbBrtot }}</div>
-			</div>
-			{% endfor %}
-		</div>
-		<!--<div class="sous_bloc_accueil_HighScore_QnF">
-			<a href="{{ path('mdqgene_highScore', {'crit':'nbQvalid'}) }}"><div class="titre_sous_bloc_accueil_HighScore"><div class="titre_sous_bloc_accueil_HighScore_txt">Nombre de questions</br>ajoutées à la bdd</div></div></a>
-			{% for scuser in nbQvalid %}
-			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}} - <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Score">{{scuser.nbQvalid }}</div>
-			</div>
-			{% endfor %}
-		</div>-->
-
