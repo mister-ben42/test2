@@ -11,6 +11,6 @@ services:
          
      mdq_gene.twig.mdq_extension:
         class: MDQ\GeneBundle\Twig\GeneExtension
-        arguments: [@mdq_admin.repository.gestion, @mdq_gene.service.role]
+        arguments: [@mdq_admin.repository.gestion, @mdq_gene.service.role, @mdq_user.jeton_serv]
         tags:
             - { name: twig.extension }

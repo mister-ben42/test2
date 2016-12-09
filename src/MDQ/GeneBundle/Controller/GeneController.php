@@ -123,8 +123,9 @@ class GeneController extends Controller
 		
 			$listeUQM=$em->getRepository('MDQUserBundle:ScUser')
 							->recupUserByCrit('scofDayTM');
-			GeneController::majnbJday($listeUserMq);//Mise a jour Jeton
-			GeneController::majnbJday($listeUQM);//Mise a jour jeton
+			$jetonServ = $this->container->get('mdq_user.jeton_serv');
+			$jetonServ->majQuotJeton($listeUserMq);// A mixer avec le suivant
+			$jetonServ->majQuotJeton($listeUQM);
 			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
 						->majClassement($listeUQM, 'TotalMedia', $tabMaitres);
 			$listeUMu=$em->getRepository('MDQUserBundle:ScUser')
@@ -145,50 +146,6 @@ class GeneController extends Controller
 						->majClassement($listeULx, 'LxQuizz', $tabMaitres);
 
 
-	//************ Controle du nouveau mois **************** ////////////////////
-	/*$moisactu=$datejour->format('m');
-		if($moisactu!=$datebdd->getMonth()){
-			$listeUser=$em->getRepository('MDQUserBundle:ScUser')
-					->recupUserofMonth();		
-			$i=0;$j=0;$h=0;$sc=0;$testegal=null;$tabrMDQ=[null];
-			$rMDQ=null;
-			foreach($listeUser as $scUser){
-				$i++;
-				$j=$i;//j,h et sc, servent a gerer les situations de exaeco.
-				if($scUser->getSumtop10month()==$sc){$j=$h;}
-				if($scUser->getHighClassMonthMq()==NULL || $j<$scUser->getHighClassMonthMq()){
-				$scUser->setHighClassMonthMq($j);
-				$scUser->setNumHighClassMonthMq(1);
-				}
-				else if($j==$scUser->getHighClassMonthMq()){			
-					$scUser->setNumHighClassMonthMq($scUser->getNumHighClassMonthMq()+1);					
-				}
-				if($scUser->getMonthHighScMq()==NULL || $scUser->getSumtop10month()>$scUser->getMonthHighScMq()){
-					$scUser->setMonthHighScMq($scUser->getSumtop10month());
-				}
-				$sc=$scUser->getSumtop10month();
-				$h=$j;
-				$scUser->setSumtop10month(NULL);
-				$scUser->setTop10month([0,0,0,0,0,0,0,0,0,0]);
-				if($i==1){$tabrMDQ[0]=$scUser;}
-				elseif($i==2){$tabrMDQ[1]=$scUser;
-							if($j==1){$testegal=1;}
-				}
-				elseif($i==3){$tabrMDQ[2]=$scUser;
-							if($j==1){$testegal=2;}
-				}			
-			}
-			if($testegal==2){shuffle($tabrMDQ);}			
-			elseif($testegal==1){
-				$tirage=mt_rand(0,1);
-				if($tirage==1){$val=$tabrMDQ[1];
-								$tabrMDQ[1]=$tabrMDQ[0];
-								$tabrMDQ[0]=$val;
-								}
-			}
-			$datebdd->setMonth($moisactu);
-			$datebdd->setRMDQ($tabrMDQ[0]);
-		}*/
 	//**** mise a jour date_ref ***********************//
 					
 			$datebdd->setRMDQ($tabMaitres[0]);
@@ -255,7 +212,7 @@ class GeneController extends Controller
 	  'gestion'=>$gestion,
     ));
   }
-	private function majnbJday($tabUsers)
+/*	private function majnbJday($tabUsers)
 	{
 		$em=$this->getDoctrine()->getManager();
 		$gestion=$em->getRepository('MDQAdminBundle:Gestion')	
@@ -270,6 +227,7 @@ class GeneController extends Controller
 		$em->flush();
 		return;
 	}
+*/
    public function accueilJeuAction()
   {
 		$session = $this->getRequest()->getSession();

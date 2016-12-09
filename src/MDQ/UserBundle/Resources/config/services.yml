@@ -17,9 +17,11 @@ services:
         arguments: [@mdq_gene.repository.date_ref]
         tags:
             - { name: twig.extension }
-    mdq_user.services:         
-        class: MDQ\UserBundle\Services\UserServ
-        arguments: [@mdq_gene.repository.date_ref]
+    mdq_user.jeton_serv:         
+        class: MDQ\UserBundle\Services\JetonServ
+        arguments: [@mdq_admin.repository.gestion]
+   
+   
 
         
          

@@ -101,16 +101,30 @@ class Gestion
     /**
      * @var integer
      *
-     * @ORM\Column(name="nbJinit", type="integer")
+     * @ORM\Column(name="nbJinitMq", type="integer")
      */
-    private $nbJinit;
+    private $nbJinitMq;
+    
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbJinitQM", type="integer")
+     */
+    private $nbJinitQM;
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="nbJquot", type="integer")
+     * @ORM\Column(name="nbJquotMq", type="integer")
      */
-    private $nbJquot;
+    private $nbJquotMq;
+    
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbJquotQM", type="integer")
+     */
+    private $nbJquotQM;
     
     /**
      * Get id
@@ -375,49 +389,102 @@ class Gestion
         return $this->jetons_uniques;
     }
 
+
+ 
+
     /**
-     * Set nbJinit
+     * Set nbJquotMq
      *
-     * @param integer $nbJinit
+     * @param integer $nbJquotMq
+     *
      * @return Gestion
      */
-    public function setNbJinit($nbJinit)
+    public function setNbJquotMq($nbJquotMq)
     {
-        $this->nbJinit = $nbJinit;
+        $this->nbJquotMq = $nbJquotMq;
 
         return $this;
     }
 
     /**
-     * Get nbJinit
+     * Get nbJquotMq
      *
-     * @return integer 
+     * @return integer
      */
-    public function getNbJinit()
+    public function getNbJquotMq()
     {
-        return $this->nbJinit;
+        return $this->nbJquotMq;
     }
 
     /**
-     * Set nbJquot
+     * Set nbJquotQM
      *
-     * @param integer $nbJquot
+     * @param integer $nbJquotQM
+     *
      * @return Gestion
      */
-    public function setNbJquot($nbJquot)
+    public function setNbJquotQM($nbJquotQM)
     {
-        $this->nbJquot = $nbJquot;
+        $this->nbJquotQM = $nbJquotQM;
 
         return $this;
     }
 
     /**
-     * Get nbJquot
+     * Get nbJquotQM
      *
-     * @return integer 
+     * @return integer
      */
-    public function getNbJquot()
+    public function getNbJquotQM()
     {
-        return $this->nbJquot;
+        return $this->nbJquotQM;
+    }
+
+    /**
+     * Set nbJinitMq
+     *
+     * @param integer $nbJinitMq
+     *
+     * @return Gestion
+     */
+    public function setNbJinitMq($nbJinitMq)
+    {
+        $this->nbJinitMq = $nbJinitMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbJinitMq
+     *
+     * @return integer
+     */
+    public function getNbJinitMq()
+    {
+        return $this->nbJinitMq;
+    }
+
+    /**
+     * Set nbJinitQM
+     *
+     * @param integer $nbJinitQM
+     *
+     * @return Gestion
+     */
+    public function setNbJinitQM($nbJinitQM)
+    {
+        $this->nbJinitQM = $nbJinitQM;
+
+        return $this;
+    }
+
+    /**
+     * Get nbJinitQM
+     *
+     * @return integer
+     */
+    public function getNbJinitQM()
+    {
+        return $this->nbJinitQM;
     }
 }

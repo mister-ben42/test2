@@ -8,6 +8,12 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class QuizzServ
 {    
+       	private $jetonServ;
+ 
+	public function __construct($jetonServ) {
+	  $this->jetonServ = $jetonServ;
+	} 
+      
       public function selectPageJeu($game)
       {
 	    if($game=="MasterQuizz" || $game=="MuQuizz" || $game=="SexyQuizz")
@@ -20,10 +26,10 @@ class QuizzServ
 	    }      
 	    return $page;
       }
-      public function testAutoriseNewG(Gestion $gestion, $game, $user, $admin)
+      public function testAutoriseNewG(Gestion $gestion, $game, User $user, $admin)
       {
 	    $test=1;
-	     if ($user===null || $game=="MasterQuizz" && $gestion->getMq()==0 && $admin==0
+	     if($user===null || $game=="MasterQuizz" && $gestion->getMq()==0 && $admin==0
 			 || $game=="FfQuizz" && $gestion->getFf()==0 && $admin==0
 			 || $game=="ArQuizz" && $gestion->getAr()==0 && $admin==0
 			 || $game=="MuQuizz" && $gestion->getMc()==0 && $admin==0
@@ -31,28 +37,13 @@ class QuizzServ
 			 || $game=="SexyQuizz" && $admin==0
 			 || $game=="TvQuizz" && $admin==0)
 		{$test=0;}
-	    if ($game!="MasterQuizz" && $game!="FfQuizz" && $game!="ArQuizz" && $game!="MuQuizz" && $game!="LxQuizz" && $game!="SexyQuizz" && $game!="TvQuizz")
+	    elseif($game!="MasterQuizz" && $game!="FfQuizz" && $game!="ArQuizz" && $game!="MuQuizz" && $game!="LxQuizz" && $game!="SexyQuizz" && $game!="TvQuizz")
+		{$test=0;}
+	    elseif($this->jetonServ->testJeton($user, $game)===false && $admin==0)
 		{$test=0;}
 	    return $test;
       }
-      public function testJeton($game, User $user)
-      {
-		$game="none"; // en attendant de répartir les jetons selon les jeux.
-	/*ss	$nbJtotMq=$user->getScUser()->getNbJdayMq()+$user->getScUser()->getNbJMq();
-	ss	$nbJtotQnF=$user->getScUser()->getNbJdayQnF()+$user->getScUser()->getNbJQnF();
-	ss	if($game=="MasterQuizz" && $nbJtotMq==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));
-	ss	}
-	ss	elseif($game=="MasterQuizz" && $user->getScUser()->getNbJdayMq()!=0){$user->getScUser()->setNbJdayMq($user->getScUser()->getNbJdayMq()-1);}
-	ss	elseif($game=="MasterQuizz" && $user->getScUser()->getNbJMq()!=0){$user->getScUser()->setNbJMq($user->getScUser()->getNbJMq()-1);}
-	ss	elseif($nbJtotQnF==0){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-	ss	elseif($user->getScUser()->getNbJdayQnF()!=0){$user->getScUser()->setNbJdayQnF($user->getScUser()->getNbJdayQnF()-1);}
-	ss	else{$user->getScUser()->setNbJQnF($user->getScUser()->getNbJQnF()-1);}
-	*/
-		$nbJ=$user->getScUser()->getNbJdayMq();
-		if($nbJ==0){$test=0;}
-		else{$test=1;}
-		return $test;
-      }
+
       public function comFinP($scofDayUser, $scMaxUser, $score, $game, $highScoreTous, $userId)
       {
 				if($game=='MasterQuizz'){$nameGame='MasterQuizz';}

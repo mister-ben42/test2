@@ -101,16 +101,30 @@ class Gestion
     /**
      * @var integer
      *
-     * @ORM\Column(name="nbJinit", type="integer")
+     * @ORM\Column(name="nbJinitMq", type="integer")
      */
-    private $nbJinit;
+    private $nbJinitMq;
+    
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbJinitQM", type="integer")
+     */
+    private $nbJinitQM;
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="nbJquot", type="integer")
+     * @ORM\Column(name="nbJquotMq", type="integer")
      */
-    private $nbJquot;
+    private $nbJquotMq;
+    
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbJquotQM", type="integer")
+     */
+    private $nbJquotQM;
     
     /**
      * Get id
@@ -350,5 +364,79 @@ class Gestion
     public function getInscription()
     {
         return $this->inscription;
+    }
+
+    /**
+     * Set jetons_uniques
+     *
+     * @param boolean $jetonsUniques
+     * @return Gestion
+     */
+    public function setJetonsUniques($jetonsUniques)
+    {
+        $this->jetons_uniques = $jetonsUniques;
+
+        return $this;
+    }
+
+    /**
+     * Get jetons_uniques
+     *
+     * @return boolean 
+     */
+    public function getJetonsUniques()
+    {
+        return $this->jetons_uniques;
+    }
+
+
+ 
+
+    /**
+     * Set nbJquotMq
+     *
+     * @param integer $nbJquotMq
+     *
+     * @return Gestion
+     */
+    public function setNbJquotMq($nbJquotMq)
+    {
+        $this->nbJquotMq = $nbJquotMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbJquotMq
+     *
+     * @return integer
+     */
+    public function getNbJquotMq()
+    {
+        return $this->nbJquotMq;
+    }
+
+    /**
+     * Set nbJquotQM
+     *
+     * @param integer $nbJquotQM
+     *
+     * @return Gestion
+     */
+    public function setNbJquotQM($nbJquotQM)
+    {
+        $this->nbJquotQM = $nbJquotQM;
+
+        return $this;
+    }
+
+    /**
+     * Get nbJquotQM
+     *
+     * @return integer
+     */
+    public function getNbJquotQM()
+    {
+        return $this->nbJquotQM;
     }
 }

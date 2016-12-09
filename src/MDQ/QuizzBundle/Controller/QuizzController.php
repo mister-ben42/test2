@@ -23,14 +23,12 @@ class QuizzController extends Controller
 	$user = $this->container->get('security.context')->getToken()->getUser();
 	$em = $this->getDoctrine()->getManager();
 	$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
-	$quizzServ = $this->container->get('mdq_quizz.services');
+	$quizzServ = $this->container->get('mdq_quizz.services');	
 	if($this->get('security.context')->isGranted('ROLE_ADMIN')){$admin=1;}
 	else{$admin=0;}
         if(!$quizzServ->testAutoriseNewG($gestion, $game, $user, $admin)) {return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		
-		if(!$quizzServ->testJeton($game,$user)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		$user->getScUser()->setNbJdayMq($user->getScUser()->getNbJdayMq()-1);
-		$partie=$em->getRepository('MDQQuizzBundle:PartieQuizz')->createNewP($game,$user);
+		$partie=$em->getRepository('MDQQuizzBundle:PartieQuizz')->createNewP($game,$user);		
+		$this->container->get('mdq_user.jeton_serv')->suppJPartie($user, $game);
 		$em->persist($partie); 
 		$em->flush();
 		$this->getRequest()->getSession()->set('page', 'tirageQ');

@@ -861,9 +861,9 @@ class ScUser
 	public function __construct()
 	{
 	$this->nbJMq=0;
-	$this->nbJdayMq=10;
+	$this->nbJdayMq=5;
 	$this->nbJQnF=0;
-	$this->nbJdayQnF=0;
+	$this->nbJdayQnF=5;
 	$this->nbBrtot = 0;
 	$this->nbPtot = 0;
 	$this->nbPMq = 0;

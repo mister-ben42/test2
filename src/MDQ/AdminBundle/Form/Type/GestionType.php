@@ -49,10 +49,10 @@ class GestionType extends AbstractType
 			 ->add('jetons_uniques', 'checkbox', array(			
 			'required'  => false,
 				))
-			 ->add('nbJinit', 'text', array(			
+			->add('nbJquotMq', 'text', array(			
 			'required'  => false,
 				))
-			->add('nbJquot', 'text', array(			
+			->add('nbJquotQm', 'text', array(			
 			'required'  => false,
 				))
 		;
