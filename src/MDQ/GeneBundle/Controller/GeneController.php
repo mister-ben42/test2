@@ -20,25 +20,8 @@ class GeneController extends Controller
 	En fait il suffir juste de mettre la partie test de la date apres celle de la validation de la partie*/
 	// MODIF EFFECTUEE : A tester puis effacer le passage precedent.
 	// ******** Controle des parties en bdd et validation le cas echeant + mise a jours de bdd user et partie
-	$partieNonValide=$em->getRepository('MDQQuizzBundle:PartieQuizz')
-				->recupPNonValid();
-		foreach ($partieNonValide as $partie){
-			$intcontrol = new \DateInterval('PT10M');// Definition d'un intervalle de 10 minutes
-			$dateactu= new \DateTime();
-			$datepartie=$partie->getDate();
-			if($dateactu->sub($intcontrol)>$datepartie){
-				$partie->setValid(true);
-				$user=$partie->getUser();
-				$scUser=$user->getScUser();
-				$game=$partie->getType();
-				if($game=='MasterQuizz'){$dom1='none';}
-				else{$dom1=$game;
-					$game='MediaQuizz';}
-				$em->getRepository('MDQUserBundle:ScUser')
-							->majBddScfinP($scUser, $dom1, $game, $partie);
-
-			}
-		}
+	$geneServ = $this->container->get('mdq_gene.accueilGene');
+	$geneServ->testNonValidPartie();
 	// ********** Controle de nouvelle journee -- A terme a remplacer par un CRON ******** ///
 	$datejour= new \DateTime(date('Y-m-d'));
 		//Reste un petit pb avec l'objet date : si pas de connexion le lundi, mais le mardi, la date de Maj de la datebdd jour est celle du debut de semane, ce qui conduit a une maj automatique du jour lors de l'arrivee suivante sur la page d'accueil.

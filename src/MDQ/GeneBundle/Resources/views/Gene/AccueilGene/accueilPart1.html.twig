@@ -1,0 +1,36 @@
+
+       {% if (not is_granted("IS_AUTHENTICATED_REMEMBERED")) and (gestion.BlocageTot!=1) %}	
+	<div id="bandeau_form_connexion">
+	      <div id="bloc_form_connexion">
+		{{ render(controller("MDQUserBundle:User:loginBis")) }} 
+	{#	{{render (controller("FOSUserBundle:Security:login")) }}#}
+		<div id="inscrire">
+		{% if gestion.Inscription==0 %}<strong class="affich_flash1" style="color:yellow; font-weight:normal;" >Pas encore inscrit ?</strong>
+		{% else %}<a href="{{ path('fos_user_registration_register') }}">Pas encore inscrit ?</a>
+		{% endif %}
+		</div>
+		<div id="bloc_connexion_croix">x</div>
+	      </div>
+	</div>
+	{% endif %}
+	<div id="bloc_flash_message"><div id="flash_message">
+	  
+	  <strong id="mess_flash_1">Les inscriptions ne sont pas autorisées actuellement.</strong>
+	  <strong id="mess_flash_2">Cette rubrique n'est pas disponible actuellement.</strong> 
+	  <strong id="mess_flash_3">Il n'est pas possible de se connecter actuellement.</strong>  
+	
+	<div id="flash_message_croix">x</div>
+	</div></div>
+	
+	
+	<div id="accueil_bloc_centre">
+		<div id="accueil_bloc_centre_anim">
+			<div id="bloc_centre_anim1" class="bloc_centre_anim"></div>
+			<div id="bloc_centre_anim2" class="bloc_centre_anim"></div>
+		</div>
+	
+	</div>
+	<div id="bouton_jouer"><a href="{{ path('mdqgene_accueilJeu') }}">   
+	  <img src="{{ asset('bundles/GeneBundle/buttonjouer.png') }}" alt="bouton" width="100%">
+	  </a>
+	</div>

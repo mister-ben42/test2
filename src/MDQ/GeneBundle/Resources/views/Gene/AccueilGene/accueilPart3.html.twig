@@ -1,0 +1,121 @@
+
+	<div id="accueil_bloc2">
+	      <div id="accueil_bloc2_gauche">
+		<div id="highScDay" class="bloc">
+	  <div class="img_highscore"><a href="{{ path('mdqgene_highScore', {'crit':'scofDayMq'}) }}"><img src="../bundles/GeneBundle/highScoreDay2.jpg" alt="scoredujour" width="200px"></a></div>
+		{% for user in highScDay %}
+		{%if loop.index==4 %}<div class="accueil_heighSC_col">
+		{% elseif loop.index==10 %}<div class="accueil_heighSC_col2">
+		{%endif%}
+		<div {% if loop.index==1 %}class="accueil_heighSC_1"{% elseif loop.index==2 %}class="accueil_heighSC_2"{% elseif loop.index==3 %}class="accueil_heighSC_3"{%else%}class="accueil_heighSC_tous"{%endif%}>
+			{% if loop.index==1 %}
+			<img src="../bundles/GeneBundle/coupeminiOr.png" alt="coupe" height="22px">
+			{% endif %}
+			{% if loop.index==2 %}
+			<img src="../bundles/GeneBundle/coupeminiAg.png" alt="coupe" height="18px">
+			{% endif %}
+			{% if loop.index==3 %}
+			<img src="../bundles/GeneBundle/coupeminiBz.png" alt="coupe" height="14px">
+			{% endif %}
+		{%if loop.index>3%}<div class="accueil_highSC_nom">{%endif%}{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+		{{user.username}} </a>{%if loop.index>3%}</div><div class="accueil_highSC_sc">{%else%} - {%endif%}{{user.scofDayMq}}{%if loop.index>3%}</div>{%endif%}
+		</div>
+		{%if loop.index==9 or loop.index==loop.length and loop.index>3%}</div>{%endif%}
+		{% endfor %}
+		</div>
+		<div id="highScMonth" class="bloc">
+		 <div class="img_highscore"><a href="{{ path('mdqgene_highScore', {'crit':'kingMaster'}) }}"><img src="../bundles/GeneBundle/highScoreWeek.jpg" alt="scoredujour" width="200px"></a></div>
+
+		{% for user in kingMaster %}
+		{%if loop.index==4 %}<div class="accueil_heighSC_col">
+		{% elseif loop.index==10 %}<div class="accueil_heighSC_col2">
+		{%endif%}
+		<div {% if loop.index==1 %}class="accueil_heighSC_1"{% elseif loop.index==2 %}class="accueil_heighSC_2"{% elseif loop.index==3 %}class="accueil_heighSC_3"{%else%}class="accueil_heighSC_tous"{%endif%}>
+			{% if loop.index==1 %}
+			<img src="../bundles/GeneBundle/coupeminiOr.png" alt="coupe" height="22px">
+			{% endif %}
+			{% if loop.index==2 %}
+			<img src="../bundles/GeneBundle/coupeminiAg.png" alt="coupe" height="18px">
+			{% endif %}
+			{% if loop.index==3 %}
+			<img src="../bundles/GeneBundle/coupeminiBz.png" alt="coupe" height="14px">
+			{% endif %}
+		{%if loop.index>3%}<div class="accueil_highSC_nom">{%endif%}{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+		{{user.username}} </a>{%if loop.index>3%}</div><div class="accueil_highSC_sc">{%else%} - {%endif%}{{user.kingMaster}}{%if loop.index>3%}</div>{%endif%}
+		</div>
+		{%if loop.index==9 or loop.index==loop.length and loop.index>3%}</div>{%endif%}
+		{% endfor %}
+		</div>
+	
+	  </div>
+	    <div id="accueil_bloc2_droite">
+	  <div id="bloc_QnF" class="bloc">
+		<div class="img_highscore"><img src="../bundles/GeneBundle/QnF.jpg" alt="QnF" width="200px"></div>
+		<div id="bloc_QnF_EM" >
+		</br>
+		<a href="{{ path('mdqgene_highScore', {'crit':'scofDayTM'}) }}">
+		<img src={{ asset('bundles/GeneBundle/LogoQuizzEm.png') }} alt="Expert Media" width="170px">
+		</a>
+		{% for user in highScDayTM %}
+		{%if loop.index==4 %}<div class="accueil_heighSC_col">
+		{% elseif loop.index==10 %}<div class="accueil_heighSC_col2">
+		{%endif%}
+		  <div {% if loop.index==1 %}class="accueil_heighSC_1"{% elseif loop.index==2 %}class="accueil_heighSC_2"{% elseif loop.index==3 %}class="accueil_heighSC_3"{%else%}class="accueil_heighSC_tous"{%endif%}>
+			{% if loop.index==1 %}
+			<img src="../bundles/GeneBundle/coupeminiOr.png" alt="coupe" height="22px">
+			{% endif %}
+			{% if loop.index==2 %}
+			<img src="../bundles/GeneBundle/coupeminiAg.png" alt="coupe" height="18px">
+			{% endif %}
+			{% if loop.index==3 %}
+			<img src="../bundles/GeneBundle/coupeminiBz.png" alt="coupe" height="14px">
+			{% endif %}
+		  {%if loop.index>3%}<div class="accueil_highSC_nom">{%endif%}{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+		  {{user.username}} </a>{%if loop.index>3%}</div><div class="accueil_highSC_sc">{%else%} - {%endif%}{{user.scofDayTM}}{%if loop.index>3%}</div>{%endif%}
+		  </div>
+		  {%if loop.index==9 or loop.index==loop.length and loop.index>3%}</div>{%endif%}
+		{% endfor %}
+		
+		</div>
+		<div id="accueil_QnF_bloc2">
+{#		<div class="QnF_col">
+			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayAr'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Ar"><img src={{ asset('bundles/GeneBundle/LogoQuizzAr2.png') }} alt="Art" width="120px"></div></a>
+			{% for user in highScDayAr %}
+			<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayAr}}</div>
+			</div>
+			{% endfor %}
+		</div>		
+#}		<div class="QnF_col">
+			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayFf'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Ff"><img src={{ asset('bundles/GeneBundle/LogoQuizzFf2.png') }} alt="Nature" width="120px"></div></a>
+			{% for user in highScDayFf %}
+			<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayFf}}</div>
+			</div>
+			{% endfor %}
+		</div>
+{#		<div class="QnF_col">
+			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayMu'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Mu"><img src={{ asset('bundles/GeneBundle/LogoQuizzMu2.png') }} alt="Musique" width="120px"></div></a>
+			{% for user in highScDayMu %}
+			<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayMu}}</div>
+			</div>
+			{% endfor %}
+		</div>
+#}		<div class="QnF_col">
+			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayLx'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Lx"><img src={{ asset('bundles/GeneBundle/LogoQuizzLx2.png') }} alt="Lieux" width="120px"></div></a>
+			{% for user in highScDayLx %}
+			<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
+			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayLx}}</div>
+			</div>
+			{% endfor %}
+		</div>
+		</div>
+		</div>
+	</div>
+	</div>
+	

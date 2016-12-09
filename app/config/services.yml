@@ -21,6 +21,18 @@ services:
         factory_method: getRepository
         arguments: ['MDQAdminBundle:Gestion']      
 
+    mdq_quizz.repository.partiequizz:
+        class: MDQ\QuizzBundle\Entity\PartieQuizz
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['MDQQuizzBundle:PartieQuizz']
+        
+    mdq_user.repository.scuser:
+        class: MDQ\UserBundle\Entity\ScUser
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: ['MDQUserBundle:ScUser']
+       
     mdq_gene.service.role:
         class: MDQ\GeneBundle\Services\RoleService
         arguments: [@security.role_hierarchy]

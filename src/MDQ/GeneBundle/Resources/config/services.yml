@@ -9,6 +9,10 @@ services:
      mdq_gene.services:
          class: MDQ\GeneBundle\Services\HighScore
          
+     mdq_gene.accueilGene:
+         class: MDQ\GeneBundle\Services\AccueilGene
+         arguments: [@mdq_quizz.repository.partiequizz, @mdq_user.repository.scuser]
+         
      mdq_gene.twig.mdq_extension:
         class: MDQ\GeneBundle\Twig\GeneExtension
         arguments: [@mdq_admin.repository.gestion, @mdq_gene.service.role, @mdq_user.jeton_serv]
