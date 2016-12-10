@@ -93,7 +93,7 @@ class Theme
     private $prct5;  
     
       /**
-     * @ORM\OneToMany(targetEntity="Dom3", mappedBy="theme", cascade={"persist"}))
+     * @ORM\OneToMany(targetEntity="Dom3", mappedBy="theme", cascade={"remove"})
      */
     private $dom3map;
     

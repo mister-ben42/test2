@@ -79,8 +79,8 @@ class Dom3
     
 
     /**
-    * @ORM\ManyToOne(targetEntity="MDQ\QuestionBundle\Entity\Theme")
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\ManyToOne(targetEntity="MDQ\QuestionBundle\Entity\Theme", inversedBy="dom3map")
+    * @ORM\JoinColumn(nullable=true)
     */
     private $theme;
 

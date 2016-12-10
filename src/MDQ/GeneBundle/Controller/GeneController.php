@@ -30,58 +30,7 @@ class GeneController extends Controller
 		$tabMaitres=[$datebdd->getRMDQ(), null,null,null,null,null,null];
 		if($datebdd->getDay()!=$datejour){
 			$datebdd->setDay($datejour);// Je le mets la ; si je le mets apres l'operation sub dateInter, l'interval est deduit de la date entree en bdd -jsp pourquoi.
-			//*************************Mise a jour de la bdd StatsQuot****************** ///
-			// A voir ou le placer.
-			$statsJ=$em->getRepository('MDQGeneBundle:StatsQuot')->findOneBy(array('valid'=>0));
-			if($datebdd->getRMDQ()!==null){$statsJ->setRMDQ($datebdd->getRMDQ()->getId());}
-			if($datebdd->getMMDQ()!==null){$statsJ->setMMDQ($datebdd->getMMDQ()->getId());}
-			if($datebdd->getSMDQ()!==null){$statsJ->setSMDQ($datebdd->getSMDQ()->getId());}
-			if($datebdd->getFfMDQ()!==null){$statsJ->setFfMDQ($datebdd->getFfMDQ()->getId());}
-			if($datebdd->getLxMDQ()!==null){$statsJ->setLxMDQ($datebdd->getLxMDQ()->getId());}
-			if($datebdd->getArMDQ()!==null){$statsJ->setArMDQ($datebdd->getArMDQ()->getId());}
-			if($datebdd->getMuMDQ()!==null){$statsJ->setMuMDQ($datebdd->getMuMDQ()->getId());}
-		//	$nbPMq=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('MasterQuizz',0,1); // 0 pour la date = depuis tjrs.
-			$nbPMq=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('MasterQuizz',$datebdd->getDay(),0);
-			$nbPFf=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('FfQuizz',$datebdd->getDay(),0);
-			$nbPLx=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('LxQuizz',$datebdd->getDay(),0);
-			$nbPAr=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('ArQuizz',$datebdd->getDay(),0);
-			$nbPMu=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('MuQuizz',$datebdd->getDay(),0);
-			$nbPMqbot=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('MasterQuizz',$datebdd->getDay(),1);
-			$nbPTotbot=$em->getRepository('MDQQuizzBundle:PartieQuizz')->nbParties('tous',$datebdd->getDay(),1);
-			$nbUserDay=$em->getRepository('MDQUserBundle:User')->recupNbUser($datebdd->getDay(),1);
-			$nbUser7j=$em->getRepository('MDQUserBundle:User')->recupNbUser($datebdd->getDay(),7);
-			$nbUser30j=$em->getRepository('MDQUserBundle:User')->recupNbUser($datebdd->getDay(),30);
-			$nbInscritDay=$em->getRepository('MDQUserBundle:User')->recupNbInscrit($datebdd->getDay(),1);
-			$scMoy=$em->getRepository('MDQQuizzBundle:PartieQuizz')->recupScMoy("tous",$datebdd->getDay(),1,0);
-			$scMoyBot=$em->getRepository('MDQQuizzBundle:PartieQuizz')->recupScMoy("tous",$datebdd->getDay(),1,1);
-			$nbQMq=$em->getRepository('MDQQuestionBundle:Question')->getNbQuestions(2, 1, 0, "MasterQuizz", "none", "none", "id", "ASC", 0, 1);
-			$nbQFf=$em->getRepository('MDQQuestionBundle:Question')->getNbQuestions(2, 1, 0, "none", "FfQuizz", "none", "id", "ASC", 0, 1);
-			$nbQLx=$em->getRepository('MDQQuestionBundle:Question')->getNbQuestions(2, 1, 0, "none", "LxQuizz",  "none", "id", "ASC", 0, 1);
-			$nbQAr=$em->getRepository('MDQQuestionBundle:Question')->getNbQuestions(2, 1, 0, "none", "ArQuizz",  "none", "id", "ASC", 0, 1);
-			$nbQMu=$em->getRepository('MDQQuestionBundle:Question')->getNbQuestions(2, 1, 0, "none", "MuQuizz",  "none", "id", "ASC", 0, 1);
-			$statsJ->setNbPMQ($nbPMq); 
-			$statsJ->setNbPFf($nbPFf);
-			$statsJ->setNbPLx($nbPLx);
-			$statsJ->setNbPAr($nbPAr);
-			$statsJ->setNbPMu($nbPMu);
-			$statsJ->setNbPtot($nbPMq+$nbPFf+$nbPLx+$nbPAr+$nbPMu);
-			$statsJ->setNbPMQbot($nbPMqbot);
-			$statsJ->setNbPTotbot($nbPTotbot); 
-			$statsJ->setNbUserDay($nbUserDay);
-			$statsJ->setNbUser7j($nbUser7j); 
-			$statsJ->setNbUser30j($nbUser30j); 
-			$statsJ->setNbNewUser($nbInscritDay); 
-			$statsJ->setScMoyP($scMoy); 
-			$statsJ->setScMoyPbot($scMoyBot); 
-			$statsJ->setNbQMqV($nbQMq); 
-			$statsJ->setNbQFfV($nbQFf); 
-			$statsJ->setNbQLxV($nbQLx); 
-			$statsJ->setNbQArV($nbQAr); 
-			$statsJ->setNbQMuV($nbQMu); 
-			$statsJ->setDay($datebdd->getDay());
-			$statsJ->setValid(1);		
-			$statsnewJ=new StatsQuot();			
-			$em->persist($statsnewJ);
+
 			
 	//************* Controle nouvelle semaine ************** /////////////////////
 		$semref=$datebdd->getWeek();
@@ -151,124 +100,49 @@ class GeneController extends Controller
 				->setParameter('publication', true)
 				->orderBy('n.priorite', 'DESC')
 				->addOrderBy('n.id', 'DESC');							
-	$newsA=$news->getQuery()
-			    ->getResult();	
+	$newsA=$news->getQuery()->getResult();	
 
-	$highScDay=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('scofDayMq',1,15);
-//	$highScDayTv=$em->getRepository('MDQUserBundle:ScUser')		
-//					->recupHighScore('scofDayTv',1,5);
-	$highScDayLx=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('scofDayLx',1,5);
-	$highScDayMu=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('scofDayMu',1,5);
-	$highScDayFf=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('scofDayFf',1,5);
-	$highScDayAr=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('scofDayAr',1,5);
-	//$top10month=$em->getRepository('MDQUserBundle:ScUser')		
-	//				->recupHighScore('sumtop10month',1,15);
-	$kingMaster=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('kingMaster',1,15);
-	$highScDayTM=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('scofDayTM',1,15);
-	$dateref=$em->getRepository('MDQGeneBundle:DateReference')	
-				->find(1);
+
+	$dateref=$datebdd;
 	$tabMaitre=[$dateref->getRMDQ(),$dateref->getSMDQ(),$dateref->getMMDQ(),$dateref->getMuMDQ(),
 	$dateref->getArMDQ(),$dateref->getFfMDQ(),$dateref->getLxMDQ()];
-	$gestion=$em->getRepository('MDQAdminBundle:Gestion')	
-				->find(1);
+	$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
+	
+	$accueilServ = $this->container->get('mdq_gene.accueilGene');
 	return $this->render('MDQGeneBundle:Gene:accueil.html.twig', array(
-      'highScDay' => $highScDay,
+	  'accueilServ'=>$accueilServ,
 	  'news' => $newsA,
-	//  'top10month' => $top10month,
-//	  'top5weekMq' => $top5weekMq,
-	//  'highScDayTv'=>$highScDayTv,
-	  'kingMaster'=>$kingMaster,
-	  'highScDayAr'=>$highScDayAr,
-	  'highScDayMu'=>$highScDayMu,
-	  'highScDayLx'=>$highScDayLx,
-	  'highScDayFf'=>$highScDayFf,
-	  'highScDayTM'=>$highScDayTM,
-	  'tabMaitre'=>$tabMaitre,
-	  'datejour'=>$datejour,//juste pour tester
+	  'datejour'=>$datejour,
 	  'gestion'=>$gestion,
     ));
   }
-/*	private function majnbJday($tabUsers)
-	{
-		$em=$this->getDoctrine()->getManager();
-		$gestion=$em->getRepository('MDQAdminBundle:Gestion')	
-				->find(1);
-		foreach($tabUsers as $scUser)
-		{
-		    if($scUser->getNbJdayMq()<$gestion->getNbJquot())
-		    {$scUser->setNbJdayMq($gestion->getNbJquot());		
-			$em->persist($scUser);
-		    }
-		}		
-		$em->flush();
-		return;
-	}
-*/
    public function accueilJeuAction()
   {
 		$session = $this->getRequest()->getSession();
 		$session->set('page', 'accueilJeu');
 		$em=$this->getDoctrine()->getManager();
-		$gestion=$em->getRepository('MDQAdminBundle:Gestion')	
-				->find(1);
 		return $this->render('MDQGeneBundle:Gene:accueilJeu.html.twig', array(
-		'gestion'=>$gestion,
 		));
   }
 
 	public function accueilHighScoreAction()
 	{
 		$em=$this->getDoctrine()->getManager();
-		$highScKM=$em->getRepository('MDQUserBundle:ScUser')
-					->recupHighScore('highScKM',1,10);
-
-		$prctBrtotMq=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('prctBrtotMq',1,10);	
-		$medMq=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('MedMq',1,10);
-		$medAr=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('MedAr',1,10);		
-		$medKM=$em->getRepository('MDQUserBundle:ScUser')
-					->recupHighScore('MedKm',1,10);
-		$medLx=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('MedLx',1,10);
-		$medMu=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('MedMu',1,10);
-		$medFf=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('MedFf',1,10);
-		$medTM=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('MedTm',1,10);
-		$nbQvalid=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('nbQvalid',1,10);
-		$nbBrtot=$em->getRepository('MDQUserBundle:ScUser')		
-					->recupHighScore('nbBrtot',1,10);
-
+		$medMq=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore('MedMq',1,10);		
+		$medKM=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore('MedKm',1,10);
+		$medLx=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore('MedLx',1,10);
+		$medFf=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore('MedFf',1,10);
+		$medTM=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore('MedTm',1,10);
+		$accueilHSServ = $this->container->get('mdq_gene.accueilHS');
 		
 		return $this->render('MDQGeneBundle:Gene:accueilHighScore.html.twig', array(
-	//	  'scTotMq' => $scTotMq,
-	//	  'scMaxMq' => $scMaxMq,
-	//	  'scMoyMq' => $scMoyMq,
-		  'prctBrtotMq'=>$prctBrtotMq,
-	//	  'nbBrtotMq'=>$nbBrtotMq,
+		  'accueilHSServ' => $accueilHSServ,
 		  'MedMq'=>$medMq,
-		  'MedAr'=>$medAr,
 		 'MedFf'=>$medFf,
 		  'MedLx'=>$medLx,
-		  'MedMu'=>$medMu,
 		  'MedTm'=>$medTM,
 		  'highScKm'=>$highScKM,
 		  'MedKm'=>$medKM,
-		  'nbQvalid'=>$nbQvalid,
-		  'nbBrtot'=>$nbBrtot,
-	/*	  'scofDayMq' =>$scofDayMq,
-		  'sumtop10month' =>$sumtop10month,*/
 		));
 	}
 	public function highScoreAction($crit, $page, $id)

@@ -3,49 +3,119 @@
 	      <div id="accueil_bloc2_gauche">
 		<div id="highScDay" class="bloc">
 	  <div class="img_highscore"><a href="{{ path('mdqgene_highScore', {'crit':'scofDayMq'}) }}"><img src="../bundles/GeneBundle/highScoreDay2.jpg" alt="scoredujour" width="200px"></a></div>
-		{% for user in highScDay %}
-		{%if loop.index==4 %}<div class="accueil_heighSC_col">
-		{% elseif loop.index==10 %}<div class="accueil_heighSC_col2">
-		{%endif%}
-		<div {% if loop.index==1 %}class="accueil_heighSC_1"{% elseif loop.index==2 %}class="accueil_heighSC_2"{% elseif loop.index==3 %}class="accueil_heighSC_3"{%else%}class="accueil_heighSC_tous"{%endif%}>
-			{% if loop.index==1 %}
+		<div class="accueil_heighSC_1">
 			<img src="../bundles/GeneBundle/coupeminiOr.png" alt="coupe" height="22px">
-			{% endif %}
-			{% if loop.index==2 %}
+			1- <a {{accueilServ.highScHref("scofDayMq", 1) }} >{{accueilServ.highScUser("scofDayMq", 1) }} </a> - {{accueilServ.highScScore("scofDayMq", 1)}}
+		</div>
+		
+		<div class="accueil_heighSC_2">
 			<img src="../bundles/GeneBundle/coupeminiAg.png" alt="coupe" height="18px">
-			{% endif %}
-			{% if loop.index==3 %}
+			2- <a {{accueilServ.highScHref("scofDayMq", 2) }} >{{accueilServ.highScUser("scofDayMq", 2) }} </a> - {{accueilServ.highScScore("scofDayMq", 2)}}
+		</div>
+		
+		<div class="accueil_heighSC_3">
 			<img src="../bundles/GeneBundle/coupeminiBz.png" alt="coupe" height="14px">
-			{% endif %}
-		{%if loop.index>3%}<div class="accueil_highSC_nom">{%endif%}{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
-		{{user.username}} </a>{%if loop.index>3%}</div><div class="accueil_highSC_sc">{%else%} - {%endif%}{{user.scofDayMq}}{%if loop.index>3%}</div>{%endif%}
+			3- <a {{accueilServ.highScHref("scofDayMq", 3) }} >{{accueilServ.highScUser("scofDayMq", 3) }} </a> - {{accueilServ.highScScore("scofDayMq", 3)}}
 		</div>
-		{%if loop.index==9 or loop.index==loop.length and loop.index>3%}</div>{%endif%}
-		{% endfor %}
+		
+		<div class="accueil_heighSC_col"><div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">4-  <a {{accueilServ.highScHref("scofDayMq", 4) }} >{{accueilServ.highScUser("scofDayMq", 4)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",4)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">5-  <a {{accueilServ.highScHref("scofDayMq", 5) }} >{{accueilServ.highScUser("scofDayMq", 5)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",5)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">6-  <a {{accueilServ.highScHref("scofDayMq", 6) }} >{{accueilServ.highScUser("scofDayMq", 6)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",6)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">7-  <a {{accueilServ.highScHref("scofDayMq", 7) }} >{{accueilServ.highScUser("scofDayMq", 7)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",7)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">8-  <a {{accueilServ.highScHref("scofDayMq", 8) }} >{{accueilServ.highScUser("scofDayMq", 8)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",8)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">9-  <a {{accueilServ.highScHref("scofDayMq", 9) }} >{{accueilServ.highScUser("scofDayMq", 9)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",9)}}</div>
+		 </div>
 		</div>
+		
+		<div class="accueil_heighSC_col2"><div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">10-  <a {{accueilServ.highScHref("scofDayMq", 10) }} >{{accueilServ.highScUser("scofDayMq", 10)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",10)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">11-  <a {{accueilServ.highScHref("scofDayMq", 11) }} >{{accueilServ.highScUser("scofDayMq", 11)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",11)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">12-  <a {{accueilServ.highScHref("scofDayMq", 12) }} >{{accueilServ.highScUser("scofDayMq", 12)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",12)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">13-  <a {{accueilServ.highScHref("scofDayMq", 13) }} >{{accueilServ.highScUser("scofDayMq", 13)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",13)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">14-  <a {{accueilServ.highScHref("scofDayMq", 14) }} >{{accueilServ.highScUser("scofDayMq", 14)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",14)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">15-  <a {{accueilServ.highScHref("scofDayMq", 15) }} >{{accueilServ.highScUser("scofDayMq", 15)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayMq",15)}}</div>
+		 </div>			
+
+		</div></div>
 		<div id="highScMonth" class="bloc">
 		 <div class="img_highscore"><a href="{{ path('mdqgene_highScore', {'crit':'kingMaster'}) }}"><img src="../bundles/GeneBundle/highScoreWeek.jpg" alt="scoredujour" width="200px"></a></div>
 
-		{% for user in kingMaster %}
-		{%if loop.index==4 %}<div class="accueil_heighSC_col">
-		{% elseif loop.index==10 %}<div class="accueil_heighSC_col2">
-		{%endif%}
-		<div {% if loop.index==1 %}class="accueil_heighSC_1"{% elseif loop.index==2 %}class="accueil_heighSC_2"{% elseif loop.index==3 %}class="accueil_heighSC_3"{%else%}class="accueil_heighSC_tous"{%endif%}>
-			{% if loop.index==1 %}
+		<div class="accueil_heighSC_1">
 			<img src="../bundles/GeneBundle/coupeminiOr.png" alt="coupe" height="22px">
-			{% endif %}
-			{% if loop.index==2 %}
+			1- <a {{accueilServ.highScHref("kingMaster", 1) }} >{{accueilServ.highScUser("kingMaster", 1) }} </a> - {{accueilServ.highScScore("kingMaster", 1)}}
+		</div>
+		
+		<div class="accueil_heighSC_2">
 			<img src="../bundles/GeneBundle/coupeminiAg.png" alt="coupe" height="18px">
-			{% endif %}
-			{% if loop.index==3 %}
+			2- <a {{accueilServ.highScHref("kingMaster", 2) }} >{{accueilServ.highScUser("kingMaster", 2) }} </a> - {{accueilServ.highScScore("kingMaster", 2)}}
+		</div>
+		
+		<div class="accueil_heighSC_3">
 			<img src="../bundles/GeneBundle/coupeminiBz.png" alt="coupe" height="14px">
-			{% endif %}
-		{%if loop.index>3%}<div class="accueil_highSC_nom">{%endif%}{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
-		{{user.username}} </a>{%if loop.index>3%}</div><div class="accueil_highSC_sc">{%else%} - {%endif%}{{user.kingMaster}}{%if loop.index>3%}</div>{%endif%}
+			3- <a {{accueilServ.highScHref("kingMaster", 3) }} >{{accueilServ.highScUser("kingMaster", 3) }} </a> - {{accueilServ.highScScore("kingMaster", 3)}}
 		</div>
-		{%if loop.index==9 or loop.index==loop.length and loop.index>3%}</div>{%endif%}
-		{% endfor %}
+		
+		<div class="accueil_heighSC_col"><div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">4-  <a {{accueilServ.highScHref("kingMaster", 4) }} >{{accueilServ.highScUser("kingMaster", 4)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",4)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">5-  <a {{accueilServ.highScHref("kingMaster", 5) }} >{{accueilServ.highScUser("kingMaster", 5)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",5)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">6-  <a {{accueilServ.highScHref("kingMaster", 6) }} >{{accueilServ.highScUser("kingMaster", 6)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",6)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">7-  <a {{accueilServ.highScHref("kingMaster", 7) }} >{{accueilServ.highScUser("kingMaster", 7)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",7)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">8-  <a {{accueilServ.highScHref("kingMaster", 8) }} >{{accueilServ.highScUser("kingMaster", 8)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",8)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">9-  <a {{accueilServ.highScHref("kingMaster", 9) }} >{{accueilServ.highScUser("kingMaster", 9)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",9)}}</div>
+		 </div>
 		</div>
+		
+		<div class="accueil_heighSC_col2"><div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">10-  <a {{accueilServ.highScHref("kingMaster", 10) }} >{{accueilServ.highScUser("kingMaster", 10)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",10)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">11-  <a {{accueilServ.highScHref("kingMaster", 11) }} >{{accueilServ.highScUser("kingMaster", 11)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",11)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">12-  <a {{accueilServ.highScHref("kingMaster", 12) }} >{{accueilServ.highScUser("kingMaster", 12)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",12)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">13-  <a {{accueilServ.highScHref("kingMaster", 13) }} >{{accueilServ.highScUser("kingMaster", 13)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",13)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">14-  <a {{accueilServ.highScHref("kingMaster", 14) }} >{{accueilServ.highScUser("kingMaster", 14)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",14)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">15-  <a {{accueilServ.highScHref("kingMaster", 15) }} >{{accueilServ.highScUser("kingMaster", 15)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("kingMaster",15)}}</div>
+		 </div>			
+
+		</div></div>
 	
 	  </div>
 	    <div id="accueil_bloc2_droite">
@@ -53,66 +123,98 @@
 		<div class="img_highscore"><img src="../bundles/GeneBundle/QnF.jpg" alt="QnF" width="200px"></div>
 		<div id="bloc_QnF_EM" >
 		</br>
-		<a href="{{ path('mdqgene_highScore', {'crit':'scofDayTM'}) }}">
-		<img src={{ asset('bundles/GeneBundle/LogoQuizzEm.png') }} alt="Expert Media" width="170px">
-		</a>
-		{% for user in highScDayTM %}
-		{%if loop.index==4 %}<div class="accueil_heighSC_col">
-		{% elseif loop.index==10 %}<div class="accueil_heighSC_col2">
-		{%endif%}
-		  <div {% if loop.index==1 %}class="accueil_heighSC_1"{% elseif loop.index==2 %}class="accueil_heighSC_2"{% elseif loop.index==3 %}class="accueil_heighSC_3"{%else%}class="accueil_heighSC_tous"{%endif%}>
-			{% if loop.index==1 %}
+		<a href="{{ path('mdqgene_highScore', {'crit':'scofDayTM'}) }}"><img src={{ asset('bundles/GeneBundle/LogoQuizzEm.png') }} alt="Expert Media" width="170px"></a>
+		<div class="accueil_heighSC_1">
 			<img src="../bundles/GeneBundle/coupeminiOr.png" alt="coupe" height="22px">
-			{% endif %}
-			{% if loop.index==2 %}
+			1- <a {{accueilServ.highScHref("scofDayTM", 1) }} >{{accueilServ.highScUser("scofDayTM", 1) }} </a> - {{accueilServ.highScScore("scofDayTM", 1)}}
+		</div>
+		
+		<div class="accueil_heighSC_2">
 			<img src="../bundles/GeneBundle/coupeminiAg.png" alt="coupe" height="18px">
-			{% endif %}
-			{% if loop.index==3 %}
+			2- <a {{accueilServ.highScHref("scofDayTM", 2) }} >{{accueilServ.highScUser("scofDayTM", 2) }} </a> - {{accueilServ.highScScore("scofDayTM", 2)}}
+		</div>
+		
+		<div class="accueil_heighSC_3">
 			<img src="../bundles/GeneBundle/coupeminiBz.png" alt="coupe" height="14px">
-			{% endif %}
-		  {%if loop.index>3%}<div class="accueil_highSC_nom">{%endif%}{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
-		  {{user.username}} </a>{%if loop.index>3%}</div><div class="accueil_highSC_sc">{%else%} - {%endif%}{{user.scofDayTM}}{%if loop.index>3%}</div>{%endif%}
-		  </div>
-		  {%if loop.index==9 or loop.index==loop.length and loop.index>3%}</div>{%endif%}
-		{% endfor %}
+			3- <a {{accueilServ.highScHref("scofDayTM", 3) }} >{{accueilServ.highScUser("scofDayTM", 3) }} </a> - {{accueilServ.highScScore("scofDayTM", 3)}}
+		</div>
+		
+		<div class="accueil_heighSC_col"><div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">4-  <a {{accueilServ.highScHref("scofDayTM", 4) }} >{{accueilServ.highScUser("scofDayTM", 4)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",4)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">5-  <a {{accueilServ.highScHref("scofDayTM", 5) }} >{{accueilServ.highScUser("scofDayTM", 5)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",5)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">6-  <a {{accueilServ.highScHref("scofDayTM", 6) }} >{{accueilServ.highScUser("scofDayTM", 6)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",6)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">7-  <a {{accueilServ.highScHref("scofDayTM", 7) }} >{{accueilServ.highScUser("scofDayTM", 7)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",7)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">8-  <a {{accueilServ.highScHref("scofDayTM", 8) }} >{{accueilServ.highScUser("scofDayTM", 8)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",8)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+		<div class="accueil_highSC_nom">9-  <a {{accueilServ.highScHref("scofDayTM", 9) }} >{{accueilServ.highScUser("scofDayTM", 9)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",9)}}</div>
+		 </div>
+		</div>
+		
+		<div class="accueil_heighSC_col2"><div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">10-  <a {{accueilServ.highScHref("scofDayTM", 10) }} >{{accueilServ.highScUser("scofDayTM", 10)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",10)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">11-  <a {{accueilServ.highScHref("scofDayTM", 11) }} >{{accueilServ.highScUser("scofDayTM", 11)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",11)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">12-  <a {{accueilServ.highScHref("scofDayTM", 12) }} >{{accueilServ.highScUser("scofDayTM", 12)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",12)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">13-  <a {{accueilServ.highScHref("scofDayTM", 13) }} >{{accueilServ.highScUser("scofDayTM", 13)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",13)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">14-  <a {{accueilServ.highScHref("scofDayTM", 14) }} >{{accueilServ.highScUser("scofDayTM", 14)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",14)}}</div>
+		 </div>
+		<div class="accueil_heighSC_tous">
+	<div class="accueil_highSC_nom">15-  <a {{accueilServ.highScHref("scofDayTM", 15) }} >{{accueilServ.highScUser("scofDayTM", 15)}} </a></div><div class="accueil_highSC_sc">{{accueilServ.highScScore("scofDayTM",15)}}</div>
+		 </div>	
 		
 		</div>
 		<div id="accueil_QnF_bloc2">
-{#		<div class="QnF_col">
-			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayAr'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Ar"><img src={{ asset('bundles/GeneBundle/LogoQuizzAr2.png') }} alt="Art" width="120px"></div></a>
-			{% for user in highScDayAr %}
-			<div class="QnF_ligne_HighSc">
-			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
-			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayAr}}</div>
-			</div>
-			{% endfor %}
-		</div>		
-#}		<div class="QnF_col">
+		<div class="QnF_col">
 			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayFf'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Ff"><img src={{ asset('bundles/GeneBundle/LogoQuizzFf2.png') }} alt="Nature" width="120px"></div></a>
-			{% for user in highScDayFf %}
-			<div class="QnF_ligne_HighSc">
-			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
-			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayFf}}</div>
-			</div>
-			{% endfor %}
+		<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">1- <a {{accueilServ.highScHref("scofDayFf", 1) }}>{{accueilServ.highScUser("scofDayFf", 1)}}  </a></div><div class="Qnf_highSC_sc">{{accueilServ.highScScore("scofDayFf",1)}}</div>
 		</div>
-{#		<div class="QnF_col">
-			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayMu'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Mu"><img src={{ asset('bundles/GeneBundle/LogoQuizzMu2.png') }} alt="Musique" width="120px"></div></a>
-			{% for user in highScDayMu %}
-			<div class="QnF_ligne_HighSc">
-			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
-			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayMu}}</div>
-			</div>
-			{% endfor %}
+		<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">2- <a {{accueilServ.highScHref("scofDayFf", 2) }}>{{accueilServ.highScUser("scofDayFf", 2)}}  </a></div><div class="Qnf_highSC_sc">{{accueilServ.highScScore("scofDayFf",2)}}</div>
 		</div>
-#}		<div class="QnF_col">
+		<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">3- <a {{accueilServ.highScHref("scofDayFf", 3) }}>{{accueilServ.highScUser("scofDayFf", 3)}}  </a></div><div class="Qnf_highSC_sc">{{accueilServ.highScScore("scofDayFf",3)}}</div>
+		</div>
+		<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">4- <a {{accueilServ.highScHref("scofDayFf", 4) }}>{{accueilServ.highScUser("scofDayFf", 4)}}  </a></div><div class="Qnf_highSC_sc">{{accueilServ.highScScore("scofDayFf",4)}}</div>
+		</div>
+		<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">5- <a {{accueilServ.highScHref("scofDayFf", 5) }}>{{accueilServ.highScUser("scofDayFf", 5)}}  </a></div><div class="Qnf_highSC_sc">{{accueilServ.highScScore("scofDayFf",5)}}</div>
+		</div>
+		</div>
+		<div class="QnF_col">
 			<a href="{{ path('mdqgene_highScore', {'crit':'scofDayLx'}) }}"><div class="QnF_col_titre" id="QnF_col_titre_Lx"><img src={{ asset('bundles/GeneBundle/LogoQuizzLx2.png') }} alt="Lieux" width="120px"></div></a>
-			{% for user in highScDayLx %}
-			<div class="QnF_ligne_HighSc">
-			<div class="Qnf_highSC_nom">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':user.id}) }}">
-			{{user.username}} </a></div><div class="Qnf_highSC_sc">{{user.scofDayLx}}</div>
-			</div>
-			{% endfor %}
+		<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">1- <a {{accueilServ.highScHref("scofDayLx", 1) }}>{{accueilServ.highScUser("scofDayLx", 1)}}  </a></div><div class="Qnf_highSC_sc">{{accueilServ.highScScore("scofDayLx",1)}}</div>
+		</div>
+		<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">2- <a {{accueilServ.highScHref("scofDayLx", 2) }}>{{accueilServ.highScUser("scofDayLx", 2)}}  </a></div><div class="Qnf_highSC_sc">{{accueilServ.highScScore("scofDayLx",2)}}</div>
+		</div>
+		<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">3- <a {{accueilServ.highScHref("scofDayLx", 3) }}>{{accueilServ.highScUser("scofDayLx", 3)}}  </a></div><div class="Qnf_highSC_sc">{{accueilServ.highScScore("scofDayLx",3)}}</div>
+		</div>
+		<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">4- <a {{accueilServ.highScHref("scofDayLx", 4) }}>{{accueilServ.highScUser("scofDayLx", 4)}}  </a></div><div class="Qnf_highSC_sc">{{accueilServ.highScScore("scofDayLx",4)}}</div>
+		</div>
+		<div class="QnF_ligne_HighSc">
+			<div class="Qnf_highSC_nom">5- <a {{accueilServ.highScHref("scofDayLx", 5) }}>{{accueilServ.highScUser("scofDayLx", 5)}}  </a></div><div class="Qnf_highSC_sc">{{accueilServ.highScScore("scofDayLx",5)}}</div>
+		</div>
 		</div>
 		</div>
 		</div>

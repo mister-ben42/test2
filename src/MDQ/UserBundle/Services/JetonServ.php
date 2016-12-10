@@ -9,14 +9,16 @@ class JetonServ
 {    
 
  	private $gestionRepository;
+ 	private $gestion;
  
 	public function __construct($gestionRepository) {
 	  $this->gestionRepository = $gestionRepository;
+	  $this->gestion=$gestionRepository->findOneById(1);
 	} 
 
 	public function testJeton(User $user, $game)
 	{
-	      $gestion=$this->gestionRepository->findOneById(1);
+	      $gestion=$this->gestion;
 	      if($gestion->getJetonsUniques()===true){
 		  if(($user->getScUser()->getNbJdayMq()+$user->getScUser()->getNbJMq()+$user->getScUser()->getNbJdayQnF()+$user->getScUser()->getNbJQnF()>0) && ($game=="MuQuizz" || $game=="FfQuizz" || $game=="ArQuizz" || $game=="LxQuizz"|| $game=="MasterQuizz")){
 		  return true;}
@@ -38,7 +40,7 @@ class JetonServ
 	}
 	public function suppJPartie(User $user, $game)
 	{
-	      $gestion=$this->gestionRepository->findOneById(1);
+	      $gestion=$this->gestion;
 	      $scUser=$user->getScUser();
 	      if($gestion->getJetonsUniques()===true){
 		  if($scUser->getNbJdayQnF()>0){$scUser->setNbJdayQnF($scUser->getNbJdayQnF()-1);}
@@ -61,7 +63,7 @@ class JetonServ
 	}
 	public function majQuotJeton($tabUsers)
 	{
-		$gestion=$this->gestionRepository->findOneById(1);		
+		$gestion=$this->gestion;		
 		foreach($tabUsers as $scUser)
 		{
 		    if($scUser->getNbJdayMq()<$gestion->getNbJquotMq())

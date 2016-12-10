@@ -6,89 +6,84 @@
 		  <div id="accueil_maitre_ligne1">
 		    
 		    <div class="accueil_maitre_col1" id="accueil_maitre_savant">
-		    {% if tabMaitre.1 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.1.usermap.id}) }}">{% endif %}
-		     {% if tabMaitre.1 is null or tabMaitre.1.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/savant-H.png') }}" {% if tabMaitre.1 is null %} style="opacity:0.4"  {% endif %} alt="savant-H" width=68%>  <div class="accueil_maitre_txt">   <div class="accueil_maitre_txt_titre">Savant</div>
-			  {% else %}<img src="{{ asset('bundles/GeneBundle/savant-F.png') }}" alt="savant-F" width=68%>  <div class="accueil_maitre_txt"> <div class="accueil_maitre_txt_titre">Savante</div>
-			  {% endif %}
-			  
-				     <div {% if tabMaitre.1 is null or tabMaitre.1.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.1 is not null %}{{tabMaitre.1.usermap.username}}{% endif %}</div>
-			    </div>
-			   {% if tabMaitre.1 is not null %} </a>{% endif %}
-		    
+		     <a {{accueilServ.maitreTesthref("Savant")}}>
+		     <img {{accueilServ.maitreImg("Savant")}} style="margin-left:-8px" alt="roi" width=68%>
+
+			    <div class="accueil_maitre_txt">
+				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Savant")}}</div>
+				    <div class={{accueilServ.maitreColorSexe("Savant")}}>{{accueilServ.maitreUser("Savant")}}</div>
+				    </div>
+		</a> 
 		    </div>
 		   
 		    <div class="accueil_maitre_col1">
-		     {% if tabMaitre.0 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.0.usermap.id}) }}">{% endif %}
-		     {% if tabMaitre.0 is null or tabMaitre.0.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/roi2.png') }}" {% if tabMaitre.0 is null %} style="opacity:0.4; margin-left:-8px" {% else %}style="margin-left:-8px"    {% endif %} alt="roi" width=121%>
-		     {% else %}<img style="margin-left:-8px" src="{{ asset('bundles/GeneBundle/reine3.png') }}" alt="roi" width=100%>
-		     {% endif %}
+		     <a {{accueilServ.maitreTesthref("Roi")}}>
+		     <img {{accueilServ.maitreImg("Roi")}} style="margin-left:-8px" alt="roi" width=100%>
+
 			    <div class="accueil_maitre_txt">
-				    <div class="accueil_maitre_txt_titre">{% if tabMaitre.0 is null or tabMaitre.0.usermap.sexe==0 %}Roi{% else %}Reine{%endif%}</div>
-				    <div {% if tabMaitre.0 is null or tabMaitre.0.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.0 is not null %}{{tabMaitre.0.usermap.username}}{%endif%}</div>
+				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Roi")}}</div>
+				    <div class={{accueilServ.maitreColorSexe("Roi")}}>{{accueilServ.maitreUser("Roi")}}</div>
 			    </div>
-			    {% if tabMaitre.0 is not null %}</a>{% endif %}
+			    </a>
 		    
 		    </div>
-		    <div class="accueil_maitre_col1" id="accueil_maitre_ministre">
-			{% if tabMaitre.2 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.2.usermap.id}) }}">{% endif %}
-			 {% if tabMaitre.2 is null or tabMaitre.2.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/ministre-H.png') }}" {% if tabMaitre.2 is null %} style="opacity:0.4"  {% endif %} alt="ministre-H" width=68%>
-			  {% else %}<img src="{{ asset('bundles/GeneBundle/ministre-H.png') }}" alt="ministre-F" width=68% style="margin-left:-8px">
-			  {% endif %}
 		    
+		    <div class="accueil_maitre_col1" id="accueil_maitre_ministre">
+		    <a {{accueilServ.maitreTesthref("Ministre")}}>
+		     <img {{accueilServ.maitreImg("Ministre")}} style="margin-left:-8px" alt="roi" width=68%>
+
 			    <div class="accueil_maitre_txt">
 				    <div class="accueil_maitre_txt_titre">Ministre</div>
-				     <div {% if tabMaitre.2 is null or tabMaitre.2.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.2 is not null %}{{tabMaitre.2.usermap.username}}{% endif %}</div>
+				    <div class={{accueilServ.maitreColorSexe("Ministre")}}>{{accueilServ.maitreUser("Ministre")}}</div>
 			    </div>
-			{% if tabMaitre.2 is not null %}</a>{% endif %}
+		    </a>
 		    </div>
+		    
 		</div>
 		  <div id="accueil_maitre_ligne2">		    
 		    <div class="accueil_maitre_col2">
-			{% if tabMaitre.3 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.3.usermap.id}) }}">{% endif %}
-			{% if tabMaitre.3 is null or tabMaitre.3.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/virtuose-H.png') }}" alt="virtuose-H" {% if tabMaitre.3 is null %} style="opacity:0.4; margin-bottom:-10px" {%else%}style="margin-bottom:-10px" {% endif %} width=100%>
-			{% else %}<img src="{{ asset('bundles/GeneBundle/virtuose-F.png') }}" alt="virtuose-F" style="margin-bottom:0px" width=88%x>
-			{% endif %}
+		      <a {{accueilServ.maitreTesthref("Musicien")}}>
+		     <img {{accueilServ.maitreImg("Musicien")}} style="margin-left:-8px" alt="roi" width=94%%>
+
 			    <div class="accueil_maitre_txt2">
-				    <div class="accueil_maitre_txt_titre">{% if tabMaitre.3 is null or tabMaitre.3.usermap.sexe==0 %}Musicien{% else %}Musicienne{% endif %}</div>
-				    <div {% if tabMaitre.3 is null or tabMaitre.3.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.3 is not null %}{{tabMaitre.3.usermap.username}}{% endif %}</div>
+				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Musicien")}}</div>
+				    <div class={{accueilServ.maitreColorSexe("Musicien")}}>{{accueilServ.maitreUser("Musicien")}}</div>
 			    </div>
-		    {% if tabMaitre.3 is not null %}</a>{% endif %}
+		    </a>
+
 		    </div>
 			
 		    <div class="accueil_maitre_col2">
-			{% if tabMaitre.5 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.5.usermap.id}) }}">{% endif %}
-			{% if tabMaitre.5 is null or tabMaitre.5.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/nature-H.png') }}"  {% if tabMaitre.5 is null %} style="opacity:0.4" {% endif %} alt="nature-H" width=100%>
-			{% else %}<img src="{{ asset('bundles/GeneBundle/nature-F.png') }}" style="margin-bottom:-10px"  alt="nature-F" width=112%>
-			{% endif %}
+		      <a {{accueilServ.maitreTesthref("Ecolo")}}>
+		     <img {{accueilServ.maitreImg("Ecolo")}} style="margin-left:-8px" alt="roi" width=106%>
+
 			    <div class="accueil_maitre_txt2">
 				    <div class="accueil_maitre_txt_titre">Ecologiste</div>
-				    <div {% if tabMaitre.5 is null or tabMaitre.5.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.5 is not null %} {{tabMaitre.5.usermap.username}}{% endif %}</div>
+				    <div class={{accueilServ.maitreColorSexe("Ecolo")}}>{{accueilServ.maitreUser("Ecolo")}}</div>
 			    </div>
-			{% if tabMaitre.5 is not null %}</a>{% endif %}
+		    </a>
 		    </div>
 			
 		    <div class="accueil_maitre_col2">
-			{% if tabMaitre.4 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.4.usermap.id}) }}">{% endif %}
-			{% if tabMaitre.4 is null or tabMaitre.4.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/peintre-H.png') }}" alt="peintre-H" {% if tabMaitre.3 is null %} style="opacity:0.4; margin-bottom:0px" {%else%}style="margin-bottom:0px" {% endif %} width=100%>
-			{% else %}<img src="{{ asset('bundles/GeneBundle/peintre-F.png') }}" alt="peintre" width=100%>	
-			{% endif %}	    
+		      <a {{accueilServ.maitreTesthref("Peintre")}}>
+		     <img {{accueilServ.maitreImg("Peintre")}} style="margin-left:-8px" alt="roi" width=100%>
+
 			    <div class="accueil_maitre_txt2">
 				    <div class="accueil_maitre_txt_titre">Peintre</div>
-				   <div {% if tabMaitre.4 is null or tabMaitre.4.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.4 is not null %}{{tabMaitre.4.usermap.username}}{% endif %}</div>
+				    <div class={{accueilServ.maitreColorSexe("Peintre")}}>{{accueilServ.maitreUser("Peintre")}}</div>
 			    </div>
-			{% if tabMaitre.4 is not null %}</a>{% endif %}
+		    </a>
 		    </div>
 			
 		    <div class="accueil_maitre_col2">
-			{% if tabMaitre.6 is not null %}<a href="{{ path('mdquser_profileU', {'id':tabMaitre.6.usermap.id}) }}">{% endif %}
-			{% if tabMaitre.6 is null or tabMaitre.6.usermap.sexe==0 %}<img src="{{ asset('bundles/GeneBundle/globeT-H2.png') }}" {% if tabMaitre.6 is null %} style="opacity:0.4"  {% endif %} alt="globeT" width=100%>	
-			{% else %}<img src="{{ asset('bundles/GeneBundle/globeT-F.png') }}" alt="globeT" width=112%>	
-			{% endif %}
+		      <a {{accueilServ.maitreTesthref("Globe-T")}}>
+		     <img {{accueilServ.maitreImg("Globe-T")}} style="margin-left:-8px" alt="roi" width=106%%>
+
 			    <div class="accueil_maitre_txt2">
-				    <div class="accueil_maitre_txt_titre">Globe-Trotter</div>
-				    <div {% if tabMaitre.6 is null or tabMaitre.6.usermap.sexe==0 %} class="accueil_maitre_txt_nom_H" {% else %}  class="accueil_maitre_txt_nom_F" {% endif %}>{% if tabMaitre.6 is not null %}{{tabMaitre.6.usermap.username}}{% endif %}</div>
+				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Globe-T")}}</div>
+				    <div class={{accueilServ.maitreColorSexe("Globe-T")}}>{{accueilServ.maitreUser("Globe-T")}}</div>
 			    </div>
-		    {% if tabMaitre.6 is not null %}</a>{% endif %}
+		    </a>
 		    </div>
 		</div>
 		</div>

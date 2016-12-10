@@ -97,10 +97,14 @@ class AdminController extends Controller
     public function resetThemeAction()//efface la table et remet l'incrément à 0
 	{		
 		$connection = $this->getDoctrine()->getManager()->getConnection();
-		$platform   = $connection->getDatabasePlatform();  
-		$connection->executeUpdate($platform->getTruncateTableSQL('theme', true /* whether to cascade */));
-		$connection->executeUpdate($platform->getTruncateTableSQL('dom3', true /* whether to cascade */));
+		$platform   = $connection->getDatabasePlatform();
 		$em=$this->getDoctrine()->getManager();
+		
+		$connection->query('START TRANSACTION;SET FOREIGN_KEY_CHECKS=0; TRUNCATE dom3; TRUNCATE theme; SET FOREIGN_KEY_CHECKS=1; COMMIT;');
+	//	$connection->executeUpdate($platform->getTruncateTableSQL('dom3', true /* whether to cascade */));
+	//	$connection->executeUpdate($platform->getTruncateTableSQL('theme', true /* whether to cascade */));
+		
+		
 		$themenone=new Theme();
 		$themenone->setNom("none");
 		$themenone->setDom1("Pas de theme");

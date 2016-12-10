@@ -2,29 +2,89 @@
 		
 		<div class="sous_bloc_accueil_HighScore_QnF">
 			<a href="{{ path('mdqgene_highScore', {'crit':'prctBrtotMq'}) }}"><div class="titre_sous_bloc_accueil_HighScore"><div class="titre_sous_bloc_accueil_HighScore_txt">% de bonnes réponses</br>au Masterquizz</div></div></a>
-			{% for scuser in prctBrtotMq %}
 			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}} - <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Score">{{scuser.prctBrtotMq }}</div>
+			<div class="accueil_HgSc_gauche">1 - <a {{accueilHSServ.highScHref("prctBrtotMq", 1) }}> {{accueilHSServ.highScUser("prctBrtotMq", 1) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("prctBrtotMq", 1) }}</div>
 			</div>
-			{% endfor %}
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">2 - <a {{accueilHSServ.highScHref("prctBrtotMq", 2) }}> {{accueilHSServ.highScUser("prctBrtotMq", 2) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("prctBrtotMq", 2) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">3 - <a {{accueilHSServ.highScHref("prctBrtotMq", 3) }}> {{accueilHSServ.highScUser("prctBrtotMq", 3) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("prctBrtotMq", 3) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">4 - <a {{accueilHSServ.highScHref("prctBrtotMq", 4) }}> {{accueilHSServ.highScUser("prctBrtotMq", 4) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("prctBrtotMq", 4) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">5 - <a {{accueilHSServ.highScHref("prctBrtotMq", 5) }}> {{accueilHSServ.highScUser("prctBrtotMq", 5) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("prctBrtotMq", 5) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">6 - <a {{accueilHSServ.highScHref("prctBrtotMq", 6) }}> {{accueilHSServ.highScUser("prctBrtotMq", 6) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("prctBrtotMq", 6) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">7 - <a {{accueilHSServ.highScHref("prctBrtotMq", 7) }}> {{accueilHSServ.highScUser("prctBrtotMq", 7) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("prctBrtotMq", 7) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">8 - <a {{accueilHSServ.highScHref("prctBrtotMq", 8) }}> {{accueilHSServ.highScUser("prctBrtotMq", 8) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("prctBrtotMq", 8) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">9 - <a {{accueilHSServ.highScHref("prctBrtotMq", 9) }}> {{accueilHSServ.highScUser("prctBrtotMq", 9) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("prctBrtotMq", 9) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">10 - <a {{accueilHSServ.highScHref("prctBrtotMq", 10) }}> {{accueilHSServ.highScUser("prctBrtotMq", 10) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("prctBrtotMq", 10) }}</div>
+			</div>
 		</div>
 		<div class="sous_bloc_accueil_HighScore_QnF">
 			<a href="{{ path('mdqgene_highScore', {'crit':'nbBrtot'}) }}"><div class="titre_sous_bloc_accueil_HighScore"><div class="titre_sous_bloc_accueil_HighScore_txt">Nombre total</br>de bonnes réponses</div></div></a>
-			{% for scuser in nbBrtot %}
 			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}} - <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Score">{{scuser.nbBrtot }}</div>
+			<div class="accueil_HgSc_gauche">1 - <a {{accueilHSServ.highScHref("nbBrtot", 1) }}> {{accueilHSServ.highScUser("nbBrtot", 1) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("nbBrtot", 1) }}</div>
 			</div>
-			{% endfor %}
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">2 - <a {{accueilHSServ.highScHref("nbBrtot", 2) }}> {{accueilHSServ.highScUser("nbBrtot", 2) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("nbBrtot", 2) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">3 - <a {{accueilHSServ.highScHref("nbBrtot", 3) }}> {{accueilHSServ.highScUser("nbBrtot", 3) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("nbBrtot", 3) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">4 - <a {{accueilHSServ.highScHref("nbBrtot", 4) }}> {{accueilHSServ.highScUser("nbBrtot", 4) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("nbBrtot", 4) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">5 - <a {{accueilHSServ.highScHref("nbBrtot", 5) }}> {{accueilHSServ.highScUser("nbBrtot", 5) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("nbBrtot", 5) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">6 - <a {{accueilHSServ.highScHref("nbBrtot", 6) }}> {{accueilHSServ.highScUser("nbBrtot", 6) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("nbBrtot", 6) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">7 - <a {{accueilHSServ.highScHref("nbBrtot", 7) }}> {{accueilHSServ.highScUser("nbBrtot", 7) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("nbBrtot", 7) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">8 - <a {{accueilHSServ.highScHref("nbBrtot", 8) }}> {{accueilHSServ.highScUser("nbBrtot", 8) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("nbBrtot", 8) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">9 - <a {{accueilHSServ.highScHref("nbBrtot", 9) }}> {{accueilHSServ.highScUser("nbBrtot", 9) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("nbBrtot", 9) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">10 - <a {{accueilHSServ.highScHref("nbBrtot", 10) }}> {{accueilHSServ.highScUser("nbBrtot", 10) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("nbBrtot", 10) }}</div>
+			</div>
 		</div>
-		<!--<div class="sous_bloc_accueil_HighScore_QnF">
-			<a href="{{ path('mdqgene_highScore', {'crit':'nbQvalid'}) }}"><div class="titre_sous_bloc_accueil_HighScore"><div class="titre_sous_bloc_accueil_HighScore_txt">Nombre de questions</br>ajoutées à la bdd</div></div></a>
-			{% for scuser in nbQvalid %}
-			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}} - <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Score">{{scuser.nbQvalid }}</div>
-			</div>
-			{% endfor %}
-		</div>-->
+
 

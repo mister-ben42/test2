@@ -21,23 +21,47 @@
 			</div></div>
 			{% endfor %}
 		</div>
-		<!--<div class="sous_bloc_accueil_HighScore_QnF">
-			<a href="{{ path('mdqgene_highScore', {'crit':'MedMu'}) }}"><div class="titre_sous_bloc_accueil_HighScore"><div class="titre_sous_bloc_accueil_HighScore_txt">Médailles au Quizz</br>Musique Classique</div></div></a>
-			{% for scuser in MedMu %}
-			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Med">
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.mu1}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.mu2}}</div>
-			</div></div>
-			{% endfor %}
-		</div>-->
+
 		<div class="sous_bloc_accueil_HighScore_QnF">
 			<a href="{{ path('mdqgene_highScore', {'crit':'highScKM'}) }}"><div class="titre_sous_bloc_accueil_HighScore"><div class="titre_sous_bloc_accueil_HighScore_txt">Meilleur score</br>au KingMaster</div></div></a>
-			{% for scuser in highScKm %}
 			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}} - <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
-			<div class="accueil_HighSc_Score">{{scuser.highScKM }}</div>
+			<div class="accueil_HgSc_gauche">1 - <a {{accueilHSServ.highScHref("highScKM", 1) }}> {{accueilHSServ.highScUser("highScKM", 1) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("highScKM", 1) }}</div>
 			</div>
-			{% endfor %}
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">2 - <a {{accueilHSServ.highScHref("highScKM", 2) }}> {{accueilHSServ.highScUser("highScKM", 2) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("highScKM", 2) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">3 - <a {{accueilHSServ.highScHref("highScKM", 3) }}> {{accueilHSServ.highScUser("highScKM", 3) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("highScKM", 3) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">4 - <a {{accueilHSServ.highScHref("highScKM", 4) }}> {{accueilHSServ.highScUser("highScKM", 4) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("highScKM", 4) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">5 - <a {{accueilHSServ.highScHref("highScKM", 5) }}> {{accueilHSServ.highScUser("highScKM", 5) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("highScKM", 5) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">6 - <a {{accueilHSServ.highScHref("highScKM", 6) }}> {{accueilHSServ.highScUser("highScKM", 6) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("highScKM", 6) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">7 - <a {{accueilHSServ.highScHref("highScKM", 7) }}> {{accueilHSServ.highScUser("highScKM", 7) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("highScKM", 7) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">8 - <a {{accueilHSServ.highScHref("highScKM", 8) }}> {{accueilHSServ.highScUser("highScKM", 8) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("highScKM", 8) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">9 - <a {{accueilHSServ.highScHref("highScKM", 9) }}> {{accueilHSServ.highScUser("highScKM", 9) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("highScKM", 9) }}</div>
+			</div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">10 - <a {{accueilHSServ.highScHref("highScKM", 10) }}> {{accueilHSServ.highScUser("highScKM", 10) }} </a></div>
+			<div class="accueil_HighSc_Score">{{accueilHSServ.highScScore("highScKM", 10) }}</div>
+			</div>
 		</div>

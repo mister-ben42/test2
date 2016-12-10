@@ -6,6 +6,15 @@ namespace MDQ\GeneBundle\Services;
 class HighScore
 {    
 
+	public function getFunctions(){// voir si possible d'envoyer à twig
+		return array(
+		  'test'=> new \Twig_Function_Method($this, 'test')
+	      );
+	}
+	public function test($data)
+	{
+	      return "test concluant !";
+	}
 	public function editTxt($crit)
 	{
 	$data['crit']=$crit;

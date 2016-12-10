@@ -10,11 +10,14 @@ class GeneExtension extends \Twig_Extension
 	private $gestionRepository;
 	private $roleService;
 	private $jetonServ;
+	private $gestion;
+	
  
 	public function __construct($gestionRepository, $roleService, $jetonServ) {
 	  $this->gestionRepository=$gestionRepository;
 	  $this->roleService=$roleService;
 	  $this->jetonServ=$jetonServ;
+	  $this->gestion=$gestionRepository->findOneById(1);
 	}
 	
 	public function getFunctions(){
@@ -23,12 +26,7 @@ class GeneExtension extends \Twig_Extension
 		  'testAccessAJ'=> new \Twig_Function_Method($this, 'testAccessAJ'),
 	      );
 	}
-	    public function getFilters()
-	{
-	    return array(
-//		'chgeNull' => new \Twig_Filter_Method($this, 'chgeNullto0'),		
-	    );
-	}
+
 	public function getName()
 	  {
 		return 'Gene';
@@ -40,7 +38,7 @@ class GeneExtension extends \Twig_Extension
 	      if($user===Null){$txt="affich_flash1";}
 	      else
 	      {	    
-		    $gestion=$this->gestionRepository->findOneById(1);
+		    $gestion=$this->gestion;
 		    if($this->roleService->isGranted('ROLE_ADMIN', $user)){$admin=1;}
 		    if($jeu=="Mq")
 		    {
@@ -76,7 +74,7 @@ class GeneExtension extends \Twig_Extension
 	      $txt=""; $admin=0;
 	      if($user!==Null)
 	      {	      
-		    $gestion=$this->gestionRepository->findOneById(1);
+		    $gestion=$this->gestion;
 		    if($this->roleService->isGranted('ROLE_ADMIN', $user)){$admin=1;}
 		    if($jeu=="Mq")
 		    {
@@ -102,6 +100,9 @@ class GeneExtension extends \Twig_Extension
 	      }
 	      return $txt;
 	}
+
+
+
 }
 
 
