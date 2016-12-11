@@ -31,6 +31,7 @@ framework:
     trusted_proxies: ~
     session:
         name: MDQSessionBF
+        handler_id: session.handler.pdo
         # handler_id set to null will use default session handler from php.ini// handler_id:  ~        
     fragments:       ~
     http_method_override: true
@@ -90,3 +91,11 @@ swiftmailer:
     spool:     { type: memory }
 
 gregwar_captcha: ~
+
+services:
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        public:    false
+        arguments:
+            - 'mysql:dbname=mondeduquizz;port=127.0.0.1'
+            - { db_username: '%database_user%', db_password: '%database_password%' }

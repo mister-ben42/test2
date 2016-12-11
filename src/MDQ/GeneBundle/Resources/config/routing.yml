@@ -1,7 +1,7 @@
 mdqgene_accueil:
     pattern:  /
     defaults: { _controller: MDQGeneBundle:Gene:accueil }
-    methods:  [GET]
+    methods:  [GET, PUT]
 mdqgene_accueilJeu:
     path:  /accueilJeu
     defaults: { _controller: MDQGeneBundle:Gene:accueilJeu }
