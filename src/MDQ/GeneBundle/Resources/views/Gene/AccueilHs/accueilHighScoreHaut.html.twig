@@ -1,39 +1,225 @@
 
 		<div class="sous_bloc_accueil_HighScore">
 			<a href="{{ path('mdqgene_highScore', {'crit':'MedKm'}) }}"><div class="titre_sous_bloc_accueil_HighScore">Médailles</br>au King Master</div></a>
-			{% for scuser in MedKm %}
 			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}"> {{scuser.username}} </a></div>
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedKm", 1) }}> {{accueilHSServ.highScUser("MedKm", 1) }} </a></div>
 			<div class="accueil_HighSc_Med">
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.km1}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.km2}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.km3}}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 1, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 1, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 1, 3) }}</div>
 			</div></div>
-			{% endfor %}
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedKm", 2) }}> {{accueilHSServ.highScUser("MedKm", 2) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 2, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 2, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 2, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedKm", 3) }}> {{accueilHSServ.highScUser("MedKm", 3) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 3, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 3, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 3, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedKm", 4) }}> {{accueilHSServ.highScUser("MedKm", 4) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 4, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 4, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 4, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedKm", 5) }}> {{accueilHSServ.highScUser("MedKm", 5) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 5, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 5, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 5, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedKm", 6) }}> {{accueilHSServ.highScUser("MedKm", 6) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 6, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 6, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 6, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedKm", 7) }}> {{accueilHSServ.highScUser("MedKm", 7) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 7, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 7, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 7, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedKm", 8) }}> {{accueilHSServ.highScUser("MedKm", 8) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 8, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 8, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 8, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedKm", 9) }}> {{accueilHSServ.highScUser("MedKm", 9) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 9, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 9, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 9, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedKm", 10) }}> {{accueilHSServ.highScUser("MedKm", 10) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 10, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 10, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedKm", 10, 3) }}</div>
+			</div></div>
+			
+			
 		</div>
 		<div class="sous_bloc_accueil_HighScore">
 			<a href="{{ path('mdqgene_highScore', {'crit':'MedMq'}) }}"><div class="titre_sous_bloc_accueil_HighScore">Médailles</br>au MasterQuizz</div></a>
-			{% for scuser in MedMq %}
 			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}">{{scuser.username}} </a></div>
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedMq", 1) }}> {{accueilHSServ.highScUser("MedMq", 1) }} </a></div>
 			<div class="accueil_HighSc_Med">
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.mq1}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.mq2}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.mq3}}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 1, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 1, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 1, 3) }}</div>
 			</div></div>
-			{% endfor %}
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedMq", 2) }}> {{accueilHSServ.highScUser("MedMq", 2) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 2, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 2, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 2, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedMq", 3) }}> {{accueilHSServ.highScUser("MedMq", 3) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 3, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 3, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 3, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedMq", 4) }}> {{accueilHSServ.highScUser("MedMq", 4) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 4, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 4, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 4, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedMq", 5) }}> {{accueilHSServ.highScUser("MedMq", 5) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 5, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 5, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 5, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedMq", 6) }}> {{accueilHSServ.highScUser("MedMq", 6) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 6, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 6, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 6, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedMq", 7) }}> {{accueilHSServ.highScUser("MedMq", 7) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 7, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 7, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 7, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedMq", 8) }}> {{accueilHSServ.highScUser("MedMq", 8) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 8, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 8, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 8, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedMq", 9) }}> {{accueilHSServ.highScUser("MedMq", 9) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 9, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 9, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 9, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedMq", 10) }}> {{accueilHSServ.highScUser("MedMq", 10) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 10, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 10, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedMq", 10, 3) }}</div>
+			</div></div>
 		</div>
+		
 		<div class="sous_bloc_accueil_HighScore">
 			<a href="{{ path('mdqgene_highScore', {'crit':'MedTm'}) }}"><div class="titre_sous_bloc_accueil_HighScore">Médailles</br> Expert Média</div></a>
-			{% for scuser in MedTm %}
 			<div class="listescore_bloc_accueil_HighScore">
-			<div class="accueil_HgSc_gauche">{{loop.index}}- <a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}">{{scuser.username}} </a></div>
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedTm", 1) }}> {{accueilHSServ.highScUser("MedTm", 1) }} </a></div>
 			<div class="accueil_HighSc_Med">
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.tm1}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.tm2}}</div>
-			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.tm3}}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 1, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 1, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 1, 3) }}</div>
 			</div></div>
-			{% endfor %}
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedTm", 2) }}> {{accueilHSServ.highScUser("MedTm", 2) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 2, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 2, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 2, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedTm", 3) }}> {{accueilHSServ.highScUser("MedTm", 3) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 3, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 3, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 3, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedTm", 4) }}> {{accueilHSServ.highScUser("MedTm", 4) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 4, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 4, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 4, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedTm", 5) }}> {{accueilHSServ.highScUser("MedTm", 5) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 5, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 5, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 5, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedTm", 6) }}> {{accueilHSServ.highScUser("MedTm", 6) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 6, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 6, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 6, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedTm", 7) }}> {{accueilHSServ.highScUser("MedTm", 7) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 7, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 7, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 7, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedTm", 8) }}> {{accueilHSServ.highScUser("MedTm", 8) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 8, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 8, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 8, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedTm", 9) }}> {{accueilHSServ.highScUser("MedTm", 9) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 9, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 9, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 9, 3) }}</div>
+			</div></div>
+			<div class="listescore_bloc_accueil_HighScore">
+			<div class="accueil_HgSc_gauche">1- <a {{accueilHSServ.highScHref("MedTm", 10) }}> {{accueilHSServ.highScUser("MedTm", 10) }} </a></div>
+			<div class="accueil_HighSc_Med">
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 10, 1) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 10, 2) }}</div>
+			<div class="accueil_HighSc_Med_case"><img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{accueilHSServ.highScMed("MedTm", 10, 3) }}</div>
+			</div></div>
 		</div>
 
 		

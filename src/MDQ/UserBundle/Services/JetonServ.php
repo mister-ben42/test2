@@ -3,15 +3,14 @@
 namespace MDQ\UserBundle\Services;
 
 use MDQ\UserBundle\Entity\User;
-
+use MDQ\AdminBundle\Entity\GestionRepository;
 
 class JetonServ
 {    
 
- 	private $gestionRepository;
  	private $gestion;
  
-	public function __construct($gestionRepository) {
+	public function __construct(GestionRepository $gestionRepository) {
 	  $this->gestionRepository = $gestionRepository;
 	  $this->gestion=$gestionRepository->findOneById(1);
 	} 

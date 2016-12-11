@@ -269,7 +269,7 @@ class ScUserRepository extends EntityRepository
 		}// tout ca pour n'envoyer qu'un tableau d'id.
 		return $tab2;
 	}
-			private function MajStatGame(ScUser $scUser, $game, $br)
+			private function majStatGame(ScUser $scUser, $game, $br)
 			{
 				if($game=='MasterQuizz')
 				{
@@ -282,7 +282,7 @@ class ScUserRepository extends EntityRepository
 				}
 				return;
 			}
-			private function MajNbQ(ScUser $scUser, $dom1)
+			private function majNbQ(ScUser $scUser, $dom1)
 			{
 				if($dom1=='Histoire'){$nbQ=$scUser->getNbQhMq()+1;
 										$scUser->setNbQhMq($nbQ);}
@@ -310,7 +310,7 @@ class ScUserRepository extends EntityRepository
 										$scUser->setNbQSx($nbQ);}								
 				return $nbQ;
 			}
-			private function MajNbBr(ScUser $scUser, $dom1, $br)
+			private function majNbBr(ScUser $scUser, $dom1, $br)
 			{				
 				if($br==1){$scUser->setNbBrtot($scUser->getNbBrtot()+1);}
 				if($dom1=='Histoire'){$nbBr=$scUser->getNbBrhMq()+$br;
@@ -339,7 +339,7 @@ class ScUserRepository extends EntityRepository
 									$scUser->setNbBrSx($nbBr);}
 				return $nbBr;
 			}
-			private function MajPrctBr(ScUser $scUser, $dom1, $nbQ, $nbBr)
+			private function majPrctBr(ScUser $scUser, $dom1, $nbQ, $nbBr)
 			{
 				if($dom1=='Histoire'){$scUser->setPrctBrhMq($nbBr*100/$nbQ);}
 				elseif($dom1=='Géographie'){$scUser->setPrctBrgMq($nbBr*100/$nbQ);}
@@ -358,10 +358,10 @@ class ScUserRepository extends EntityRepository
 	public function majBddScQ($scUser, $game, $dom1, $br)
 	{
 
-		if($game=='MasterQuizz'){ScUserRepository::MajStatGame($scUser, $game, $br);}
-		$newnbQ=$this->MajNbQ($scUser,$dom1);			
-		$newnbBr=$this->MajNbBr($scUser,$dom1,$br);
-		$this->MajPrctBr($scUser, $dom1, $newnbQ, $newnbBr);
+		if($game=='MasterQuizz'){ScUserRepository::majStatGame($scUser, $game, $br);}
+		$newnbQ=$this->majNbQ($scUser,$dom1);			
+		$newnbBr=$this->majNbBr($scUser,$dom1,$br);
+		$this->majPrctBr($scUser, $dom1, $newnbQ, $newnbBr);
 		
 		return 1;
 	}
@@ -370,10 +370,10 @@ class ScUserRepository extends EntityRepository
 	      if($rep==$bRep){$br=1;}
 	      else{$br=0;}
 
-		if($game=='MasterQuizz'){ScUserRepository::MajStatGame($scUser, $game, $br);}
-		$newnbQ=$this->MajNbQ($scUser,$dom1);			
-		$newnbBr=ScUserRepository::MajNbBr($scUser,$dom1,$br);
-		ScUserRepository::MajPrctBr($scUser, $dom1, $newnbQ, $newnbBr);
+		if($game=='MasterQuizz'){ScUserRepository::majStatGame($scUser, $game, $br);}
+		$newnbQ=$this->majNbQ($scUser,$dom1);			
+		$newnbBr=ScUserRepository::majNbBr($scUser,$dom1,$br);
+		ScUserRepository::majPrctBr($scUser, $dom1, $newnbQ, $newnbBr);
 		if($finP==1){$this->majBddScfinP($scUser, $dom1, $game, $partie);}
 		
 		return 1;

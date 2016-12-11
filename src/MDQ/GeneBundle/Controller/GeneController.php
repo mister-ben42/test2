@@ -5,7 +5,7 @@
 namespace MDQ\GeneBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use MDQ\GeneBundle\Entity\StatsQuot;
+//use MDQ\GeneBundle\Entity\StatsQuot; //En attendant de le réactiver quand en ligne, avec un service à part
 
 
 class GeneController extends Controller
@@ -21,7 +21,8 @@ class GeneController extends Controller
 	// MODIF EFFECTUEE : A tester puis effacer le passage precedent.
 	// ******** Controle des parties en bdd et validation le cas echeant + mise a jours de bdd user et partie
 	$geneServ = $this->container->get('mdq_gene.accueilGene');
-	$geneServ->testNonValidPartie();
+	$geneServ->testNonValidPartie();	
+	$em->flush();
 	// ********** Controle de nouvelle journee -- A terme a remplacer par un CRON ******** ///
 	$datejour= new \DateTime(date('Y-m-d'));
 		//Reste un petit pb avec l'objet date : si pas de connexion le lundi, mais le mardi, la date de Maj de la datebdd jour est celle du debut de semane, ce qui conduit a une maj automatique du jour lors de l'arrivee suivante sur la page d'accueil.
@@ -77,7 +78,6 @@ class GeneController extends Controller
 			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
 						->majClassement($listeULx, 'LxQuizz', $tabMaitres);
 
-
 	//**** mise a jour date_ref ***********************//
 					
 			$datebdd->setRMDQ($tabMaitres[0]);
@@ -88,9 +88,11 @@ class GeneController extends Controller
 			$datebdd->setFfMDQ($tabMaitres[5]);
 			$datebdd->setLxMDQ($tabMaitres[6]);
 			$em->persist($datebdd);
+			$em->flush();
+			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
 	// ************ flush final, execute toutes les mises a jour ******* ////
-			$em->flush();
+			
 	// ************ recuperation des news a afficher ********************* ////
 	// Ca me fait chier ca ne detecte par le repository de l'entite News ; je mets tout ici.
 	$news=$em->createQueryBuilder();
@@ -104,8 +106,6 @@ class GeneController extends Controller
 
 
 	$dateref=$datebdd;
-	$tabMaitre=[$dateref->getRMDQ(),$dateref->getSMDQ(),$dateref->getMMDQ(),$dateref->getMuMDQ(),
-	$dateref->getArMDQ(),$dateref->getFfMDQ(),$dateref->getLxMDQ()];
 	$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
 	
 	$accueilServ = $this->container->get('mdq_gene.accueilGene');
@@ -119,30 +119,19 @@ class GeneController extends Controller
    public function accueilJeuAction()
   {
 		$session = $this->getRequest()->getSession();
+		$accueilJServ = $this->container->get('mdq_gene.accueilJeu');	
 		$session->set('page', 'accueilJeu');
-		$em=$this->getDoctrine()->getManager();
 		return $this->render('MDQGeneBundle:Gene:accueilJeu.html.twig', array(
+		'accueilJServ'=>$accueilJServ,
 		));
   }
 
 	public function accueilHighScoreAction()
 	{
-		$em=$this->getDoctrine()->getManager();
-		$medMq=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore('MedMq',1,10);		
-		$medKM=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore('MedKm',1,10);
-		$medLx=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore('MedLx',1,10);
-		$medFf=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore('MedFf',1,10);
-		$medTM=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore('MedTm',1,10);
-		$accueilHSServ = $this->container->get('mdq_gene.accueilHS');
-		
+
+		$accueilHSServ = $this->container->get('mdq_gene.accueilHS');		
 		return $this->render('MDQGeneBundle:Gene:accueilHighScore.html.twig', array(
 		  'accueilHSServ' => $accueilHSServ,
-		  'MedMq'=>$medMq,
-		 'MedFf'=>$medFf,
-		  'MedLx'=>$medLx,
-		  'MedTm'=>$medTM,
-		  'highScKm'=>$highScKM,
-		  'MedKm'=>$medKM,
 		));
 	}
 	public function highScoreAction($crit, $page, $id)

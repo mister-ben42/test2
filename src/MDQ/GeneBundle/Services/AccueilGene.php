@@ -2,6 +2,10 @@
 
 namespace MDQ\GeneBundle\Services;
 
+use MDQ\UserBundle\Entity\ScUserRepository;
+use MDQ\GeneBundle\Entity\DateReferenceRepository;
+
+
 
 class AccueilGene
 {    
@@ -16,8 +20,8 @@ class AccueilGene
 	private $tabScDayFf;
 	private $tabScDayLx;      	
  
-	public function __construct($partieRepository, $scUserRepository, $dateRefRepository, $assets, $router) {
-	  $this->partiequizzRepository=$partieRepository;
+	public function __construct($partieRepository, ScUserRepository $scUserRepository, DateReferenceRepository $dateRefRepository, $assets, $router) {
+	  $this->partieRepository=$partieRepository;
 	  $this->dateRefRepository=$dateRefRepository->findOneById(1);
 	  $this->scUserRepository=$scUserRepository;
 	  $this->assets=$assets;
@@ -33,7 +37,7 @@ class AccueilGene
 
       public function testNonValidPartie()
       {
-	    $partieNonValide=$this->partiequizzRepository->recupPNonValid();
+	    $partieNonValide=$this->partieRepository->recupPNonValid();
 	    foreach ($partieNonValide as $partie){
 			$intcontrol = new \DateInterval('PT10M');// Definition d'un intervalle de 10 minutes
 			$dateactu= new \DateTime();
@@ -58,43 +62,36 @@ class AccueilGene
 	      if($type=="Roi"){
 		    if($this->dateRefRepository->getRMDQ()!==Null){
 		    $route=$this->router->generate('mdquser_profileU', array("id"=>$this->dateRefRepository->getRMDQ()->getId()));
-		    $url=$this->assets->getAssetUrl($route);
 		    $txt="href=".$route;}
 	      }
 	      elseif($type=="Savant"){
 		    if($this->dateRefRepository->getSMDQ()!==Null){
 		    $route=$this->router->generate('mdquser_profileU', array("id"=>$this->dateRefRepository->getSMDQ()->getId()));
-		    $url=$this->assets->getAssetUrl($route);
 		    $txt="href=".$route;}
 	      }
 	      elseif($type=="Ministre"){
 		    if($this->dateRefRepository->getMMDQ()!==Null){
 		    $route=$this->router->generate('mdquser_profileU', array("id"=>$this->dateRefRepository->getMMDQ()->getId()));
-		    $url=$this->assets->getAssetUrl($route);
 		    $txt="href=".$route;}
 	      }
 	      elseif($type=="Musicien"){
 		    if($this->dateRefRepository->getMuMDQ()!==Null){
 		    $route=$this->router->generate('mdquser_profileU', array("id"=>$this->dateRefRepository->getMuMDQ()->getId()));
-		    $url=$this->assets->getAssetUrl($route);
 		    $txt="href=".$route;}
 	      }
 	      elseif($type=="Peintre"){
 		    if($this->dateRefRepository->getArMDQ()!==Null){
 		    $route=$this->router->generate('mdquser_profileU', array("id"=>$this->dateRefRepository->getArMDQ()->getId()));
-		    $url=$this->assets->getAssetUrl($route);
 		    $txt="href=".$route;}
 	      }
 	      elseif($type=="Ecolo"){
 		    if($this->dateRefRepository->getFfMDQ()!==Null){
 		    $route=$this->router->generate('mdquser_profileU', array("id"=>$this->dateRefRepository->getFfMDQ()->getId()));
-		    $url=$this->assets->getAssetUrl($route);
 		    $txt="href=".$route;}
 	      }
 	      elseif($type=="Globbe-T"){
 		    if($this->dateRefRepository->getLxMDQ()!==Null){
 		    $route=$this->router->generate('mdquser_profileU', array("id"=>$this->dateRefRepository->getLxMDQ()->getId()));
-		    $url=$this->assets->getAssetUrl($route);
 		    $txt="href=".$route;}
 	      }	      
 	      return $txt;	      

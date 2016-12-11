@@ -37,3 +37,4 @@ services:
         class: MDQ\GeneBundle\Services\RoleService
         arguments: [@security.role_hierarchy]
         
+        

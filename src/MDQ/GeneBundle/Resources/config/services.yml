@@ -15,10 +15,11 @@ services:
          
      mdq_gene.accueilHS:
          class: MDQ\GeneBundle\Services\AccueilHighSc
-         arguments: [@mdq_quizz.repository.partiequizz, @mdq_user.repository.scuser, @mdq_gene.repository.date_ref, @twig.extension.assets, @router]
-         
-     mdq_gene.twig.mdq_extension:
-        class: MDQ\GeneBundle\Twig\GeneExtension
+         arguments: [@mdq_user.repository.scuser, @router]
+     
+     mdq_gene.accueilJeu:
+        class: MDQ\GeneBundle\Services\AccueilJeu
         arguments: [@mdq_admin.repository.gestion, @mdq_gene.service.role, @mdq_user.jeton_serv]
-        tags:
-            - { name: twig.extension }
+         
+
+         

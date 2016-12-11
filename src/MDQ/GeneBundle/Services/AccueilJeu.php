@@ -1,13 +1,13 @@
 <?php
-// src/MDQ/UserBundle/Twig/UserExtension.php
 
-namespace MDQ\GeneBundle\Twig;
+namespace MDQ\GeneBundle\Services;
 
-class GeneExtension extends \Twig_Extension
-{
+use MDQ\UserBundle\Entity\ScUserRepository;
 
-	
-	private $gestionRepository;
+
+class AccueilJeu
+{    
+
 	private $roleService;
 	private $jetonServ;
 	private $gestion;
@@ -19,19 +19,12 @@ class GeneExtension extends \Twig_Extension
 	  $this->jetonServ=$jetonServ;
 	  $this->gestion=$gestionRepository->findOneById(1);
 	}
-	
-	public function getFunctions(){
-		return array(
-		  'flashAJ' => new \Twig_Function_Method($this, 'selectFlashAcJeu'),
-		  'testAccessAJ'=> new \Twig_Function_Method($this, 'testAccessAJ'),
-	      );
-	}
 
 	public function getName()
 	  {
-		return 'Gene';
+		return 'AcueilJeu';
 	  }
-	public function selectFlashAcJeu($jeu, $user)
+	public function selectFlash($jeu, $user)
 	{
 	      $txt="";
 	      $admin=0;
@@ -100,9 +93,5 @@ class GeneExtension extends \Twig_Extension
 	      }
 	      return $txt;
 	}
-
-
-
 }
-
 
