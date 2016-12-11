@@ -22,11 +22,10 @@ class QuizzController extends Controller
 	{
 	$user = $this->container->get('security.context')->getToken()->getUser();
 	$em = $this->getDoctrine()->getManager();
-	$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
 	$quizzServ = $this->container->get('mdq_quizz.services');	
 	if($this->get('security.context')->isGranted('ROLE_ADMIN')){$admin=1;}
 	else{$admin=0;}
-        if(!$quizzServ->testAutoriseNewG($gestion, $game, $user, $admin)) {return $this->redirect($this->generateUrl('mdqgene_accueil'));}
+        if(!$quizzServ->testAutoriseNewG($game, $user, $admin)) {return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$partie=$em->getRepository('MDQQuizzBundle:PartieQuizz')->createNewP($game,$user);		
 		$this->container->get('mdq_user.jeton_serv')->suppJPartie($user, $game);
 		$em->persist($partie); 
@@ -44,15 +43,14 @@ class QuizzController extends Controller
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
 		$session->set('page', 'Mquizz');
-		$em = $this->getDoctrine()->getManager();
-		$gestion=$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
 		$user = $this->container->get('security.context')->getToken()->getUser();
 	      if ($user===null) {return $this->redirect($this->generateUrl('mdqgene_accueil'));	} 		
 		$quizzServ = $this->container->get('mdq_quizz.services');
 		$page=$quizzServ->selectPageJeu($game);
+		$signalE=$quizzServ->testSignalE();
 		return $this->render('MDQQuizzBundle:Quizz:jeuQuizz\\'.$page.'.html.twig', array(
 		    'game'=>$game,
-		    'signalE'=>$gestion->getSignalE()
+		    'signalE'=>$signalE,
 		    ));			
 	}
 	public function editQuestionAction(){

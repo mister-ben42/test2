@@ -8,7 +8,7 @@ services:
 
      mdq_quizz.services:         
          class: MDQ\QuizzBundle\Services\QuizzServ
-         arguments: [@mdq_user.jeton_serv]
+         arguments: [@mdq_user.jeton_serv, @mdq_admin.repository.gestion]
          
      mdq_quizz.ajax:         
          class: MDQ\QuizzBundle\Services\AjaxQuizz

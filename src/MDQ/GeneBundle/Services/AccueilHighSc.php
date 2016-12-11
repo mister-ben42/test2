@@ -31,20 +31,24 @@ class AccueilHighSc
 	  $this->tabMedFf=$scUserRepository->recupHighScore('MedFf',1,10);
 	}
 
- 
-
-	public function highScHref($type, $rang)
+	private function typeToTab($type)
 	{
-	     $txt="";
-	     $rang=$rang-1;
-	     if($type=="prctBrtotMq"){$tab=$this->tabprctBrtotMq;}
+	      if($type=="prctBrtotMq"){$tab=$this->tabprctBrtotMq;}
 	      elseif($type=="nbBrtot"){$tab=$this->tabnbBrtot;}
 	      elseif($type=="highScKM"){$tab=$this->tabHighScKM;}
 	      elseif($type=="MedKm"){$tab=$this->tabMedKm;}
 	      elseif($type=="MedMq"){$tab=$this->tabMedMq;}
 	      elseif($type=="MedTm"){$tab=$this->tabMedTm;}
 	      elseif($type=="MedLx"){$tab=$this->tabMedLx;}
-	      elseif($type=="MedFf"){$tab=$this->tabMedFf;}  
+	      elseif($type=="MedFf"){$tab=$this->tabMedFf;} 
+	      return $tab;
+	}
+
+	public function highScHref($type, $rang)
+	{
+	     $txt="";
+	     $rang=$rang-1;
+	      $tab=$this->typeToTab($type);
 	      if(isset($tab[$rang]) && $tab[$rang]!==Null){$txt="href=".$this->router->generate('mdquser_profileU', array("id"=>$tab[$rang]['id']));}	 	
 	      return $txt;
 	}
@@ -52,14 +56,7 @@ class AccueilHighSc
 	{
 	     $txt="";
 	     $rang=$rang-1;
-	     if($type=="prctBrtotMq"){$tab=$this->tabprctBrtotMq;}
-	      elseif($type=="nbBrtot"){$tab=$this->tabnbBrtot;}
-	      elseif($type=="highScKM"){$tab=$this->tabHighScKM;}	      
-	      elseif($type=="MedKm"){$tab=$this->tabMedKm;}
-	      elseif($type=="MedMq"){$tab=$this->tabMedMq;} 
-	      elseif($type=="MedTm"){$tab=$this->tabMedTm;}
-	      elseif($type=="MedLx"){$tab=$this->tabMedLx;}
-	      elseif($type=="MedFf"){$tab=$this->tabMedFf;} 
+	      $tab=$this->typeToTab($type);
 	      if(isset($tab[$rang]) && $tab[$rang]!==Null){$txt=$tab[$rang]['username'];}	      
 	      return $txt;
 	}
@@ -67,9 +64,7 @@ class AccueilHighSc
 	{
 	     $txt="";
 	     $rang=$rang-1;
-	     if($type=="prctBrtotMq"){$tab=$this->tabprctBrtotMq;}
-	      elseif($type=="nbBrtot"){$tab=$this->tabnbBrtot;}
-	      elseif($type=="highScKM"){$tab=$this->tabHighScKM;}
+	      $tab=$this->typeToTab($type);
 	      if(isset($tab[$rang]) && $tab[$rang]!==Null){$txt=$tab[$rang][$type];}	     
 	      return $txt;
 	}

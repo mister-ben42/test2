@@ -93,21 +93,9 @@ class GeneController extends Controller
 		}
 	// ************ flush final, execute toutes les mises a jour ******* ////
 			
-	// ************ recuperation des news a afficher ********************* ////
-	// Ca me fait chier ca ne detecte par le repository de l'entite News ; je mets tout ici.
-	$news=$em->createQueryBuilder();
-			$news->select('n.titre, n.texte, n.dateCreate')
-				->from('MDQAdminBundle:News', 'n')
-				->where('n.publication = :publication')
-				->setParameter('publication', true)
-				->orderBy('n.priorite', 'DESC')
-				->addOrderBy('n.id', 'DESC');							
-	$newsA=$news->getQuery()->getResult();	
 
-
-	$dateref=$datebdd;
-	$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
-	
+	$newsA=$em->getRepository('MDQAdminBundle:News')->recupNews();
+	$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);	
 	$accueilServ = $this->container->get('mdq_gene.accueilGene');
 	return $this->render('MDQGeneBundle:Gene:accueil.html.twig', array(
 	  'accueilServ'=>$accueilServ,

@@ -2,7 +2,6 @@
 
 namespace MDQ\GeneBundle\Services;
 
-use MDQ\UserBundle\Entity\ScUserRepository;
 
 
 class AccueilJeu
@@ -13,7 +12,7 @@ class AccueilJeu
 	private $gestion;
 	
  
-	public function __construct($gestionRepository, $roleService, $jetonServ) {
+	public function __construct(Gestion $gestionRepository, $roleService, $jetonServ) {
 	  $this->gestionRepository=$gestionRepository;
 	  $this->roleService=$roleService;
 	  $this->jetonServ=$jetonServ;

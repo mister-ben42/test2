@@ -8,10 +8,13 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class QuizzServ
 {    
-       	private $jetonServ;
+       	private $jetonServ;       	
+	private $gestion;
  
-	public function __construct($jetonServ) {
+	public function __construct($jetonServ, $gestionRepository) {
 	  $this->jetonServ = $jetonServ;
+	  $this->gestionRepository=$gestionRepository;
+	  $this->gestion=$gestionRepository->findOneById(1);
 	} 
       
       public function selectPageJeu($game)
@@ -26,9 +29,10 @@ class QuizzServ
 	    }      
 	    return $page;
       }
-      public function testAutoriseNewG(Gestion $gestion, $game, User $user, $admin)
+      public function testAutoriseNewG($game, User $user, $admin)
       {
 	    $test=1;
+	    $gestion=$this->gestion;
 	     if($user===null || $game=="MasterQuizz" && $gestion->getMq()==0 && $admin==0
 			 || $game=="FfQuizz" && $gestion->getFf()==0 && $admin==0
 			 || $game=="ArQuizz" && $gestion->getAr()==0 && $admin==0
@@ -132,6 +136,11 @@ class QuizzServ
 	      $tabScore['ScDay']=$scofDayUser;
 	      $tabScore['ScMax']=$highscore;
 	      return $tabScore;
+      }
+      public function testSignalE()
+      {
+		$gestion=$this->gestion;
+		return $gestion->getSignalE();
       }
 }
 
