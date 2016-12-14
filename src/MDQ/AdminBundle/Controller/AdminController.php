@@ -9,6 +9,7 @@ use MDQ\AdminBundle\Entity\Gestion;
 use MDQ\AdminBundle\Form\Type\GestionType;
 use MDQ\QuestionBundle\Entity\Theme;
 use MDQ\QuestionBundle\Entity\Dom3;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AdminController extends Controller
 {

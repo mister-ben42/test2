@@ -72,7 +72,13 @@ class News
     {
         return $this->id;
     }
+    
+	public function __construct($auteur)
+	{
+	$this->auteur=$auteur; // Par défaut, la date de 	création est la date d'aujourd'hui
 
+	}
+	
     /**
      * Set titre
      *

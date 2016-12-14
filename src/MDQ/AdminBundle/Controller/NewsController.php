@@ -18,11 +18,7 @@ class NewsController extends Controller
 		$user = $this->container->get('security.context')->getToken()->getUser();
 	      if ($user===null) { return $this->redirect($this->generateUrl('mdqgene_accueil'));}// pas sur que suffisant /sécurité - différent de test que intance user (cf profilecontroller de FOSUser?           
 		
-		$username=$user->getUsername();
-		 $dateactu=new \Datetime();
-			$news = new News;
-			$news->setAuteur($username);
-			$news->setDateCreate($dateactu);
+			$news = new News($user->getUsername());
 			$form = $this->createForm(new NewsType(), $news);  
 			$request = $this->getRequest();
 		if ($request->getMethod() == 'POST') {      

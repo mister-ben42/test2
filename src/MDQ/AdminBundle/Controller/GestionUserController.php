@@ -10,7 +10,7 @@ use MDQ\UserBundle\Form\Type\UserBlockType;
 use MDQ\UserBundle\Entity\CritEditU;
 use MDQ\UserBundle\Form\Type\CritEditUType;
 
-class AdminController extends Controller
+class GestionUserController extends Controller
 {
 
 	public function profileUAdminAction(User $user)

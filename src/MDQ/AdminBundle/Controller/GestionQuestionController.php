@@ -302,7 +302,7 @@ class GestionQuestionController extends Controller
 				$qaval=$em->getRepository('MDQQuestionBundle:QaValider')->findOneById($request->request->get('idQ'));
 				$datecreate=$qaval->getDatecreate();
 				$question= new Question();
-				$question=$this->container->get('mdq_admin.gestionQ')->insetQaval($question, $request, $datecreate, $qaval->getAuteur());
+				$question=$this->container->get('mdq_admin.gestionQ')->inserQaval($question, $request, $datecreate, $qaval->getAuteur());
 				$em->persist($question);
 				
 				$qaval->setRepAdmin(100);

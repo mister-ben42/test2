@@ -25,7 +25,7 @@ class GestionQuestion
 				$question->setDelai($request->request->get('delai'));
 		return $question;		
 	}
-	public function insetQaval(Question $question, Request $request, $datecreate, $auteur)
+	public function inserQaval(Question $question, Request $request, $datecreate, $auteur)
 	{
 				$question->setIntitule($request->request->get('intitule'));
 				$question->setBrep($request->request->get('brep'));
