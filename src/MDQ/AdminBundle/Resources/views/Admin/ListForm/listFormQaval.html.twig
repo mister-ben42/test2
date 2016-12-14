@@ -15,7 +15,7 @@
       <li class="admin_listQ_bloc">
 	  <div class="bloc1">
 		<form>
-	<div class="bloc_intitule">{% set num=loop.index+(data.page-1)*data.nbpp %}{{ num }} :<span class="admin_listQ_idQ">{{ question.id }}</span><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
+	<div class="bloc_intitule">{{ adminTwig.calcNumQ(loop.index, data.page, data.nbpp)}} :<span class="admin_listQ_idQ">{{ question.id }}</span><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
 				
 
 	{% include("MDQAdminBundle:Admin/ListForm:blocGauche1.html.twig") %}
@@ -23,7 +23,7 @@
 		<div class="admin_listQ_repAdmin">Réponse donnée : {{question.repAdmin}}</div>
 		<select name="repAdmin">
 			{% for rep in data.tabrepAdmin %}
-			<option value="{{rep.value}}" {% if question.repAdmin==rep.value %}selected style="background-color:pink;"{%endif%}>{{rep.name}}</option>
+			<option value="{{rep.value}}" {{ adminTwig.testSelected(question.repAdmin,rep.value)}}>{{rep.name}}</option>
 			{%endfor%}
 		</select>
 		<div class="admin_listQ_blocbouton">

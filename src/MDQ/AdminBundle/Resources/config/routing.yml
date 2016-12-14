@@ -4,15 +4,15 @@ mdqadmin_accueilAdmin:
     methods:  [GET]
 mdqadmin_profileUAdmin:
     path:    /profileUAdmin/{id}
-    defaults: { _controller: MDQAdminBundle:Admin:profileUAdmin }
+    defaults: { _controller: MDQAdminBundle:GestionUser:profileUAdmin }
     methods:  [GET, PUT]
 mdqadmin_voirU:
     path:    /voirU/{type}/{compte}/{sexe}/{departement}/{age}/{last_login}/{role}/{nbP}/{triUser}/{triStats}/{sens}/{nbdeU}/{nbmin}
-    defaults: { _controller: MDQAdminBundle:Admin:voirU}
+    defaults: { _controller: MDQAdminBundle:GestionUser:voirU}
     methods:  [GET]
 mdqadmin_critvoirU:
     path:    /critvoirU
-    defaults: { _controller: MDQAdminBundle:Admin:critvoirU }
+    defaults: { _controller: MDQAdminBundle:GestionUser:critvoirU }
     methods:  [GET, POST]
 mdqadmin_newNews:
     path:    /newNews
@@ -90,7 +90,7 @@ mdqadmin_listeTheme:
     methods:  [GET, PUT]
 mdqadmin_resetError:
     path:    /resetError
-    defaults: { _controller: MDQAdminBundle:GestionQuestion:resetError }
+    defaults: { _controller: MDQAdminBundle:Admin:resetError }
     methods:  [GET, POST]
 mdqadmin_testQdouble:
     path:    /testQdouble

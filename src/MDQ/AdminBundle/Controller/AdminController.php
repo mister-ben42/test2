@@ -5,10 +5,6 @@
 namespace MDQ\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use MDQ\UserBundle\Entity\User;
-use MDQ\UserBundle\Form\Type\UserBlockType;
-use MDQ\UserBundle\Entity\CritEditU;
-use MDQ\UserBundle\Form\Type\CritEditUType;
 use MDQ\AdminBundle\Entity\Gestion;
 use MDQ\AdminBundle\Form\Type\GestionType;
 use MDQ\QuestionBundle\Entity\Theme;
@@ -20,79 +16,6 @@ class AdminController extends Controller
 	public function accueilAdminAction()
 	{
 		return $this->render('MDQAdminBundle:Admin:accueilA.html.twig');	
-	}
-	public function profileUAdminAction(User $user)
-	{
-		 $form = $this->createForm(new UserBlockType(), $user);
-
-		$request = $this->getRequest();
-
-		if ($request->getMethod() == 'POST') {
-		  $form->bind($request);
-
-		  if ($form->isValid()) {
-			$em = $this->getDoctrine()->getManager();
-			$em->persist($user);
-			$em->flush();
-			$id=$user->getId();
-			return $this->redirect($this->generateUrl('mdqadmin_profileUAdmin', array(
-			'id' => $id
-			)));
-		}}
-		$derPartieUser=$this->getDoctrine()
-							->getManager()
-							->getRepository('MDQQuizzBundle:PartieQuizz')
-							->recupDerPartieUser($user->getId());
-		$dateref=$this->getDoctrine()->getManager()->getRepository('MDQGeneBundle:DateReference')->find(1);
-		return $this->render('MDQAdminBundle:Admin:profileUAdmin.html.twig', array(
-		'user'   => $user,	  
-		'derParties'=>$derPartieUser,
-		'form'    => $form->createView(),
-		'dateref'=>$dateref,
-		));
-	}
-	public function critvoirUAction()
-	{
-
-		$crits = new CritEditU;
-		$form = $this->createForm(new CritEditUType(), $crits);		
-		$request = $this->getRequest();		
-		if ($request->getMethod() == 'POST') {		  
-		  $form->bind($request);		 
-		  if ($form->isValid()) {			
-			return $this->redirect($this->generateUrl('mdqadmin_voirU', array(		
-			'type'=> $crits->getType(),
-			'compte'=> $crits->getCompte(),
-			'sexe'=> $crits->getSexe(),
-			'departement'=> $crits->getDepartement(),
-			'age'=>$crits->getAge(),
-			'last_login'=>$crits->getLastLogin(),
-			'role'=>$crits->getRole(),
-			'nbP'=>$crits->getNbP(),
-			'triUser'=>$crits->getTriUser(),
-			'triStats'=>$crits->getTriStats(),
-			'sens'=>$crits->getSens(),
-			'nbdeU'=>$crits->getNbdeU(),
-			'nbmin'=>$crits->getNbmin()
-			)));
-		  }
-		}
-		return $this->render('MDQAdminBundle:Admin:critvoirU.html.twig', array(
-		  'form' => $form->createView(),
-		));
-	}
-	public function voirUAction($type, $compte, $sexe, $departement, $age,$last_login, $role, $nbP, $triUser, $triStats, $sens, $nbdeU, $nbmin)
-	{	    
-		$users = $this->getDoctrine()
-						 ->getManager()
-						 ->getRepository('MDQUserBundle:User')
-						 ->getUsers($type, $compte, $sexe, $departement, $age,$last_login, $role, $nbP, $triUser, $triStats, $sens, $nbdeU, $nbmin);
-
-		return $this->render('MDQAdminBundle:Admin:voirU.html.twig', array(
-		  'users'   => $users,
-		  'nbusers' => count($users),
-		  'adminTwig'=>$this->container->get('mdq_admin.adminTwig'),
-		));
 	}
 
     public function resetThemeAction()//efface la table et remet l'incrément à 0
@@ -259,6 +182,66 @@ class AdminController extends Controller
     {
 	  return $this->render('MDQAdminBundle:Admin:testR.html.twig');
     }
+    
+	public function resetErrorAction()
+	{
+		$request = $this->getRequest();	 
+		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
+		{
+			$idQ = $request->request->get('idQ');
+			if($idQ!==null)
+			{
+				$em = $this->getDoctrine()->getManager();
+				$question=$em->getRepository('MDQQuestionBundle:Question')
+							->findOneById($idQ);
+				$users_error=$question->getUsers_error();
+				foreach ($users_error as $scuser)
+				{
+					$question->removeUser_error($scuser);					
+					$scuser->setNbErrorSignal($scuser->getNbErrorSignal()-1);
+				}
+				$question->setError(0);
+				$question->setTaberror([0,0,0]);
+				$em->persist($question);
+				$em->flush();
+			}
+			return new JsonResponse($idQ);
+		}
+		$data='none';
+		return $data;  
+	}
+ 	public function testQdoubleAction()
+	{
+		$repository= $this->getDoctrine()->getManager()->getRepository('MDQQuestionBundle:Question');
+		$questions=$repository->findAll();
+		$tabIdDouble=[];
+		$tabIdInt=[];
+		foreach ($questions as $question)
+		{
+			if (in_array($question->getIntitule(), $tabIdInt))
+			{				
+				$idDouble = array_search($question->getIntitule(), $tabIdInt);
+				$question2=$repository->recupDataQ($idDouble);
+				if($question2['brep']==$question->getBrep())
+				{
+					$tabdoublon[0]=$question->getId();
+					$tabdoublon[1]=$idDouble;
+					array_push($tabIdDouble,$tabdoublon);
+				}
+				else
+				{
+				$tabIdInt[$question->getId()]=$question->getIntitule();
+				}
+			}
+			else
+			{
+			$tabIdInt[$question->getId()]=$question->getIntitule();
+			}
+		}
+		return $this->render('MDQAdminBundle:Admin:testQdouble.html.twig', array(
+			'tabIdDouble' => $tabIdDouble,
+		));
+	}
 }
     
 

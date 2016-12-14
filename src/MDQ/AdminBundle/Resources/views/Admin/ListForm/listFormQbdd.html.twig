@@ -18,14 +18,14 @@
 		<form>
 
 
-	<div class="bloc_intitule">{% set num=loop.index+(data.page-1)*data.nbpp %}{{ num }} :<a href="{{ path('mdqadmin_modifQ', {'id': question.id, 'error': data.error, 'valid':data.valid, 'diff': data.diff, 'dom1': data.dom1C, 'theme': data.theme, 'crit': data.crit, 'sens': data.sens, 'nbdeQ': data.nbdeQ, 'nbmin': data.nbmin}) }}"><span class="admin_listQ_idQ">{{ question.id }}</span></a><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
+	<div class="bloc_intitule">{{ adminTwig.calcNumQ(loop.index, data.page, data.nbpp)}} :<a href="{{ path('mdqadmin_modifQ', {'id': question.id, 'error': data.error, 'valid':data.valid, 'diff': data.diff, 'dom1': data.dom1C, 'theme': data.theme, 'crit': data.crit, 'sens': data.sens, 'nbdeQ': data.nbdeQ, 'nbmin': data.nbmin}) }}"><span class="admin_listQ_idQ">{{ question.id }}</span></a><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
  
  
 	
 	{% include("MDQAdminBundle:Admin/ListForm:blocGauche1.html.twig") %}
 
 
-		<div class="admin_listQ_blocbouton" {%if question.valid==0 %}style="background-color:rgb(250,50,50);" {%elseif question.valid==1 %}style="background-color:rgb(100,255,100);"  {%elseif question.valid==2 %}style="background-color:rgb(100,100,255);"  {%endif%} >
+		<div class="admin_listQ_blocbouton" {{adminTwig.backGroundListForm(question.valid)}} >
 				<div class="admin_listQ_modifier">Modifier</div>
 				<div>{{question.valid}}
 				<div class="admin_listQ_valider admin_listQ_valid">Valide</div>
@@ -66,14 +66,12 @@
 		<div id="admin_editQ_error">
 		<p>Nombre d'erreurs singalées : {{question.error}}</p>
 		<p>Rép fausse : {{question.taberror[0]}}, Ortho : {{question.taberror[1]}}, Autre : {{question.taberror[2]}}</p>
-		{% if not question.users_error.empty %}
 		  <p>
 			Joueurs ayant signalé une erreur : 
 			{% for scuser in question.users_error %}
 			<a href="{{ path('mdqadmin_profileUAdmin', {'id':scuser.usermap.id}) }}">{{ scuser.usermap.username }}</a> - 
 			{% endfor %}
 		  </p>
-		{% endif %}	
 		<div class="admin_editQ_error_button">Remise à 0</div>
 		</div>
 

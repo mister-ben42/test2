@@ -37,7 +37,7 @@ class AdminTwig
 	      elseif($dom1=="LxQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Lx/'.$media.'.jpg');}
 	      elseif($dom1=="ArQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Ar/'.$media.'.jpg');}
 	      elseif($dom1=="SexyQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Sexy/'.$media.'.jpg');}
-	      
+	      else{$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/'.$media.'.jpg');}
 	      $txt="src=".$route;
 	      return $txt;	
 	}
@@ -46,6 +46,19 @@ class AdminTwig
 	  $txt="";
 	  if($crit1==$crit2){$txt='selected style=background-color:pink;';}
 	  return $txt;
+	}
+	public function calcNumQ($loop, $page, $nbParP)
+	{
+	    $txt=$loop+(($page-1)*$nbParP);
+	    return $txt;
+	}
+	public function backGroundListForm($valid)
+	{
+	    $txt="";
+	    if($valid==0){$txt="style=background-color:rgb(250,50,50);";}
+	    elseif($valid==1){$txt="style=background-color:rgb(100,255,100);";}
+	    elseif($valid==2){$txt="style=background-color:rgb(100,100,255);";}
+	    return $txt;
 	}
 }
 
