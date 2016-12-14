@@ -38,6 +38,7 @@ class BotController extends Controller
 			}
 		}
 		
+			$em->flush();
 		return $this->render('MDQAdminBundle:Admin:botPartie.html.twig', array(
 			'Parties' => $tabParties,
 			'Bots2'=> $botsSelects2,
@@ -75,7 +76,7 @@ class BotController extends Controller
 				$tabcoeffdiff=[1.5,1,0.75,0.50,0.30];				
 				$coefb=25+$coefa*$tabcoeffdiff[($tabdiff[$numQ-1])-1];
 				$coefs=array(0=>(100-$coefb),1=>$coefb);
-				$botGame = $this->container->get('mdq_admin.services');
+				$botGame = $this->container->get('mdq_admin.botGame');
 				$bRep=$botGame->rand_coef($coefs);
 				if($bRep==1){
 					$nbBrtot++;
@@ -157,7 +158,6 @@ class BotController extends Controller
 		+	}*/
 			$em->persist($scUser);
 			$em->persist($partie);
-			$em->flush();
 			$tabPartie['sctot']=$score;
 			$tabPartie['game']="MasterQuizz";
 			return $tabPartie;
@@ -206,7 +206,7 @@ class BotController extends Controller
 				$qtire=$em->getRepository('MDQQuestionBundle:Question')
 							->tirageduneQ($game,$tabDerQ,$tabtheme,$tabdom3,$tabidQ, $numQ, $tabMedia);
 				$tabidQ[($numQ-1)]=$qtire['id'];
-				$botGame = $this->container->get('mdq_admin.services');
+				$botGame = $this->container->get('mdq_admin.botGame');
 				$rep=$botGame->rand_coef($coefs);
 				if($rep==1){$nbBrtot++;}
 				if($game=='ArQuizz'){	
@@ -267,7 +267,6 @@ class BotController extends Controller
 			$bot->setLastLogin(new \Datetime());
 			$em->persist($scUser);
 			$em->persist($partie2);
-			$em->flush();
 			return $tabPartie2;
 	}
 

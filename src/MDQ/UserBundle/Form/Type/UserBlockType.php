@@ -15,14 +15,7 @@ class UserBlockType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('locked', 'choice', array(
-				'choices' => array(
-					'0' => 'accessible',
-					'1' => 'bloqué',					
-				),
-				'required'    => true,
-				'expanded'   =>true,
-			))
+
 			->add('allowError', 'choice', array(
 				'choices' => array(
 					'1' => 'SignalError Autorisé',

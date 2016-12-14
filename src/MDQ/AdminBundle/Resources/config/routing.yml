@@ -104,5 +104,8 @@ mdqadmin_mail:
     path:    /mail
     defaults: { _controller: MDQAdminBundle:Admin:mail }
     methods:  [GET]
-
+mdqadmin_testR:
+    path:    /testR
+    defaults: { _controller: MDQAdminBundle:Admin:testRequete }
+    methods:  [GET]
     

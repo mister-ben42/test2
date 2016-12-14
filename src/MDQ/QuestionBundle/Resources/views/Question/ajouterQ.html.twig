@@ -16,11 +16,7 @@
 	{% if repAdmin>9 and repAdmin<20 %}
 		<div> Modifier votre question en tenant compte du critère suivant :</div>
 	{% endif %}
-		{% if repAdmin==10 %}<p>Corriger les fautes d'orthographe et de syntaxe.</p>
-		{% elseif repAdmin==11 %}<p>Revoir la formulation.</p>
-		{% elseif repAdmin==12 %}<p>Développer le commentaire.</p>
-		{% elseif repAdmin==13 %}<p>Choisir des propositons de réponse plus pertinentes</p>
-		{% endif %}
+	    <p>{{affichRepAdmin}}</p>
 {% endif %}
 <div id="bloc_ajoutQ_intro">Avant de rédiger une question, reportez-vous aux <a href="#bloc_ajoutQ_consigne">conignes de rédaction</a> ci-dessous.</div>
 
@@ -146,3 +142,4 @@
 	<script	src="{{ asset('bundles/UserBundle/user.js') }}"></script>
 
 {% endblock %}
+

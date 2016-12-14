@@ -62,6 +62,9 @@ class QuestionController extends Controller
 	}
 	public function modifQavalAction(Qavalider $qaval)
 	{
+		$em=$this->getDoctrine()->getManager();
+		$gestion=$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);
+		if($gestion->getPropQ()==0 && !$this->get('security.context')->isGranted('ROLE_ADMIN')){ return $this->redirect($this->generateUrl('mdqgene_accueil'));    }
 		if (!$this->get('security.context')->isGranted('ROLE_USER')) {
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
@@ -84,14 +87,15 @@ class QuestionController extends Controller
 			$qaval->setRetournee(1);
 			$em->persist($qaval);
 			$em->flush();
-		   
+		$this->container->get('mdq_question.propQ');	   
 			return $this->redirect($this->generateUrl('mdquser_profileUAuto'));
 		}}
-
+	      
 		return $this->render('MDQQuestionBundle:Question:ajouterQ.html.twig', array(
 		  'form'    => $form->createView(),
 		  'repAdmin'=>$repAdmin,
 		  'doublon'=>0,
+		  'affichRepAdmin'=>$this->container->get('mdq_question.propQ')->affichRepAdmin($repAdmin),
 		));
    	}
 

@@ -29,7 +29,6 @@ class CritEditUType extends AbstractType
 				'choices' => array(
 					'0' => 'Comptes actifs',
 					'1'=>'Comptes supprimés',
-					'2'=>'Comptes bloqués',
 					'3'=>'Tous'
 				),
 				'required'    => true,

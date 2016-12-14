@@ -16,17 +16,12 @@
 	  <div class="bloc_admin_listeU" {%if user.bot==1%}style="background-color:rgb(255,150,150)" {% else %} style="background-color:rgb(255,255,200)" {% endif %}>
 		<div><a href="{{ path('mdqadmin_profileUAdmin', {'id': user.id}) }}">{{ loop.index }} :{{ user.id }} - {{ user.username }} </a></div>
 		<div class="bloc_admin_listeU_gauche" {%if user.sexe==1%}style="background-color:rgb(255,220,245)" {% else %} style="background-color:rgb(220,250,255)" {% endif %}>
-		<p> {{ sexe(user.sexe) }}, {{ age(user.datenaissance|date('d/m/Y')) }} ans </p>
+		<p> {{ user.sexe|sexe }}, {{ age(user.datenaissance|date('d/m/Y')) }} ans </p>
 		<p>{{ user.departement }}</p>
 		<div> date de naissance : <strong class="bloc_admin_listU_sc">{{ user.datenaissance|date('d/m/Y') }} </strong></div>
 		<div> date d'inscription :  <strong class="bloc_admin_listU_sc">{{ user.datecreate|date('d/m/Y') }} </strong></div>
 		<div> dernière connection :  <strong class="bloc_admin_listU_sc">{{ user.lastLogin|date('d/m/Y') }} </strong></div>
-		<p> devise : {{ user.devise }} </p>
-		{% if (user.locked==0) and (user.supprime==0) %} <p> Compte accessible </p>
-		{% elseif user.supprime==1 %}	<p> Compte supprimé </p>
-		{% elseif user.locked==1 %}	<p> Compte bloqué </p>
-		{% else %}<p> erreur concernant l'état du compte </p>
-		{% endif %}
+		<p> devise : {{ user.devise }} </p> <p> {{adminTwig.txtCompteU(user.supprime)}} </p>
 		</div>
 		<div class="bloc_admin_listeU_droite">
 		  <div class="bloc_admin_listeU_droite_1">

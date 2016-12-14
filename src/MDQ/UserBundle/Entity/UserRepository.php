@@ -19,10 +19,8 @@ class UserRepository extends EntityRepository
  		
  		if($sexe!=2){$qb->andWhere('a.sexe='.$sexe);}
  		if($type!=2){$qb->andWhere('a.bot='.$type);}
- 		if($compte==0){$qb->andWhere('a.supprime=0')
-				  ->andWhere('a.locked=0');}
+ 		if($compte==0){$qb->andWhere('a.supprime=0');}
 		elseif($compte==1){$qb->andWhere('a.supprime=1');}
-		elseif($compte==2){$qb->andWhere('a.locked=1');}
  		if($nbP!="none" || $triStats!="none"){$qb->leftJoin('a.scUser','sc');}
 		if($nbP!="none"){$qb->andWhere('sc.nbPtot'.$nbP);}
 		if($triUser=="last_login"){$triUser="lastLogin";}

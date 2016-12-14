@@ -2,7 +2,7 @@
 
 namespace MDQ\QuizzBundle\Services;
 
-use MDQ\AdminBundle\Entity\Gestion;
+use MDQ\AdminBundle\Entity\GestionRepository;
 use MDQ\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -11,7 +11,7 @@ class QuizzServ
        	private $jetonServ;       	
 	private $gestion;
  
-	public function __construct($jetonServ, $gestionRepository) {
+	public function __construct($jetonServ,GestionRepository $gestionRepository) {
 	  $this->jetonServ = $jetonServ;
 	  $this->gestionRepository=$gestionRepository;
 	  $this->gestion=$gestionRepository->findOneById(1);

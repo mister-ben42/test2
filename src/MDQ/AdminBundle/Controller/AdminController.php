@@ -90,7 +90,8 @@ class AdminController extends Controller
 
 		return $this->render('MDQAdminBundle:Admin:voirU.html.twig', array(
 		  'users'   => $users,
-		  'nbusers' => count($users)	  
+		  'nbusers' => count($users),
+		  'adminTwig'=>$this->container->get('mdq_admin.adminTwig'),
 		));
 	}
 
@@ -253,6 +254,10 @@ class AdminController extends Controller
       
     return $this->redirect($this->generateUrl('mdqadmin_accueilAdmin'));
     
+    }
+    public function testRequeteAction()
+    {
+	  return $this->render('MDQAdminBundle:Admin:testR.html.twig');
     }
 }
     

@@ -21,8 +21,7 @@
 	  <div class="well">
 	  <form  method="post" {{ form_enctype(form) }}>
 		
-	  {# Génération de l'input. #}
-	  {{ form_widget(form.locked) }}
+
 		</div>
 		{{ form_rest(form) }}
 		<input type="submit" class="btn btn-primary" value="Valider" />
@@ -31,7 +30,7 @@
 	<div class="bloc">
 		<p>Erreurs signalées au total : {{user.scuser.nbErrorSignalTot}}</p>
 		<p>Erreurs signalées en cours : {{user.scuser.nbErrorSignal}}</p>
-		{% if not user.scuser.questions_error.empty %}
+		{% if not user.scuser.questionsError.empty %}
 		{% for question in user.scuser.questions_error %}
 			<a href="{{ path('mdqadmin_modifQ', {'id': question.id}) }}">{{question.id}}</a>{% if not loop.last %}, {% endif %}
 		{% endfor %}

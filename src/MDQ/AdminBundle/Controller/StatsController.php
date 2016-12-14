@@ -14,8 +14,6 @@ class StatsController extends Controller
 		$dom1a=$dom1;
 		$dom1=[];
 		$dom1['nom']=$dom1a;
-		if($dom1['nom']!="none")
-		{
 		     $em=$this->getDoctrine()->getManager();
 		     $req=$em->getRepository('MDQQuestionBundle:Theme')->findBy(array('dom1'=>$dom1['nom'])
 					);
@@ -34,16 +32,10 @@ class StatsController extends Controller
 			'themes' => $req,
 			'dom1' => $dom1,
 			'entete' =>$entete,
-			'viewDom2'=>$viewDom2
+			'viewDom2'=>$viewDom2,
+			'adminTwig'=>$this->container->get('mdq_admin.adminTwig'),
 			));
-		
-		}
-		else {		      	return $this->render('MDQAdminBundle:Admin:arbratheme.html.twig', array(
-			'themes' => $dom1,
-			'dom1' => $dom1,
-			'entete' =>$entete
-			));
-			}
+
 	}
 
     public function statQAction()
