@@ -18,7 +18,7 @@
 		<form>
 	
 	{% if error is defined %} {% set bddqcm=1 %} {% else %} {% set bddqaval=1 %}{%endif%}
-	{% if bddqcm==1%}	<div class="bloc_intitule">{% set num=loop.index+(page-1)*nbpp %}{{ num }} :<a href="{{ path('mdqadmin_modifQ', {'id': question.id, 'choice':choice, 'error': error, 'valid':valid, 'diff': diff, 'dom1': dom1C, 'theme': theme, 'crit': crit, 'sens': sens, 'nbdeQ': nbdeQ, 'nbmin': nbmin}) }}"><span class="admin_listQ_idQ">{{ question.id }}</span></a><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
+	{% if bddqcm==1%}	<div class="bloc_intitule">{% set num=loop.index+(page-1)*nbpp %}{{ num }} :<a href="{{ path('mdqadmin_modifQ', {'id': question.id, 'error': error, 'valid':valid, 'diff': diff, 'dom1': dom1C, 'theme': theme, 'crit': crit, 'sens': sens, 'nbdeQ': nbdeQ, 'nbmin': nbmin}) }}"><span class="admin_listQ_idQ">{{ question.id }}</span></a><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
     {% else %}	<div class="bloc_intitule">{% set num=loop.index+(page-1)*nbpp %}{{ num }} :<span class="admin_listQ_idQ">{{ question.id }}</span><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
 				
 
@@ -188,7 +188,7 @@
 	<div id="admin_listQ_pagination">
 		{% for p in range(1, nbpage) %}
 		<li{% if p == page %} class="admin_listQ_num_page_active"{% else %} class="admin_listQ_num_page"{% endif %}>
-{% if bddqcm==1%}<a href="{{ path('mdqadmin_voirQ', {'choice':choice, 'page':p, 'error': error, 'valid':valid, 'diff': diff, 'game':game, 'dom1': dom1C, 'theme': theme, 'crit': crit, 'sens': sens, 'nbdeQ': nbdeQ, 'nbmin': nbmin}) }}">{{ p }}</a>{% endif %}
+{% if bddqcm==1%}<a href="{{ path('mdqadmin_voirQ', {'page':p, 'error': error, 'valid':valid, 'diff': diff, 'game':game, 'dom1': dom1C, 'theme': theme, 'crit': crit, 'sens': sens, 'nbdeQ': nbdeQ, 'nbmin': nbmin}) }}">{{ p }}</a>{% endif %}
 {% if bddqaval==1%}<a href="{{ path('mdqadmin_voirQaVal', {'page':p, 'repAdmin':repAdmin, 'diff': diff, 'dom1': dom1C, 'crit': crit, 'sens': sens, 'nbdeQ': nbdeQ, 'nbmin': nbmin}) }}">{{ p }}</a>{% endif %}
 
 		</li>

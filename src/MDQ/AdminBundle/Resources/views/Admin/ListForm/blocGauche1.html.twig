@@ -1,0 +1,7 @@
+		<div class="blocrep"><div class="rep"><input name="brep" type="text" value="{{question.Brep}}"></div><div class="nblettre"></div> <div class="rep"><input name="mrep1" type="text" value="{{question.mrep1}}"></div> <div class="nblettre"></div> <div class="rep"><input name="mrep2" type="text" value="{{question.mrep2}}"></div><div class="nblettre"></div>  <div class="rep"><input name="mrep3" type="text" value="{{question.mrep3}}"></div><div class="nblettre"></div>  </div>
+        <div class="bloc_commentaire"><div class="commentaire"><textarea name="com" >{{question.commentaire}}</textarea></div><div class="nblettre"></div></div>
+		{% if question.type=="image" %}		
+
+		<img {{adminTwig.routeImg(question.dom1,question.media)}} height="100" />
+		{% endif %}
+		

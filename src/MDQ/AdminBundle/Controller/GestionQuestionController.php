@@ -17,25 +17,13 @@ class GestionQuestionController extends Controller
 {
 
 
-	public function voirQAction($choice, $page, $error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin)
+	public function voirQAction($page, $error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin)
 	{
 		$em=$this->getDoctrine()->getManager();
-		
-		$tabdom2 = $em	 ->getRepository('MDQQuestionBundle:Question')
-						 ->recupDom2ouDom3('dom2');
-		$tabdom3 = $em	 ->getRepository('MDQQuestionBundle:Question')
-						 ->recupDom2ouDom3('dom3');
-		$tabtheme=$em->getRepository('MDQQuestionBundle:Theme')
-					->findAll();
-		$tabmedia=['texte','image','citation','audio','citationlitt','suitelog'];
-		if($choice=="list")
-		{
 			
 			$questions = $em ->getRepository('MDQQuestionBundle:Question')
-						 ->getQuestions($error, $valid, $diff, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin)
-						 ;
-			return $this->render('MDQAdminBundle:Admin:voirQ.html.twig', array(
-			  'questions'   => $questions,
+						 ->getQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin);
+			$data=array(
 			  'nbquestions' => count($questions),
 			  'valid' =>$valid,
 			  'error' => $error,
@@ -46,24 +34,31 @@ class GestionQuestionController extends Controller
 			  'sens' => $sens,
 			  'nbdeQ' => $nbdeQ,
 			  'nbmin' => $nbmin
-			));
-		}
-		else if($choice=="listForm")
-		{
-			$nbQ=$em ->getRepository('MDQQuestionBundle:Question')
-						 ->getNbQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin)
-						 ;
-			$nbpp=20;//nb de question par page
-			if($nbQ>$nbpp)
-				{$nbmin2=($nbmin+($page-1)*$nbpp);}
-			else{$nbmin2=$nbmin;}
-			$nbdeQ2=$nbpp;
-			$questions = $em ->getRepository('MDQQuestionBundle:Question')
-						 ->getQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ2, $nbmin2)
-						 ;
-			$nbpage=ceil($nbQ/$nbpp);
-			return $this->render('MDQAdminBundle:Admin:listFormQ.html.twig', array(
+			  );
+			return $this->render('MDQAdminBundle:Admin:voirQ.html.twig', array(
 			  'questions'   => $questions,
+			  'data' =>$data,
+			  'adminTwig'=>$this->container->get('mdq_admin.adminTwig'),			  
+			));
+	}
+
+	public function voirListFormQAction($page, $error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin)
+	{
+		$em=$this->getDoctrine()->getManager();
+		
+		$tabdom2 = $em	 ->getRepository('MDQQuestionBundle:Question')->recupDom2ouDom3('dom2');
+		$tabdom3 = $em	 ->getRepository('MDQQuestionBundle:Question')->recupDom2ouDom3('dom3');
+		$tabtheme=$em->getRepository('MDQQuestionBundle:Theme')->findAll();
+		$tabmedia=['texte','image','citation','audio','citationlitt','suitelog'];
+
+			$nbQ=$em ->getRepository('MDQQuestionBundle:Question')->getNbQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin) ;
+			$nbpp=20;//nb de question par page
+			if($nbQ>$nbpp){$nbmin2=($nbmin+($page-1)*$nbpp);}
+			else{$nbmin2=$nbmin;}
+			$questions = $em ->getRepository('MDQQuestionBundle:Question')
+						 ->getQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbpp, $nbmin2);
+			$nbpage=ceil($nbQ/$nbpp);
+			$data=array(
 			  'nbquestions' => $nbQ,
 			  'nbpage'=>$nbpage,
 			  'nbpp'=>$nbpp,
@@ -72,7 +67,6 @@ class GestionQuestionController extends Controller
 			  'tabdom3' => $tabdom3,
 			  'tabtheme'=>$tabtheme,
 			  'tabmedia'=>$tabmedia,
-			  'choice'=>$choice,
 			  'valid' =>$valid,
 			  'error' => $error,
 			  'diff' =>$diff,
@@ -82,33 +76,29 @@ class GestionQuestionController extends Controller
 			  'crit' => $crit,
 			  'sens' => $sens,
 			  'nbdeQ' => $nbdeQ,
-			  'nbmin' => $nbmin
+			  'nbmin' => $nbmin,
+			 );
+			
+			return $this->render('MDQAdminBundle:Admin:ListForm\listFormQbdd.html.twig', array(
+			  'questions'   => $questions,			  
+			  'adminTwig'=>$this->container->get('mdq_admin.adminTwig'),
+			  'data'=>$data,
 			 ));
-		}
-		else{return $this->redirect($this->generateUrl('mdqadmin_accueilAdmin'));}
+
 	}
 	public function critvoirQAction($choice)
 	{
-		/*	if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-		// Sinon on déclenche une exception " Accès interdit "
-		// throw new AccessDeniedHttpException('Accès limité aux auteurs');
-			return $this->redirect($this->generateUrl('mdqquestion_accueil'));
-		}
-		*/	
+
 		$crits = new CritEditQ;
 		$form = $this->createForm(new CritEditQType(), $crits);
-		// On récupère la requête
 		$request = $this->getRequest();
-		// On vérifie qu'elle est de type POST
+		if($choice=="listForm"){$url='mdqadmin_voirListFormQ';}
+		else{$url='mdqadmin_voirQ';}
 		if ($request->getMethod() == 'POST') {
-		  // On fait le lien Requête <-> Formulaire
 		  $form->bind($request);
-
-		  // On vérifie que les valeurs entrées sont correctes
 		  if ($form->isValid()) {
 			
-				return $this->redirect($this->generateUrl('mdqadmin_voirQ', array(
-				'choice'=>$choice,
+				return $this->redirect($this->generateUrl($url, array(
 				'error'=> $crits->getError(),
 				'valid'=> $crits->getValid(),
 				'diff'=> $crits->getDiff(),
@@ -124,10 +114,6 @@ class GestionQuestionController extends Controller
 			
 		  }
 		}
-
-		// à ce stade :
-		// - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
-		// - Soit la requête est de type POST, mais le formulaire n'est pas valide, donc on l'affiche de nouveau
 
 		return $this->render('MDQAdminBundle:Admin:critvoirQ.html.twig', array(
 		  'form' => $form->createView(),
@@ -171,51 +157,20 @@ class GestionQuestionController extends Controller
 		$request = $this->getRequest();	 
 		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 		{
-			$valid = $request->request->get('valid');
-			$idQ = $request->request->get('idQ');
-			$intitule = $request->request->get('intitule');
-			$brep = $request->request->get('brep');
-			$mrep1 = $request->request->get('mrep1');
-			$mrep2 = $request->request->get('mrep2');
-			$mrep3 = $request->request->get('mrep3');
-			$com = $request->request->get('com');
-			$dom1 = $request->request->get('dom1');
-			$dom2 = $request->request->get('dom2');
-			$dom3 = $request->request->get('dom3');
-			$theme = $request->request->get('theme');
-			$diff = $request->request->get('diff');
-			$type = $request->request->get('type');
-			$delai = $request->request->get('delai');
-			if($idQ!==null && $valid!==null)
-			{
-				$em = $this->getDoctrine()->getManager();
-				$question=$em->getRepository('MDQQuestionBundle:Question')
-							->findOneById($idQ);				
-				$question->setValid($valid);
-				$em->persist($question);
-				$em->flush();
+		      $idQ=$request->request->get('idQ');
+		      $em = $this->getDoctrine()->getManager();
+			if($idQ!==null && $request->request->get('valid')!==null)
+			{				
+				$question=$em->getRepository('MDQQuestionBundle:Question')->findOneById($idQ);				
+				$question->setValid($request->request->get('valid'));
 			}
-			else if($idQ!==null && $intitule!==null && $brep!==null)
+			else if($idQ!==null && $request->request->get('intitule')!==null && $request->request->get('brep')!==null)
 			{
-				$em = $this->getDoctrine()->getManager();
-				$question=$em->getRepository('MDQQuestionBundle:Question')
-							->findOneById($idQ);				
-				$question->setIntitule($intitule);
-				$question->setBrep($brep);
-				$question->setMrep1($mrep1);
-				$question->setMrep2($mrep2);
-				$question->setMrep3($mrep3);
-				$question->setCommentaire($com);
-				$question->setDom1($dom1);
-				$question->setDom2($dom2);
-				$question->setDom3($dom3);
-				$question->setTheme($theme);
-				$question->setDiff($diff);
-				$question->setType($type);
-				$question->setDelai($delai);
-				$em->persist($question);
-				$em->flush();
+				$question=$em->getRepository('MDQQuestionBundle:Question')->findOneById($idQ);
+				$question=$this->container->get('mdq_admin.gestionQ')->modifQ($question, $request);				
 			}
+			$em->persist($question);
+				$em->flush();
 			return new JsonResponse($idQ);
 		}
 		$data='error';
@@ -282,11 +237,9 @@ class GestionQuestionController extends Controller
 		//$nbmin2=$nbmin;// A SUPPRIMER ENSUITE
 		$nbdeQ2=$nbpp;
 		$questions = $em ->getRepository('MDQQuestionBundle:QaValider')
-						 ->getQuestions($repAdmin, $diff, $dom1, $crit, $sens, $nbdeQ2, $nbmin2)
-						 ;
+						 ->getQuestions($repAdmin, $diff, $dom1, $crit, $sens, $nbdeQ2, $nbmin2);
 		$nbpage=ceil($nbQ/$nbpp);
-		return $this->render('MDQAdminBundle:Admin:listFormQ.html.twig', array(
-			  'questions'   => $questions,
+		$data=array(
 			  'nbquestions' => $nbQ,
 			  'nbpage'=>$nbpage,
 			  'nbpp'=>$nbpp,
@@ -302,7 +255,13 @@ class GestionQuestionController extends Controller
 			  'crit'=>$crit,
 			  'sens'=>$sens,
 			  'nbdeQ'=>$nbdeQ,
-			  'nbmin'=>$nbmin,
+			  'nbmin'=>$nbmin
+			  );
+		
+		return $this->render('MDQAdminBundle:Admin:ListForm\listFormQaval.html.twig', array(
+			  'questions'   => $questions,
+			  'adminTwig'=>$this->container->get('mdq_admin.adminTwig'),
+			  'data'=>$data,
 			 ));		
 	}
 	public function retourQaValajaxAction()
@@ -330,57 +289,22 @@ class GestionQuestionController extends Controller
 	public function insertQaValajaxAction()
 	{// Qd Qaval est insérée dans la bdd
 		$request = $this->getRequest();	 
-		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
+		if($request->isXmlHttpRequest())
 		{			
-				$repAdmin = $request->request->get('repAdmin');
-				$idQ = $request->request->get('idQ');
-				$intitule = $request->request->get('intitule');
-				$brep = $request->request->get('brep');
-				$mrep1 = $request->request->get('mrep1');
-				$mrep2 = $request->request->get('mrep2');
-				$mrep3 = $request->request->get('mrep3');
-				$com = $request->request->get('com');
-				$dom1 = $request->request->get('dom1');
-				$dom2 = $request->request->get('dom2');
-				$dom3 = $request->request->get('dom3');
-				$theme = $request->request->get('theme');
-				$diff = $request->request->get('diff');
-				$type = $request->request->get('type');
-				$delai = $request->request->get('delai');
-				$doublon = $request->request->get('doublon');	
-			if($idQ!==null && $intitule!==null && $brep!==null)
+
+			if($request->request->get('idQ')!==null && $request->request->get('intitule')!==null && $request->request->get('brep')!==null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				// avant je vais tester si cette question existe déjà dans la Bdd
-				$doublons=$em->getRepository('MDQQuestionBundle:Question')
-							->testDoublon('bddqcm', 'intitule', $intitule);
-				if($doublons!=[] && $doublon==0){
-					return new JsonResponse($doublons);
-					}
-				if($repAdmin==100){$valid=1;}
-				if($repAdmin==200){$valid=3;}
-				$qaval=$em->getRepository('MDQQuestionBundle:QaValider')
-							->findOneById($idQ);
+				$doublons=$em->getRepository('MDQQuestionBundle:Question')->testDoublon('bddqcm', 'intitule', $request->request->get('intitule'));
+				if($doublons!=[] && $doublon==0){return new JsonResponse($doublons);}
+				
+				$qaval=$em->getRepository('MDQQuestionBundle:QaValider')->findOneById($request->request->get('idQ'));
 				$datecreate=$qaval->getDatecreate();
-				$auteur=$qaval->getAuteur();
 				$question= new Question();
-				$question->setIntitule($intitule);
-				$question->setBrep($brep);
-				$question->setMrep1($mrep1);
-				$question->setMrep2($mrep2);
-				$question->setMrep3($mrep3);
-				$question->setCommentaire($com);
-				$question->setDom1($dom1);
-				$question->setDom2($dom2);
-				$question->setDom3($dom3);
-				$question->setTheme($theme);
-				$question->setDiff($diff);
-				$question->setType($type);
-				$question->setDelai($delai);
-				$question->setValid($valid);
-				$question->setDatecreate($datecreate);
-				$question->setAuteur($auteur);
+				$question=$this->container->get('mdq_admin.gestionQ')->insetQaval($question, $request, $datecreate, $qaval->getAuteur());
 				$em->persist($question);
+				
 				$qaval->setRepAdmin(100);
 				$qaval->setRetournee(0);
 				$auteur=$qaval->getAuteur();

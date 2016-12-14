@@ -1,0 +1,69 @@
+
+		<select name="dom1" >
+           <option value="Histoire" {{ adminTwig.testSelected(question.dom1,"Histoire")}} >Histoire</option>
+           <option value="Géographie" {{ adminTwig.testSelected(question.dom1,"Géographie")}}>Géographie</option>
+           <option value="Sciences et nature" {{ adminTwig.testSelected(question.dom1,"Sciences et nature" )}}>Sciences et nature</option>
+           <option value="Arts et Littérature" {{ adminTwig.testSelected(question.dom1,"Arts et Littérature" )}}>Arts et Littérature</option>
+           <option value="Sports et loisirs" {{ adminTwig.testSelected(question.dom1,"Sports et loisirs")}}>Sports et loisirs</option>
+           <option value="Divers" {{ adminTwig.testSelected(question.dom1,"Divers")}}>Divers</option>
+           <option value="McQuizz" {{ adminTwig.testSelected(question.dom1,"McQuizz")}}>Musique classique</option>
+           <option value="ArQuizz" {{ adminTwig.testSelected(question.dom1,"ArQuizz")}}>Quizz Art</option>
+           <option value="FfQuizz" {{ adminTwig.testSelected(question.dom1,"FfQuizz")}}>Faune et Flore</option>
+           <option value="LxQuizz" {{ adminTwig.testSelected(question.dom1,"LxQuizz")}}>Lieux du monde</option>
+           <option value="TvQuizz" {{ adminTwig.testSelected(question.dom1,"TvQuizz")}}>TvQuizz</option>
+           <option value="EyesQuizz" {{ adminTwig.testSelected(question.dom1,"EyesQuizz")}}>Regard de star</option> 
+           <option value="SexyQuizz" {{ adminTwig.testSelected(question.dom1,"SexyQuizz")}}>SexyQuizz</option>
+			<option value="Error" {% if question.dom1!="TvQuizz" and question.dom1!="EyesQuizz" and question.dom1!="McQuizz" and question.dom1!="FfQuizz" and question.dom1!="ArQuizz" and question.dom1!="LxQuizz" and  question.dom1!="SexyQuizz" and question.dom1!="Histoire" and question.dom1!="Géographie" and question.dom1!="Sciences et nature" and question.dom1!="Arts et Littérature" and question.dom1!="Sports et loisirs" and question.dom1!="Divers"%}selected style="background-color:pink;"{%endif%}>Erreur</option>
+	  </select>
+		<select name="diff">
+           <option value="1"  {{ adminTwig.testSelected(question.diff,1) }} >Très facile</option>
+           <option value="2" {{ adminTwig.testSelected(question.diff,2) }} >Facile</option>
+           <option value="3" {{ adminTwig.testSelected(question.diff,3) }} >Moyen</option>
+           <option value="4" {{ adminTwig.testSelected(question.diff,4) }} >Difficile</option>
+           <option value="5" {{ adminTwig.testSelected(question.diff,5) }} >Très difficile</option>
+       </select>
+	  <p><label>theme</label></p>
+	   <select name="theme">
+			{% for theme in data.tabtheme %}
+		{% if loop.index==1 %}<optgroup label="{{theme.dom1}}">{% set dom1=theme.dom1 %}{% endif %}
+		{%if theme.dom1!=dom1 %}</optgroup><optgroup label="{{theme.dom1}}">{% endif %}
+			<option value="{{theme.nom}}" {{ adminTwig.testSelected(question.theme,theme.nom) }}>{{theme.nom}}</option>
+			{% set dom1=theme.dom1 %}
+			{% endfor %}
+		</select>
+		<div class="listFormQ_theme"><input name="theme" type="text"></div>
+		<p><label>dom2</label></p>
+		<select name="dom2">
+			{% for rep in data.tabdom2 %}
+		{% if loop.index==1 %}<optgroup label="{{rep.dom1}}">{% set dom1=rep.dom1 %}{% endif %}
+		{%if rep.dom1!=dom1 %}</optgroup><optgroup label="{{rep.dom1}}">{% endif %}
+			<option value="{{rep.dom2}}" {{ adminTwig.testSelected(question.dom2,rep.dom2) }}>{{rep.dom2}}</option>
+			{% set dom1=rep.dom1 %}
+			{% endfor %}
+			</optgroup>
+		</select>
+		<div class="listFormQ_dom2"><input name="dom2" type="text"></div>
+		<p><label>dom3</label></p>
+		<select name="dom3">
+			{% for rep in data.tabdom3 %}
+		{% if loop.index==1 %}<optgroup label="{{rep.dom1}}">{% set dom1=rep.dom1 %}{% endif %}
+		{%if rep.dom1!=dom1 %}</optgroup><optgroup label="{{rep.dom1}}">{% endif %}
+			<option value="{{rep.dom3}}" {{ adminTwig.testSelected(question.dom3,rep.dom3) }}>{{rep.dom3}}</option>
+
+			{% set dom1=rep.dom1 %}
+			{% endfor %}
+		</select>
+		<div class="listFormQ_dom3"><input name="dom3" type="text"></div>
+		</br>
+		<select name="type">
+			{% for type in data.tabmedia %}
+			<option value="{{type}}" {{ adminTwig.testSelected(question.type,type) }}>{{type}}</option>
+			{%endfor%}
+		</select>
+			<input name="delai_année" type="text" placeholder="année délai" value="{{question.delai}}">
+
+		<div>
+		<div class="crit">auteur :</div><div class="critQ1"><a href="{{ path('mdqadmin_profileUAdmin', {'id': question.auteur.usermap.id}) }}">{{ question.auteur.usermap.username}} </a></div>
+		<div class="crit">date : </div><div class="critQ1" class="admin_listQ_date">{{ question.datecreate|date('d/m/Y') }} </div> 
+		</div>
+		

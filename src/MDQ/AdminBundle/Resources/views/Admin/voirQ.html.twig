@@ -8,18 +8,18 @@
 
 {% block admin_body %}
 
-  <h3>Il y a {{ nbquestions }} questions correspondant à votre requête.</h3>
+  <h3>Il y a {{ data.nbquestions }} questions correspondant à votre requête.</h3>
  <div id="bloc_list_question">
   <ul>
    
 	{% for question in questions %}
       <li>
 	  <div class="bloc1">
-		{{ loop.index }} :<a href="{{ path('mdqadmin_modifQ', {'id': question.id, 'error': error, 'valid':valid, 'diff': diff, 'dom1': dom1, 'theme': theme, 'crit': crit, 'sens': sens, 'nbdeQ': nbdeQ, 'nbmin': nbmin}) }}">{{ question.id }} - {{ question.intitule }}</a>
+		{{ loop.index }} :<a href="{{ path('mdqadmin_modifQ', {'id': question.id, 'error': data.error, 'valid':data.valid, 'diff': data.diff, 'dom1': data.dom1, 'theme': data.theme, 'crit': data.crit, 'sens': data.sens, 'nbdeQ': data.nbdeQ, 'nbmin': data.nbmin}) }}">{{ question.id }} - {{ question.intitule }}</a>
         <div class="blocrep"><div class="rep"> {{ question.brep }} </div><div class="prctrep"> {{ question.prctBrep }} </div> <div class="rep">{{ question.mrep1 }}</div> <div class="prctrep"> {{ question.prctMrep1 }} </div> <div class="rep"> {{ question.mrep2 }}</div><div class="prctrep"> {{ question.prctMrep2 }} </div>  <div class="rep">  {{ question.mrep3 }}</div><div class="prctrep"> {{ question.prctMrep3 }} </div>  </div>
         <p><div class="commentaire">{{ question.commentaire }}</div></p>
 		{% if question.type=="image" %}
-		<img src="{{ asset('bundles/mdqquestion/images/imgQuestions/'~question.media~'.jpg') }}" height="100" />
+		<img {{adminTwig.routeImg(question.dom1,question.media)}}height="100" />
 		{% endif %}
 	  </div>
 	  <div class="bloc2">

@@ -35,8 +35,12 @@ mdqadmin_testQdouble:
     defaults: { _controller: MDQAdminBundle:GestionQuestion:testQdouble }
     methods:  [GET]
 mdqadmin_voirQ:
-    path:    /voirQ/{choice}/{page}/{error}/{valid}/{diff}/{game}/{dom1}/{theme}/{crit}/{sens}/{nbdeQ}/{nbmin}
-    defaults: { _controller: MDQAdminBundle:GestionQuestion:voirQ, choice:list, page:1, error:0, valid:3, diff:0, game:none, dom1:none, theme:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
+    path:    /voirQ/{page}/{error}/{valid}/{diff}/{game}/{dom1}/{theme}/{crit}/{sens}/{nbdeQ}/{nbmin}
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:voirQ, page:1, error:0, valid:3, diff:0, game:none, dom1:none, theme:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
+    methods:  [GET]
+mdqadmin_voirListFormQ:
+    path:    /voirListFormQ/{page}/{error}/{valid}/{diff}/{game}/{dom1}/{theme}/{crit}/{sens}/{nbdeQ}/{nbmin}
+    defaults: { _controller: MDQAdminBundle:GestionQuestion:voirListFormQ, page:1, error:0, valid:3, diff:0, game:none, dom1:none, theme:none, crit:id, sens:ASC, nbdeQ:0, nbmin:1 }
     methods:  [GET]
 mdqadmin_critvoirQ:
     path:    /critvoirQ/{choice}
@@ -75,7 +79,7 @@ mdqadmin_statQ:
 mdqadmin_botGame:
     path:    /botGame/{nbBots}/{djajoue}/{type}
     defaults: 	{ _controller: MDQAdminBundle:Bot:botPartie, nbBots:1, djajoue:1, type:Tous }
-    methods:  [GET]
+    methods:  [GET, PUT]
 mdqadmin_resetTheme:
     path:    /resetTheme
     defaults: { _controller: MDQAdminBundle:Admin:resetTheme }
@@ -108,4 +112,4 @@ mdqadmin_testR:
     path:    /testR
     defaults: { _controller: MDQAdminBundle:Admin:testRequete }
     methods:  [GET]
-    
+

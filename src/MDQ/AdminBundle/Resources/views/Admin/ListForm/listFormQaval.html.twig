@@ -1,0 +1,77 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/voirQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Voir les questions
+{% endblock %}
+
+{% block admin_body %}
+
+  <h3>Il y a {{ data.nbquestions }} questions correspondant à votre requête.</h3>
+ <div id="bloc_list_question">
+  <ul>
+      {% for question in questions %}
+      <li class="admin_listQ_bloc">
+	  <div class="bloc1">
+		<form>
+	<div class="bloc_intitule">{% set num=loop.index+(data.page-1)*data.nbpp %}{{ num }} :<span class="admin_listQ_idQ">{{ question.id }}</span><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
+				
+
+	{% include("MDQAdminBundle:Admin/ListForm:blocGauche1.html.twig") %}
+
+		<div class="admin_listQ_repAdmin">Réponse donnée : {{question.repAdmin}}</div>
+		<select name="repAdmin">
+			{% for rep in data.tabrepAdmin %}
+			<option value="{{rep.value}}" {% if question.repAdmin==rep.value %}selected style="background-color:pink;"{%endif%}>{{rep.name}}</option>
+			{%endfor%}
+		</select>
+		<div class="admin_listQ_blocbouton">
+			<div class="admin_listQ_envoyer admin_listQ_valid">Envoyer</div>
+			{% if question.retournee==1%}<div>Retournée</div>{% endif %}
+		</div>
+
+	  {% include("MDQAdminBundle:Admin/ListForm:blocGauche2.html.twig") %}
+
+
+	  </div>
+	  
+	  
+	  
+	  <div class="bloc2">
+	{% include("MDQAdminBundle:Admin/ListForm:blocDroite1.html.twig") %}
+
+		<div id="bloc_doublon">Doublon possible ? 
+				<select name="doublon">
+					<option value="0" selected>Non</option>
+					<option value="1">Oui</option>
+				</select>
+		</div>
+		</div>
+		</form>
+		
+      </li> 
+	</br></br></br></br></br></br>
+
+    {% endfor %}
+  </ul>
+	 </div>
+	<div id="admin_listQ_pagination">
+		{% for p in range(1, data.nbpage) %}
+		<li{% if p == data.page %} class="admin_listQ_num_page_active"{% else %} class="admin_listQ_num_page"{% endif %}>
+
+<a href="{{ path('mdqadmin_voirQaVal', {'page':p, 'repAdmin':data.repAdmin, 'diff': data.diff, 'dom1': data.dom1C, 'crit': data.crit, 'sens': data.sens, 'nbdeQ': data.nbdeQ, 'nbmin': data.nbmin}) }}">{{ p }}</a>
+
+		</li>
+		{% endfor %}
+	</div>
+
+ 
+  
+{% endblock %}
+{% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script	src="{{ asset('bundles/QuestionBundle/adaptForm.js') }}"></script>
+
+{% endblock %}
+

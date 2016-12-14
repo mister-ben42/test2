@@ -5,7 +5,15 @@ namespace MDQ\AdminBundle\Services;
 
 class AdminTwig
 {    
+ 
+	private $assets;     	
+ 
+	public function __construct($assets) {
+	  $this->assets=$assets;
+	}
 
+	
+	
 	public function txtCompteU($userSup)// pour la page Voir User
 	{
 	      $txt="Problème dans dans l'état du compte";
@@ -19,7 +27,25 @@ class AdminTwig
 	      if($dom1=="LxQuizz"){$txt="Base comparative 0 % | 0 % | 33 % | 33 % | 33 %";}
 	      elseif($dom1=="FfQuizz"){$txt="Base comparative 10 % | 0 % | 30 % | 30 % | 30 %";}
 	      elseif($dom1=="Histoire" || $dom1=="Géographie" || $dom1=="Divers" || $dom1=="Sports et loisirs" || $dom1=="Sciences et nature" || $dom1=="Arts et Littérature"){$txt="Base comparative 8 % | 12 % | 27 % | 27 % | 27 % ";}
-	      return $txt;
-	
+	      return $txt;	
+	}
+	public function routeImg($dom1,$media)
+	{
+	      $txt="";
+	      if($dom1=="TvQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/TV/'.$media.'.jpg');}
+	      elseif($dom1=="FfQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Ff/'.$media.'.jpg');}
+	      elseif($dom1=="LxQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Lx/'.$media.'.jpg');}
+	      elseif($dom1=="ArQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Ar/'.$media.'.jpg');}
+	      elseif($dom1=="SexyQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Sexy/'.$media.'.jpg');}
+	      
+	      $txt="src=".$route;
+	      return $txt;	
+	}
+	public function testSelected($crit1, $crit2)
+	{
+	  $txt="";
+	  if($crit1==$crit2){$txt='selected style=background-color:pink;';}
+	  return $txt;
 	}
 }
+

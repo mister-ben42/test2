@@ -1,0 +1,105 @@
+{# src/MDQ/QuestionBundle/Resources/views/Question/voirQ.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Voir les questions
+{% endblock %}
+
+{% block admin_body %}
+
+  <h3>Il y a {{ data.nbquestions }} questions correspondant à votre requête.</h3>
+ <div id="bloc_list_question">
+  <ul>
+
+	{% for question in questions %}
+      <li class="admin_listQ_bloc">
+	  <div class="bloc1">
+		<form>
+
+
+	<div class="bloc_intitule">{% set num=loop.index+(data.page-1)*data.nbpp %}{{ num }} :<a href="{{ path('mdqadmin_modifQ', {'id': question.id, 'error': data.error, 'valid':data.valid, 'diff': data.diff, 'dom1': data.dom1C, 'theme': data.theme, 'crit': data.crit, 'sens': data.sens, 'nbdeQ': data.nbdeQ, 'nbmin': data.nbmin}) }}"><span class="admin_listQ_idQ">{{ question.id }}</span></a><textarea name="intitule" type="text" >{{question.intitule}}</textarea></div><div class="nblettre"></div>
+ 
+ 
+	
+	{% include("MDQAdminBundle:Admin/ListForm:blocGauche1.html.twig") %}
+
+
+		<div class="admin_listQ_blocbouton" {%if question.valid==0 %}style="background-color:rgb(250,50,50);" {%elseif question.valid==1 %}style="background-color:rgb(100,255,100);"  {%elseif question.valid==2 %}style="background-color:rgb(100,100,255);"  {%endif%} >
+				<div class="admin_listQ_modifier">Modifier</div>
+				<div>{{question.valid}}
+				<div class="admin_listQ_valider admin_listQ_valid">Valide</div>
+				<div class="admin_listQ_invalider admin_listQ_valid">Refus</div>
+				<div class="admin_listQ_passvalid admin_listQ_valid">Passe</div>
+			</div>		
+		</div>
+
+	  {% include("MDQAdminBundle:Admin/ListForm:blocGauche2.html.twig") %}
+
+
+	  <div class="admin_listQ_stats">
+	  <p>STATS</p>
+	  <div class="admin_listQ_stats_a ">nb joué : {{question.nbJoue}}</div>
+	  <div class="admin_listQ_stats_a "> nb Br : {{question.nbBrep}}</div>
+	  <div class="admin_listQ_stats_a "> % Br : {{question.prctBrep}}</div>
+	  </br>
+	  <div class="admin_listQ_stats_a "> % Br 100j : {{question.prct100j}}</div>
+	   <div class="admin_listQ_stats_a ">% Br 500j : {{question.prct500j}}</div>
+	  </br>
+	  <div class="admin_listQ_stats_a "> nb Mr1 : {{question.nbMrep1}}</div>
+	  <div class="admin_listQ_stats_a "> % Mr1 : {{question.prctMrep1}}</div>
+	   <div class="admin_listQ_stats_a ">nb Mr2 : {{question.nbMrep2}}</div>
+	  <div class="admin_listQ_stats_a "> % Mr2b : {{question.prctMrep2}}</div>
+	  </br>
+	  <div class="admin_listQ_stats_a "> nb Mr3 : {{question.nbMrep3}}</div>
+	   <div class="admin_listQ_stats_a ">% Mr3 :{{question.prctMrep3}}</div>
+	  
+	  </div>
+
+	  </div>
+	  
+	  
+	  
+	  <div class="bloc2">
+	{% include("MDQAdminBundle:Admin/ListForm:blocDroite1.html.twig") %}
+
+		<div id="admin_editQ_error">
+		<p>Nombre d'erreurs singalées : {{question.error}}</p>
+		<p>Rép fausse : {{question.taberror[0]}}, Ortho : {{question.taberror[1]}}, Autre : {{question.taberror[2]}}</p>
+		{% if not question.users_error.empty %}
+		  <p>
+			Joueurs ayant signalé une erreur : 
+			{% for scuser in question.users_error %}
+			<a href="{{ path('mdqadmin_profileUAdmin', {'id':scuser.usermap.id}) }}">{{ scuser.usermap.username }}</a> - 
+			{% endfor %}
+		  </p>
+		{% endif %}	
+		<div class="admin_editQ_error_button">Remise à 0</div>
+		</div>
+
+		</div>
+		</form>
+		
+      </li> 
+	</br></br></br></br></br></br>
+    {% endfor %}
+  </ul>
+	 </div>
+	<div id="admin_listQ_pagination">
+		{% for p in range(1, data.nbpage) %}
+		<li{% if p == data.page %} class="admin_listQ_num_page_active"{% else %} class="admin_listQ_num_page"{% endif %}>
+	  <a href="{{ path('mdqadmin_voirListFormQ', {'page':p, 'error': data.error, 'valid':data.valid, 'diff': data.diff, 'game':data.game, 'dom1': data.dom1C, 'theme': data.theme, 'crit': data.crit, 'sens': data.sens, 'nbdeQ': data.nbdeQ, 'nbmin': data.nbmin}) }}">{{ p }}</a>
+
+		</li>
+		{% endfor %}
+	</div>
+
+ 
+  
+{% endblock %}
+{% block javascripts %}
+	<script	src="{{ asset('bundles/jquery.js') }}"></script>
+	<script	src="{{ asset('bundles/QuestionBundle/adaptForm.js') }}"></script>
+
+{% endblock %}
+
