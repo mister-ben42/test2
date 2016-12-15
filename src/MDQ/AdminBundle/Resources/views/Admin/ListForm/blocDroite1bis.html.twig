@@ -1,0 +1,13 @@
+
+	  <p><label>theme</label></p>
+	   <select name="theme">
+			{% for theme in data.tabtheme %}
+		{% if loop.index==1 %}<optgroup label="{{theme.dom1}}">{% set dom1=theme.dom1 %}{% endif %}
+		{%if theme.dom1!=dom1 %}</optgroup><optgroup label="{{theme.dom1}}">{% endif %}
+			<option value="{{theme.nom}}" {{ adminTwig.testSelected(question.theme,theme.nom) }}>{{theme.nom}}</option>
+			{% set dom1=theme.dom1 %}
+			{% endfor %}
+		</select>
+		<div class="listFormQ_theme"><input name="theme" type="text"></div>
+
+

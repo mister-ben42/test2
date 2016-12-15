@@ -25,14 +25,14 @@ class BotController extends Controller
 		{
 			if($type=="Mq" || $type=="Tous")
 			{
-				$partieMq=BotController::botgameMq($bot);
+				$partieMq=$this->botgameMq($bot);
 				$tabParties[$j]=$partieMq;
 				$j++;
 			}
 			
 			if($type=="QM" || $type=="Tous")
 			{
-				$partieMq=BotController::botgameQM($bot);
+				$partieMq=$this->botgameQM($bot);
 				$tabParties[$j]=$partieMq;
 				$j++;	
 			}
@@ -77,7 +77,7 @@ class BotController extends Controller
 				$coefb=25+$coefa*$tabcoeffdiff[($tabdiff[$numQ-1])-1];
 				$coefs=array(0=>(100-$coefb),1=>$coefb);
 				$botGame = $this->container->get('mdq_admin.botGame');
-				$bRep=$botGame->rand_coef($coefs);
+				$bRep=$botGame->rand_Coef($coefs);
 				if($bRep==1){
 					$nbBrtot++;
 					$scdebase=$tabscore[($tabdiff[$numQ-1])-1];
@@ -207,7 +207,7 @@ class BotController extends Controller
 							->tirageduneQ($game,$tabDerQ,$tabtheme,$tabdom3,$tabidQ, $numQ, $tabMedia);
 				$tabidQ[($numQ-1)]=$qtire['id'];
 				$botGame = $this->container->get('mdq_admin.botGame');
-				$rep=$botGame->rand_coef($coefs);
+				$rep=$botGame->rand_Coef($coefs);
 				if($rep==1){$nbBrtot++;}
 				if($game=='ArQuizz'){	
 					$nbQAr++; $scoreQ=0;

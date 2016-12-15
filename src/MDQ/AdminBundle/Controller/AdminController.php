@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\AdminBundle\Entity\Gestion;
 use MDQ\AdminBundle\Form\Type\GestionType;
 use MDQ\QuestionBundle\Entity\Theme;
-use MDQ\QuestionBundle\Entity\Dom3;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AdminController extends Controller
@@ -22,7 +21,6 @@ class AdminController extends Controller
     public function resetThemeAction()//efface la table et remet l'incrément à 0
 	{		
 		$connection = $this->getDoctrine()->getManager()->getConnection();
-		$platform   = $connection->getDatabasePlatform();
 		$em=$this->getDoctrine()->getManager();
 		
 	//	$connection->query('START TRANSACTION;SET FOREIGN_KEY_CHECKS=0; TRUNCATE dom3; TRUNCATE theme; SET FOREIGN_KEY_CHECKS=1; COMMIT;');// Avec dom3

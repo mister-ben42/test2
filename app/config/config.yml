@@ -99,3 +99,4 @@ services:
         arguments:
             - 'mysql:dbname=mondeduquizz;port=127.0.0.1'
             - { db_username: '%database_user%', db_password: '%database_password%' }
+
