@@ -1,0 +1,14 @@
+
+		</br>
+		<select name="type">
+			{% for type in data.tabmedia %}
+			<option value="{{type}}" {{ adminTwig.testSelected(question.type,type) }}>{{type}}</option>
+			{%endfor%}
+		</select>
+			<input name="delai_année" type="text" placeholder="année délai" value="{{question.delai}}">
+
+		<div>
+		<div class="crit">auteur :</div><div class="critQ1"><a href="{{ path('mdqadmin_profileUAdmin', {'id': question.auteur.usermap.id}) }}">{{ question.auteur.usermap.username}} </a></div>
+		<div class="crit">date : </div><div class="critQ1" class="admin_listQ_date">{{ question.datecreate|date('d/m/Y') }} </div> 
+		</div>
+		

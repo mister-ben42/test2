@@ -11,26 +11,19 @@ class StatsController extends Controller
 
 	public function arbrathemeAction($dom1, $entete, $viewDom2)
 	{
-		$dom1a=$dom1;
-		$dom1=[];
-		$dom1['nom']=$dom1a;
-		     $em=$this->getDoctrine()->getManager();
-		     $req=$em->getRepository('MDQQuestionBundle:Theme')->findBy(array('dom1'=>$dom1['nom'])
-					);
-				$req2=$em->getRepository('MDQQuestionBundle:Question')->findBy(
-											      array('valid'=>1, 'dom1'=>$dom1['nom'])
-					);
-					$dom1['nbQ']=count($req2);
-					for($j=1;$j<6;$j++)
-					{					
-					    $rq[$j]=$em->getRepository('MDQQuestionBundle:Question')->findBy(
-											      array('valid'=>1, 'dom1'=>$dom1['nom'], 'diff'=>$j));
-					    if($dom1['nbQ']!=0){$dom1['d'.$j]=count($rq[$j])*100/$dom1['nbQ'];}
-					    else{$dom1['d'.$j]=0;}
-					}
-		      	return $this->render('MDQAdminBundle:Admin:arbratheme.html.twig', array(
-			'themes' => $req,
-			'dom1' => $dom1,
+	    if($dom1!="none"){
+	    $em=$this->getDoctrine()->getManager();
+	    $questions=$em->getRepository('MDQQuestionBundle:Question')->createQueryBuilder('q')->where('q.dom1= :dom1')->setParameter('dom1', $dom1)		
+		->andWhere("q.valid=1")->getQuery()->getArrayResult();
+		$data=$this->container->get('mdq_admin.stats')->dataArbraT($questions, $dom1);
+	    }
+	    else{
+		$data[0]=[];
+		$data[1]['nom']="none";
+	    }
+		 return $this->render('MDQAdminBundle:Admin:arbratheme.html.twig', array(
+			'tabdata' => $data[0],
+			'dom1' => $data[1],
 			'entete' =>$entete,
 			'viewDom2'=>$viewDom2,
 			'adminTwig'=>$this->container->get('mdq_admin.adminTwig'),

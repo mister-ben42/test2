@@ -16,4 +16,5 @@ services:
      mdq_admin.gestionQ:
          class: MDQ\AdminBundle\Services\GestionQuestion
 
-
+     mdq_admin.stats:
+         class: MDQ\AdminBundle\Services\StatServ

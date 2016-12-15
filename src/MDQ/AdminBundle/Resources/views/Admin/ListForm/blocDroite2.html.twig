@@ -1,0 +1,12 @@
+		<p><label>dom2</label></p>
+		<select name="dom2">
+			{% for rep in data.tabdom2 %}
+		{% if loop.index==1 %}<optgroup label="{{rep.dom1}}">{% set dom1=rep.dom1 %}{% endif %}
+		{%if rep.dom1!=dom1 %}</optgroup><optgroup label="{{rep.dom1}}">{% endif %}
+			<option value="{{rep.dom2}}" {{ adminTwig.testSelected(question.dom2,rep.dom2) }}>{{rep.dom2}}</option>
+			{% set dom1=rep.dom1 %}
+			{% endfor %}
+			</optgroup>
+		</select>
+		<div class="listFormQ_dom2"><input name="dom2" type="text"></div>
+

@@ -16,17 +16,17 @@
 	{% else %}<a href="{{ path('mdqadmin_arbratheme', {'dom1':dom1.nom, 'entete':entete, 'viewDom2':1})}}"><div id="arbra_viewDom2">Voir Dom2</div></a>
 	      <a href="{{ path('mdqadmin_arbratheme', {'dom1':dom1.nom, 'entete':entete, 'viewDom2':0})}}"><div id="arbra_viewDom2">Cacher Dom2</div></a>
 	       <h3>{{dom1.nom}}</h3>
-	      <div>{{dom1.nbQ}} questions - {{dom1.d1|round }} % | {{dom1.d2|round }} % | {{dom1.d3|round }} % | {{dom1.d4|round }} % | {{dom1.d5|round }} % </div>
+	      <div>{{dom1.nbQ}} questions - {{dom1.d1 }} % | {{dom1.d2 }} % | {{dom1.d3 }} % | {{dom1.d4 }} % | {{dom1.d5 }} % </div>
 	      <div><span class="arbra_stats_dom3" style="font-size:13px;">{{adminTwig.arbraBaseCompar(dom1.nom)}}</span></div>
-	      {% for theme in themes %}
-	      <div><div class="arbra_titre">{{theme.nom}}</div>
-	      <div>{{theme.nbQ}} questions - {{theme.prct1|round}} | {{theme.prct2|round}} | {{theme.prct3|round}} | {{theme.prct4|round}} | {{theme.prct5|round}}</div>
+	      {% for data in tabdata %}
+	      <div><div class="arbra_titre">{{data.nomTheme}}</div>
+	      <div>{{data.nbQTheme}} questions - {{data.prctd1}} | {{data.prctd2}} | {{data.prctd3}} | {{data.prctd4}} | {{data.prctd5}} </div>
 	      </br>
-		{% for dom3 in theme.dom3map %}
-		<div style="text-indent:45px;">{{dom3.nom}}  <span class="arbra_stats_dom3">({{dom3.nbQ}} - {{dom3.prct1|round}} | {{dom3.prct2|round}} | {{dom3.prct3|round}} | {{dom3.prct4|round}} | {{dom3.prct5|round}})</span></div> 
+		{% for dom3 in data.tabdom3 %}
+		<div style="text-indent:45px;">{{dom3.nomDom3}}  <span class="arbra_stats_dom3">({{dom3.nbQDom3}} - {{dom3.prctd1Dom3}} | {{dom3.prctd2Dom3}} | {{dom3.prctd3Dom3}} | {{dom3.prctd4Dom3}} | {{dom3.prctd5Dom3}})</span></div> 
 		    {% if viewDom2==1 %}
-			    {% for dom2 in dom3.dom2 %}
-				  <div style="text-indent:85px;"><span class="arbra_stats_dom3">{{dom2.1}}</span></div>
+			    {% for dom2 in dom3.tabdom2 %}
+				  <div style="text-indent:85px;"><span class="arbra_stats_dom3">{{dom2.nomDom2}} - {{dom2.nbQDom2}}</span></div>
 			    {% endfor %}
 		    {% endif %}
 		{% endfor %}

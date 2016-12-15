@@ -25,10 +25,8 @@ class AdminController extends Controller
 		$platform   = $connection->getDatabasePlatform();
 		$em=$this->getDoctrine()->getManager();
 		
-		$connection->query('START TRANSACTION;SET FOREIGN_KEY_CHECKS=0; TRUNCATE dom3; TRUNCATE theme; SET FOREIGN_KEY_CHECKS=1; COMMIT;');
-	//	$connection->executeUpdate($platform->getTruncateTableSQL('dom3', true /* whether to cascade */));
-	//	$connection->executeUpdate($platform->getTruncateTableSQL('theme', true /* whether to cascade */));
-		
+	//	$connection->query('START TRANSACTION;SET FOREIGN_KEY_CHECKS=0; TRUNCATE dom3; TRUNCATE theme; SET FOREIGN_KEY_CHECKS=1; COMMIT;');// Avec dom3
+		$connection->query('START TRANSACTION;SET FOREIGN_KEY_CHECKS=0; TRUNCATE theme; SET FOREIGN_KEY_CHECKS=1; COMMIT;');
 		
 		$themenone=new Theme();
 		$themenone->setNom("none");
@@ -56,54 +54,7 @@ class AdminController extends Controller
 					$objTheme->setNom($theme[1]);
 					$objTheme->setDom1($dom1);
 					array_push($tabtheme, $theme[1]);
-					$dom3s=$em->getRepository('MDQQuestionBundle:Question')
-					      ->recupDom3($dom1,$theme[1]);
-					$objTheme->setDom3($dom3s);
-					$req=$em->getRepository('MDQQuestionBundle:Question')->findBy(
-											      array('valid'=>1, 'theme'=>$theme[1])
-					);
-					$nbQ=count($req);
-					for($j=1;$j<6;$j++)
-					{					
-					    $rq[$j]=$em->getRepository('MDQQuestionBundle:Question')->findBy(
-											      array('valid'=>1, 'theme'=>$theme[1], 'diff'=>$j));
-					    if($nbQ!=0){$prct[$j]=count($rq[$j])*100/$nbQ;}
-					    else{$prct[$j]=0;}
-					}
-					$objTheme->setNbQ($nbQ);
-					$objTheme->setprct1($prct[1]);
-					$objTheme->setprct2($prct[2]);
-					$objTheme->setprct3($prct[3]);
-					$objTheme->setprct4($prct[4]);
-					$objTheme->setprct5($prct[5]);
 					$em->persist($objTheme);
-					foreach($dom3s as $dom3)
-					{
-					     $objDom3=new Dom3();
-					     $objDom3->setNom($dom3[1]);
-					     $objDom3->setDom1($dom1);
-					    $objDom3->setTheme($objTheme);
-					    $req=$em->getRepository('MDQQuestionBundle:Question')->findBy(
-											      array('valid'=>1, 'theme'=>$theme[1], 'dom3'=>$dom3[1])
-					    );
-					    $nbQ=count($req);
-					    for($j=1;$j<6;$j++)
-					    {					
-						$rq[$j]=$em->getRepository('MDQQuestionBundle:Question')->findBy(
-											      array('valid'=>1, 'theme'=>$theme[1], 'dom3'=>$dom3[1], 'diff'=>$j));
-						if($nbQ!=0){$prct[$j]=count($rq[$j])*100/$nbQ;}
-						else{$prct[$j]=0;}
-					    }
-					    $dom2s=$em->getRepository('MDQQuestionBundle:Question')->recupDom2($dom3,$theme[1]);
-					    $objDom3->setNbQ($nbQ);
-					    $objDom3->setprct1($prct[1]);
-					    $objDom3->setprct2($prct[2]);
-					    $objDom3->setprct3($prct[3]);
-					    $objDom3->setprct4($prct[4]);
-					    $objDom3->setprct5($prct[5]);
-					    $objDom3->setDom2($dom2s);
-					    $em->persist($objDom3);
-					}
 				}
 			}
 		}
@@ -111,17 +62,10 @@ class AdminController extends Controller
 		$em->flush();
 		$tabtheme=$em->getRepository('MDQQuestionBundle:Theme')
 					->findAll();
-		$tabdom2=$em->getRepository('MDQQuestionBundle:Question')
-					->recupDom2ouDom3('dom2');
-		$tabdom3=$em->getRepository('MDQQuestionBundle:Question')
-					->recupDom2ouDom3('dom3');
 		return $this->render('MDQAdminBundle:Admin:listeTheme.html.twig', array(
 			'tabtheme' => $tabtheme,
-			'tabdom2' => $tabdom2,
-			'tabdom3' => $tabdom3,
 			));
 	}
-
 
 	public function gestionAction(Gestion $gestion)
 	{

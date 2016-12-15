@@ -32,38 +32,3 @@
 			{% endfor %}
 		</select>
 		<div class="listFormQ_theme"><input name="theme" type="text"></div>
-		<p><label>dom2</label></p>
-		<select name="dom2">
-			{% for rep in data.tabdom2 %}
-		{% if loop.index==1 %}<optgroup label="{{rep.dom1}}">{% set dom1=rep.dom1 %}{% endif %}
-		{%if rep.dom1!=dom1 %}</optgroup><optgroup label="{{rep.dom1}}">{% endif %}
-			<option value="{{rep.dom2}}" {{ adminTwig.testSelected(question.dom2,rep.dom2) }}>{{rep.dom2}}</option>
-			{% set dom1=rep.dom1 %}
-			{% endfor %}
-			</optgroup>
-		</select>
-		<div class="listFormQ_dom2"><input name="dom2" type="text"></div>
-		<p><label>dom3</label></p>
-		<select name="dom3">
-			{% for rep in data.tabdom3 %}
-		{% if loop.index==1 %}<optgroup label="{{rep.dom1}}">{% set dom1=rep.dom1 %}{% endif %}
-		{%if rep.dom1!=dom1 %}</optgroup><optgroup label="{{rep.dom1}}">{% endif %}
-			<option value="{{rep.dom3}}" {{ adminTwig.testSelected(question.dom3,rep.dom3) }}>{{rep.dom3}}</option>
-
-			{% set dom1=rep.dom1 %}
-			{% endfor %}
-		</select>
-		<div class="listFormQ_dom3"><input name="dom3" type="text"></div>
-		</br>
-		<select name="type">
-			{% for type in data.tabmedia %}
-			<option value="{{type}}" {{ adminTwig.testSelected(question.type,type) }}>{{type}}</option>
-			{%endfor%}
-		</select>
-			<input name="delai_année" type="text" placeholder="année délai" value="{{question.delai}}">
-
-		<div>
-		<div class="crit">auteur :</div><div class="critQ1"><a href="{{ path('mdqadmin_profileUAdmin', {'id': question.auteur.usermap.id}) }}">{{ question.auteur.usermap.username}} </a></div>
-		<div class="crit">date : </div><div class="critQ1" class="admin_listQ_date">{{ question.datecreate|date('d/m/Y') }} </div> 
-		</div>
-		
