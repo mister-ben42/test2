@@ -12,18 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class PartieQuizzRepository extends EntityRepository
 {
-	
-	
-	public function tiragedudom($tab){//tirage au sort et test du domaine
-		$tabtheme=['Histoire','Sports et loisirs','Géographie','Arts et Littérature','Sciences et nature','Divers'];
-		while (!isset($nbtire) OR in_array($dom, $tab)===true)
-			{
-			$nbtire=mt_rand(0,5);
-			$dom=$tabtheme[$nbtire];			
-			}		
-		$tab[2]=$tab[1];$tab[1]=$tab[0];$tab[0]=$dom;		
-		return $tab;
-	}
 		
 
 	public function getDerParties($iduser,$type,$nb) {// Fonctionnelle
@@ -181,7 +169,7 @@ class PartieQuizzRepository extends EntityRepository
 			array_push($tabDerQ, $idQ);
 			}
 		}
-		if($game=="MasterQuizz")
+/*		if($game=="MasterQuizz")
 		{
 			$tabdom3=[]; $tabtheme=[]; $tabidQ=[];$tabdom=['x','x','x'];
 			for($numQ=1; $numQ<11; $numQ++) {
@@ -196,6 +184,15 @@ class PartieQuizzRepository extends EntityRepository
 			$scUser=$user->getScUser();
 			$scUser->setNbPMq($scUser->getNbPMq()+1);
 		}
+*/		
+		if($game=="MasterQuizz")
+		{
+		
+			$tabidQ=$this->getEntityManager()->getRepository('MDQQuestionBundle:Question')->tiragePartieMq($tabDerQ);
+				
+			$scUser=$user->getScUser();
+			$scUser->setNbPMq($scUser->getNbPMq()+1);
+		}
 		else
 		{
 			$scUser=$user->getScUser();
@@ -205,17 +202,7 @@ class PartieQuizzRepository extends EntityRepository
 			elseif($game=="FfQuizz"){$scUser->setNbPFf($scUser->getNbPFf()+1);}
 			elseif($game=="ArQuizz"){$scUser->setNbPAr($scUser->getNbPAr()+1);}
 			elseif($game=="LxQuizz"){$scUser->setNbPLx($scUser->getNbPLx()+1);}
-			$tabtheme=['x','x'];$tabidQ=[]; $tabdom3=[]; $tabMedia=[];
-			for($numQ=1; $numQ<$nbQ+1; $numQ++)
-			{
-				$questionRepository=$this->getEntityManager()->getRepository('MDQQuestionBundle:Question');
-				$qtire=$questionRepository->tirageduneQ($game,$tabDerQ,$tabtheme, $tabdom3, $tabidQ, $numQ, $tabMedia);
-				$tabidQ[($numQ-1)]=$qtire['id'];
-				$tabdom3[$numQ-1]=$qtire['dom3'];
-				$tabtheme[1]=$tabtheme[0];
-				$tabtheme[0]=$qtire['theme'];	
-				$tabMedia[($numQ-1)]=$qtire['media'];
-			}
+			$tabidQ=$this->getEntityManager()->getRepository('MDQQuestionBundle:Question')->tiragePartieQM($tabDerQ, $game);
 		}
 		$scUser->setNbPtot($scUser->getNbPtot()+1);
 		$pseudo=$user->getUsername();

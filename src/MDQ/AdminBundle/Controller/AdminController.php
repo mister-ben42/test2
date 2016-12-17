@@ -122,8 +122,13 @@ class AdminController extends Controller
     
     }
     public function testRequeteAction()
-    {
-	  return $this->render('MDQAdminBundle:Admin:testR.html.twig');
+    {	
+
+	
+	
+	  return $this->render('MDQAdminBundle:Admin:testR.html.twig', array(
+			
+		));
     }
     
 	public function resetErrorAction()

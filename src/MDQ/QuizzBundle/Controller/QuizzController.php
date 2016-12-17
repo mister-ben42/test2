@@ -19,7 +19,7 @@ class QuizzController extends Controller
 		'photo'=>$photo,
 		));
 	}
-	public function newGameAction($game)// 37 ! à reprendre !
+	public function newGameAction($game)// 9 requete en tout
 	{
 		if(!$this->container->get('mdq_admin.security')->testAutorize("newGame", $game)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 	$user = $this->container->get('security.context')->getToken()->getUser();

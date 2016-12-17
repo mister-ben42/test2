@@ -608,106 +608,90 @@ class QuestionRepository extends EntityRepository
 
 		);
   }
-  	public function tirageduneQMq($numQ,$dom, $tabdom3, $tabtheme, $derQ, $tabQ) {		
-		$tabdiff=[1,2,2,3,3,3,4,4,5,5];// Là aussi, possibilité de diminuer le nb de requête à 5 en caclculant en amot le nb de Q.
-			$query=$this->_em->createQuery('SELECT COUNT(q.id) FROM MDQQuestionBundle:Question q WHERE q.diff=:diff AND q.dom1=:dom1 AND q.valid=:valid');
-			$query->setParameter('diff', $tabdiff[$numQ-1]);
-			$query->setParameter('dom1', $dom);
-			$query->setParameter('valid', 1);
-			$count=$query->getSingleScalarResult();
-		while (!isset($Q) || in_array($D3, $tabdom3)===true || in_array($T, $tabtheme)===true || in_array($Q, $derQ)===true || $test===false){		
-			$test=true;			
-			$offset=intval(rand(0, $count-1));
-			$question=$this->_em->createQueryBuilder();
-			$question->select('q.id, q.dom3, q.theme')
-				->from('MDQQuestionBundle:Question', 'q')
-				->where('q.dom1 = :dom1')
-				->setParameter('dom1', $dom)
-				->andWhere('q.diff = :diff')
-				->setParameter('diff', $tabdiff[$numQ-1])
-				->andWhere('q.valid = :valid')
-				->setParameter('valid', 1)
-				->setMaxResults(1)
-				->setFirstResult($offset);				
-			$result=$question->getQuery()
-			    ->getOneOrNullResult();	
-							  
-			$Q=$result['id'];			
-			$D3=$result['dom3'];
-			$T=$result['theme'];
-			for ($i=1;$i<$numQ;$i++) {
-			if ($Q<($tabQ[$i-1]+40) && $Q>($tabQ[$i-1]-40)){
-				$test=false;
-			}}		
-		}		
-		
-		return $result;
-	}
-	public function tirageduneQ($game,$tabDerQ,$tabtheme, $tabdom3, $tabidQ, $numQ, $tabMedia)
+
+
+	public function tiragePartieMq($tabDerP)
 	{
-		
-		$dom1=$game;		
+		$tabdom3=[]; $tabtheme=[]; $tabidQ=[];$tabdom=['x','x','x']; $tabId=[];
+		$tabdiff=[1,2,2,3,3,3,4,4,5,5];	
+			$questions=$this->_em->createQueryBuilder();
+			$questions->select('q.id, q.dom3, q.theme, q.diff, q.dom1')
+				->from('MDQQuestionBundle:Question', 'q')
+				->where('q.valid = :valid')
+				->setParameter('valid', 1)
+				->andWhere('q.dom1=:dom1a OR q.dom1=:dom1b OR q.dom1=:dom1c OR q.dom1=:dom1d OR q.dom1=:dom1e OR q.dom1=:dom1f')
+				->setParameter('dom1a', "Histoire")
+				->setParameter('dom1b', "Geographie")
+				->setParameter('dom1c', "Divers")
+				->setParameter('dom1d', "Sports et loisirs")
+				->setParameter('dom1e', "Sciences et nature")
+				->setParameter('dom1f', "Arts et Littérature");		
+			$result=$questions->getQuery()->getResult();
+			$nbResult=count($result);
+			for($numQ=1; $numQ<11; $numQ++) {
+				$test=false;
+				while($test===false){				
+				$test=true;
+				$numR=mt_rand(0, ($nbResult-1));
+				if(in_array($result[$numR]['id'],$tabDerP)){$test=false;}
+				if($result[$numR]['diff']!=$tabdiff[$numQ-1]){$test=false;}
+				if(in_array($result[$numR]['id'],$tabidQ)){$test=false;}
+				if(in_array($result[$numR]['dom1'],$tabdom)){$test=false;}
+				if(in_array($result[$numR]['theme'],$tabtheme)){$test=false;}				
+				if(in_array($result[$numR]['dom3'],$tabdom3)){$test=false;}				
+				}
+
+				$tabdom[0]=$tabdom[1];
+				$tabdom[1]=$tabdom[2];
+				$tabdom[2]=$result[$numR]['dom1'];
+				$tabidQ[$numQ-1]=$result[$numR]['id'];			
+				$tabdom3[$numQ-1]=$result[$numR]['dom3'];
+				//$tabtheme[$numQ-1]=$result[$numR]['theme']; //Pas sur que très utile
+				$tabId[$numQ-1]=$result[$numR]['id'];
+			}
+		return $tabId;
+			
+	}
+	public function tiragePartieQM($tabDerP, $game)
+	{
+		$tabdom3=[]; $tabtheme=['x','x']; $tabidQ=[];$tabId=[];$tabMedia=[];
 		$tabdiffTv=[1,1,3,3,3,3,5,5];
 		$tabdiffFf=[1,3,3,3,4,4,5,5];
 		$tabdiffLx=[3,3,3,4,4,4,5,5];
-		if($game=="MuQuizz" || $game=="ArQuizz" || $game=="LxQuizz" || $game=="TvQuizz" || $game=="SexyQuizz" ){$tabdom3=['x','x'];}
-		$qt = $this->_em->createQueryBuilder();// possibilité d'accélérer en ne comptant pas le nb de question pour chaque question
-				$qt	->select('q.id')
-					->from('MDQQuestionBundle:Question', 'q')
-					->where('q.id>0')
-					->andWhere('q.dom1 = :dom1')
-					->setParameter('dom1', $dom1);
-				if($game=="TvQuizz"){
-				$qt	->AndWhere('q.diff = :diff')
-					->setParameter('diff', $tabdiffTv[$numQ-1]);
-					}
-				if($game=="FfQuizz"){
-				$qt	->AndWhere('q.diff = :diff')
-					->setParameter('diff', $tabdiffFf[$numQ-1]);
-					}
-				if($game=="LxQuizz"){
-				$qt	->AndWhere('q.diff = :diff')
-					->setParameter('diff', $tabdiffLx[$numQ-1]);
-					}
-		$qt2=$qt->getQuery()->getResult();
-		$nbQ=count($qt2);
-		if($game=="SexyQuizz"){$tabMedia=['x','x'];}
-		
-		while(!isset($Q) || in_array($Q, $tabDerQ)===true || in_array($Q,$tabidQ)===true || in_array($D, $tabdom3)===true || in_array($M, $tabMedia)===true)
-		{
-			$offset=intval(rand(0, $nbQ-1));
-			$question=$this->_em->createQueryBuilder();
-			$question->select('q.id, q.theme', 'q.dom3', 'q.media')
+			$questions=$this->_em->createQueryBuilder();
+			$questions->select('q.id, q.dom3, q.theme, q.diff, q.dom1, q.media')
 				->from('MDQQuestionBundle:Question', 'q')
-				->where('q.dom1 = :dom1')
-				->setParameter('dom1', $dom1);
-				if($game=="TvQuizz"){
-				$question->AndWhere('q.diff = :diff')
-					->setParameter('diff', $tabdiffTv[$numQ-1]);
-					}
-				if($game=="FfQuizz"){
-				$question->AndWhere('q.diff = :diff')
-					->setParameter('diff', $tabdiffFf[$numQ-1])
-					->AndWhere('q.theme != :theme')
-					->setParameter('theme', $tabtheme[0]);
-					}
-				if($game=="LxQuizz"){
-				$question->AndWhere('q.diff = :diff')
-					->setParameter('diff', $tabdiffLx[$numQ-1])
-					->AndWhere('q.theme != :theme')
-					->setParameter('theme', $tabtheme[0]);
-					}
-			$question->setMaxResults(1)
-				->setFirstResult($offset);				
-			$result=$question->getQuery()
-			    ->getOneOrNullResult();								  
-			$Q=$result['id'];
-			$D=$result['dom3'];
-			$M=$result['media'];
-		}
-		
-		return $result;
+				->where('q.valid = :valid')
+				->setParameter('valid', 1)
+				->andWhere('q.dom1=:dom1')
+				->setParameter('dom1', $game);		
+			$result=$questions->getQuery()->getResult();
+			$nbResult=count($result);
+			for($numQ=1; $numQ<9; $numQ++) {
+				$test=false;
+				while($test===false){				
+				$test=true;
+				$numR=mt_rand(0, ($nbResult-1));
+				if(in_array($result[$numR]['id'],$tabDerP)){$test=false;}
+				if($game=="FfQuizz" && $result[$numR]['diff']!=$tabdiffFf[$numQ-1]){$test=false;}
+				if($game=="LxQuizz" && $result[$numR]['diff']!=$tabdiffLx[$numQ-1]){$test=false;}
+				if($game=="TvQuizz" && $result[$numR]['diff']!=$tabdiffTv[$numQ-1]){$test=false;}
+				if(in_array($result[$numR]['id'],$tabidQ)){$test=false;}
+				if(in_array($result[$numR]['theme'],$tabtheme)){$test=false;}				
+				if(in_array($result[$numR]['dom3'],$tabdom3)){$test=false;}
+				if(in_array($result[$numR]['media'],$tabMedia)){$test=false;}
+				}
+
+				$tabtheme[0]=$tabtheme[1];
+				$tabtheme[1]=$result[$numR]['theme'];
+				$tabidQ[$numQ-1]=$result[$numR]['id'];			
+				$tabdom3[$numQ-1]=$result[$numR]['dom3'];
+				$tabId[$numQ-1]=$result[$numR]['id'];
+			}
+		return $tabId;
+			
 	}
+
 	public function testEcartId($idQtire,$numQ,$tabQ) {
 		$ok=true;
 		for ($i=1;$i<$numQ;$i++) {
