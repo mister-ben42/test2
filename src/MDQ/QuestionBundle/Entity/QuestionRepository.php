@@ -813,7 +813,7 @@ class QuestionRepository extends EntityRepository
 			if ($newnbJoue<501){$question->setPrct500j($newnbBrep*100/$newnbJoue);}
 		return $question;
 	}
-	function testDoublon($bdd, $crit, $chaine)// elle est demandé pour entrée des questions
+	public function testDoublon($bdd, $crit, $chaine)// elle est demandé pour entrée des questions
 	{
 		$data=[];
 		//pour l'instant bdd sera toujours bddqcm

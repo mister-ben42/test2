@@ -10,7 +10,3 @@ mdqquestion_adaptForm:
     path:    /adaptForm
     defaults: { _controller: MDQQuestionBundle:Question:adaptForm }
     methods:  [GET]
-mdqquestion_signalError:
-    path:    /signalError
-    defaults: { _controller: MDQQuestionBundle:Question:signalError }
-    methods:  [GET, POST]

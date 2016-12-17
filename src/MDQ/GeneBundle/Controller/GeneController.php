@@ -128,7 +128,7 @@ class GeneController extends Controller
 		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$id_connect=0;$nbparPage=20;
 		if ($this->get('security.context')->isGranted('ROLE_USER')) {// ca ca marche.
-			$id_connec = $this->container->get('security.context')->getToken()->getUser()->getScUser()->getId();
+			$id_connect = $this->container->get('security.context')->getToken()->getUser()->getScUser()->getId();
 		}
 		$highScServ = $this->container->get('mdq_gene.services');
 		$data=$highScServ->editTxt($crit);

@@ -24,11 +24,6 @@ class SelfSecurity
 		$user=0;
 		$blocageTot=0;
 		$testGame=0;
-		$jeuMq=0;
-		$jeuFf=0;
-		$jeuAr=0;
-		$jeuMu=0;
-		$jeuLx=0;
 		$inscription=0;
 		$propQ=0;
 		$signalE=0;
@@ -73,7 +68,7 @@ class SelfSecurity
 			$user=1;
 			$propQ=1;
 		}
-		elseif($action=="signalErreur"){			
+		elseif($action=="signalError"){			
 			$blocageTot=1;
 			$user=1;
 			$signalE=1;

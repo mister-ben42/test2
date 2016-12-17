@@ -22,3 +22,7 @@ mdqquizz_finPartie:
     path: /finPartie
     defaults: { _controller: MDQQuizzBundle:Quizz:finPartie }
     methods:  [GET]
+mdqquestion_signalError:
+    path:    /signalError
+    defaults: { _controller: MDQQuizzBundle:Quizz:signalError }
+    methods:  [GET, POST]

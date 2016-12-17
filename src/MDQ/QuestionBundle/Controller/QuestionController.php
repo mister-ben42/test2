@@ -13,22 +13,24 @@ class QuestionController extends Controller
 {
 	 public function ajouterQAction()
 	{
-		if(!$this->container->get('mdq_admin.security')->testAutorize("ajoutQ", $game)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
+		if(!$this->container->get('mdq_admin.security')->testAutorize("ajoutQ", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$em=$this->getDoctrine()->getManager();
 		$user = $this->container->get('security.context')->getToken()->getUser();
  
-		$nbPMq=$user->getScUser()->getNbPMq();
+/**		// A définir le moment opportun
+		nbPMq=$user->getScUser()->getNbPMq();
 		$nbQaval7j=$em 	->getRepository('MDQQuestionBundle:QaValider')
 						->nbQaval7j($user->getId());
 		if(!$this->get('security.context')->isGranted('ROLE_ADMIN')){
 			if($nbQaval7j>4 || $nbPMq<10){ return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		}
+**/		
 		$quest = new QaValider;
 		$quest->setAuteur($user->getScUser());
-		$form = $this->createForm(new QaValiderType(), $quest);    
-		$request = $this->getRequest();
-		if ($request->getMethod() == 'POST') {
-			$form->bind($request);
+		$form = $this->createForm(new QaValiderType(), $quest);  
+		if ($this->getRequest()->getMethod() == 'POST') {
+			$form->bind($this->getRequest());
+/**		// A développe rle moment opportun : tester les doublons?	
 			$intitule=$quest->getIntitule();
 			$doublons=$em->getRepository('MDQQuestionBundle:Question')
 							->testDoublon('bddqaval', 'intitule', $intitule);
@@ -38,12 +40,10 @@ class QuestionController extends Controller
 						'doublon'=>1,
 							));
 			}
-			if ($form->isValid()) {
-               $em = $this->getDoctrine()->getManager();
+*/			if ($form->isValid()) {
 			   $scUser=$user->getScUser();
 			   $scUser->setNbQprop($scUser->getNbQprop()+1);
 				$em->persist($quest);
-				$em->persist($scUser);
 				$em->flush();
 		return $this->redirect($this->generateUrl('mdquser_profileUAuto'));
 			}
@@ -55,24 +55,18 @@ class QuestionController extends Controller
 	}
 	public function modifQavalAction(Qavalider $qaval)
 	{
-		if(!$this->container->get('mdq_admin.security')->testAutorize("modifQaval", $game)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		$em=$this->getDoctrine()->getManager();
+		if(!$this->container->get('mdq_admin.security')->testAutorize("modifQaval", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$user = $this->container->get('security.context')->getToken()->getUser(); 
 		$idauteur=$qaval->getAuteur()->getId();		
 		$repAdmin=$qaval->getRepAdmin();
-		if($repAdmin<10 || $repAdmin>20 || $user->getId()!=$idauteur)
-			{return $this->redirect($this->generateUrl('mdquser_profileUAuto'));}
-			// pour ne pas sélectionner par l'URL des questions validées ou refusées.
+		if($repAdmin<10 || $repAdmin>20 || $user->getId()!=$idauteur){return $this->redirect($this->generateUrl('mdquser_profileUAuto'));}// pour ne pas sélectionner par l'URL des questions validées ou refusées.
 		$form = $this->createForm(new QaValiderType(), $qaval);
 		$request = $this->getRequest();
 		if ($request->getMethod() == 'POST') {
 		  $form->bind($request);
 		  if ($form->isValid()) {
-			$em = $this->getDoctrine()->getManager();
 			$qaval->setRetournee(1);
-			$em->persist($qaval);
-			$em->flush();
-		$this->container->get('mdq_question.propQ');	   
+			$this->getDoctrine()->getManager()->flush();   
 			return $this->redirect($this->generateUrl('mdquser_profileUAuto'));
 		}}
 	      

@@ -107,49 +107,24 @@ class QuizzController extends Controller
 	
 	public function signalErrorAction()
 	{
-	  if(!$this->container->get('mdq_admin.security')->testAutorize("signalError", null))
+	  if($this->container->get('mdq_admin.security')->testAutorize("signalError", null))
 	  {
+		$em=$this->getDoctrine()->getManager();	
 		$user = $this->container->get('security.context')->getToken()->getUser();
-		$scuser=$user->getScUser();
 		$request = $this->getRequest();	 
-		if($request->isXmlHttpRequest() && $user->getAllowError==1) // pour vérifier la présence d'une requete Ajax
+		if($request->isXmlHttpRequest() && $user->getAllowError()==1) // pour vérifier la présence d'une requete Ajax
 		{
 			$idQ = $request->request->get('idQ');	
 			$taberror = $request->request->get('taberror');	
 			if($idQ!==null && $taberror!==null)
-			{
-				
-				$question=$em->getRepository('MDQQuestionBundle:Question')
-							->findOneById($idQ);
-				$users_error=$question->getUsers_error();
-				$tabIdUser_error=[];
-				foreach ($users_error as $scuserb)
-				{
-					$id=$scuserb->getId();
-					array_push($tabIdUser_error, $id);
-				}
-				if(in_array($scuser->getId(), $tabIdUser_error)!==true)
-				{
-					$taberrorQ=$question->getTaberror();
-					$taberrorQ[0]=$taberrorQ[0]+$taberror[0];
-					$taberrorQ[1]=$taberrorQ[1]+$taberror[1];
-					$taberrorQ[2]=$taberrorQ[2]+$taberror[2];
-					$question->setError($question->getError()+1);
-					$question->setTaberror($taberrorQ);
-					$question->addUser_error($user->getScUser());
-					$scuser->setNbErrorSignalTot($scuser->getNbErrorSignalTot()+1);
-					$scuser->setNbErrorSignal($scuser->getNbErrorSignal()+1);
-					$em->persist($question);
-					$em->persist($scuser);
+			{				
+				$question=$em->getRepository('MDQQuestionBundle:Question')->findOneById($idQ);
+				$this->container->get('mdq_quizz.ajax')->majSignalError($question, $user->getScUser(), $taberror);
 					$em->flush();
-				}
 			return new JsonResponse($idQ);
-			}
-			
+			} 
 		}
-	  }
-		$data='error';
-		return new JsonResponse($data);  
+	  }		
+		return new JsonResponse("error");  
 	}
-
 }
