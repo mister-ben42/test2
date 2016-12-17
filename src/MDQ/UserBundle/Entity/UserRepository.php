@@ -105,4 +105,22 @@ class UserRepository extends EntityRepository
 				  ->andWhere('u.bot = 0');				
 		return $qb->getQuery()->getSingleScalarResult();	
 	}
+		public function selectTabMaitres($tabId)
+	{
+		$req=$this->_em->createQueryBuilder('u');
+		$req->select('u.id, u.username, u.sexe')
+				->from('MDQUserBundle:User', 'u');
+				if($tabId[0]!==null){$req->where('u.id='.$tabId[0]->getId());}
+				else{$req->where('u.id=0');}
+				if($tabId[1]!==null){$req->orWhere('u.id='.$tabId[1]->getId());}
+				if($tabId[2]!==null){$req->orWhere('u.id='.$tabId[2]->getId());}
+				if($tabId[3]!==null){$req->orWhere('u.id='.$tabId[3]->getId());}
+				if($tabId[4]!==null){$req->orWhere('u.id='.$tabId[4]->getId());}
+				if($tabId[5]!==null){$req->orWhere('u.id='.$tabId[5]->getId());}	
+				if($tabId[6]!==null){$req->orWhere('u.id='.$tabId[6]->getId());}	
+				;
+			$result=$req->getQuery()
+			    ->getResult();
+		return $result;
+	}
 }

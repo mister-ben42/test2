@@ -3,6 +3,7 @@
 namespace MDQ\QuizzBundle\Services;
 
 use MDQ\QuestionBundle\Entity\Question;
+use MDQ\UserBundle\Entity\ScUser;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -88,6 +89,30 @@ class AjaxQuizz
 		$data=0;
 		if($session->get('page')!='jeuQuizz'){$data=1;}
 		return $data;
+	}
+	public function majSignalError(Question $question, ScUser $scUser, $taberror)
+	{
+				$users_error=$question->getUsers_error();
+				$tabIdUser_error=[];
+				foreach ($users_error as $scUserb)
+				{
+					$id=$scUserb->getId();
+					array_push($tabIdUser_error, $id);
+				}
+				if(in_array($scUser->getId(), $tabIdUser_error)!==true)
+				{
+					
+					$taberrorQ=$question->getTaberror();
+					$taberrorQ[0]=$taberrorQ[0]+$taberror[0];
+					$taberrorQ[1]=$taberrorQ[1]+$taberror[1];
+					$taberrorQ[2]=$taberrorQ[2]+$taberror[2];
+					$question->setError($question->getError()+1);
+					$question->setTaberror($taberrorQ);
+					$question->addUser_error($scUser);
+					$scUser->setNbErrorSignalTot($scUser->getNbErrorSignalTot()+1);
+					$scUser->setNbErrorSignal($scUser->getNbErrorSignal()+1);
+				}
+		return;
 	}
 }
 

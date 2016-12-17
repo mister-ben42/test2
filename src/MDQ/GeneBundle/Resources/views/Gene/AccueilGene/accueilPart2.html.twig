@@ -6,35 +6,35 @@
 		  <div id="accueil_maitre_ligne1">
 		    
 		    <div class="accueil_maitre_col1" id="accueil_maitre_savant">
-		     <a {{accueilServ.maitreTesthref("Savant")}}>
-		     <img {{accueilServ.maitreImg("Savant")}} style="margin-left:-8px" alt="roi" width=68%>
+		     <a {{accueilServ.maitreTesthref(tabMaitre.savant.id|default(''))}}>
+		     <img {{accueilServ.maitreImg("Savant",tabMaitre.savant.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=68%>
 
 			    <div class="accueil_maitre_txt">
-				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Savant")}}</div>
-				    <div class={{accueilServ.maitreColorSexe("Savant")}}>{{accueilServ.maitreUser("Savant")}}</div>
+				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Savant",tabMaitre.savant.sexe|default(''))}}</div>
+				    <div class={{accueilServ.maitreColorSexe(tabMaitre.savant.sexe|default(''))}}>{{tabMaitre.savant.username|default('')}}</div>
 				    </div>
 		</a> 
 		    </div>
 		   
 		    <div class="accueil_maitre_col1">
-		     <a {{accueilServ.maitreTesthref("Roi")}}>
-		     <img {{accueilServ.maitreImg("Roi")}} style="margin-left:-8px" alt="roi" width=100%>
+		     <a {{accueilServ.maitreTesthref(tabMaitre.roi.id|default(''))}}>
+		     <img {{accueilServ.maitreImg("Roi",tabMaitre.roi.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=100%>
 
 			    <div class="accueil_maitre_txt">
-				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Roi")}}</div>
-				    <div class={{accueilServ.maitreColorSexe("Roi")}}>{{accueilServ.maitreUser("Roi")}}</div>
+				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Roi", tabMaitre.roi.sexe|default(''))}}</div>
+				    <div class={{accueilServ.maitreColorSexe(tabMaitre.roi.sexe|default(''))}}>{{tabMaitre.roi.username|default('')}}</div>
 			    </div>
 			    </a>
 		    
 		    </div>
 		    
 		    <div class="accueil_maitre_col1" id="accueil_maitre_ministre">
-		    <a {{accueilServ.maitreTesthref("Ministre")}}>
-		     <img {{accueilServ.maitreImg("Ministre")}} style="margin-left:-8px" alt="roi" width=68%>
+		    <a {{accueilServ.maitreTesthref(tabMaitre.ministre.id|default(''))}}>
+		     <img {{accueilServ.maitreImg("Ministre",tabMaitre.ministre.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=68%>
 
 			    <div class="accueil_maitre_txt">
 				    <div class="accueil_maitre_txt_titre">Ministre</div>
-				    <div class={{accueilServ.maitreColorSexe("Ministre")}}>{{accueilServ.maitreUser("Ministre")}}</div>
+				    <div class={{accueilServ.maitreColorSexe(tabMaitre.ministre.sexe|default(''))}}>{{tabMaitre.ministre.username|default('')}}</div>
 			    </div>
 		    </a>
 		    </div>
@@ -42,50 +42,50 @@
 		</div>
 		  <div id="accueil_maitre_ligne2">		    
 		    <div class="accueil_maitre_col2">
-		      <a {{accueilServ.maitreTesthref("Musicien")}}>
-		     <img {{accueilServ.maitreImg("Musicien")}} style="margin-left:-8px" alt="roi" width=94%%>
+		      <a {{accueilServ.maitreTesthref(tabMaitre.virtuose.id|default(''))}}>
+		     <img {{accueilServ.maitreImg("Musicien",tabMaitre.virtuose.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=94%%>
 
 			    <div class="accueil_maitre_txt2">
-				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Musicien")}}</div>
-				    <div class={{accueilServ.maitreColorSexe("Musicien")}}>{{accueilServ.maitreUser("Musicien")}}</div>
+				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Musicien",tabMaitre.virtuose.sexe|default(''))}}</div>
+				    <div class={{accueilServ.maitreColorSexe(tabMaitre.virtuose.sexe|default(''))}}>{{tabMaitre.virtuose.username|default('')}}</div>
 			    </div>
 		    </a>
 
 		    </div>
 			
 		    <div class="accueil_maitre_col2">
-		      <a {{accueilServ.maitreTesthref("Ecolo")}}>
-		     <img {{accueilServ.maitreImg("Ecolo")}} style="margin-left:-8px" alt="roi" width=106%>
+		      <a {{accueilServ.maitreTesthref("Ecolo",tabMaitre.ecolo.id|default(''))}}>
+		     <img {{accueilServ.maitreImg("Ecolo",tabMaitre.ecolo.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=106%>
 
 			    <div class="accueil_maitre_txt2">
 				    <div class="accueil_maitre_txt_titre">Ecologiste</div>
-				    <div class={{accueilServ.maitreColorSexe("Ecolo")}}>{{accueilServ.maitreUser("Ecolo")}}</div>
+				    <div class={{accueilServ.maitreColorSexe(tabMaitre.ecolo.sexe|default(''))}}>{{tabMaitre.ecolo.username|default('')}}</div>
 			    </div>
 		    </a>
 		    </div>
 			
 		    <div class="accueil_maitre_col2">
-		      <a {{accueilServ.maitreTesthref("Peintre")}}>
-		     <img {{accueilServ.maitreImg("Peintre")}} style="margin-left:-8px" alt="roi" width=100%>
+		      <a {{accueilServ.maitreTesthref("Peintre",tabMaitre.peintre.id|default(''))}}>
+		     <img {{accueilServ.maitreImg("Peintre",tabMaitre.peintre.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=100%>
 
 			    <div class="accueil_maitre_txt2">
 				    <div class="accueil_maitre_txt_titre">Peintre</div>
-				    <div class={{accueilServ.maitreColorSexe("Peintre")}}>{{accueilServ.maitreUser("Peintre")}}</div>
+				    <div class={{accueilServ.maitreColorSexe(tabMaitre.peintre.sexe|default(''))}}>{{tabMaitre.peintre.username|default('')}}</div>
 			    </div>
 		    </a>
 		    </div>
 			
 		    <div class="accueil_maitre_col2">
-		      <a {{accueilServ.maitreTesthref("Globe-T")}}>
-		     <img {{accueilServ.maitreImg("Globe-T")}} style="margin-left:-8px" alt="roi" width=106%%>
+		      <a {{accueilServ.maitreTesthref("Globe-T",tabMaitre.globeT.id|default(''))}}>
+		     <img {{accueilServ.maitreImg("Globe-T",tabMaitre.globeT.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=106%%>
 
 			    <div class="accueil_maitre_txt2">
-				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Globe-T")}}</div>
-				    <div class={{accueilServ.maitreColorSexe("Globe-T")}}>{{accueilServ.maitreUser("Globe-T")}}</div>
+				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Globe-T",tabMaitre.globeT.sexe|default(''))}}</div>
+				    <div class={{accueilServ.maitreColorSexe(tabMaitre.globeT.sexe|default(''))}}>{{tabMaitre.globeT.username|default('')}}</div>
 			    </div>
 		    </a>
 		    </div>
-		</div>
+		 </div>
 		</div>
 	    </div>
 	    <div id="accueil_bloc1_droite">

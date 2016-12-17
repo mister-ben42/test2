@@ -59,35 +59,35 @@ class PartieQuizz
     /**
      * @var integer
      *
-     * @ORM\Column(name="Q1", type="integer")
+     * @ORM\Column(name="Q1", type="integer", nullable=true)
      */
     private $q1;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="Q2", type="integer")
+     * @ORM\Column(name="Q2", type="integer", nullable=true)
      */
     private $q2;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="Q3", type="integer")
+     * @ORM\Column(name="Q3", type="integer", nullable=true)
      */
     private $q3;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="Q4", type="integer")
+     * @ORM\Column(name="Q4", type="integer", nullable=true)
      */
     private $q4;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="Q5", type="integer")
+     * @ORM\Column(name="Q5", type="integer", nullable=true)
      */
     private $q5;
 

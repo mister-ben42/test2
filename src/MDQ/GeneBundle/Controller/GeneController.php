@@ -25,16 +25,16 @@ class GeneController extends Controller
 	$em->flush();
 	// ********** Controle de nouvelle journee -- A terme a remplacer par un CRON ******** ///
 	$datejour= new \DateTime(date('Y-m-d'));
-		//Reste un petit pb avec l'objet date : si pas de connexion le lundi, mais le mardi, la date de Maj de la datebdd jour est celle du debut de semane, ce qui conduit a une maj automatique du jour lors de l'arrivee suivante sur la page d'accueil.
-		$datebdd=$em->getRepository('MDQGeneBundle:DateReference')->find(1);
-		//$tabrMDQ[0]=$datebdd->getRMDQ(); Que si classement mensuel
-		$tabMaitres=[$datebdd->getRMDQ(), null,null,null,null,null,null];
-		if($datebdd->getDay()!=$datejour){
-			$datebdd->setDay($datejour);// Je le mets la ; si je le mets apres l'operation sub dateInter, l'interval est deduit de la date entree en bdd -jsp pourquoi.
+		//Reste un petit pb avec l'objet date : si pas de connexion le lundi, mais le mardi, la date de Maj de la dateref jour est celle du debut de semane, ce qui conduit a une maj automatique du jour lors de l'arrivee suivante sur la page d'accueil.
+		$dateref=$em->getRepository('MDQGeneBundle:DateReference')->find(1);
+		//$tabrMDQ[0]=$dateref->getRMDQ(); Que si classement mensuel
+		$tabMaitres=[$dateref->getRMDQ(), null,null,null,null,null,null];
+		if($dateref->getDay()!=$datejour){
+			$dateref->setDay($datejour);// Je le mets la ; si je le mets apres l'operation sub dateInter, l'interval est deduit de la date entree en bdd -jsp pourquoi.
 
 			
 	//************* Controle nouvelle semaine ************** /////////////////////
-		$semref=$datebdd->getWeek();
+		$semref=$dateref->getWeek();
 		$int=$datejour->diff($semref);
 		if($int->format('%a')>6){
 			$tabMaitres=[null,null,null,null,null,null,null];
@@ -44,8 +44,8 @@ class GeneController extends Controller
 			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
 						->majClassement($listeUser, 'KingMaster', $tabMaitres);
 			$week1= new \DateInterval('P7D');
-			$datebdd->getWeek()->add($week1);
-			$datebdd->setWeek($datejour->add($int)->add($week1));
+			$dateref->getWeek()->add($week1);
+			$dateref->setWeek($datejour->add($int)->add($week1));
 		}
 	//****************************** Mise a jour, donnees du jour.*******************************
 			$listeUserMq=$em->getRepository('MDQUserBundle:ScUser')
@@ -80,20 +80,21 @@ class GeneController extends Controller
 
 	//**** mise a jour date_ref ***********************//
 					
-			$datebdd->setRMDQ($tabMaitres[0]);
-			$datebdd->setSMDQ($tabMaitres[1]);
-			$datebdd->setMMDQ($tabMaitres[2]);
-			$datebdd->setMuMDQ($tabMaitres[3]);
-			$datebdd->setArMDQ($tabMaitres[4]);
-			$datebdd->setFfMDQ($tabMaitres[5]);
-			$datebdd->setLxMDQ($tabMaitres[6]);
-			$em->persist($datebdd);
+			$dateref->setRMDQ($tabMaitres[0]);
+			$dateref->setSMDQ($tabMaitres[1]);
+			$dateref->setMMDQ($tabMaitres[2]);
+			$dateref->setMuMDQ($tabMaitres[3]);
+			$dateref->setArMDQ($tabMaitres[4]);
+			$dateref->setFfMDQ($tabMaitres[5]);
+			$dateref->setLxMDQ($tabMaitres[6]);
 			$em->flush();
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}
 	// ************ flush final, execute toutes les mises a jour ******* ////
 			
-
+	$tabMaitre1=[$dateref->getRMDQ(),$dateref->getMMDQ(),$dateref->getSMDQ(), $dateref->getFfMDQ(), $dateref->getLxMDQ(), $dateref->getMuMDQ(), $dateref->getArMDQ()];
+	$tabMaitre2=$em->getRepository('MDQUserBundle:User')->selectTabMaitres($tabMaitre1);
+	$tabMaitre=$geneServ->getTabMaitre($dateref, $tabMaitre2);
 	$newsA=$em->getRepository('MDQAdminBundle:News')->recupNews();
 	$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);	
 	$accueilServ = $this->container->get('mdq_gene.accueilGene');
@@ -102,6 +103,7 @@ class GeneController extends Controller
 	  'news' => $newsA,
 	  'datejour'=>$datejour,
 	  'gestion'=>$gestion,
+	  'tabMaitre'=>$tabMaitre,
     ));
   }
    public function accueilJeuAction()

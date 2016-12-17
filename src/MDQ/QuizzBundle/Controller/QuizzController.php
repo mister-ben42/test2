@@ -19,7 +19,7 @@ class QuizzController extends Controller
 		'photo'=>$photo,
 		));
 	}
-	public function newGameAction($game)
+	public function newGameAction($game)// 37 ! à reprendre !
 	{
 		if(!$this->container->get('mdq_admin.security')->testAutorize("newGame", $game)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 	$user = $this->container->get('security.context')->getToken()->getUser();
@@ -47,7 +47,7 @@ class QuizzController extends Controller
 		    'signalE'=>$signalE,
 		    ));			
 	}
-	public function editQuestionAction(){
+	public function editQuestionAction(){// 3 requete en tout (2spécifique)
 		$request = $this->getRequest();	 	
 		$quizzServ = $this->container->get('mdq_quizz.ajax');
 		$user = $this->container->get('security.context')->getToken()->getUser();		
@@ -56,8 +56,10 @@ class QuizzController extends Controller
 		$numQ = $request->request->get('numQ');	
 		$em=$this->getDoctrine()->getManager();
 		 if ($numQ !== null ){   
-			$idQ = $em->getRepository('MDQQuizzBundle:PartieQuizz')->recupQ($numQ,$user->getId());
+		//	$idQ = $em->getRepository('MDQQuizzBundle:PartieQuizz')->recupQ($numQ,$user->getId()); //Plus besoin ; la suite est limite, mais ça marche
 			$partie=$em->getRepository('MDQQuizzBundle:PartieQuizz')->recupPartie($user->getId());
+			$function1="getQ".$numQ;
+			$idQ=$partie->$function1();
 			if($numQ!=$partie->getNbQjoue()+1){$data['id']="error";
 							    return new JsonResponse($data);}
 			$data = $em->getRepository('MDQQuestionBundle:Question')->recupDataQ($idQ);
@@ -67,7 +69,7 @@ class QuizzController extends Controller
 	  }
 	  return "erreur";        
 	}
-	public function verifReponseAction(){
+	public function verifReponseAction(){// 9 requetes (8spécifiques) je ne vois pas comment diminuer.
 		$request = $this->getRequest();	 		
 		$quizzServ = $this->container->get('mdq_quizz.ajax');
 		$user = $this->container->get('security.context')->getToken()->getUser();		
@@ -87,9 +89,10 @@ class QuizzController extends Controller
 		}
 		return "erreur";// il faudrait retourner à l'accueil dans ce cas/
 	}
-	public function finPartieAction(){
+	public function finPartieAction(){//6 dont celle de sécurité.
 	
 		if(!$this->container->get('mdq_admin.security')->testAutorize("finPartie", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
+		$user = $this->container->get('security.context')->getToken()->getUser();
 		$quizzServ = $this->container->get('mdq_quizz.services');
 		$partieJoue=$this->getDoctrine()->getManager()->getRepository('MDQQuizzBundle:PartieQuizz')->recupPartie($user->getId());
 		$game=$partieJoue->getType();
