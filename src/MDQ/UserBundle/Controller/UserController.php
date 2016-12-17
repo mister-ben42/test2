@@ -10,18 +10,15 @@ use MDQ\UserBundle\Entity\User;
 
 
 class UserController extends Controller
-{
+{	
 	public function profileUAction(User $user)
 	{
+		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$user_connect = $this->container->get('security.context')->getToken()->getUser();
-        if ($user_connect===$user && $user_connect->getId()==$user->getId()) {
+		if ($user_connect===$user && $user_connect->getId()==$user->getId()) {
 			return $this->redirect($this->generateUrl('mdquser_profileUAuto'));
         }
 		$session = $this->getRequest()->getSession();
-		$pagePrec="none";
-		if($session->has('page')){
-			$pagePrec=$session->get('page');
-		}
 		$em=$this->getDoctrine()->getManager();
 		$derPartieUser=$em->getRepository('MDQQuizzBundle:PartieQuizz')
 						  ->recupDerPartieUser($user->getId());
@@ -33,10 +30,8 @@ class UserController extends Controller
 
 	public function profileUAutoAction()
 	{
+		if(!$this->container->get('mdq_admin.security')->testAutorize("profileUAuto", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$user = $this->container->get('security.context')->getToken()->getUser();
-		if ($user===null || !$this->get('security.context')->isGranted('ROLE_USER')) {// ça ça marche.
-			return $this->redirect($this->generateUrl('mdqgene_accueil'));
-		}
 		$em=$this->getDoctrine()->getManager();
 		$derPartieUser=$em	->getRepository('MDQQuizzBundle:PartieQuizz')
 							->recupDerPartieUser($user->getId());
@@ -55,10 +50,12 @@ class UserController extends Controller
 	}
 	public function profileUAutoEditAction()
 	{
-	return $this->redirect($this->generateUrl('fos_user_profile_edit'));
+		if(!$this->container->get('mdq_admin.security')->testAutorize("profileUAuto", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
+		return $this->redirect($this->generateUrl('fos_user_profile_edit'));
 	}
 	public function profileUPasswordAction()
 	{
+		if(!$this->container->get('mdq_admin.security')->testAutorize("profileUAuto", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 	return $this->redirect($this->generateUrl('fos_user_change_password'));
 
 	}

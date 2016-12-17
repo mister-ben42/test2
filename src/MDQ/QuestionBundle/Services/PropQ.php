@@ -8,10 +8,6 @@ class PropQ
 {    
  	
  
-	public function __construct() {
-	}
-
- 
 
       public function affichRepAdmin($rep)
       {

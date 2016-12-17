@@ -37,4 +37,7 @@ services:
         class: MDQ\GeneBundle\Services\RoleService
         arguments: [@security.role_hierarchy]
         
-       
+    mdq_admin.security:
+        class: MDQ\AdminBundle\Services\SelfSecurity
+        arguments: [@security.context, @session, @mdq_admin.repository.gestion]
+

@@ -84,9 +84,9 @@ class AjaxQuizz
 		return $finP;
 	}
 	public function testSession(Session $session)
-	{
+	{// Plus léger, m'évite de charger une gestion à chaque fois.
 		$data=0;
-		if($session->get('page')!='Mquizz'){$data=1;}
+		if($session->get('page')!='jeuQuizz'){$data=1;}
 		return $data;
 	}
 }

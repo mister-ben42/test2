@@ -106,6 +106,7 @@ class GeneController extends Controller
   }
    public function accueilJeuAction()
   {
+		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$session = $this->getRequest()->getSession();
 		$accueilJServ = $this->container->get('mdq_gene.accueilJeu');	
 		$session->set('page', 'accueilJeu');
@@ -116,7 +117,7 @@ class GeneController extends Controller
 
 	public function accueilHighScoreAction()
 	{
-
+		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$accueilHSServ = $this->container->get('mdq_gene.accueilHS');		
 		return $this->render('MDQGeneBundle:Gene:accueilHighScore.html.twig', array(
 		  'accueilHSServ' => $accueilHSServ,
@@ -124,10 +125,10 @@ class GeneController extends Controller
 	}
 	public function highScoreAction($crit, $page, $id)
 	{
+		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$id_connect=0;$nbparPage=20;
 		if ($this->get('security.context')->isGranted('ROLE_USER')) {// ca ca marche.
-			$user_connect = $this->container->get('security.context')->getToken()->getUser();
-			$id_connect=$user_connect->getScUser()->getId();
+			$id_connec = $this->container->get('security.context')->getToken()->getUser()->getScUser()->getId();
 		}
 		$highScServ = $this->container->get('mdq_gene.services');
 		$data=$highScServ->editTxt($crit);
@@ -148,10 +149,12 @@ class GeneController extends Controller
 	}
 	public function regleJeuAction()
 	{
+		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		return $this->render('MDQGeneBundle:Gene:regleJeu.html.twig');
 	}
 	public function afficheNewsAction()
 	{
+		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$em=$this->getDoctrine()->getManager();
 			$news=$em->createQueryBuilder();
 			$news->select('n.titre, n.texte, n.dateCreate')

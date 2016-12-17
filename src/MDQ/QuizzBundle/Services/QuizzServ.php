@@ -4,7 +4,6 @@ namespace MDQ\QuizzBundle\Services;
 
 use MDQ\AdminBundle\Entity\GestionRepository;
 use MDQ\UserBundle\Entity\User;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class QuizzServ
 {    
@@ -28,24 +27,6 @@ class QuizzServ
 	    $page='photoQuizz';	    
 	    }      
 	    return $page;
-      }
-      public function testAutoriseNewG($game, User $user, $admin)
-      {
-	    $test=1;
-	    $gestion=$this->gestion;
-	     if($user===null || $game=="MasterQuizz" && $gestion->getMq()==0 && $admin==0
-			 || $game=="FfQuizz" && $gestion->getFf()==0 && $admin==0
-			 || $game=="ArQuizz" && $gestion->getAr()==0 && $admin==0
-			 || $game=="MuQuizz" && $gestion->getMc()==0 && $admin==0
-			 || $game=="LxQuizz"  && $gestion->getLx()==0 && $admin==0
-			 || $game=="SexyQuizz" && $admin==0
-			 || $game=="TvQuizz" && $admin==0)
-		{$test=0;}
-	    elseif($game!="MasterQuizz" && $game!="FfQuizz" && $game!="ArQuizz" && $game!="MuQuizz" && $game!="LxQuizz" && $game!="SexyQuizz" && $game!="TvQuizz")
-		{$test=0;}
-	    elseif($this->jetonServ->testJeton($user, $game)===false && $admin==0)
-		{$test=0;}
-	    return $test;
       }
 
       public function comFinP($scofDayUser, $scMaxUser, $score, $game, $highScoreTous, $userId)
@@ -89,13 +70,7 @@ class QuizzServ
 				elseif($game=='TvQuizz'){$crit='scofDayTv';}
 	      return $crit;
       }
-      public function testAccessFinP(Session $session, User $user)
-      {
-	      $test=1;	      
-	      if ($user===null){$test=0;}
-	      if($session->get('page')!='Mquizz'){$test=0;}
-	     return $test;
-      }
+
       public function recupScFinP(User $user, $game)
       {
 	      	if($game=="MasterQuizz")
