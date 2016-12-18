@@ -7,7 +7,7 @@
 		    
 		    <div class="accueil_maitre_col1" id="accueil_maitre_savant">
 		     <a {{accueilServ.maitreTesthref(tabMaitre.savant.id|default(''))}}>
-		     <img {{accueilServ.maitreImg("Savant",tabMaitre.savant.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=68%>
+		     <img {{accueilServ.maitreImg("Savant",tabMaitre.savant.sexe|default(0),tabMaitre.savant.id|default(''))}} style="margin-left:-8px" alt="roi" width=68%>
 
 			    <div class="accueil_maitre_txt">
 				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Savant",tabMaitre.savant.sexe|default(''))}}</div>
@@ -18,7 +18,7 @@
 		   
 		    <div class="accueil_maitre_col1">
 		     <a {{accueilServ.maitreTesthref(tabMaitre.roi.id|default(''))}}>
-		     <img {{accueilServ.maitreImg("Roi",tabMaitre.roi.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=100%>
+		     <img {{accueilServ.maitreImg("Roi",tabMaitre.roi.sexe|default(0),tabMaitre.roi.id|default(''))}} style="margin-left:-8px" alt="roi" width=100%>
 
 			    <div class="accueil_maitre_txt">
 				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Roi", tabMaitre.roi.sexe|default(''))}}</div>
@@ -30,7 +30,7 @@
 		    
 		    <div class="accueil_maitre_col1" id="accueil_maitre_ministre">
 		    <a {{accueilServ.maitreTesthref(tabMaitre.ministre.id|default(''))}}>
-		     <img {{accueilServ.maitreImg("Ministre",tabMaitre.ministre.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=68%>
+		     <img {{accueilServ.maitreImg("Ministre",tabMaitre.ministre.sexe|default(0),tabMaitre.ministre.id|default(''))}} style="margin-left:-8px" alt="roi" width=68%>
 
 			    <div class="accueil_maitre_txt">
 				    <div class="accueil_maitre_txt_titre">Ministre</div>
@@ -43,7 +43,7 @@
 		  <div id="accueil_maitre_ligne2">		    
 		    <div class="accueil_maitre_col2">
 		      <a {{accueilServ.maitreTesthref(tabMaitre.virtuose.id|default(''))}}>
-		     <img {{accueilServ.maitreImg("Musicien",tabMaitre.virtuose.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=94%%>
+		     <img {{accueilServ.maitreImg("Musicien",tabMaitre.virtuose.sexe|default(0),tabMaitre.virtuose.id|default(''))}} style="margin-left:-8px" alt="roi" width=94%%>
 
 			    <div class="accueil_maitre_txt2">
 				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Musicien",tabMaitre.virtuose.sexe|default(''))}}</div>
@@ -55,7 +55,7 @@
 			
 		    <div class="accueil_maitre_col2">
 		      <a {{accueilServ.maitreTesthref(tabMaitre.ecolo.id|default(''))}}>
-		     <img {{accueilServ.maitreImg("Ecolo",tabMaitre.ecolo.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=106%>
+		     <img {{accueilServ.maitreImg("Ecolo",tabMaitre.ecolo.sexe|default(0),tabMaitre.ecolo.id|default(''))}} style="margin-left:-8px" alt="roi" width=106%>
 
 			    <div class="accueil_maitre_txt2">
 				    <div class="accueil_maitre_txt_titre">Ecologiste</div>
@@ -66,7 +66,7 @@
 			
 		    <div class="accueil_maitre_col2">
 		      <a {{accueilServ.maitreTesthref(tabMaitre.peintre.id|default(''))}}>
-		     <img {{accueilServ.maitreImg("Peintre",tabMaitre.peintre.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=100%>
+		     <img {{accueilServ.maitreImg("Peintre",tabMaitre.peintre.sexe|default(0),tabMaitre.peintre.id|default(''))}} style="margin-left:-8px" alt="roi" width=100%>
 
 			    <div class="accueil_maitre_txt2">
 				    <div class="accueil_maitre_txt_titre">Peintre</div>
@@ -77,7 +77,7 @@
 			
 		    <div class="accueil_maitre_col2">
 		      <a {{accueilServ.maitreTesthref(tabMaitre.globeT.id|default(''))}}>
-		     <img {{accueilServ.maitreImg("Globe-T",tabMaitre.globeT.sexe|default(''))}} style="margin-left:-8px" alt="roi" width=106%%>
+		     <img {{accueilServ.maitreImg("Globe-T",tabMaitre.globeT.sexe|default(0),tabMaitre.globeT.id|default(''))}} style="margin-left:-8px" alt="roi" width=106%%>
 
 			    <div class="accueil_maitre_txt2">
 				    <div class="accueil_maitre_txt_titre">{{accueilServ.maitreNom("Globe-T",tabMaitre.globeT.sexe|default(''))}}</div>

@@ -43,7 +43,7 @@ class QaValiderRepository extends EntityRepository
 			else{$nbmin2=$nbmin;}
 
 		$qb->orderBy('a.'.$crit, $sens)
-			->setFirstResult($nbmin-1);
+			->setFirstResult($nbmin2-1);
 		if($nbdeQ!=0) {
 			$qb->setMaxResults($nbdeQ);
 		}

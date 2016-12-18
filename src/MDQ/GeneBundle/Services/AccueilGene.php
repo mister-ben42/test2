@@ -87,47 +87,46 @@ class AccueilGene
 	      }
 	      return $txt;
 	}
-	public function maitreImg($type, $sexe)
+	public function maitreImg($type, $sexe, $id)
 	{
-	      $isNul=false;
-	      if($sexe==""){$isNul=true;}
+	      
 	      if($type=="Roi"){		    
-		    if($isNul || $sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/roi2.png');}
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/roi2.png');}
 		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/reine3.png');}		     
 		    $txt="src=".$route;
 	      }
 	      elseif($type=="Savant"){		    
-		    if($isNul || $sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/savant-H.png');}
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/savant-H.png');}
 		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/savant-F.png');}		     
 		    $txt="src=".$route;
 	      }
 	      elseif($type=="Ministre"){		    
-		    if($isNul || $sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/ministre-H.png');}
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/ministre-H.png');}
 		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/ministre-H.png');}		     
 		    $txt="src=".$route;
 	      }	      	      	      
 	      elseif($type=="Musicien"){		    
-		    if($isNul || $sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/virtuose-H.png');}
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/virtuose-H.png');}
 		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/virtuose-F.png');}		     
 		    $txt="src=".$route;
 	      }	
 	      elseif($type=="Peintre"){		    
-		    if($isNul || $sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/peintre-H.png');}
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/peintre-H.png');}
 		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/peintre-F.png');}		     
 		    $txt="src=".$route;
 	      }
 	      elseif($type=="Ecolo"){		    
-		    if($isNul || $sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/nature-H.png');}
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/nature-H.png');}
 		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/nature-F.png');}		     
 		    $txt="src=".$route;
 	      }	      
 	      elseif($type=="Globe-T"){		    
-		    if($isNul || $sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/globeT-H2.png');}
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/globeT-H2.png');}
 		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/globeT-F.png');}		     
 		    $txt="src=".$route;
 	      }
 
-	      if($isNul===true){$txt=$txt." style=opacity:0.4";}
+	      if($id==""){$txt=$txt." style=opacity:0.4";}
 	      return $txt;
 	}
 	public function maitreColorSexe($sexe)
