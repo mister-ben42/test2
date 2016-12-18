@@ -56,16 +56,13 @@ class BotController extends Controller
 			$scUser=$bot->getScUser();
 			$tabcoef=$scUser->getTabCoefBot();
 			$tabdiff=[1,2,2,3,3,3,4,4,5,5];  $score=0; $tabPartie=[];
-			$tabDom=['h','g','sn','al', 'sl', 'd'];
 			$tabNbQ=[0,0,0,0,0,0];
 			$tabNbBr=[0,0,0,0,0,0];
 			$nbQtotP=10; $nbBrTotP=0;
 			for($i=0; $i<10; $i++)
 			{
 			    $dom1=mt_rand(0, 5);
-			    $tabGame[$i]['dom1']=$dom1;
 			    $br=$this->container->get('mdq_admin.botGame')->testBr($tabcoef[$dom1],$tabdiff[$i]);
-			    $tabGame[$i]['br']=$br;
 			    $tabNbQ[$dom1]++;
 			    if($br==1){
 				      $score=$this->container->get('mdq_admin.botGame')->calcScore($score,$tabdiff[$i]);
@@ -143,7 +140,6 @@ class BotController extends Controller
 			
 			$game=$tabgame[$nb];
 			
-			//*
 			//$game='MuQuizz';// Pour forcer le tirage de MuQuizz
 			$tabPartie2['bot']=$bot->getUsername();
 			$tabPartie2['game']=$game;
@@ -153,7 +149,7 @@ class BotController extends Controller
 			else if($game=='FfQuizz'){$coefJ=$tabcoef[8];}
 			else if($game=='LxQuizz'){$coefJ=$tabcoef[9];}
 			$coefs=array(0=>(100-$coefJ),1=>$coefJ);
-			$tabtheme=['x','x'];$tabDerQ=[];$scoreP=0; $tabdom3=['x','x','x']; $tabMedia=['x','x'];
+			$scoreP=0;
 			$nbQAr=$scUser->getNbQAr();	$nbBrAr=$scUser->getNbBrAr();
 			$nbQFf=$scUser->getNbQFf();	$nbBrFf=$scUser->getNbBrFf();
 			$nbQLx=$scUser->getNbQLx();	$nbBrLx=$scUser->getNbBrLx();
@@ -163,7 +159,7 @@ class BotController extends Controller
 			for($numQ=1; $numQ<9; $numQ++)
 			{
 				$botGame = $this->container->get('mdq_admin.botGame');
-				$rep=$botGame->rand_CoefQM($coefs);
+				$rep=$botGame->randCoefQM($coefs);
 				if($rep==1){$nbBrtot++;}
 				if($game=='ArQuizz'){	
 					$nbQAr++; $scoreQ=0;

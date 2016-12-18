@@ -142,10 +142,10 @@ class AdminController extends Controller
 				$em = $this->getDoctrine()->getManager();
 				$question=$em->getRepository('MDQQuestionBundle:Question')
 							->findOneById($idQ);
-				$users_error=$question->getUsers_error();
+				$users_error=$question->getUsersError();
 				foreach ($users_error as $scuser)
 				{
-					$question->removeUser_error($scuser);					
+					$question->removeUsersError($scuser);					
 					$scuser->setNbErrorSignal($scuser->getNbErrorSignal()-1);
 				}
 				$question->setError(0);

@@ -3,7 +3,7 @@
 namespace MDQ\GeneBundle\Services;
 
 use MDQ\UserBundle\Entity\ScUserRepository;
-use MDQ\GeneBundle\Entity\DateReferenceRepository;
+use MDQ\GeneBundle\Entity\DateReference;
 
 
 
@@ -177,7 +177,7 @@ class AccueilGene
 	      if(isset($tab[$rang]) && $tab[$rang]!==Null){$txt=$tab[$rang][$type];}	     
 	      return $txt;
 	}
-	public function getTabMaitre($dateref, $tabMaitre2)
+	public function getTabMaitre(DateReference $dateref, $tabMaitre2)
 	{
 	      	if($dateref->getRMDQ()===null){$tabMaitre['roi']=null;}
 	else{

@@ -20,7 +20,7 @@ class MDQUserExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
+        //$configuration = new Configuration(); // sensio
        // $config = $this->processConfiguration($configuration, $configs);// enlevé pour le test sansiolab
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));

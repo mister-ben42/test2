@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class QuestionRepository extends EntityRepository
 {
-	public function getQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin)
+	public function getQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin, $page)
   {
  
 		$qb = $this->createQueryBuilder('a');
@@ -95,109 +95,22 @@ class QuestionRepository extends EntityRepository
 				$qb->andWhere('a.theme = :theme')
 				->setParameter('theme', $theme);
 		}
-	
+		$qb1=$qb;
+		$nbTot=count($qb1->getQuery()->getResult());
+		if($nbTot>$nbdeQ){$nbmin2=($nbmin+($page-1)*$nbdeQ);}
+			else{$nbmin2=$nbmin;}
 		$qb->orderBy('a.'.$crit, $sens)
-			->setFirstResult($nbmin-1);
+			->setFirstResult($nbmin2-1);
+			
 		if($nbdeQ!=0) {
 			$qb->setMaxResults($nbdeQ);
 		}
-	
-  return $qb->getQuery()
-            ->getResult();
+		$questions=$qb->getQuery()->getResult();
+		$data=[$nbTot, $questions];
+	return $data;
 
 	}
-	public function getNbQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin)
-	{ 
-			$qb = $this->createQueryBuilder('a');
-			
-		
-		
-					
-			$qb->where('a.id>0'); //c'est bateau, mais après ça me permet de mettre uniquement des andWhere et d'éviter trop de conditions.
-			if($valid!=4){
-				$qb->andWhere('a.valid = :valid')
-				->setParameter('valid', $valid);	
-			}
-			if($error!=2) { 
-				$qb->andWhere('a.error= :error')
-				->setParameter('error', $error);	
-			}
-			if($diff!=0){
-				$qb->andWhere('a.diff = :diff')
-				->setParameter('diff', $diff);	
-			}
-			if($dom1!="none"){
-					$qb->andWhere('a.dom1 = :dom1')
-					->setParameter('dom1', $dom1);
-				}
-			elseif($dom1=="none"){
-				if($game!="none"){
-					if($game=="MasterQuizz"){
-					$qb->andWhere($qb->expr()->orX(
-					$qb->expr()->eq('a.dom1', ':dom1a'),
-					$qb->expr()->eq('a.dom1', ':dom1b'),
-					$qb->expr()->eq('a.dom1', ':dom1c'),
-					$qb->expr()->eq('a.dom1', ':dom1d'),
-					$qb->expr()->eq('a.dom1', ':dom1e'),
-					$qb->expr()->eq('a.dom1', ':dom1f')				
-					));
-					$qb->setParameter('dom1a', "Histoire")
-					   ->setParameter('dom1b', "Divers")
-					   ->setParameter('dom1d', "Sports et loisirs")
-					   ->setParameter('dom1e', "Sciences et nature")
-					   ->setParameter('dom1c', "Géographie")					   
-					  ->setParameter('dom1f', "Arts et Littérature");
-					}
-					elseif($game=="Quizz Média"){
-					$qb->andWhere('a.dom1 = :dom1a')
-					->setParameter('dom1a', "FfQuizz");
-					$qb->orWhere('a.dom1 = :dom1b')
-					->setParameter('dom1b', "LxQuizz");
-					$qb->orWhere('a.dom1 = :dom1c')
-					->setParameter('dom1c', "McQuizz");
-					$qb->orWhere('a.dom1 = :dom1d')
-					->setParameter('dom1d', "ArQuizz");
-					}
-					elseif($game=="Autre"){
-					$qb->andWhere('a.dom1 != :dom1a')
-					->setParameter('dom1a', "Histoire");
-					$qb->andWhere('a.dom1 != :dom1b')
-					->setParameter('dom1b', "Géographie");
-					$qb->andWhere('a.dom1 != :dom1c')
-					->setParameter('dom1c', "Divers");
-					$qb->andWhere('a.dom1 != :dom1d')
-					->setParameter('dom1d', "Sports et loisirs");
-					$qb->andWhere('a.dom1 != :dom1e')
-					->setParameter('dom1e', "Sciences et nature");
-					$qb->andWhere('a.dom1 != :dom1f')
-					->setParameter('dom1f', "Arts et Littérature");
-					$qb->andWhere('a.dom1 != :dom1g')
-					->setParameter('dom1g', "FfQuizz");
-					$qb->andWhere('a.dom1 != :dom1h')
-					->setParameter('dom1h', "LxQuizz");
-					$qb->andWhere('a.dom1 != :dom1i')
-					->setParameter('dom1i', "McQuizz");
-					$qb->andWhere('a.dom1 != :dom1j')
-					->setParameter('dom1j', "ArQuizz");
-					}
-					
-				}
-			}
-			if($theme!="none"){
-					$qb->andWhere('a.theme = :theme')
-					->setParameter('theme', $theme);
-			}
-		
-			$qb->orderBy('a.'.$crit, $sens)
-				->setFirstResult($nbmin-1);
-			if($nbdeQ!=0) {
-				$qb->setMaxResults($nbdeQ);
-			}
-		
-		$qb2=$qb->getQuery()->getResult();
-		$nbQ=count($qb2);
-		return $nbQ;
-	}
+
   public function getStatsQ()
     {
 	// Stats génrales
@@ -799,7 +712,6 @@ class QuestionRepository extends EntityRepository
 	}
 	public function testDoublon($bdd, $crit, $chaine)// elle est demandé pour entrée des questions
 	{
-		$data=[];
 		//pour l'instant bdd sera toujours bddqcm
 		$question=$this->_em->createQueryBuilder();
 			if($bdd=="bddqcm"){

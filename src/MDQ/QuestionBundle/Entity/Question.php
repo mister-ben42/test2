@@ -939,25 +939,6 @@ class Question
         return $this->taberror;
     }
 	
-	public function addUser_error(\MDQ\UserBundle\Entity\ScUser $ScUser)
-	{
-	// Ici, on utilise l'ArrayCollection vraiment comme un tableau
-		$this->users_error[] = $ScUser;
-		return $this;
-	}
-
-	public function removeUser_error(\MDQ\UserBundle\Entity\ScUser $ScUser)
-	{
-		// Ici on utilise une méthode de l'ArrayCollection, pour supprimer la catégorie en argument
-		$this->users_error->removeElement($ScUser);
-	}
-
-	  // Notez le pluriel, on récupère une liste de catégories ici !
-	public function getUsers_error()
-	{
-		return $this->users_error;
-	}
-	  
     /**
      * Set valid
      *

@@ -20,8 +20,6 @@ services:
     mdq_user.jeton_serv:         
         class: MDQ\UserBundle\Services\JetonServ
         arguments: [@mdq_admin.repository.gestion]
-   
-   
 
-        
-         
+
+

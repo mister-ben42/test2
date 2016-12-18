@@ -7,11 +7,10 @@ use MDQ\UserBundle\Entity\User;
 
 class QuizzServ
 {    
-       	private $jetonServ;       	
+       	    	
 	private $gestion;
  
-	public function __construct($jetonServ,GestionRepository $gestionRepository) {
-	  $this->jetonServ = $jetonServ;
+	public function __construct(GestionRepository $gestionRepository) {
 	  $this->gestionRepository=$gestionRepository;
 	  $this->gestion=$gestionRepository->findOneById(1);
 	} 

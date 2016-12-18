@@ -92,10 +92,7 @@ class Theme
      */
     private $prct5;  
     
-      /**
-     * @ORM\OneToMany(targetEntity="Dom3", mappedBy="theme", cascade={"remove"})
-     */
-    private $dom3map;
+ 
     
 	public function __construct()
 	{
@@ -107,7 +104,6 @@ class Theme
 	$this->prct3=0;
 	$this->prct4=0;
 	$this->prct5=0;
-	$this->dom3map = new ArrayCollection();
 	}
     /**
      * Get id
@@ -349,24 +345,6 @@ class Theme
         return $this->prct5;
     }
     
-        /**
-     * Add dom3map
-     *
-     * @param MDQ\QuestionBundle\Entity\Dom3 $dom3map
-     */
-    public function adddom3map(\MDQ\QuestionBundle\Entity\Dom3 $dom3map)
-    {
-        $dom3map->setTheme($this);
-        $this->dom3map[]= $dom3map;
-    }
-    /**
-     * Get dom3map
-     *
-     * @return Doctrine\Common\Collections\Collection
-     */
-    public function getdom3map()
-    {
-        return $this->dom3map;
-    }
+
     
 }

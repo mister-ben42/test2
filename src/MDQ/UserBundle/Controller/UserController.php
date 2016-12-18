@@ -18,8 +18,7 @@ class UserController extends Controller
 		if ($user_connect===$user && $user_connect->getId()==$user->getId()) {
 			return $this->redirect($this->generateUrl('mdquser_profileUAuto'));
         }
-		$session = $this->getRequest()->getSession();
-		$em=$this->getDoctrine()->getManager();
+				$em=$this->getDoctrine()->getManager();
 		$derPartieUser=$em->getRepository('MDQQuizzBundle:PartieQuizz')
 						  ->recupDerPartieUser($user->getId());
 		return $this->render('MDQUserBundle:User:profileU.html.twig', array(

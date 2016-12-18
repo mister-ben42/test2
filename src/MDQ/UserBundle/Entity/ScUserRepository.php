@@ -358,7 +358,7 @@ class ScUserRepository extends EntityRepository
 	public function majBddScQ($scUser, $game, $dom1, $br)
 	{
 
-		if($game=='MasterQuizz'){ScUserRepository::majStatGame($scUser, $game, $br);}
+		if($game=='MasterQuizz'){$this->majStatGame($scUser, $game, $br);}
 		$newnbQ=$this->majNbQ($scUser,$dom1);			
 		$newnbBr=$this->majNbBr($scUser,$dom1,$br);
 		$this->majPrctBr($scUser, $dom1, $newnbQ, $newnbBr);
@@ -370,7 +370,7 @@ class ScUserRepository extends EntityRepository
 	      if($rep==$bRep){$br=1;}
 	      else{$br=0;}
 
-		if($game=='MasterQuizz'){ScUserRepository::majStatGame($scUser, $game, $br);}
+		if($game=='MasterQuizz'){$this->majStatGame($scUser, $game, $br);}
 		$newnbQ=$this->majNbQ($scUser,$dom1);			
 		$newnbBr=ScUserRepository::majNbBr($scUser,$dom1,$br);
 		ScUserRepository::majPrctBr($scUser, $dom1, $newnbQ, $newnbBr);

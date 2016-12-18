@@ -92,14 +92,14 @@ class AjaxQuizz
 	}
 	public function majSignalError(Question $question, ScUser $scUser, $taberror)
 	{
-				$users_error=$question->getUsers_error();
-				$tabIdUser_error=[];
+				$users_error=$question->getUsersError();
+				$tabIdUserError=[];
 				foreach ($users_error as $scUserb)
 				{
 					$id=$scUserb->getId();
-					array_push($tabIdUser_error, $id);
+					array_push($tabIdUserError, $id);
 				}
-				if(in_array($scUser->getId(), $tabIdUser_error)!==true)
+				if(in_array($scUser->getId(), $tabIdUserError)!==true)
 				{
 					
 					$taberrorQ=$question->getTaberror();
@@ -108,7 +108,7 @@ class AjaxQuizz
 					$taberrorQ[2]=$taberrorQ[2]+$taberror[2];
 					$question->setError($question->getError()+1);
 					$question->setTaberror($taberrorQ);
-					$question->addUser_error($scUser);
+					$question->addUsersError($scUser);
 					$scUser->setNbErrorSignalTot($scUser->getNbErrorSignalTot()+1);
 					$scUser->setNbErrorSignal($scUser->getNbErrorSignal()+1);
 				}

@@ -33,7 +33,7 @@ class BotGame
 		return $score;
 	}
 	
-	public function rand_CoefQM($coefs)// tirage au sort avec applicatio de coefficient sous fore de tableau - pour partie bot.
+	public function randCoefQM($coefs)// tirage au sort avec applicatio de coefficient sous fore de tableau - pour partie bot.
 	{
 	$rang = mt_rand(1, array_sum($coefs));
 	$tot = 0;  

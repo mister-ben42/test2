@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class QaValiderRepository extends EntityRepository
 {
-	public function getQuestions($repAdmin, $diff, $dom1, $crit, $sens, $nbdeQ, $nbmin)
+	public function getQuestions($repAdmin, $diff, $dom1, $crit, $sens, $nbdeQ, $nbmin, $page)
 	{ 
 		$qb = $this->createQueryBuilder('a');						
 		$qb->where('a.id>0'); //c'est bateau, mais après ça me permet de mettre uniquement des andWhere et d'éviter trop de conditions.
@@ -36,50 +36,23 @@ class QaValiderRepository extends EntityRepository
 		if($dom1!="none"){
 			$qb->andWhere('a.dom1 = :dom1')
 			->setParameter('dom1', $dom1);
-		}		
+		}
+		$qb1=$qb;
+		$nbTot=count($qb1->getQuery()->getResult());
+		if($nbTot>$nbdeQ){$nbmin2=($nbmin+($page-1)*$nbdeQ);}
+			else{$nbmin2=$nbmin;}
+
 		$qb->orderBy('a.'.$crit, $sens)
 			->setFirstResult($nbmin-1);
 		if($nbdeQ!=0) {
 			$qb->setMaxResults($nbdeQ);
 		}
-		
-	  return $qb->getQuery()
+		$questions=$qb->getQuery()
 				->getResult();
+		$data=[$nbTot, $questions];
+	return $data;
 	}
-	public function getnbQuestions($repAdmin, $diff, $dom1, $crit, $sens, $nbdeQ, $nbmin)
-	{ 
-		$qb = $this->createQueryBuilder('a');						
-		$qb->where('a.id>0'); //c'est bateau, mais après ça me permet de mettre uniquement des andWhere et d'éviter trop de conditions.
-		if($repAdmin==0){			
-			$qb->andWhere('a.repAdmin = 0');	
-		}
-		if($repAdmin==1){			
-			$qb->andWhere('a.repAdmin>0')
-				->andWhere('a.repAdmin<10');
-		}
-		if($repAdmin==2){			
-			$qb->andWhere('a.repAdmin>10');
-		}
-		if($repAdmin==3){
-			$qb->andWhere('a.retournee>0');
-		}
-		if($diff!=0){
-			$qb->andWhere('a.diff = :diff')
-			->setParameter('diff', $diff);	
-		}
-		if($dom1!="none"){
-			$qb->andWhere('a.dom1 = :dom1')
-			->setParameter('dom1', $dom1);
-		}		
-		$qb->orderBy('a.'.$crit, $sens)
-			->setFirstResult($nbmin-1);
-		if($nbdeQ!=0) {
-			$qb->setMaxResults($nbdeQ);
-		}
-		$qb2=$qb->getQuery()->getResult();
-		$nbQ=count($qb2);
-		return $nbQ;
-	}
+
 	public function recupQaval($userId)
 	{
 		$qb = $this->createQueryBuilder('q')

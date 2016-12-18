@@ -21,8 +21,9 @@ class GestionQuestionController extends Controller
 	{
 		$em=$this->getDoctrine()->getManager();
 			
-			$questions = $em ->getRepository('MDQQuestionBundle:Question')
+			$req = $em ->getRepository('MDQQuestionBundle:Question')
 						 ->getQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin);
+			$questions=$req[1];
 			$data=array(
 			  'nbquestions' => count($questions),
 			  'valid' =>$valid,
@@ -51,15 +52,13 @@ class GestionQuestionController extends Controller
 		$tabtheme=$em->getRepository('MDQQuestionBundle:Theme')->findAll();
 		$tabmedia=['texte','image','citation','audio','citationlitt','suitelog'];
 
-			$nbQ=$em ->getRepository('MDQQuestionBundle:Question')->getNbQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin) ;
+
 			$nbpp=20;//nb de question par page
-			if($nbQ>$nbpp){$nbmin2=($nbmin+($page-1)*$nbpp);}
-			else{$nbmin2=$nbmin;}
-			$questions = $em ->getRepository('MDQQuestionBundle:Question')
-						 ->getQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbpp, $nbmin2);
-			$nbpage=ceil($nbQ/$nbpp);
+			$req = $em ->getRepository('MDQQuestionBundle:Question')
+						 ->getQuestions($error, $valid, $diff, $game, $dom1, $theme, $crit, $sens, $nbpp, $nbmin, $page);
+			$nbpage=ceil($req[0]/$nbpp);
 			$data=array(
-			  'nbquestions' => $nbQ,
+			  'nbquestions' => $req[0],
 			  'nbpage'=>$nbpage,
 			  'nbpp'=>$nbpp,
 			  'page'=>$page,
@@ -80,7 +79,7 @@ class GestionQuestionController extends Controller
 			 );
 			
 			return $this->render('MDQAdminBundle:Admin:ListForm\listFormQbdd.html.twig', array(
-			  'questions'   => $questions,			  
+			  'questions'   => $req[1],			  
 			  'adminTwig'=>$this->container->get('mdq_admin.adminTwig'),
 			  'data'=>$data,
 			 ));
@@ -227,20 +226,14 @@ class GestionQuestionController extends Controller
 				array('value'=>13,'name'=>'Retour : choisir des propositons de réponse plus pertinentes'),
 			
 			);
-		$nbQ=$em ->getRepository('MDQQuestionBundle:QaValider')
-					->getNbQuestions($repAdmin, $diff, $dom1, $crit, $sens, $nbdeQ, $nbmin)
 						 ;
 		$nbpp=20;//nb de question par page
-		if($nbQ>$nbpp)
-			{$nbmin2=($nbmin+($page-1)*$nbpp);}
-		else{$nbmin2=$nbmin;}
-		//$nbmin2=$nbmin;// A SUPPRIMER ENSUITE
-		$nbdeQ2=$nbpp;
-		$questions = $em ->getRepository('MDQQuestionBundle:QaValider')
-						 ->getQuestions($repAdmin, $diff, $dom1, $crit, $sens, $nbdeQ2, $nbmin2);
-		$nbpage=ceil($nbQ/$nbpp);
+		
+		$req = $em ->getRepository('MDQQuestionBundle:QaValider')
+						 ->getQuestions($repAdmin, $diff, $dom1, $crit, $sens, $nbpp, $nbmin2, $page);
+		$nbpage=ceil($req[0]/$nbpp);
 		$data=array(
-			  'nbquestions' => $nbQ,
+			  'nbquestions' => $req[0],
 			  'nbpage'=>$nbpage,
 			  'nbpp'=>$nbpp,
 			  'page'=>$page,
@@ -259,7 +252,7 @@ class GestionQuestionController extends Controller
 			  );
 		
 		return $this->render('MDQAdminBundle:Admin:ListForm\listFormQaval.html.twig', array(
-			  'questions'   => $questions,
+			  'questions'   => $req[1],
 			  'adminTwig'=>$this->container->get('mdq_admin.adminTwig'),
 			  'data'=>$data,
 			 ));		

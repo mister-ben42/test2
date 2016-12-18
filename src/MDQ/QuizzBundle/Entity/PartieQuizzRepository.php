@@ -118,7 +118,7 @@ class PartieQuizzRepository extends EntityRepository
 		return $qb->getQuery()->getSingleScalarResult();	
 	}
 
-	public function RecupScMoy($game, $date, $nbjr, $type_user)
+	public function recupScMoy($game, $date, $nbjr, $type_user)
 	{
 		if($date!==0){
 			$xday=$nbjr-1;
@@ -169,22 +169,7 @@ class PartieQuizzRepository extends EntityRepository
 			array_push($tabDerQ, $idQ);
 			}
 		}
-/*		if($game=="MasterQuizz")
-		{
-			$tabdom3=[]; $tabtheme=[]; $tabidQ=[];$tabdom=['x','x','x'];
-			for($numQ=1; $numQ<11; $numQ++) {
-				$dom=$this->tiragedudom($tabdom);
-				$questionRepository=$this->getEntityManager()->getRepository('MDQQuestionBundle:Question');
-				$qtire=$questionRepository->tirageduneQMq($numQ, $dom[0], $tabdom3, $tabtheme, $tabDerQ, $tabidQ);
-				$tabdom=$dom;			 
-				$tabidQ[$numQ-1]=$qtire['id'];			
-				$tabdom3[$numQ-1]=$qtire['dom3'];
-				$tabtheme[$numQ-1]=$qtire['theme'];
-			}
-			$scUser=$user->getScUser();
-			$scUser->setNbPMq($scUser->getNbPMq()+1);
-		}
-*/		
+
 		if($game=="MasterQuizz")
 		{
 		

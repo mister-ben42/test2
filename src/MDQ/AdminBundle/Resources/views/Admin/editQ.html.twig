@@ -91,10 +91,10 @@
  <div id="admin_editQ_error">
 	<p>Nombre d'erreurs singalées : {{question.error}}</p>
 	<p>Rép fausse : {{question.taberror[0]}}, Ortho : {{question.taberror[1]}}, Autre : {{question.taberror[2]}}</p>
-	{% if not question.users_error.empty %}
+	{% if not question.usersError.empty %}
 		  <p>
 			Joueurs ayant signalé une erreur : 
-			{% for scuser in question.users_error %}
+			{% for scuser in question.usersError %}
 			<a href="{{ path('mdqadmin_profileUAdmin', {'id':scuser.usermap.id}) }}">{{ scuser.usermap.username }}</a>{% if not loop.last %}, {% endif %}
 			{% endfor %}
 		  </p>
