@@ -230,7 +230,7 @@ class GestionQuestionController extends Controller
 		$nbpp=20;//nb de question par page
 		
 		$req = $em ->getRepository('MDQQuestionBundle:QaValider')
-						 ->getQuestions($repAdmin, $diff, $dom1, $crit, $sens, $nbpp, $nbmin2, $page);
+						 ->getQuestions($repAdmin, $diff, $dom1, $crit, $sens, $nbpp, $nbmin, $page);
 		$nbpage=ceil($req[0]/$nbpp);
 		$data=array(
 			  'nbquestions' => $req[0],

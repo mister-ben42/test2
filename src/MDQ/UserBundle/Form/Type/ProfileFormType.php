@@ -29,6 +29,7 @@ class ProfileFormType extends BaseType
 				'years' => range(2010,1930),
 				'empty_value' => array('year' => 'année', 'month' => 'mois', 'day' => 'jour')
 				))
+				->remove('username')
 				->add('departement', 'choice', array(
 					'choices' => array(
 					'France métropolitaine'=>array(
@@ -72,7 +73,7 @@ class ProfileFormType extends BaseType
 			//	->add('devise', 'textarea', array(
 			//		'required'=>false,
 			//	))	
-				->remove('username')	
+					
 					;
     }
 

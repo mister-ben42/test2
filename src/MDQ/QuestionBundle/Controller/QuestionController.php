@@ -6,7 +6,7 @@ namespace MDQ\QuestionBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\QuestionBundle\Entity\QaValider;
-use MDQ\QuestionBundle\Form\Type\QaValiderType;
+use MDQ\QuestionBundle\Form\Type\QuestionType;
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
 
 class QuestionController extends Controller
@@ -27,7 +27,7 @@ class QuestionController extends Controller
 **/		
 		$quest = new QaValider;
 		$quest->setAuteur($user->getScUser());
-		$form = $this->createForm(new QaValiderType(), $quest);  
+		$form = $this->createForm(new QuestionType(), $quest);  
 		if ($this->getRequest()->getMethod() == 'POST') {
 			$form->bind($this->getRequest());
 /**		// A développe rle moment opportun : tester les doublons?	
@@ -60,7 +60,7 @@ class QuestionController extends Controller
 		$idauteur=$qaval->getAuteur()->getId();		
 		$repAdmin=$qaval->getRepAdmin();
 		if($repAdmin<10 || $repAdmin>20 || $user->getId()!=$idauteur){return $this->redirect($this->generateUrl('mdquser_profileUAuto'));}// pour ne pas sélectionner par l'URL des questions validées ou refusées.
-		$form = $this->createForm(new QaValiderType(), $qaval);
+		$form = $this->createForm(new QuestionType(), $qaval);
 		$request = $this->getRequest();
 		if ($request->getMethod() == 'POST') {
 		  $form->bind($request);

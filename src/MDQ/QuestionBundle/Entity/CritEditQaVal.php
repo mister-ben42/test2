@@ -70,10 +70,11 @@ class CritEditQaVal
      */
     private $repAdmin;
 	
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -81,33 +82,11 @@ class CritEditQaVal
     }
 
     /**
-     * Set error
-     *
-     * @param boolean $error
-     * @return CritEditQ
-     */
-    public function setError($error)
-    {
-        $this->error = $error;
-
-        return $this;
-    }
-
-    /**
-     * Get error
-     *
-     * @return boolean 
-     */
-    public function getError()
-    {
-        return $this->error;
-    }
-
-    /**
      * Set diff
      *
      * @param integer $diff
-     * @return CritEditQ
+     *
+     * @return CritEditQaVal
      */
     public function setDiff($diff)
     {
@@ -119,7 +98,7 @@ class CritEditQaVal
     /**
      * Get diff
      *
-     * @return integer 
+     * @return integer
      */
     public function getDiff()
     {
@@ -130,7 +109,8 @@ class CritEditQaVal
      * Set dom1
      *
      * @param string $dom1
-     * @return CritEditQ
+     *
+     * @return CritEditQaVal
      */
     public function setDom1($dom1)
     {
@@ -142,7 +122,7 @@ class CritEditQaVal
     /**
      * Get dom1
      *
-     * @return string 
+     * @return string
      */
     public function getDom1()
     {
@@ -150,102 +130,11 @@ class CritEditQaVal
     }
 
     /**
-     * Set theme
-     *
-     * @param string $theme
-     * @return CritEditQ
-     */
-    public function setTheme($theme)
-    {
-        $this->theme = $theme;
-
-        return $this;
-    }
-
-    /**
-     * Get theme
-     *
-     * @return string 
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
-     * Set dom2
-     *
-     * @param string $dom2
-     * @return CritEditQ
-     */
-    public function setDom2($dom2)
-    {
-        $this->dom2 = $dom2;
-
-        return $this;
-    }
-
-    /**
-     * Get dom2
-     *
-     * @return string 
-     */
-    public function getDom2()
-    {
-        return $this->dom2;
-    }
-
-    /**
-     * Set dom3
-     *
-     * @param string $dom3
-     * @return CritEditQ
-     */
-    public function setDom3($dom3)
-    {
-        $this->dom3 = $dom3;
-
-        return $this;
-    }
-
-    /**
-     * Get dom3
-     *
-     * @return string 
-     */
-    public function getDom3()
-    {
-        return $this->dom3;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     * @return CritEditQ
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string 
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * Set crit
      *
      * @param string $crit
-     * @return CritEditQ
+     *
+     * @return CritEditQaVal
      */
     public function setCrit($crit)
     {
@@ -257,7 +146,7 @@ class CritEditQaVal
     /**
      * Get crit
      *
-     * @return string 
+     * @return string
      */
     public function getCrit()
     {
@@ -268,7 +157,8 @@ class CritEditQaVal
      * Set sens
      *
      * @param string $sens
-     * @return CritEditQ
+     *
+     * @return CritEditQaVal
      */
     public function setSens($sens)
     {
@@ -280,7 +170,7 @@ class CritEditQaVal
     /**
      * Get sens
      *
-     * @return string 
+     * @return string
      */
     public function getSens()
     {
@@ -291,7 +181,8 @@ class CritEditQaVal
      * Set nbdeQ
      *
      * @param integer $nbdeQ
-     * @return CritEditQ
+     *
+     * @return CritEditQaVal
      */
     public function setNbdeQ($nbdeQ)
     {
@@ -303,7 +194,7 @@ class CritEditQaVal
     /**
      * Get nbdeQ
      *
-     * @return integer 
+     * @return integer
      */
     public function getNbdeQ()
     {
@@ -314,7 +205,8 @@ class CritEditQaVal
      * Set nbmin
      *
      * @param integer $nbmin
-     * @return CritEditQ
+     *
+     * @return CritEditQaVal
      */
     public function setNbmin($nbmin)
     {
@@ -326,7 +218,7 @@ class CritEditQaVal
     /**
      * Get nbmin
      *
-     * @return integer 
+     * @return integer
      */
     public function getNbmin()
     {
@@ -334,33 +226,11 @@ class CritEditQaVal
     }
 
     /**
-     * Set valid
-     *
-     * @param integer $valid
-     * @return CritEditQ
-     */
-    public function setValid($valid)
-    {
-        $this->valid = $valid;
-
-        return $this;
-    }
-
-    /**
-     * Get valid
-     *
-     * @return integer 
-     */
-    public function getValid()
-    {
-        return $this->valid;
-    }
-
-    /**
      * Set repAdmin
      *
      * @param integer $repAdmin
-     * @return CritEditQ
+     *
+     * @return CritEditQaVal
      */
     public function setRepAdmin($repAdmin)
     {
@@ -372,7 +242,7 @@ class CritEditQaVal
     /**
      * Get repAdmin
      *
-     * @return integer 
+     * @return integer
      */
     public function getRepAdmin()
     {

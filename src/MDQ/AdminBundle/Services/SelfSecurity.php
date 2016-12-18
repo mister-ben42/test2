@@ -79,7 +79,7 @@ class SelfSecurity
 		if($blocageTot==1 && $gestion->getBlocageTot()==1 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
 		
 		elseif($user==1 && $this->securityContext->getToken()->getUser()===null){return false;}
-		elseif($user==2 && $this->securityContext->getToken()->getUser()!==null){return false;}
+		elseif($user==2 && $this->securityContext->isGranted('ROLE_USER')){return false;}
 		
 		elseif($inscription==1 && $gestion->getInscription()==0 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
 		elseif($propQ==1 && $gestion->getPropQ()==0 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
