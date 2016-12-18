@@ -2,7 +2,7 @@
     "name": "benoit/monde-du-quizz",
     "license": "proprietary",
     "type": "project",
-    "description": "Tout ce qu'il faut pour mon site",
+    "description": "Site de Quizz et de culture Générale",
     "autoload": {
         "psr-4": {
             "": "src/"
