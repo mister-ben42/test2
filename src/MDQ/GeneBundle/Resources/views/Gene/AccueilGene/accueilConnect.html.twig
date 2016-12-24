@@ -3,11 +3,11 @@
 	  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}	  	
 		<div id="accueil_connexion_titre"><div id="pseudo">{{ app.user.username }}</div></div>
 		<a href="{{ path('mdquser_profileUAuto') }}"> <div class="list_connexion">Mon compte</div></a>
-		<div class="list_connexion">{{app.user.scuser.nbJdayMq}} <img src="../bundles/GeneBundle/Jeton.png" alt="jeton" width="13px" style="display:inline-block"></div>
+		<div class="list_connexion">{{app.user.scuser.nbJdayMq}} <img src="../bundles/mdqgene/images/Jeton.png" alt="jeton" width="13px" style="display:inline-block"></div>
 		<div id="deconnexion"><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></div>	
 		<div id="accueil_connexion_date">{{datejour|date('d/m/Y')}}</div>
 		{% else %}
-		<div id="accueil_connexion_titre"><img src="../bundles/GeneBundle/Nonconnecté.jpg" alt="connexion" width="150px"></div>	
+		<div id="accueil_connexion_titre"><img src="../bundles/mdqgene/images/Nonconnecté.jpg" alt="connexion" width="150px"></div>	
 		<div id="accueil_connexion_date">{{datejour|date('d/m/Y')}}</div>
 		{% if gestion.BlocageTot!=1 %}<div id="bloc_connextion_bouton">Se connecter</div>
 				<div id="inscrire">

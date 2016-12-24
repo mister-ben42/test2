@@ -28,4 +28,4 @@ fos_user_security_login:
     
 fos_user_registration_register:
     path:      /newToMDQ
-    defaults:  { _controller: FOSUserBundle:Registration:register }
+    defaults:  { _controller: FOSUserBundle:Registration:register, _method: POST }

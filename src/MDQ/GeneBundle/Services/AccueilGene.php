@@ -91,43 +91,43 @@ class AccueilGene
 	{
 	      
 	      if($type=="Roi"){		    
-		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/roi2.png');}
-		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/reine3.png');}		     
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/mdqgene/images/roi2.png');}
+		    else{$route=$this->assets->getAssetUrl('bundles/mdqgene/images/reine3.png');}		     
 		    $txt="src=".$route;
 	      }
 	      elseif($type=="Savant"){		    
-		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/savant-H.png');}
-		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/savant-F.png');}		     
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/mdqgene/images/savant-H.png');}
+		    else{$route=$this->assets->getAssetUrl('bundles/mdqgene/images/savant-F.png');}		     
 		    $txt="src=".$route;
 	      }	      	      
 	      elseif($type=="Musicien"){		    
-		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/virtuose-H.png');}
-		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/virtuose-F.png');}		     
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/mdqgene/images/virtuose-H.png');}
+		    else{$route=$this->assets->getAssetUrl('bundles/mdqgene/images/virtuose-F.png');}		     
 		    $txt="src=".$route;
 	      }	
 	      elseif($type=="Peintre"){		    
-		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/peintre-H.png');}
-		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/peintre-F.png');}		     
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/mdqgene/images/peintre-H.png');}
+		    else{$route=$this->assets->getAssetUrl('bundles/mdqgene/images/peintre-F.png');}		     
 		    $txt="src=".$route;
 	      }
 	      elseif($type=="Ecolo"){		    
-		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/nature-H.png');}
-		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/nature-F.png');}		     
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/mdqgene/images/nature-H.png');}
+		    else{$route=$this->assets->getAssetUrl('bundles/mdqgene/images/nature-F.png');}		     
 		    $txt="src=".$route;
 	      }	      
 	      elseif($type=="Globe-T"){		    
-		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/globeT-H2.png');}
-		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/globeT-F.png');}		     
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/mdqgene/images/globeT-H2.png');}
+		    else{$route=$this->assets->getAssetUrl('bundles/mdqgene/images/globeT-F.png');}		     
 		    $txt="src=".$route;
 	      }	      
 	      elseif($type=="Paparazzi"){		    
-		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/paparazzi-H.png');}
-		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/paparazzi-F.png');}		     
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/mdqgene/images/paparazzi-H.png');}
+		    else{$route=$this->assets->getAssetUrl('bundles/mdqgene/images/paparazzi-F.png');}		     
 		    $txt="src=".$route;
 	      }
 	      elseif($type=="Capitaine"){		    
-		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/capitaine-H.png');}
-		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/capitaine-F.png');}		     
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/mdqgene/images/capitaine-H.png');}
+		    else{$route=$this->assets->getAssetUrl('bundles/mdqgene/images/capitaine-F.png');}		     
 		    $txt="src=".$route;
 	      }
 	      if($id==""){$txt=$txt." style=opacity:0.4";}

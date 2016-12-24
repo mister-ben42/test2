@@ -7,7 +7,7 @@
     <meta name="meta" http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 	{% endblock %}
-	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/GeneBundle/faviconMDQ.png') }}" /> 
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('bundles/mdqgene/images/faviconMDQ.png') }}" /> 
     <title>{% block title %}MDQ - Le Monde du Quizz{% endblock %}</title>
 
     {% block stylesheets %}      
@@ -25,7 +25,7 @@
 	{% block haut_page %}	
 	<div id="haut_page">
 	<div id="bloc_titre">
-	  <a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/MDQ3b.png') }}" alt="titre" width="100%"></a>
+	  <a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/mdqgene/images/MDQ3b.png') }}" alt="titre" width="100%"></a>
 	</div>
 	{% block connexion %}
 	{% endblock %}

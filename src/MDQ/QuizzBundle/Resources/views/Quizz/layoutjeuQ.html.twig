@@ -4,7 +4,7 @@
 	{% block haut_page %}	
 	<div id="haut_page">
 	<div id="bloc_titre">
-	  <img src="{{ asset('bundles/GeneBundle/MDQ3b.png') }}" alt="titre" width="100%">
+	  <img src="{{ asset('bundles/mdqgene/images/MDQ3b.png') }}" alt="titre" width="100%">
 	</div>
 	<div id="jeu_bloc_score">
 		<div id="jeu_bloc_score_1">
@@ -12,7 +12,7 @@
 		<div id="jeu_bloc_score_score">0</div>
 		<div id="modifScore"></div>
 		</div>
-		<div id="jeu_bloc_timer"><img src="../../../bundles/GeneBundle/maboulerouge.png" alt="brouge" width="100%"><img id="jeu_img_boule_noire" src="../../../bundles/GeneBundle/maboulenoire.png" alt="bnoire" width="100%"><div id="timer"></div></div>
+		<div id="jeu_bloc_timer"><img src="../../../bundles/mdqgene/images/maboulerouge.png" alt="brouge" width="100%"><img id="jeu_img_boule_noire" src="../../../bundles/mdqgene/images/maboulenoire.png" alt="bnoire" width="100%"><div id="timer"></div></div>
 	</div>
 	</div>
 	{% endblock %}
@@ -20,24 +20,24 @@
 {% block body %}
       {% block audio %}
 	    <audio id="son_fondjeu" style="display: none;" >
-			<source src="{{ asset('bundles/QuizzBundle/sons/fondMq.mp3') }}" />
-			<source src="{{ asset('bundles/QuizzBundle/sons/fondMq.ogg') }}" />
+			<source src="{{ asset('bundles/mdqquizz/sons/fondMq.mp3') }}" />
+			<source src="{{ asset('bundles/mdqquizz/sons/fondMq.ogg') }}" />
 	    </audio>
 	    <audio id="son_clicvalid" style="display: none;">
-			<source src="{{ asset('bundles/QuizzBundle/sons/valid8.mp3') }}" />
-			<source src="{{ asset('bundles/QuizzBundle/sons/valid8.ogg') }}" />
+			<source src="{{ asset('bundles/mdqquizz/sons/valid8.mp3') }}" />
+			<source src="{{ asset('bundles/mdqquizz/sons/valid8.ogg') }}" />
 	    </audio>
 	    <audio id="son_fintps" style="display: none;">
-			<source src="{{ asset('bundles/QuizzBundle/sons/fintpsMq.mp3') }}" />
-			<source src="{{ asset('bundles/QuizzBundle/sons/fintpsMq.ogg') }}" />
+			<source src="{{ asset('bundles/mdqquizz/sons/fintpsMq.mp3') }}" />
+			<source src="{{ asset('bundles/mdqquizz/sons/fintpsMq.ogg') }}" />
 	    </audio>	
 	    <audio id="son_echec" style="display: none;">
-			<source src="{{ asset('bundles/QuizzBundle/sons/echecMq.mp3') }}" />
-			<source src="{{ asset('bundles/QuizzBundle/sons/echecMq.ogg') }}" />
+			<source src="{{ asset('bundles/mdqquizz/sons/echecMq.mp3') }}" />
+			<source src="{{ asset('bundles/mdqquizz/sons/echecMq.ogg') }}" />
 	    </audio>
 	    <audio id="son_succes" style="display: none;">
-			<source src="{{ asset('bundles/QuizzBundle/sons/succesMq.mp3') }}" />
-			<source src="{{ asset('bundles/QuizzBundle/sons/succesMq.ogg') }}" />
+			<source src="{{ asset('bundles/mdqquizz/sons/succesMq.mp3') }}" />
+			<source src="{{ asset('bundles/mdqquizz/sons/succesMq.ogg') }}" />
 	    </audio>				
       {% endblock %}
       <div id="marge_avt_bloc_question"></div>
@@ -52,10 +52,10 @@
 		--><div class="bloc_reponse"><div id="rep4"></div></div>
 	</div>
 		<div id="jeu_bloc_error_volume">
-	{% if app.user.AllowError==1 and signalE==1 or is_granted('ROLE_ADMIN') %} <div id="jeu_bloc_error"><img src="{{asset('bundles/GeneBundle/maboulejaune.png')}}" alt="bjaune" width="15px" title="Signaler une erreur"></div> {% endif %}
-	<div id="quizz_volume"><img src="{{asset('bundles/QuizzBundle/vol1.png')}}" alt="vol1" width="25px"></div>
+	{% if app.user.AllowError==1 and signalE==1 or is_granted('ROLE_ADMIN') %} <div id="jeu_bloc_error"><img src="{{asset('bundles/mdqgene/images/maboulejaune.png')}}" alt="bjaune" width="15px" title="Signaler une erreur"></div> {% endif %}
+	<div id="quizz_volume"><img src="{{asset('bundles/mdqquizz/images/vol1.png')}}" alt="vol1" width="25px"></div>
 	</div>
-	<div id="jeu_bloc_bloc_valid"><div id="jeu_bloc_valid"><img src="{{asset('bundles/GeneBundle/buttonvalidMq.png')}}" alt="valider" width="100%" draggable='false' ondragstart="return false;"></div></div>
+	<div id="jeu_bloc_bloc_valid"><div id="jeu_bloc_valid"><img src="{{asset('bundles/mdqgene/images/buttonvalidMq.png')}}" alt="valider" width="100%" draggable='false' ondragstart="return false;"></div></div>
 
 	{% if app.user.AllowError==1 and signalE==1 or is_granted('ROLE_ADMIN') %}
 	<div id="jeu_bloc_bloc_precise_error"><div id="jeu_bloc_precise_error">
@@ -78,6 +78,6 @@
   
  {% block javascripts %}
 	<script	src="{{ asset('bundles/jquery.js') }}"></script>
-	<script	src="{{ asset('bundles/QuizzBundle/jeuquizz2.js') }}"></script>
+	<script	src="{{ asset('bundles/mdqquizz/js/jeuquizz2.js') }}"></script>
 
 {% endblock %}

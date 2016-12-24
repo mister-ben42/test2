@@ -7,9 +7,11 @@
 {% endblock %}
 
 {% block mdqquestion_body %}
-	<div id="flash_message">Reufs : Une question identique a déjà été proposée récemment.
-		<div id="flash_message_croix">x</div>
-	</div>
+	<div id="bloc_flash_message"><div id="flash_message">	  
+	  <strong>Refus : Une question identique a déjà été proposée récemment.</strong>	
+	<div id="flash_message_croix">x</div>
+	</div></div>
+	
 	<div id="bloc_ajoutQ" class="bloc">
 {% if repAdmin is not defined %}<div class="titre_bloc">Proposer une question</div>
 {% else %}<div class="titre_bloc">Modifier une question</div>
@@ -139,7 +141,7 @@
 {% endblock %}
  {% block javascripts %}
 	<script	src="{{ asset('bundles/jquery.js') }}"></script>
-	<script	src="{{ asset('bundles/UserBundle/user.js') }}"></script>
+	<script	src="{{ asset('bundles/mdquser/js/user.js') }}"></script>
 
 {% endblock %}
 

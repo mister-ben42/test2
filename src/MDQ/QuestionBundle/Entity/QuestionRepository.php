@@ -541,7 +541,7 @@ class QuestionRepository extends EntityRepository
 
 	public function tiragePartieMq($tabDerP)
 	{
-		$tabdom3=[]; $tabtheme=[]; $tabidQ=[];$tabdom=['x','x','x']; $tabId=[];
+		$tabdom3=[]; $tabtheme=[]; $tabidQ=[];$tabdom=['x','x','x']; 
 		$tabdiff=[1,2,2,3,3,3,4,4,5,5];	
 			$questions=$this->_em->createQueryBuilder();
 			$questions->select('q.id, q.dom3, q.theme, q.diff, q.dom1')
@@ -582,7 +582,7 @@ class QuestionRepository extends EntityRepository
 	}
 	public function tiragePartieQM($tabDerP, $game)
 	{
-		$tabdom3=[]; $tabtheme=['x','x']; $tabidQ=[];$tabId=[];$tabMedia=[]; $falseGame=false;
+		$tabdom3=[]; $tabtheme=['x','x']; $tabidQ=[];$tabMedia=[]; $falseGame=false;
 		$tabdiffTv=[1,1,3,3,3,3,5,5];
 		$tabdiffFf=[1,3,3,3,4,4,5,5];
 		$tabdiffLx=[3,3,3,4,4,4,5,5];

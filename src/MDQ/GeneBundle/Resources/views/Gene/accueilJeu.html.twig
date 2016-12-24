@@ -17,22 +17,22 @@
 	</div></div>
 	<div id="accueil_jeu_Mq" class="bloc accueil_jeu_bloc">
 	<div class="accueil_jeu_bloc_logo">
-	  <div class="accueil_jeu_logo"><img src="../bundles/GeneBundle/GrosLogoMq.png" alt="titreMQ" width="100%"></div>	
+	  <div class="accueil_jeu_logo"><img src="../bundles/mdqgene/images/GrosLogoMq.png" alt="titreMQ" width="100%"></div>	
 	</div>	
 	<div id="accueil_jeu_bloc_boutonGo"><div id="accueil_jeu_boutonGo">
-	 <a {{accueilJServ.testAccessAJ("Mq", app.user)}} ><strong class={{accueilJServ.selectFlash("Mq", app.user)}}> <img src="../bundles/GeneBundle/LogoMqGo.png" alt="titre" width="100%"> </strong></a>
+	 <a {{accueilJServ.testAccessAJ("Mq", app.user)}} ><strong class={{accueilJServ.selectFlash("Mq", app.user)}}> <img src="../bundles/mdqgene/images/LogoMqGo.png" alt="titre" width="100%"> </strong></a>
 	
 	</div> </div></div>
 	<div class="bloc accueil_jeu_bloc">
-	   <div class="accueil_jeu_bloc_logo"><div class="accueil_jeu_logo"><img src="../bundles/GeneBundle/GrosLogoQm.png" alt="titreQM" width="100%"></div></div>
+	   <div class="accueil_jeu_bloc_logo"><div class="accueil_jeu_logo"><img src="../bundles/mdqgene/images/GrosLogoQm.png" alt="titreQM" width="100%"></div></div>
 	  <div id="accueil_jeu_bloc_QnF">
 	 <div id="accueil_jeu_bloc_QnF_1">
-	 <a {{accueilJServ.testAccessAJ("Ar", app.user)}} ><div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Tv"><strong class={{accueilJServ.selectFlash("Ar", app.user)}}> <img src="../bundles/GeneBundle/GrosLogoAr.png" alt="ArQuizz" width="100%"> </strong></div></a>
-	  <a {{accueilJServ.testAccessAJ("Ff", app.user)}} ><div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Tv"><strong class={{accueilJServ.selectFlash("Ff", app.user)}}> <img src="../bundles/GeneBundle/GrosLogoFf3.png" alt="FfQuizz" width="100%"> </strong></div></a>
+	 <a {{accueilJServ.testAccessAJ("Ar", app.user)}} ><div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Tv"><strong class={{accueilJServ.selectFlash("Ar", app.user)}}> <img src="../bundles/mdqgene/images/GrosLogoAr.png" alt="ArQuizz" width="100%"> </strong></div></a>
+	  <a {{accueilJServ.testAccessAJ("Ff", app.user)}} ><div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Tv"><strong class={{accueilJServ.selectFlash("Ff", app.user)}}> <img src="../bundles/mdqgene/images/GrosLogoFf3.png" alt="FfQuizz" width="100%"> </strong></div></a>
 	 </div>
 	 <div id="accueil_jeu_bloc_QnF_2">
-	 <a {{accueilJServ.testAccessAJ("Wz", app.user)}} ><div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Tv"><strong class={{accueilJServ.selectFlash("Wz", app.user)}}> <img src="../bundles/GeneBundle/GrosLogoWz.png" alt="WzQuizz" width="100%"> </strong></div></a>
-	 <a {{accueilJServ.testAccessAJ("Lx", app.user)}} ><div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Tv"><strong class={{accueilJServ.selectFlash("Lx", app.user)}}> <img src="../bundles/GeneBundle/GrosLogoLx.png" alt="LxQuizz" width="100%"> </strong></div></a>
+	 <a {{accueilJServ.testAccessAJ("Wz", app.user)}} ><div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Tv"><strong class={{accueilJServ.selectFlash("Wz", app.user)}}> <img src="../bundles/mdqgene/images/GrosLogoWz.png" alt="WzQuizz" width="100%"> </strong></div></a>
+	 <a {{accueilJServ.testAccessAJ("Lx", app.user)}} ><div class="accueil_jeu_QnF" id="accueil_jeu_QnF_Tv"><strong class={{accueilJServ.selectFlash("Lx", app.user)}}> <img src="../bundles/mdqgene/images/GrosLogoLx.png" alt="LxQuizz" width="100%"> </strong></div></a>
 	  </div>
 	
 	  </div>
@@ -43,7 +43,7 @@
 	<div id="accueil_jeu_bloc_menu">
 	<div class="bloc_menu">
 	  <ul>
-	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png') }}" alt="bjaune" width="20px">Accueil</a></li>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/mdqgene/images/petiteboulejaune.png') }}" alt="bjaune" width="20px">Accueil</a></li>
 		</ul>
 	</div>
 	</div>
@@ -54,6 +54,6 @@
 	
 {% block javascripts %}
 	<script	src="{{ asset('bundles/jquery.js') }}"></script>
-	<script	src="{{ asset('bundles/GeneBundle/gene.js') }}"></script>
+	<script	src="{{ asset('bundles/mdqgene/js/gene.js') }}"></script>
 
 {% endblock %}

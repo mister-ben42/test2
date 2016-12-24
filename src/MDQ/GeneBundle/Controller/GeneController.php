@@ -133,15 +133,13 @@ class GeneController extends Controller
 		if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {// ca ca marche.
 			$id_connect = $this->container->get('security.token_storage')->getToken()->getUser()->getScUser()->getId();
 		}
-		$highScServ = $this->container->get('mdq_gene.services');
-		$data=$highScServ->editTxt($crit);
-		if ($data['crit']=="none") {return $this->redirect($this->generateUrl('mdqgene_accueilHighScore'));}		
-		$em=$this->getDoctrine()->getManager();
-		$highScoreTous=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,1,0);
+		$data=$this->container->get('mdq_gene.services')->editTxt($crit);
+		if ($data['crit']=="none") {return $this->redirect($this->generateUrl('mdqgene_accueilHighScore'));}
+		$highScoreTous=$this->getDoctrine()->getManager()->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,1,0);
 		$nbHighScore=count($highScoreTous);
-		if($id!=0){$page=$highScServ->defPage($id, $highScoreTous, $nbparPage);}
-		$pagi=$highScServ->pagination($nbparPage, $nbHighScore, $page);
-		$highScores=$em->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,$page,$nbparPage);
+		if($id!=0){$page=$this->container->get('mdq_gene.services')->defPage($id, $highScoreTous, $nbparPage);}
+		$pagi=$this->container->get('mdq_gene.services')->pagination($nbparPage, $nbHighScore, $page);
+		$highScores=$this->getDoctrine()->getManager()->getRepository('MDQUserBundle:ScUser')->recupHighScore($crit,$page,$nbparPage);
 		      return $this->render('MDQGeneBundle:Gene:HighScore/'.$data['nomPage'].'.html.twig', array(
 		      'scusers' => $highScores,
 		      'pagi' => $pagi,

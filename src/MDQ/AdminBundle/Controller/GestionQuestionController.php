@@ -265,10 +265,8 @@ class GestionQuestionController extends Controller
 	}
 	public function insertQaValajaxAction(Request $request)
 	{// Qd Qaval est insérée dans la bdd
-		if($request->isXmlHttpRequest())
-		{			
-
-			if($request->request->get('idQ')!==null && $request->request->get('intitule')!==null && $request->request->get('brep')!==null)
+		$data='error';
+			if($request->isXmlHttpRequest() && $request->request->get('idQ')!==null && $request->request->get('intitule')!==null && $request->request->get('brep')!==null)
 			{
 				$em = $this->getDoctrine()->getManager();
 				// avant je vais tester si cette question existe déjà dans la Bdd
@@ -279,22 +277,16 @@ class GestionQuestionController extends Controller
 				$datecreate=$qaval->getDatecreate();
 				$question= new Question();
 				$question=$this->container->get('mdq_admin.gestionQ')->inserQaval($question, $request, $datecreate, $qaval->getAuteur());
-				$em->persist($question);
-				
 				$qaval->setRepAdmin(100);
 				$qaval->setRetournee(0);
 				$auteur=$qaval->getAuteur();
 				$auteur->setNbQValid($auteur->getNbQvalid()+1);
 				//Ajouter une pertir Qnf à l'auteur concerné.
 				$auteur->setNbJQnF($auteur->getNbJQnF()+1);
-				$em->persist($auteur);
-				$em->persist($qaval);
+				$em->persist($auteur, $question, $qaval);
 				$em->flush();
 			$data='ok';
-			return new JsonResponse($data);
 			}
-		}
-		$data='error';
 		return new JsonResponse($data);  
 	}
 

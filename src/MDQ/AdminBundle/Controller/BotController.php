@@ -21,6 +21,18 @@ class BotController extends Controller
 		if($nbBots>$nbBotsSelect){$nbBots=$nbBotsSelect;}
 		$botsSelects=$em->getRepository('MDQUserBundle:User')
 						 ->getBots($nbBots,$nbBotsSelect,$botsSelects2);
+		
+		$tabParties=$this->execBotGame($botsSelects, $type);
+		
+			$em->flush();
+		return $this->render('MDQAdminBundle:Admin:botPartie.html.twig', array(
+			'Parties' => $tabParties,
+			'Bots2'=> $botsSelects2,
+			'nbBotsSelect'=>$nbBotsSelect,
+		));
+	}
+	private function execBotGame($botsSelects, $type)
+	{
 		$tabParties=[];$j=0;
 		foreach($botsSelects as $bot)
 		{
@@ -38,15 +50,9 @@ class BotController extends Controller
 				$j++;	
 			}
 		}
-		
-			$em->flush();
-		return $this->render('MDQAdminBundle:Admin:botPartie.html.twig', array(
-			'Parties' => $tabParties,
-			'Bots2'=> $botsSelects2,
-			'nbBotsSelect'=>$nbBotsSelect,
-		));
+		return $tabParties;
+	
 	}
-
 	private function botgameMq(User $bot)
 	{
 			$em=$this->getDoctrine()->getManager();

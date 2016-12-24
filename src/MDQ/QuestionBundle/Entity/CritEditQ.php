@@ -234,3 +234,4 @@ class CritEditQ extends CritEditQaVal
         return $this->type;
     }
 }
+

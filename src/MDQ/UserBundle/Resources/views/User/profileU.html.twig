@@ -148,7 +148,7 @@
 		<div class="user_stats_titre">Quizz du Capitaine</div>
 			<div id="user_stats_QnF_bloc1">
 				<div id="user_stats_QnF_TF">
-					<img src={{ asset('bundles/GeneBundle/LogoScCap.png') }} alt="Captain's Quizz" width="170px">
+					<img src={{ asset('bundles/mdqgene/images/LogoScCap.png') }} alt="Captain's Quizz" width="170px">
 					<div class="user_stats_QnF_col_line">
 						<span class="user_stats_QnF_crit">Score du jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayCq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayCq|chgeNull}}</span></a>
 					</div>
@@ -159,7 +159,7 @@
 			</div>
 			<div id="user_stats_QnF_bloc2">
 			<div class="user_stats_QnF_col">
-				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzAr2.png') }} alt="Art" width="120px"></div>
+				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/mdqgene/images/LogoQuizzAr2.png') }} alt="Art" width="120px"></div>
 				<div class="user_stats_QnF_col_line">
 					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayAr', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayAr|chgeNull}}</span></a>
 				</div>
@@ -171,7 +171,7 @@
 				</div>
 			</div>
 			<div class="user_stats_QnF_col">
-				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzFf2.png') }} alt="Nature" width="120px"></div>
+				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/mdqgene/images/LogoQuizzFf2.png') }} alt="Nature" width="120px"></div>
 				<div class="user_stats_QnF_col_line">
 					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayFf', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayFf|chgeNull}}</span></a>
 				</div>
@@ -183,7 +183,7 @@
 				</div>
 				</div>
 			<div class="user_stats_QnF_col">
-				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzWz2.png') }} alt="Wouzou" width="120px"></div>
+				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/mdqgene/images/LogoQuizzWz2.png') }} alt="Wouzou" width="120px"></div>
 				<div class="user_stats_QnF_col_line">
 					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayWz', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayWz|chgeNull}}</span></a>
 				</div>
@@ -195,7 +195,7 @@
 				</div>
 			</div>
 			<div class="user_stats_QnF_col">
-				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzLx2.png') }} alt="Lieux" width="120px"></div>
+				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/mdqgene/images/LogoQuizzLx2.png') }} alt="Lieux" width="120px"></div>
 				<div class="user_stats_QnF_col_line">
 					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayLx', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayLx|chgeNull}}</span></a>
 				</div>
@@ -233,8 +233,8 @@
 {% block user_menu %}
 	<div class="bloc_menu">
 	  <ul>
-	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulejaune.png')}}" alt="bjaune" width="20px">Accueil</a></li>
-	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/GeneBundle/petiteboulebleue.png')}}" alt="bbleue" width="20px">Retour</a></li>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/mdqgene/images/petiteboulejaune.png')}}" alt="bjaune" width="20px">Accueil</a></li>
+	  <li><a href="{{ path('mdqgene_accueil') }}"><img src="{{ asset('bundles/mdqgene/images/petiteboulebleue.png')}}" alt="bbleue" width="20px">Retour</a></li>
 
 	  </ul>
 	</div>
@@ -242,7 +242,7 @@
 
 {% block javascripts %}
 	<script	src="{{ asset('bundles/jquery.js') }}"></script>
-	<script	src="{{ asset('bundles/UserBundle/profile.js') }}"></script>
+	<script	src="{{ asset('bundles/mdquser/js/profile.js') }}"></script>
 
 {% endblock %}
 

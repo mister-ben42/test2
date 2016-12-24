@@ -49,21 +49,19 @@ class QuizzController extends Controller
 		    ));			
 	}
 	public function editQuestionAction(Request $request){// 3 requete en tout (2spécifique)
-		$quizzServ = $this->container->get('mdq_quizz.ajax');
 		$user = $this->container->get('security.token_storage')->getToken()->getUser();		
-		if($quizzServ->testSession($request->getSession())==1 || $user===null){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
+		if($this->container->get('mdq_quizz.ajax')->testSession($request->getSession())==1 || $user===null){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 	  if($request->isXmlHttpRequest())  {
 		$numQ = $request->request->get('numQ');	
-		$em=$this->getDoctrine()->getManager();
 		 if ($numQ !== null ){   
-		//	$idQ = $em->getRepository('MDQQuizzBundle:PartieQuizz')->recupQ($numQ,$user->getId()); //Plus besoin ; la suite est limite, mais ça marche
-			$partie=$em->getRepository('MDQQuizzBundle:PartieQuizz')->recupPartie($user->getId());
+		//	$idQ = $this->getDoctrine()->getManager()->getRepository('MDQQuizzBundle:PartieQuizz')->recupQ($numQ,$user->getId()); //Plus besoin ; la suite est limite, mais ça marche
+			$partie=$this->getDoctrine()->getManager()->getRepository('MDQQuizzBundle:PartieQuizz')->recupPartie($user->getId());
 			$function1="getQ".$numQ;
 			$idQ=$partie->$function1();
 			if($numQ!=$partie->getNbQjoue()+1){$data['id']="error";
 							    return new JsonResponse($data);}
-			$data = $em->getRepository('MDQQuestionBundle:Question')->recupDataQ($idQ);
-			$datab=$quizzServ->dataEditQ($data);
+			$data = $this->getDoctrine()->getManager()->getRepository('MDQQuestionBundle:Question')->recupDataQ($idQ);
+			$datab=$this->container->get('mdq_quizz.ajax')->dataEditQ($data);
 			   return new JsonResponse($datab);
 		 }
 	  }

@@ -11,9 +11,9 @@
 	   {% if gestion.blocageTot==1 and not(is_granted('ROLE_ADMIN')) %}
 	   	    <div id="accueil_bandeau_maintenance">
 	   	    <div id="accueil_bloc_maintenance">
-	   	    <div id="accueil_maintenance_bloc_img1"><img src="{{ asset('bundles/GeneBundle/coneRigolo.png') }}" alt="cone" width="100%"></div>
+	   	    <div id="accueil_maintenance_bloc_img1"><img src="{{ asset('bundles/mdqgene/images/coneRigolo.png') }}" alt="cone" width="100%"></div>
 	   	    <div id="accueil_bloc_maintenance_txt">Le site est actuellement en maintenance</div>
-		    <div id="accueil_maintenance_bloc_img2"><img src="{{ asset('bundles/GeneBundle/reparateur.png') }}" alt="reparateur" width="100%"></div>
+		    <div id="accueil_maintenance_bloc_img2"><img src="{{ asset('bundles/mdqgene/images/reparateur.png') }}" alt="reparateur" width="100%"></div>
 			</div></div>
 	   <div id="accueil_backG_maintenance">
 			
@@ -32,7 +32,7 @@
 
 {% block javascripts %}
 	<script	src="{{ asset('bundles/jquery.js') }}"></script>
-	<script src="{{ asset('bundles/GeneBundle/scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-	<script	src="{{ asset('bundles/GeneBundle/gene.js') }}"></script>
+	<script src="{{ asset('bundles/mdqgene/scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+	<script	src="{{ asset('bundles/mdqgene/js/gene.js') }}"></script>
 
 {% endblock %}

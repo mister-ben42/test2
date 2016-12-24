@@ -14,7 +14,7 @@
            <option value="TvQuizz" {{ adminTwig.testSelected(question.dom1,"TvQuizz")}}>TvQuizz</option>
            <option value="EyesQuizz" {{ adminTwig.testSelected(question.dom1,"EyesQuizz")}}>Regard de star</option> 
            <option value="SexyQuizz" {{ adminTwig.testSelected(question.dom1,"SexyQuizz")}}>SexyQuizz</option>
-			<option value="Error" {% if question.dom1!="TvQuizz" and question.dom1!="EyesQuizz" and question.dom1!="MuQuizz" and question.dom1!="FfQuizz" and question.dom1!="ArQuizz" and question.dom1!="LxQuizz" nd question.dom1!="WzQuizz" and  question.dom1!="SexyQuizz" and question.dom1!="Histoire" and question.dom1!="Géographie" and question.dom1!="Sciences et nature" and question.dom1!="Arts et Littérature" and question.dom1!="Sports et loisirs" and question.dom1!="Divers"%}selected style="background-color:pink;"{%endif%}>Erreur</option>
+			<option value="Error" {% if question.dom1!="TvQuizz" and question.dom1!="EyesQuizz" and question.dom1!="MuQuizz" and question.dom1!="FfQuizz" and question.dom1!="ArQuizz" and question.dom1!="LxQuizz" and question.dom1!="WzQuizz" and  question.dom1!="SexyQuizz" and question.dom1!="Histoire" and question.dom1!="Géographie" and question.dom1!="Sciences et nature" and question.dom1!="Arts et Littérature" and question.dom1!="Sports et loisirs" and question.dom1!="Divers"%}selected style="background-color:pink;"{%endif%}>Erreur</option>
 	  </select>
 		<select name="diff">
            <option value="1"  {{ adminTwig.testSelected(question.diff,1) }} >Très facile</option>

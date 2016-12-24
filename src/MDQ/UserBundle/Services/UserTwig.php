@@ -3,6 +3,8 @@
 
 namespace MDQ\UserBundle\Services;
 
+use MDQ\UserBundle\Entity\User;
+
 class UserTwig
 {
 
@@ -15,14 +17,14 @@ class UserTwig
 
 	public function tabMedailles($data, $type)
 	{
-	    if($data==0){$balise='bundles/UserBundle/Med0.png';}
+	    if($data==0){$balise='bundles/mdquser/images/Med0.png';}
 	    elseif($data<6)
 	    {
-		  $balise='bundles/UserBundle/Med'.$type.$data.'.png';
+		  $balise='bundles/mdquser/images/Med'.$type.$data.'.png';
 	    }
 	    else
 	    {
-		  $balise='bundles/UserBundle/Med'.$type.'5.png';
+		  $balise='bundles/mdquser/images/Med'.$type.'5.png';
 	    }
             return $balise;
 	}
@@ -55,41 +57,41 @@ class UserTwig
 	  {
 		return 'U';
 	  }
-	  public function testMaitre($user)
+	  public function testMaitre(User $user)
 	  {
 		$data='';
 		$dateRef=$this->dateRefRepository->findOneById(1);
 		if($dateRef->getRMDQ()!==Null && $user->getId()==$dateRef->getRMDQ()->getId()){
-			 if($user->getSexe()==1){$data='bundles/GeneBundle/reine3.png';}
-			 else{$data='bundles/GeneBundle/roi2.png';}
+			 if($user->getSexe()==1){$data='bundles/mdqgene/images/reine3.png';}
+			 else{$data='bundles/mdqgene/images/roi2.png';}
 			 }
 		elseif($dateRef->getSMDQ()!==Null && $user->getId()==$dateRef->getSMDQ()->getId()){
-			 if($user->getSexe()==1){$data='bundles/GeneBundle/savant-F.png';}
-			 else{$data='bundles/GeneBundle/savant-H.png';}
+			 if($user->getSexe()==1){$data='bundles/mdqgene/images/savant-F.png';}
+			 else{$data='bundles/mdqgene/images/savant-H.png';}
 			 }
 		elseif($dateRef->getCMDQ()!==Null && $user->getId()==$dateRef->getCMDQ()->getId()){
-			 if($user->getSexe()==1){$data='bundles/GeneBundle/capitaine-F.png';}
-			 else{$data='bundles/GeneBundle/capitaine-H.png';}
+			 if($user->getSexe()==1){$data='bundles/mdqgene/images/capitaine-F.png';}
+			 else{$data='bundles/mdqgene/images/capitaine-H.png';}
 			 }
 		elseif($dateRef->getMuMDQ()!==Null && $user->getId()==$dateRef->getMuMDQ()->getId()){
-			 if($user->getSexe()==1){$data='bundles/GeneBundle/virtuose-F.png';}
-			 else{$data='bundles/GeneBundle/virtuose-H.png';}
+			 if($user->getSexe()==1){$data='bundles/mdqgene/images/virtuose-F.png';}
+			 else{$data='bundles/mdqgene/images/virtuose-H.png';}
 			 }
 		elseif($dateRef->getFfMDQ()!==Null && $user->getId()==$dateRef->getFfMDQ()->getId()){
-			 if($user->getSexe()==1){$data='bundles/GeneBundle/nature-F.png';}
-			 else{$data='bundles/GeneBundle/nature-H.png';}
+			 if($user->getSexe()==1){$data='bundles/mdqgene/images/nature-F.png';}
+			 else{$data='bundles/mdqgene/images/nature-H.png';}
 			 }
 		elseif($dateRef->getArMDQ()!==Null && $user->getId()==$dateRef->getArMDQ()->getId()){
-			 if($user->getSexe()==1){$data='bundles/GeneBundle/peintre-F.png';}
-			 else{$data='bundles/GeneBundle/peintre-H.png';}
+			 if($user->getSexe()==1){$data='bundles/mdqgene/images/peintre-F.png';}
+			 else{$data='bundles/mdqgene/images/peintre-H.png';}
 			 }
 		elseif($dateRef->getLxMDQ()!==Null && $user->getId()==$dateRef->getLxMDQ()->getId()){
-			 if($user->getSexe()==1){$data='bundles/GeneBundle/globeT-F.png';}
-			 else{$data='bundles/GeneBundle/globeT-H2.png';}
+			 if($user->getSexe()==1){$data='bundles/mdqgene/images/globeT-F.png';}
+			 else{$data='bundles/mdqgene/images/globeT-H2.png';}
 			 }
 		elseif($dateRef->getWzMDQ()!==Null && $user->getId()==$dateRef->getWzMDQ()->getId()){
-			 if($user->getSexe()==1){$data='bundles/GeneBundle/paparazzi-F.png';}
-			 else{$data='bundles/GeneBundle/paparazzi-H.png';}
+			 if($user->getSexe()==1){$data='bundles/mdqgene/images/paparazzi-F.png';}
+			 else{$data='bundles/mdqgene/images/paparazzi-H.png';}
 			 }
 		return $data;			
 	  
