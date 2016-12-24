@@ -35,6 +35,7 @@ class QuizzServ
 				elseif($game=='ArQuizz'){$nameGame='Quizz Art';}
 				elseif($game=='FfQuizz'){$nameGame='Quizz Nature';}
 				elseif($game=='LxQuizz'){$nameGame='Quizz Monde';}
+				elseif($game=='WzQuizz'){$nameGame='Quizz Wouzou';}
 				elseif($game=='SexyQuizz'){$nameGame='SexyQuizz';}
 				elseif($game=='TvQuizz'){$nameGame='Quizz Tv';}
 		$com['feu']=0;
@@ -65,6 +66,7 @@ class QuizzServ
 				elseif($game=='ArQuizz'){$crit='scofDayAr';}
 				elseif($game=='FfQuizz'){$crit='scofDayFf';}
 				elseif($game=='LxQuizz'){$crit='scofDayLx';}
+				elseif($game=='WzQuizz'){$crit='scofDayWz';}
 				elseif($game=='SexyQuizz'){$crit='scofDaySx';}
 				elseif($game=='TvQuizz'){$crit='scofDayTv';}
 	      return $crit;
@@ -96,6 +98,11 @@ class QuizzServ
 		{
 				$scofDayUser=$user->getScUser()->getScofDayLx();
 				$highscore=$user->getScUser()->getScMaxLx();
+		}
+		elseif($game=="WzQuizz")
+		{
+				$scofDayUser=$user->getScUser()->getScofDayWz();
+				$highscore=$user->getScUser()->getScMaxWz();
 		}
 		elseif($game=="SexyQuizz")
 		{

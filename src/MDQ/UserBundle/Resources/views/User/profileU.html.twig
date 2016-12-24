@@ -22,7 +22,7 @@
 		</div>
 		<div id="profil_partie_centre">
 		
-		<img style="margin-top:-50px" src="{{ asset(testMaitre(user)) }}" width=100%  alt="" >
+		<img style="margin-top:-50px" src="{{ asset(usertwig.testMaitre(user)) }}" width=100%  alt="" >
 
 
 		</div>
@@ -52,59 +52,59 @@
 					
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedKm', 'id':user.scuser.id}) }}">King Master</a></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Km1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km1)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Km2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km2)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Km3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km3)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Km4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km4)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Km5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Km5)}}</div></td>	
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Km1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Km1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Km2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Km2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Km3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Km3)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Km4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Km4)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Km5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Km5)}}</div></td>	
 					</tr>
 					
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedMq', 'id':user.scuser.id}) }}">MasterQuizz</a></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mq1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq1)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mq2,'Ag'))}} alt="Med" width="60px" ><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq2)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mq3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq3)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mq4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq4)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mq5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mq5)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Mq1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Mq1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Mq2,'Ag'))}} alt="Med" width="60px" ><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Mq2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Mq3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Mq3)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Mq4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Mq4)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Mq5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Mq5)}}</div></td>
 					</tr>
 					<tr>
-						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedTm', 'id':user.scuser.id}) }}">Expert Medias</a></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Tm1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm1)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Tm2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm2)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Tm3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm3)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Tm4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm4)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Tm5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Tm5)}}</div></td>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedCq', 'id':user.scuser.id}) }}">Quizz du Capitaine</a></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Cq1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Cq1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Cq2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Cq2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Cq3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Cq3)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Cq4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Cq4)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Cq5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Cq5)}}</div></td>
 					</tr>
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedAr', 'id':user.scuser.id}) }}">Quizz Art</a></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ar1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar1)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ar2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar2)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ar3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar3)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ar4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar4)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ar5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ar5)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Ar1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Ar1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Ar2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Ar2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Ar3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Ar3)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Ar4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Ar4)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Ar5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Ar5)}}</div></td>
 					</tr>
 					<tr>
 						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedFf', 'id':user.scuser.id}) }}">Quizz Nature</a></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ff1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff1)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ff2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff2)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ff3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff3)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ff4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff4)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Ff5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Ff5)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Ff1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Ff1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Ff2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Ff2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Ff3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Ff3)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Ff4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Ff4)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Ff5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Ff5)}}</div></td>
 					</tr>
 					<tr>
-						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedLx', 'id':user.scuser.id}) }}">Lieux du monde</a></td>				<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Lx1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx1)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Lx2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx2)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Lx3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx3)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Lx4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx4)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Lx5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Lx5)}}</div></td>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedLx', 'id':user.scuser.id}) }}">Quizz Géo</a></td>				<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Lx1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Lx1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Lx2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Lx2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Lx3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Lx3)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Lx4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Lx4)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Lx5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Lx5)}}</div></td>
 					</tr>
 					<tr>
-						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedMu', 'id':user.scuser.id}) }}">Musique classique</a></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mu1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu1)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mu2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu2)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mu3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu3)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mu4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu4)}}</div></td>
-						<td class="tab_med_med"><img src={{ asset(tabMed(user.scuser.medailles.Mu5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{spanMed(user.scuser.medailles.Mu5)}}</div></td>
+						<td class="tab_med_titre"><a href="{{ path('mdqgene_highScore', {'crit':'MedWz', 'id':user.scuser.id}) }}">Quizz Wouzou</a></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Wz1,'Or'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Wz1)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Wz2,'Ag'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Wz2)}}</div></td>
+						<td class="tab_med_med"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Wz3,'Bz'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Wz3)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Wz4,'Ch'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Wz4)}}</div></td>
+						<td class="tab_med_med med_td_swich_querry"><img src={{ asset(usertwig.tabMedailles(user.scuser.medailles.Wz5,'Ct'))}} alt="Med" width="60px"><div class="user_tab_med">{{usertwig.spanMed(user.scuser.medailles.Wz5)}}</div></td>
 					</tr>
 			</table>
 			</div>
@@ -121,8 +121,8 @@
 			<div class="profile_user_type">Meilleur score : <a href="{{ path('mdqgene_highScore', {'crit':'scMaxMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scMaxMq}}</span></div></a>
 			<div id="stats_date_hsc">({{user.scUser.datescMaxMq|date('d/m/Y') }})</div>			
 			
-			<div class="profile_user_type"> % de bonnes réponses :<a href="{{ path('mdqgene_highScore', {'crit':'prctBrtotMq', 'id':user.scuser.id}) }}"><span class="score_profile"><span {{testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés."  >{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrtotMq)}}</span></span></a></div>							
-			<div class="profile_user_type"> Score moyen : <a href="{{ path('mdqgene_highScore', {'crit':'scMoyMq', 'id':user.scuser.id}) }}"><span {{testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés." class="score_profile">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.scMoyMq)}}</span></a></div>
+			<div class="profile_user_type"> % de bonnes réponses :<a href="{{ path('mdqgene_highScore', {'crit':'prctBrtotMq', 'id':user.scuser.id}) }}"><span class="score_profile"><span {{usertwig.testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés."  >{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrtotMq)}}</span></span></a></div>							
+			<div class="profile_user_type"> Score moyen : <a href="{{ path('mdqgene_highScore', {'crit':'scMoyMq', 'id':user.scuser.id}) }}"><span {{usertwig.testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés." class="score_profile">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.scMoyMq)}}</span></a></div>
 								
 			<div class="profile_user_type"> Nombre de questions jouées : <a href="{{ path('mdqgene_highScore', {'crit':'nbQtotMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.nbQtotMq}}</span></a></div>
 
@@ -134,26 +134,26 @@
 			</div>
 		</div>
 		<div id="graph_bande_stats" >
-			<div id="user_graphstats_titre" {{testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés.">% de bonnes réponses par catégorie</div>
-			<div id="bande_H"><a href="{{ path('mdqgene_highScore', {'crit':'prctBrhMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Histoire</div><div class="base"><div class="bande_score" id="bande_score_H"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_H">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrhMq)}}</span> %</div></a></div>
-			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrgMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Géographie </div><div class="base"><div class="bande_score" id="bande_score_G"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_G">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrgMq)}}</span> %</div></a></div>
-			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrsnMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sciences et nature </div><div class="base"><div class="bande_score" id="bande_score_SN"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SN">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrsnMq)}}</span> %</div></a></div>
-			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBralMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Arts et Littérature </div><div class="base"><div class="bande_score" id="bande_score_AL"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_AL">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBralMq)}}</span> %</div></a></div>
-			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrslMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sports et loisirs </div><div class="base"><div class="bande_score" id="bande_score_SL"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SL">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrslMq)}}</span> %</div></a></div>
-			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrdMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Divers </div><div class="base"><div class="bande_score" id="bande_score_D"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_D">{{testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrdMq)}}</span> %</div></a></div>
+			<div id="user_graphstats_titre" {{usertwig.testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés.">% de bonnes réponses par catégorie</div>
+			<div id="bande_H"><a href="{{ path('mdqgene_highScore', {'crit':'prctBrhMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Histoire</div><div class="base"><div class="bande_score" id="bande_score_H"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_H">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrhMq)}}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrgMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Géographie </div><div class="base"><div class="bande_score" id="bande_score_G"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_G">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrgMq)}}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrsnMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sciences et nature </div><div class="base"><div class="bande_score" id="bande_score_SN"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SN">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrsnMq)}}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBralMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Arts et Littérature </div><div class="base"><div class="bande_score" id="bande_score_AL"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_AL">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBralMq)}}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrslMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sports et loisirs </div><div class="base"><div class="bande_score" id="bande_score_SL"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SL">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrslMq)}}</span> %</div></a></div>
+			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrdMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Divers </div><div class="base"><div class="bande_score" id="bande_score_D"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_D">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrdMq)}}</span> %</div></a></div>
 		</div>
 		</div>
 		</div>
 		<div id="user_stats_QnF">
-		<div class="user_stats_titre">Quizz Médias</div>
+		<div class="user_stats_titre">Quizz du Capitaine</div>
 			<div id="user_stats_QnF_bloc1">
 				<div id="user_stats_QnF_TF">
-					<img src={{ asset('bundles/GeneBundle/LogoQuizzEm.png') }} alt="Expert Media" width="170px">
+					<img src={{ asset('bundles/GeneBundle/LogoScCap.png') }} alt="Captain's Quizz" width="170px">
 					<div class="user_stats_QnF_col_line">
-						<span class="user_stats_QnF_crit">Score du jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayTM', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayTM|chgeNull}}</span></a>
+						<span class="user_stats_QnF_crit">Score du jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayCq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayCq|chgeNull}}</span></a>
 					</div>
 					<div class="user_stats_QnF_col_line">
-						<span class="user_stats_QnF_crit">Meilleur score :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxTM', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxTM}}</span></a>
+						<span class="user_stats_QnF_crit">Meilleur score :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxCq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxCq}}</span></a>
 					</div>
 				</div>
 			</div>
@@ -183,15 +183,15 @@
 				</div>
 				</div>
 			<div class="user_stats_QnF_col">
-				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzMu2.png') }} alt="Musique" width="120px"></div>
+				<div class="user_stats_QnF_col_titre"><img src={{ asset('bundles/GeneBundle/LogoQuizzWz2.png') }} alt="Wouzou" width="120px"></div>
 				<div class="user_stats_QnF_col_line">
-					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayMu', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayMu|chgeNull}}</span></a>
+					<span class="user_stats_QnF_crit">Score jour :</span><a href="{{ path('mdqgene_highScore', {'crit':'scofDayWz', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scofdayWz|chgeNull}}</span></a>
 				</div>
 				<div class="user_stats_QnF_col_line">
-					<span class="user_stats_QnF_crit">Score max :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxMu', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxMu}}</span></a>
+					<span class="user_stats_QnF_crit">Score max :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMaxWz', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMaxWz}}</span></a>
 				</div>
 				<div class="user_stats_QnF_col_line">				
-					<span class="user_stats_QnF_crit">Score moy :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMoyMu', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMoyMu}}</span></a>
+					<span class="user_stats_QnF_crit">Score moy :</span><a href="{{ path('mdqgene_highScore', {'crit':'scMoyWz', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scuser.scMoyWz}}</span></a>
 				</div>
 			</div>
 			<div class="user_stats_QnF_col">
@@ -214,7 +214,7 @@
 		{% if derParties is defined %}
 		{% for partie in derParties %}
 			<div id="partie{{loop.index}}" class="derpartie">
-			<span {{spanDerPartie(partie.type)}}>{{partie.type|affichePartie}}</span>
+			<span {{usertwig.spanDerPartie(partie.type)}}>{{usertwig.affichePartieType(partie.type)}}</span>
 			: {{partie.score}} <span style="font-size:9px;">-{{partie.date|date('d/m/Y')}}</span></div>
 		{% endfor %}
 		{% endif %}

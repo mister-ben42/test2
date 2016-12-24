@@ -35,6 +35,7 @@ class AdminTwig
 	      if($dom1=="TvQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/TV/'.$media.'.jpg');}
 	      elseif($dom1=="FfQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Ff/'.$media.'.jpg');}
 	      elseif($dom1=="LxQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Lx/'.$media.'.jpg');}
+	      elseif($dom1=="WzQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Wz/'.$media.'.jpg');}
 	      elseif($dom1=="ArQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Ar/'.$media.'.jpg');}
 	      elseif($dom1=="SexyQuizz"){$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/Sexy/'.$media.'.jpg');}
 	      else{$route=$this->assets->getAssetUrl('bundles/mdqquestion/images/imgQuestions/'.$media.'.jpg');}

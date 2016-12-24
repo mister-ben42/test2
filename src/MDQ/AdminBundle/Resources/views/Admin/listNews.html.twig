@@ -11,8 +11,8 @@
    {% for new in news %}
    <div class="admin_each_news">
    <div class="admin_news_gauche">
-   <a href="{{ path('mdqadmin_modifNews', {'id':new.id}) }}">{{ new.titre }} </a></br>
-   {{ new.texte }} </br>
+   <a href="{{ path('mdqadmin_modifNews', {'id':new.id}) }}"><h3>{{ new.titre }}</h3> </a></br>
+   {{ new.texte|nl2br }} </br>
    </div>
    <div class="admin_news_droite">
    {{ new.auteur }}, {{ new.dateCreate|date('d/m/Y') }},</br> publication : {% if new.publication==1 %}oui{%else%}non{%endif%}, priorité :{% if new.priorite==1 %}oui{%else%}non{%endif%}

@@ -8,5 +8,8 @@
 
 {% block admin_body %}
 
+	  {% for key,value in depts %}
 	  
+	 '{{key}}- {{value}}'=>'{{value}}', 
+	  {% endfor %}
 {% endblock %}

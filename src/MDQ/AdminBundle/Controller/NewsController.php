@@ -8,27 +8,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\AdminBundle\Entity\News;
 use MDQ\AdminBundle\Form\Type\NewsType;
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
+use Symfony\Component\HttpFoundation\Request;
 
 class NewsController extends Controller
 {
 
 
-	public function newNewsAction()
+	public function newNewsAction(Request $request)
 	{
-		$user = $this->container->get('security.context')->getToken()->getUser();
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();
 	      if ($user===null) { return $this->redirect($this->generateUrl('mdqgene_accueil'));}// pas sur que suffisant /sécurité - différent de test que intance user (cf profilecontroller de FOSUser?           
 		
-			$news = new News($user->getUsername());
-			$form = $this->createForm(new NewsType(), $news);  
-			$request = $this->getRequest();
-		if ($request->getMethod() == 'POST') {      
-			  $form->bind($request);
-			  if ($form->isValid()) {       
+			$news = new News($user->getUsername()); 
+			$form   = $this->get('form.factory')->create(NewsType::class, $news);
+		if ($request->getMethod() == 'POST' && $form->handleRequest($request)->isValid()) {    
 				$em = $this->getDoctrine()->getManager();
 				$em->persist($news);
 				$em->flush();
 				return $this->redirect($this->generateUrl('mdqgene_accueil'));
-			  }
 		}
 		return $this->render('MDQAdminBundle:Admin:newNews.html.twig', array(
 		  'form' => $form->createView(),
@@ -49,29 +46,24 @@ class NewsController extends Controller
 		'news' => $newsA,
     ));
 	}
-	public function modifNewsAction(News $news)
+	public function modifNewsAction(News $news, Request $request)
 	{
-			$form = $this->createForm(new NewsType(), $news);
-			$request = $this->getRequest();
+			$form = $this->get('form.factory')->create(NewsType::class, $news);
 
-		if ($request->getMethod() == 'POST') {
-			$form->bind($request);
-
-		  if ($form->isValid()) {
+		if ($request->getMethod() == 'POST' && $form->handleRequest($request)->isValid()) {   
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($news);
 			$em->flush();
 		   
 			return $this->redirect($this->generateUrl('mdqadmin_listNews'));
-		}}
+		}
 
 		return $this->render('MDQAdminBundle:Admin:newNews.html.twig', array(
 		  'form'    => $form->createView()
 		));
 	}
-	public function formListNewsAction()
+	public function formListNewsAction(Request $request)
 	{
-		$request = $this->getRequest();	 
 		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 		{			
 			$tabresult = $request->request->get('tabresult');	

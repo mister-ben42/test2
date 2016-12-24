@@ -13,7 +13,7 @@
   	<p>Question n°<span id="editQ_idQ">{{question.id}}</span></p>
 
 <div>
-  <form  method="post" class="formQ" {{ form_enctype(form) }}>
+  {{ form_start(form, {'attr':{'class':'formQ'}, 'method': 'POST'}) }}
 
 {# Les erreurs générales du formulaire. #}
 {{ form_errors(form) }}

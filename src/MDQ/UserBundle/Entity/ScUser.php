@@ -617,7 +617,84 @@ class ScUser
      * @ORM\Column(name="scofWeekFf", type="integer", nullable=true)
      */
     private $scofWeekFf;
+
+    	/**
+     * @var integer
+     *
+     * @ORM\Column(name="nbQWz", type="integer")
+     */	 
+    private $nbQWz;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbBrWz", type="integer")
+     */
+    private $nbBrWz;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prctBrWz", type="decimal", scale=2)
+     */
+    private $prctBrWz;
 	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="nbPWz", type="integer")
+     */
+    private $nbPWz;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="scTotWz", type="integer")
+     */
+    private $scTotWz;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="scMoyWz", type="decimal", scale=2)
+     */
+    private $scMoyWz;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="scMaxWz", type="integer")
+     */
+    private $scMaxWz;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="scofDayWz", type="integer", nullable=true)
+     */
+    private $scofDayWz;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="highClassDayWz", type="integer", nullable=true)
+     */
+    private $highClassDayWz;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="numHighClassDayWz", type="integer", nullable=true)
+     */
+    private $numHighClassDayWz;
+	
+	/**
+     * @var integer
+     *
+     * @ORM\Column(name="scofWeekWz", type="integer", nullable=true)
+     */
+    private $scofWeekWz;
+    
 	/**
      * @var integer
      *
@@ -775,30 +852,30 @@ class ScUser
 	/**
      * @var integer
      *
-     * @ORM\Column(name="scofDayTM", type="integer", nullable=true)
+     * @ORM\Column(name="scofDayCq", type="integer", nullable=true)
      */
-    private $scofDayTM;
+    private $scofDayCq;
 	
 	/**
      * @var integer
      *
-     * @ORM\Column(name="scMaxTM", type="integer", nullable=true)
+     * @ORM\Column(name="scMaxCq", type="integer", nullable=true)
      */
-    private $scMaxTM;
+    private $scMaxCq;
 	
 	/**
      * @var integer
      *
-     * @ORM\Column(name="highClassDayTM", type="integer", nullable=true)
+     * @ORM\Column(name="highClassDayCq", type="integer", nullable=true)
      */
-    private $highClassDayTM;
+    private $highClassDayCq;
 	
 	/**
      * @var integer
      *
-     * @ORM\Column(name="numHighClassDayTM", type="integer", nullable=true)
+     * @ORM\Column(name="numHighClassDayCq", type="integer", nullable=true)
      */
-    private $numHighClassDayTM;	
+    private $numHighClassDayCq;	
 	
 	/**
      * @var integer
@@ -920,6 +997,13 @@ class ScUser
 	$this->nbQFf = 0;
 	$this->nbBrFf = 0;	
 	$this->prctBrFf = 0;
+	$this->nbPWz = 0;
+	$this->scTotWz = 0;
+	$this->scMoyWz = 0;	
+	$this->scMaxWz = 0;
+	$this->nbQWz = 0;
+	$this->nbBrWz = 0;	
+	$this->prctBrWz = 0;
 	$this->nbPAr = 0;
 	$this->scTotAr = 0;
 	$this->scMoyAr = 0;	
@@ -938,7 +1022,7 @@ class ScUser
 	$this->sumtop10month=Null;
 	$this->top5weekMq=[0,0,0,0,0];
 	$this->sumtop5weekMq=null;	
-	$this->scMaxTM = 0;	
+	$this->scMaxCq = 0;	
 	$this->nbErrorSignalTot=0;
 	$this->nbErrorSignal=0;
 	$this->questions_error=new ArrayCollection();
@@ -967,6 +1051,10 @@ class ScUser
 					if($this->getScofDayFf()===NULL || $scP>$this->getScofDayFf()){$this->setScofDayFf($scP);$test=1;}
 					if($this->getScofWeekFf()===NULL || $scP>$this->getScofWeekFf()){$this->setScofWeekFf($scP);$test=1;}
 				}
+				elseif($dom1=='WzQuizz'){
+					if($this->getScofDayWz()===NULL || $scP>$this->getScofDayWz()){$this->setScofDayWz($scP);$test=1;}
+					if($this->getScofWeekWz()===NULL || $scP>$this->getScofWeekWz()){$this->setScofWeekWz($scP);$test=1;}
+				}
 				elseif($dom1=='LxQuizz'){
 					if($this->getScofDayLx()===NULL || $scP>$this->getScofDayLx()){$this->setScofDayLx($scP);$test=1;}
 					if($this->getScofWeekLx()===NULL || $scP>$this->getScofWeekLx()){$this->setScofWeekLx($scP);$test=1;}
@@ -989,6 +1077,8 @@ class ScUser
 									$this->setScTotAr($scTot);}
 				elseif($dom1=='FfQuizz'){$scTot=$this->getScTotFf()+$scoreP;
 									$this->setScTotFf($scTot);}
+				elseif($dom1=='WzQuizz'){$scTot=$this->getScTotWz()+$scoreP;
+									$this->setScTotWz($scTot);}
 				elseif($dom1=='LxQuizz'){$scTot=$this->getScTotLx()+$scoreP;
 									$this->setScTotLx($scTot);}
 				elseif($dom1=='TvQuizz'){$scTot=$this->getScTotTv()+$scoreP;
@@ -1003,6 +1093,7 @@ class ScUser
 				if($dom1=='MuQuizz'){$this->setScMoyMu($scTot/($this->getNbPMu()+1));}
 				elseif($dom1=='ArQuizz'){$this->setScMoyAr($scTot/($this->getNbPAr()+1));}
 				elseif($dom1=='FfQuizz'){$this->setScMoyFf($scTot/($this->getNbPFf()+1));}
+				elseif($dom1=='WzQuizz'){$this->setScMoyWz($scTot/($this->getNbPWz()+1));}
 				elseif($dom1=='LxQuizz'){$this->setScMoyLx($scTot/($this->getNbPLx()+1));}
 				elseif($dom1=='TvQuizz'){$this->setScMoyTv($scTot/($this->getNbPTv()+1));}
 				elseif($dom1=='SexyQuizz'){$this->setScMoySx($scTot/($this->getNbPSx()+1));}
@@ -1015,6 +1106,7 @@ class ScUser
 				if($dom1=='MuQuizz' && $scP>$this->getScMaxMu()){$this->setScMaxMu($scP);}
 				elseif($dom1=='ArQuizz' && $scP>$this->getScMaxAr()){$this->setScMaxAr($scP);}
 				elseif($dom1=='FfQuizz' && $scP>$this->getScMaxFf()){$this->setScMaxFf($scP);}
+				elseif($dom1=='WzQuizz' && $scP>$this->getScMaxWz()){$this->setScMaxWz($scP);}
 				elseif($dom1=='LxQuizz' && $scP>$this->getScMaxLx()){$this->setScMaxLx($scP);}				
 				elseif($dom1=='TvQuizz' && $scP>$this->getScMaxTv()){$this->setScMaxTv($scP);}
 				elseif($dom1=='SexyQuizz' && $scP>$this->getScMaxSx()){$this->setScMaxSx($scP);}
@@ -1031,7 +1123,7 @@ class ScUser
 				}
 				return;
 			}
-		public function majTM($dom1, $scP)
+		public function majCq($dom1, $scP)
 			{
 				if($dom1=='ArQuizz'){$scQM1=$scP;}
 				else{$scQM1=$this->getScofDayAr();if($scQM1===NULL){$scQM1==0;}}
@@ -1040,28 +1132,31 @@ class ScUser
 				if($dom1=='MuQuizz'){$scQM3=$scP;}
 				else{$scQM3=$this->getScofDayMu();if($scQM3===NULL){$scQM3==0;}}
 				if($dom1=='LxQuizz'){$scQM4=$scP;}
-				else{$scQM4=$this->getScofDayLx();if($scQM4===NULL){$scQM4==0;}}
-				$scTMactu=$this->getScofDayTM();if($scTMactu===NULL){$scTMactu==0;}
-				$tab3topsc=[$scQM1,$scQM2,$scQM3,$scQM4];
+				else{$scQM4=$this->getScofDayLx();if($scQM4===NULL){$scQM4==0;}}				
+				if($dom1=='WzQuizz'){$scQM5=$scP;}
+				else{$scQM5=$this->getScofDayWz();if($scQM5===NULL){$scQM5==0;}}
+				$scCqactu=$this->getScofDayCq();if($scCqactu===NULL){$scCqactu==0;}
+				$tab3topsc=[$scQM1,$scQM2,$scQM3,$scQM4, $scQM5];
 				rsort($tab3topsc);
-				$testTM=$tab3topsc[0]+$tab3topsc[1]+$tab3topsc[2];
-				if($testTM>$scTMactu){$this->setScofDayTM($testTM);}
-				if($this->getScMaxTM()===NULL || $testTM>$this->getScMaxTM()){$this->setScMaxTM($testTM);}
+				$testCq=$tab3topsc[0]+$tab3topsc[1]+$tab3topsc[2];
+				if($testCq>$scCqactu){$this->setScofDayCq($testCq);}
+				if($this->getScMaxCq()===NULL || $testCq>$this->getScMaxCq()){$this->setScMaxCq($testCq);}
 				return;
 			}	
 		public function majKingMaster()
 			{
-				if($this->getScofWeekMu()!==NULL){$tabTM[0]=$this->getScofWeekMu();}
-				else{$tabTM[0]=0;}
-				if($this->getScofWeekAr()!==NULL){$tabTM[1]=$this->getScofWeekAr();}
-				else{$tabTM[1]=0;}
-				if($this->getScofWeekFf()!==NULL){$tabTM[2]=$this->getScofWeekFf();}
-				else{$tabTM[2]=0;}
-				if($this->getScofWeekLx()!==NULL){$tabTM[3]=$this->getScofWeekLx();}
-				else{$tabTM[3]=0;}
-				//$tabTM=[$this->getScofWeekMu(),$this->getScofWeekAr(),$this->getScofWeekFf(),$this->getScofWeekLx()]; // ne sert pas
-				rsort($tabTM);
-				$kingMaster=$this->getSumtop5weekMq()+$tabTM[0]+$tabTM[1]+$tabTM[2];
+				if($this->getScofWeekMu()!==NULL){$tabCq[0]=$this->getScofWeekMu();}
+				else{$tabCq[0]=0;}
+				if($this->getScofWeekAr()!==NULL){$tabCq[1]=$this->getScofWeekAr();}
+				else{$tabCq[1]=0;}
+				if($this->getScofWeekFf()!==NULL){$tabCq[2]=$this->getScofWeekFf();}
+				else{$tabCq[2]=0;}
+				if($this->getScofWeekLx()!==NULL){$tabCq[3]=$this->getScofWeekLx();}
+				else{$tabCq[3]=0;}
+				if($this->getScofWeekWz()!==NULL){$tabCq[4]=$this->getScofWeekWz();}
+				else{$tabCq[4]=0;}
+				rsort($tabCq);
+				$kingMaster=$this->getSumtop5weekMq()+$tabCq[0]+$tabCq[1]+$tabCq[2];
 				if($kingMaster>$this->getKingMaster()){$this->setKingMaster($kingMaster);}
 				if($kingMaster>$this->getHighScKM()){$this->setHighScKM($kingMaster);}
 				return;
@@ -1071,10 +1166,11 @@ class ScUser
 		{
 			if($clsmt=='KingMaster' && $this->getKingMaster()==$sc){$j=$h;}
 			elseif($clsmt=='scofDayMq' && $this->getScofDayMq()==$sc){$j=$h;}
-			elseif($clsmt=='TotalMedia' && $this->getScofDayTM()==$sc){$j=$h;}
+			elseif($clsmt=='CaQuizz' && $this->getScofDayCq()==$sc){$j=$h;}
 			elseif($clsmt=='MuQuizz' && $this->getScofDayMu()==$sc){$j=$h;}
 			elseif($clsmt=='ArQuizz' && $this->getScofDayAr()==$sc){$j=$h;}
 			elseif($clsmt=='FfQuizz' && $this->getScofDayFf()==$sc){$j=$h;}
+			elseif($clsmt=='WzQuizz' && $this->getScofDayWz()==$sc){$j=$h;}
 			elseif($clsmt=='LxQuizz' && $this->getScofDayLx()==$sc){$j=$h;}
 			else{$j=$i;}
 			return $j;
@@ -1102,14 +1198,14 @@ class ScUser
 				}
 				
 			}
-			elseif($clsmt=='TotalMedia')
+			elseif($clsmt=='CaQuizz')
 			{
-				if($this->getHighClassDayTM()===NULL || $j<$this->getHighClassDayTM()){
-					$this->setHighClassDayTM($j);
-					$this->setNumHighClassDayTM(1);
+				if($this->getHighClassDayCq()===NULL || $j<$this->getHighClassDayCq()){
+					$this->setHighClassDayCq($j);
+					$this->setNumHighClassDayCq(1);
 				}
-				else if($j==$this->getHighClassDayTM()){			
-					$this->setNumHighClassDayTM($this->getNumHighClassDayTM()+1);					
+				else if($j==$this->getHighClassDayCq()){			
+					$this->setNumHighClassDayCq($this->getNumHighClassDayCq()+1);					
 				}	
 			}
 			elseif($clsmt=='MuQuizz')
@@ -1140,6 +1236,16 @@ class ScUser
 				}
 				else if($j==$this->getHighClassDayFf()){			
 					$this->setNumHighClassDayFf($this->getNumHighClassDayFf()+1);					
+				}	
+			}
+			elseif($clsmt=='WzQuizz')
+			{
+				if($this->getHighClassDayWz()===NULL || $j<$this->getHighClassDayWz()){
+					$this->setHighClassDayWz($j);
+					$this->setNumHighClassDayWz(1);
+				}
+				else if($j==$this->getHighClassDayWz()){			
+					$this->setNumHighClassDayWz($this->getNumHighClassDayWz()+1);					
 				}	
 			}
 			elseif($clsmt=='LxQuizz')
@@ -1173,13 +1279,13 @@ class ScUser
 				elseif($j==4 || $j==5){$med->setMq4($med->getMq4()+1);}
 				elseif($j>5 && $j<11){$med->setMq5($med->getMq5()+1);}
 			}
-			elseif($clsmt=='TotalMedia')
+			elseif($clsmt=='CaQuizz')
 			{
-				if($j==1){$med->setTm1($med->getTm1()+1);}
-				elseif($j==2){$med->setTm2($med->getTm2()+1);}
-				elseif($j==3){$med->setTm3($med->getTm3()+1);}
-				elseif($j==4 || $j==5){$med->setTm4($med->getTm4()+1);}
-				elseif($j>5 && $j<11){$med->setTm5($med->getTm5()+1);}
+				if($j==1){$med->setCq1($med->getCq1()+1);}
+				elseif($j==2){$med->setCq2($med->getCq2()+1);}
+				elseif($j==3){$med->setCq3($med->getCq3()+1);}
+				elseif($j==4 || $j==5){$med->setCq4($med->getCq4()+1);}
+				elseif($j>5 && $j<11){$med->setCq5($med->getCq5()+1);}
 			}
 			elseif($clsmt=='MuQuizz')
 			{
@@ -1205,6 +1311,14 @@ class ScUser
 				elseif($j==4 || $j==5){$med->setFf4($med->getFf4()+1);}
 				elseif($j>5 && $j<11){$med->setFf5($med->getFf5()+1);}
 			}
+			elseif($clsmt=='WzQuizz')
+			{
+				if($j==1){$med->setWz1($med->getWz1()+1);}
+				elseif($j==2){$med->setWz2($med->getWz2()+1);}
+				elseif($j==3){$med->setWz3($med->getWz3()+1);}
+				elseif($j==4 || $j==5){$med->setWz4($med->getWz4()+1);}
+				elseif($j>5 && $j<11){$med->setWz5($med->getWz5()+1);}
+			}			
 			elseif($clsmt=='LxQuizz')
 			{
 				if($j==1){$med->setLx1($med->getLx1()+1);}
@@ -1223,6 +1337,7 @@ class ScUser
 				$this->setScofWeekMu(NULL);
 				$this->setScofWeekAr(NULL);
 				$this->setScofWeekFf(NULL);
+				$this->setScofWeekWz(NULL);
 				$this->setScofWeekLx(NULL);
 			}
 			elseif($clsmt=='scofDayMq'){
@@ -1232,28 +1347,32 @@ class ScUser
 					sort($top5weekMq);
 					$this->setTop5weekMq($top5weekMq);				
 			}
-			elseif($clsmt=='TotalMedia'){$this->setScofDayTM(NULL);}
+			elseif($clsmt=='CaQuizz'){$this->setScofDayCq(NULL);}
 			elseif($clsmt=='MuQuizz'){$this->setScofDayMu(NULL);}
 			elseif($clsmt=='ArQuizz'){$this->setScofDayAr(NULL);}
 			elseif($clsmt=='FfQuizz'){$this->setScofDayFf(NULL);}
+			elseif($clsmt=='WzQuizz'){$this->setScofDayWz(NULL);}
 			elseif($clsmt=='LxQuizz'){$this->setScofDayLx(NULL);}
 		}
 		public function calcOldScore($clsmt)
 		{
 			if($clsmt=='KingMaster'){$sc=$this->getKingMaster();}
 			elseif($clsmt=='scofDayMq'){$sc=$this->getScofDayMq();}
-			elseif($clsmt=='TotalMedia'){$sc=$this->getScofDayTM();}
+			elseif($clsmt=='CaQuizz'){$sc=$this->getScofDayCq();}
 			elseif($clsmt=='MuQuizz'){$sc=$this->getScofDayMu();}
 			elseif($clsmt=='ArQuizz'){$sc=$this->getScofDayAr();}
 			elseif($clsmt=='FfQuizz'){$sc=$this->getScofDayFf();}
+			elseif($clsmt=='WzQuizz'){$sc=$this->getScofDayWz();}
 			elseif($clsmt=='LxQuizz'){$sc=$this->getScofDayLx();}
 			return $sc;
 		}
 
+
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -1261,1397 +1380,10 @@ class ScUser
     }
 
     /**
-     * Set nbPMq
-     *
-     * @param integer $nbPMq
-     * @return ScUser
-     */
-    public function setNbPMq($nbPMq)
-    {
-        $this->nbPMq = $nbPMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPMq
-     *
-     * @return integer 
-     */
-    public function getNbPMq()
-    {
-        return $this->nbPMq;
-    }
-
-    /**
-     * Set scTotMq
-     *
-     * @param integer $scTotMq
-     * @return ScUser
-     */
-    public function setScTotMq($scTotMq)
-    {
-        $this->scTotMq = $scTotMq;
-
-        return $this;
-    }
-
-    /**
-     * Get scTotMq
-     *
-     * @return integer 
-     */
-    public function getScTotMq()
-    {
-        return $this->scTotMq;
-    }
-
-    /**
-     * Set scMoyMq
-     *
-     * @param integer $scMoyMq
-     * @return ScUser
-     */
-    public function setScMoyMq($scMoyMq)
-    {
-        $this->scMoyMq = $scMoyMq;
-
-        return $this;
-    }
-
-    /**
-     * Get scMoyMq
-     *
-     * @return integer 
-     */
-    public function getScMoyMq()
-    {
-        return $this->scMoyMq;
-    }
-
-    /**
-     * Set scMaxMq
-     *
-     * @param integer $scMaxMq
-     * @return ScUser
-     */
-    public function setScMaxMq($scMaxMq)
-    {
-        $this->scMaxMq = $scMaxMq;
-
-        return $this;
-    }
-
-    /**
-     * Get scMaxMq
-     *
-     * @return integer 
-     */
-    public function getScMaxMq()
-    {
-        return $this->scMaxMq;
-    }
-
-    /**
-     * Set datescMaxMq
-     *
-     * @param \DateTime $datescMaxMq
-     * @return ScUser
-     */
-    public function setDatescMaxMq($datescMaxMq)
-    {
-        $this->datescMaxMq = $datescMaxMq;
-
-        return $this;
-    }
-
-    /**
-     * Get datescMaxMq
-     *
-     * @return \DateTime 
-     */
-    public function getDatescMaxMq()
-    {
-        return $this->datescMaxMq;
-    }
-
-    /**
-     * Set nbQtotMq
-     *
-     * @param integer $nbQtotMq
-     * @return ScUser
-     */
-    public function setNbQtotMq($nbQtotMq)
-    {
-        $this->nbQtotMq = $nbQtotMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQtotMq
-     *
-     * @return integer 
-     */
-    public function getNbQtotMq()
-    {
-        return $this->nbQtotMq;
-    }
-
-    /**
-     * Set nbBrtotMq
-     *
-     * @param integer $nbBrtotMq
-     * @return ScUser
-     */
-    public function setNbBrtotMq($nbBrtotMq)
-    {
-        $this->nbBrtotMq = $nbBrtotMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrtotMq
-     *
-     * @return integer 
-     */
-    public function getNbBrtotMq()
-    {
-        return $this->nbBrtotMq;
-    }
-
-    /**
-     * Set prctBrtotMq
-     *
-     * @param integer $prctBrtotMq
-     * @return ScUser
-     */
-    public function setPrctBrtotMq($prctBrtotMq)
-    {
-        $this->prctBrtotMq = $prctBrtotMq;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrtotMq
-     *
-     * @return integer 
-     */
-    public function getPrctBrtotMq()
-    {
-        return $this->prctBrtotMq;
-    }
-
-    /**
-     * Set nbQhMq
-     *
-     * @param integer $nbQhMq
-     * @return ScUser
-     */
-    public function setNbQhMq($nbQhMq)
-    {
-        $this->nbQhMq = $nbQhMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQhMq
-     *
-     * @return integer 
-     */
-    public function getNbQhMq()
-    {
-        return $this->nbQhMq;
-    }
-
-    /**
-     * Set nbBrhMq
-     *
-     * @param integer $nbBrhMq
-     * @return ScUser
-     */
-    public function setNbBrhMq($nbBrhMq)
-    {
-        $this->nbBrhMq = $nbBrhMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrhMq
-     *
-     * @return integer 
-     */
-    public function getNbBrhMq()
-    {
-        return $this->nbBrhMq;
-    }
-
-    /**
-     * Set prctBrhMq
-     *
-     * @param integer $prctBrhMq
-     * @return ScUser
-     */
-    public function setPrctBrhMq($prctBrhMq)
-    {
-        $this->prctBrhMq = $prctBrhMq;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrhMq
-     *
-     * @return integer 
-     */
-    public function getPrctBrhMq()
-    {
-        return $this->prctBrhMq;
-    }
-
-    /**
-     * Set nbQgMq
-     *
-     * @param integer $nbQgMq
-     * @return ScUser
-     */
-    public function setNbQgMq($nbQgMq)
-    {
-        $this->nbQgMq = $nbQgMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQgMq
-     *
-     * @return integer 
-     */
-    public function getNbQgMq()
-    {
-        return $this->nbQgMq;
-    }
-
-    /**
-     * Set nbBrgMq
-     *
-     * @param integer $nbBrgMq
-     * @return ScUser
-     */
-    public function setNbBrgMq($nbBrgMq)
-    {
-        $this->nbBrgMq = $nbBrgMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrgMq
-     *
-     * @return integer 
-     */
-    public function getNbBrgMq()
-    {
-        return $this->nbBrgMq;
-    }
-
-    /**
-     * Set prctBrgMq
-     *
-     * @param integer $prctBrgMq
-     * @return ScUser
-     */
-    public function setPrctBrgMq($prctBrgMq)
-    {
-        $this->prctBrgMq = $prctBrgMq;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrgMq
-     *
-     * @return integer 
-     */
-    public function getPrctBrgMq()
-    {
-        return $this->prctBrgMq;
-    }
-
-    /**
-     * Set nbQdMq
-     *
-     * @param integer $nbQdMq
-     * @return ScUser
-     */
-    public function setNbQdMq($nbQdMq)
-    {
-        $this->nbQdMq = $nbQdMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQdMq
-     *
-     * @return integer 
-     */
-    public function getNbQdMq()
-    {
-        return $this->nbQdMq;
-    }
-
-    /**
-     * Set nbBrdMq
-     *
-     * @param integer $nbBrdMq
-     * @return ScUser
-     */
-    public function setNbBrdMq($nbBrdMq)
-    {
-        $this->nbBrdMq = $nbBrdMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrdMq
-     *
-     * @return integer 
-     */
-    public function getNbBrdMq()
-    {
-        return $this->nbBrdMq;
-    }
-
-    /**
-     * Set prctBrdMq
-     *
-     * @param integer $prctBrdMq
-     * @return ScUser
-     */
-    public function setPrctBrdMq($prctBrdMq)
-    {
-        $this->prctBrdMq = $prctBrdMq;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrdMq
-     *
-     * @return integer 
-     */
-    public function getPrctBrdMq()
-    {
-        return $this->prctBrdMq;
-    }
-
-    /**
-     * Set nbQalMq
-     *
-     * @param integer $nbQalMq
-     * @return ScUser
-     */
-    public function setNbQalMq($nbQalMq)
-    {
-        $this->nbQalMq = $nbQalMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQalMq
-     *
-     * @return integer 
-     */
-    public function getNbQalMq()
-    {
-        return $this->nbQalMq;
-    }
-
-    /**
-     * Set nbBralMq
-     *
-     * @param integer $nbBralMq
-     * @return ScUser
-     */
-    public function setNbBralMq($nbBralMq)
-    {
-        $this->nbBralMq = $nbBralMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBralMq
-     *
-     * @return integer 
-     */
-    public function getNbBralMq()
-    {
-        return $this->nbBralMq;
-    }
-
-    /**
-     * Set prctBralMq
-     *
-     * @param integer $prctBralMq
-     * @return ScUser
-     */
-    public function setPrctBralMq($prctBralMq)
-    {
-        $this->prctBralMq = $prctBralMq;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBralMq
-     *
-     * @return integer 
-     */
-    public function getPrctBralMq()
-    {
-        return $this->prctBralMq;
-    }
-
-    /**
-     * Set nbQslMq
-     *
-     * @param integer $nbQslMq
-     * @return ScUser
-     */
-    public function setNbQslMq($nbQslMq)
-    {
-        $this->nbQslMq = $nbQslMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQslMq
-     *
-     * @return integer 
-     */
-    public function getNbQslMq()
-    {
-        return $this->nbQslMq;
-    }
-
-    /**
-     * Set nbBrslMq
-     *
-     * @param integer $nbBrslMq
-     * @return ScUser
-     */
-    public function setNbBrslMq($nbBrslMq)
-    {
-        $this->nbBrslMq = $nbBrslMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrslMq
-     *
-     * @return integer 
-     */
-    public function getNbBrslMq()
-    {
-        return $this->nbBrslMq;
-    }
-
-    /**
-     * Set prctBrslMq
-     *
-     * @param integer $prctBrslMq
-     * @return ScUser
-     */
-    public function setPrctBrslMq($prctBrslMq)
-    {
-        $this->prctBrslMq = $prctBrslMq;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrslMq
-     *
-     * @return integer 
-     */
-    public function getPrctBrslMq()
-    {
-        return $this->prctBrslMq;
-    }
-
-    /**
-     * Set nbQsnMq
-     *
-     * @param integer $nbQsnMq
-     * @return ScUser
-     */
-    public function setNbQsnMq($nbQsnMq)
-    {
-        $this->nbQsnMq = $nbQsnMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQsnMq
-     *
-     * @return integer 
-     */
-    public function getNbQsnMq()
-    {
-        return $this->nbQsnMq;
-    }
-
-    /**
-     * Set nbBrsnMq
-     *
-     * @param integer $nbBrsnMq
-     * @return ScUser
-     */
-    public function setNbBrsnMq($nbBrsnMq)
-    {
-        $this->nbBrsnMq = $nbBrsnMq;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrsnMq
-     *
-     * @return integer 
-     */
-    public function getNbBrsnMq()
-    {
-        return $this->nbBrsnMq;
-    }
-
-    /**
-     * Set prctBrsnMq
-     *
-     * @param integer $prctBrsnMq
-     * @return ScUser
-     */
-    public function setPrctBrsnMq($prctBrsnMq)
-    {
-        $this->prctBrsnMq = $prctBrsnMq;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrsnMq
-     *
-     * @return integer 
-     */
-    public function getPrctBrsnMq()
-    {
-        return $this->prctBrsnMq;
-    }
-
-
-
-    /**
-     * Set top10month
-     *
-     * @param array $top10month
-     * @return ScUser
-     */
-    public function setTop10month($top10month)
-    {
-        $this->top10month = $top10month;
-
-        return $this;
-    }
-
-    /**
-     * Get top10month
-     *
-     * @return array 
-     */
-    public function getTop10month()
-    {
-        return $this->top10month;
-    }
-
-    /**
-     * Set sumtop10month
-     *
-     * @param integer $sumtop10month
-     * @return ScUser
-     */
-    public function setSumtop10month($sumtop10month)
-    {
-        $this->sumtop10month = $sumtop10month;
-
-        return $this;
-    }
-
-    /**
-     * Get sumtop10month
-     *
-     * @return integer 
-     */
-    public function getSumtop10month()
-    {
-        return $this->sumtop10month;
-    }
-
-    /**
-     * Set usermap
-     *
-     * @param \MDQ\UserBundle\Entity\User $usermap
-     * @return ScUser
-     */
-    public function setUsermap(\MDQ\UserBundle\Entity\User $usermap = null)
-    {
-        $this->usermap = $usermap;
-
-        return $this;
-    }
-
-    /**
-     * Get usermap
-     *
-     * @return \MDQ\UserBundle\Entity\User 
-     */
-    public function getUsermap()
-    {
-        return $this->usermap;
-    }
-
-
-
-    
-
-
-    /**
-     * Set monthHighScMq
-     *
-     * @param integer $monthHighScMq
-     * @return ScUser
-     */
-    public function setMonthHighScMq($monthHighScMq)
-    {
-        $this->monthHighScMq = $monthHighScMq;
-
-        return $this;
-    }
-
-    /**
-     * Get monthHighScMq
-     *
-     * @return integer 
-     */
-    public function getMonthHighScMq()
-    {
-        return $this->monthHighScMq;
-    }
-
-    /**
-     * Set scofDayMq
-     *
-     * @param integer $scofDayMq
-     * @return ScUser
-     */
-    public function setScofDayMq($scofDayMq)
-    {
-        $this->scofDayMq = $scofDayMq;
-
-        return $this;
-    }
-
-    /**
-     * Get scofDayMq
-     *
-     * @return integer 
-     */
-    public function getScofDayMq()
-    {
-        return $this->scofDayMq;
-    }
-
-    /**
-     * Set highClassDayMq
-     *
-     * @param integer $highClassDayMq
-     * @return ScUser
-     */
-    public function setHighClassDayMq($highClassDayMq)
-    {
-        $this->highClassDayMq = $highClassDayMq;
-
-        return $this;
-    }
-
-    /**
-     * Get highClassDayMq
-     *
-     * @return integer 
-     */
-    public function getHighClassDayMq()
-    {
-        return $this->highClassDayMq;
-    }
-
-    /**
-     * Set numHighClassDayMq
-     *
-     * @param integer $numHighClassDayMq
-     * @return ScUser
-     */
-    public function setNumHighClassDayMq($numHighClassDayMq)
-    {
-        $this->numHighClassDayMq = $numHighClassDayMq;
-
-        return $this;
-    }
-
-    /**
-     * Get numHighClassDayMq
-     *
-     * @return integer 
-     */
-    public function getNumHighClassDayMq()
-    {
-        return $this->numHighClassDayMq;
-    }
-
-    /**
-     * Set highClassMonthMq
-     *
-     * @param integer $highClassMonthMq
-     * @return ScUser
-     */
-    public function setHighClassMonthMq($highClassMonthMq)
-    {
-        $this->highClassMonthMq = $highClassMonthMq;
-
-        return $this;
-    }
-
-    /**
-     * Get highClassMonthMq
-     *
-     * @return integer 
-     */
-    public function getHighClassMonthMq()
-    {
-        return $this->highClassMonthMq;
-    }
-
-    /**
-     * Set numHighClassMonthMq
-     *
-     * @param integer $numHighClassMonthMq
-     * @return ScUser
-     */
-    public function setNumHighClassMonthMq($numHighClassMonthMq)
-    {
-        $this->numHighClassMonthMq = $numHighClassMonthMq;
-
-        return $this;
-    }
-
-    /**
-     * Get numHighClassMonthMq
-     *
-     * @return integer 
-     */
-    public function getNumHighClassMonthMq()
-    {
-        return $this->numHighClassMonthMq;
-    }
-
-    /**
-     * Set tabCoefBot
-     *
-     * @param array $tabCoefBot
-     * @return ScUser
-     */
-    public function setTabCoefBot($tabCoefBot)
-    {
-        $this->tabCoefBot = $tabCoefBot;
-
-        return $this;
-    }
-
-    /**
-     * Get tabCoefBot
-     *
-     * @return array 
-     */
-    public function getTabCoefBot()
-    {
-        return $this->tabCoefBot;
-    }
-
-    
-    /**
-     * Set nbErrorSignalTot
-     *
-     * @param integer $nbErrorSignalTot
-     * @return ScUser
-     */
-    public function setNbErrorSignalTot($nbErrorSignalTot)
-    {
-        $this->nbErrorSignalTot = $nbErrorSignalTot;
-
-        return $this;
-    }
-
-    /**
-     * Get nbErrorSignalTot
-     *
-     * @return integer 
-     */
-    public function getNbErrorSignalTot()
-    {
-        return $this->nbErrorSignalTot;
-    }
-
-    /**
-     * Set nbErrorSignal
-     *
-     * @param integer $nbErrorSignal
-     * @return ScUser
-     */
-    public function setNbErrorSignal($nbErrorSignal)
-    {
-        $this->nbErrorSignal = $nbErrorSignal;
-
-        return $this;
-    }
-
-    /**
-     * Get nbErrorSignal
-     *
-     * @return integer 
-     */
-    public function getNbErrorSignal()
-    {
-        return $this->nbErrorSignal;
-    }
-
-    /**
-     * Add questions_error
-     *
-     * @param \MDQ\QuestionBundle\Entity\Question $questionsError
-     * @return ScUser
-     */
-    public function addQuestionError(\MDQ\QuestionBundle\Entity\Question $questionsError)
-    {
-        $this->questions_error[] = $questionsError;
-
-        return $this;
-    }
-
-    /**
-     * Remove questions_error
-     *
-     * @param \MDQ\QuestionBundle\Entity\Question $questionsError
-     */
-    public function removeQuestionError(\MDQ\QuestionBundle\Entity\Question $questionsError)
-    {
-        $this->questions_error->removeElement($questionsError);
-    }
-
-    /**
-     * Get questions_error
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getQuestionsError()
-    {
-        return $this->questions_error;
-    }
-
-    /**
-     * Add questions_error
-     *
-     * @param \MDQ\QuestionBundle\Entity\Question $questionsError
-     * @return ScUser
-     */
-    public function addQuestionsError(\MDQ\QuestionBundle\Entity\Question $questionsError)
-    {
-        $this->questions_error[] = $questionsError;
-
-        return $this;
-    }
-
-    /**
-     * Remove questions_error
-     *
-     * @param \MDQ\QuestionBundle\Entity\Question $questionsError
-     */
-    public function removeQuestionsError(\MDQ\QuestionBundle\Entity\Question $questionsError)
-    {
-        $this->questions_error->removeElement($questionsError);
-    }
-
-
-    /**
-     * Add qavaliders
-     *
-     * @param \MDQ\QuestionBundle\Entity\QaValider $qavaliders
-     * @return ScUser
-     */
-    public function addQavalider(\MDQ\QuestionBundle\Entity\QaValider $qavalider)
-    {
-        $this->qavaliders[] = $qavalider;
-		$qavalider->setAuteur($this);
-        return $this;
-    }
-
-    /**
-     * Remove qavaliders
-     *
-     * @param \MDQ\QuestionBundle\Entity\QaValider $qavaliders
-     */
-    public function removeQavalider(\MDQ\QuestionBundle\Entity\QaValider $qavalider)
-    {
-        $this->qavaliders->removeElement($qavalider);
-		
-    }
-
-    /**
-     * Get qavaliders
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getQavaliders()
-    {
-        return $this->qavaliders;
-    }
-
-    /**
-     * Set nbQprop
-     *
-     * @param integer $nbQprop
-     * @return ScUser
-     */
-    public function setNbQprop($nbQprop)
-    {
-        $this->nbQprop = $nbQprop;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQprop
-     *
-     * @return integer 
-     */
-    public function getNbQprop()
-    {
-        return $this->nbQprop;
-    }
-
-    /**
-     * Set nbQvalid
-     *
-     * @param integer $nbQvalid
-     * @return ScUser
-     */
-    public function setNbQvalid($nbQvalid)
-    {
-        $this->nbQvalid = $nbQvalid;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQvalid
-     *
-     * @return integer 
-     */
-    public function getNbQvalid()
-    {
-        return $this->nbQvalid;
-    }
-
-    /**
-     * Set nbQSx
-     *
-     * @param integer $nbQSx
-     * @return ScUser
-     */
-    public function setNbQSx($nbQSx)
-    {
-        $this->nbQSx = $nbQSx;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQSx
-     *
-     * @return integer 
-     */
-    public function getNbQSx()
-    {
-        return $this->nbQSx;
-    }
-
-    /**
-     * Set nbBrSx
-     *
-     * @param integer $nbBrSx
-     * @return ScUser
-     */
-    public function setNbBrSx($nbBrSx)
-    {
-        $this->nbBrSx = $nbBrSx;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrSx
-     *
-     * @return integer 
-     */
-    public function getNbBrSx()
-    {
-        return $this->nbBrSx;
-    }
-
-    /**
-     * Set prctBrSx
-     *
-     * @param string $prctBrSx
-     * @return ScUser
-     */
-    public function setPrctBrSx($prctBrSx)
-    {
-        $this->prctBrSx = $prctBrSx;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrSx
-     *
-     * @return string 
-     */
-    public function getPrctBrSx()
-    {
-        return $this->prctBrSx;
-    }
-
-    /**
-     * Set nbPSx
-     *
-     * @param integer $nbPSx
-     * @return ScUser
-     */
-    public function setNbPSx($nbPSx)
-    {
-        $this->nbPSx = $nbPSx;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPSx
-     *
-     * @return integer 
-     */
-    public function getNbPSx()
-    {
-        return $this->nbPSx;
-    }
-
-    /**
-     * Set scTotSx
-     *
-     * @param integer $scTotSx
-     * @return ScUser
-     */
-    public function setScTotSx($scTotSx)
-    {
-        $this->scTotSx = $scTotSx;
-
-        return $this;
-    }
-
-    /**
-     * Get scTotSx
-     *
-     * @return integer 
-     */
-    public function getScTotSx()
-    {
-        return $this->scTotSx;
-    }
-
-    /**
-     * Set scMoySx
-     *
-     * @param string $scMoySx
-     * @return ScUser
-     */
-    public function setScMoySx($scMoySx)
-    {
-        $this->scMoySx = $scMoySx;
-
-        return $this;
-    }
-
-    /**
-     * Get scMoySx
-     *
-     * @return string 
-     */
-    public function getScMoySx()
-    {
-        return $this->scMoySx;
-    }
-
-    /**
-     * Set scMaxSx
-     *
-     * @param integer $scMaxSx
-     * @return ScUser
-     */
-    public function setScMaxSx($scMaxSx)
-    {
-        $this->scMaxSx = $scMaxSx;
-
-        return $this;
-    }
-
-    /**
-     * Get scMaxSx
-     *
-     * @return integer 
-     */
-    public function getScMaxSx()
-    {
-        return $this->scMaxSx;
-    }
-
-    /**
-     * Set scofDaySx
-     *
-     * @param integer $scofDaySx
-     * @return ScUser
-     */
-    public function setScofDaySx($scofDaySx)
-    {
-        $this->scofDaySx = $scofDaySx;
-
-        return $this;
-    }
-
-    /**
-     * Get scofDaySx
-     *
-     * @return integer 
-     */
-    public function getScofDaySx()
-    {
-        return $this->scofDaySx;
-    }
-
-    /**
-     * Set nbQTv
-     *
-     * @param integer $nbQTv
-     * @return ScUser
-     */
-    public function setNbQTv($nbQTv)
-    {
-        $this->nbQTv = $nbQTv;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQTv
-     *
-     * @return integer 
-     */
-    public function getNbQTv()
-    {
-        return $this->nbQTv;
-    }
-
-    /**
-     * Set nbBrTv
-     *
-     * @param integer $nbBrTv
-     * @return ScUser
-     */
-    public function setNbBrTv($nbBrTv)
-    {
-        $this->nbBrTv = $nbBrTv;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrTv
-     *
-     * @return integer 
-     */
-    public function getNbBrTv()
-    {
-        return $this->nbBrTv;
-    }
-
-    /**
-     * Set prctBrTv
-     *
-     * @param string $prctBrTv
-     * @return ScUser
-     */
-    public function setPrctBrTv($prctBrTv)
-    {
-        $this->prctBrTv = $prctBrTv;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrTv
-     *
-     * @return string 
-     */
-    public function getPrctBrTv()
-    {
-        return $this->prctBrTv;
-    }
-
-    /**
-     * Set nbPTv
-     *
-     * @param integer $nbPTv
-     * @return ScUser
-     */
-    public function setNbPTv($nbPTv)
-    {
-        $this->nbPTv = $nbPTv;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPTv
-     *
-     * @return integer 
-     */
-    public function getNbPTv()
-    {
-        return $this->nbPTv;
-    }
-
-    /**
-     * Set scTotTv
-     *
-     * @param integer $scTotTv
-     * @return ScUser
-     */
-    public function setScTotTv($scTotTv)
-    {
-        $this->scTotTv = $scTotTv;
-
-        return $this;
-    }
-
-    /**
-     * Get scTotTv
-     *
-     * @return integer 
-     */
-    public function getScTotTv()
-    {
-        return $this->scTotTv;
-    }
-
-    /**
-     * Set scMoyTv
-     *
-     * @param string $scMoyTv
-     * @return ScUser
-     */
-    public function setScMoyTv($scMoyTv)
-    {
-        $this->scMoyTv = $scMoyTv;
-
-        return $this;
-    }
-
-    /**
-     * Get scMoyTv
-     *
-     * @return string 
-     */
-    public function getScMoyTv()
-    {
-        return $this->scMoyTv;
-    }
-
-    /**
-     * Set scMaxTv
-     *
-     * @param integer $scMaxTv
-     * @return ScUser
-     */
-    public function setScMaxTv($scMaxTv)
-    {
-        $this->scMaxTv = $scMaxTv;
-
-        return $this;
-    }
-
-    /**
-     * Get scMaxTv
-     *
-     * @return integer 
-     */
-    public function getScMaxTv()
-    {
-        return $this->scMaxTv;
-    }
-
-    /**
-     * Set scofDayTv
-     *
-     * @param integer $scofDayTv
-     * @return ScUser
-     */
-    public function setScofDayTv($scofDayTv)
-    {
-        $this->scofDayTv = $scofDayTv;
-
-        return $this;
-    }
-
-    /**
-     * Get scofDayTv
-     *
-     * @return integer 
-     */
-    public function getScofDayTv()
-    {
-        return $this->scofDayTv;
-    }
-
-
-    /**
      * Set nbJMq
      *
      * @param integer $nbJMq
+     *
      * @return ScUser
      */
     public function setNbJMq($nbJMq)
@@ -2664,7 +1396,7 @@ class ScUser
     /**
      * Get nbJMq
      *
-     * @return integer 
+     * @return integer
      */
     public function getNbJMq()
     {
@@ -2675,6 +1407,7 @@ class ScUser
      * Set nbJdayMq
      *
      * @param integer $nbJdayMq
+     *
      * @return ScUser
      */
     public function setNbJdayMq($nbJdayMq)
@@ -2687,7 +1420,7 @@ class ScUser
     /**
      * Get nbJdayMq
      *
-     * @return integer 
+     * @return integer
      */
     public function getNbJdayMq()
     {
@@ -2698,6 +1431,7 @@ class ScUser
      * Set nbJQnF
      *
      * @param integer $nbJQnF
+     *
      * @return ScUser
      */
     public function setNbJQnF($nbJQnF)
@@ -2710,7 +1444,7 @@ class ScUser
     /**
      * Get nbJQnF
      *
-     * @return integer 
+     * @return integer
      */
     public function getNbJQnF()
     {
@@ -2721,6 +1455,7 @@ class ScUser
      * Set nbJdayQnF
      *
      * @param integer $nbJdayQnF
+     *
      * @return ScUser
      */
     public function setNbJdayQnF($nbJdayQnF)
@@ -2733,7 +1468,7 @@ class ScUser
     /**
      * Get nbJdayQnF
      *
-     * @return integer 
+     * @return integer
      */
     public function getNbJdayQnF()
     {
@@ -2741,9 +1476,802 @@ class ScUser
     }
 
     /**
+     * Set nbBrtot
+     *
+     * @param integer $nbBrtot
+     *
+     * @return ScUser
+     */
+    public function setNbBrtot($nbBrtot)
+    {
+        $this->nbBrtot = $nbBrtot;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrtot
+     *
+     * @return integer
+     */
+    public function getNbBrtot()
+    {
+        return $this->nbBrtot;
+    }
+
+    /**
+     * Set nbPtot
+     *
+     * @param integer $nbPtot
+     *
+     * @return ScUser
+     */
+    public function setNbPtot($nbPtot)
+    {
+        $this->nbPtot = $nbPtot;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPtot
+     *
+     * @return integer
+     */
+    public function getNbPtot()
+    {
+        return $this->nbPtot;
+    }
+
+    /**
+     * Set nbPMq
+     *
+     * @param integer $nbPMq
+     *
+     * @return ScUser
+     */
+    public function setNbPMq($nbPMq)
+    {
+        $this->nbPMq = $nbPMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPMq
+     *
+     * @return integer
+     */
+    public function getNbPMq()
+    {
+        return $this->nbPMq;
+    }
+
+    /**
+     * Set scTotMq
+     *
+     * @param integer $scTotMq
+     *
+     * @return ScUser
+     */
+    public function setScTotMq($scTotMq)
+    {
+        $this->scTotMq = $scTotMq;
+
+        return $this;
+    }
+
+    /**
+     * Get scTotMq
+     *
+     * @return integer
+     */
+    public function getScTotMq()
+    {
+        return $this->scTotMq;
+    }
+
+    /**
+     * Set scMoyMq
+     *
+     * @param string $scMoyMq
+     *
+     * @return ScUser
+     */
+    public function setScMoyMq($scMoyMq)
+    {
+        $this->scMoyMq = $scMoyMq;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyMq
+     *
+     * @return string
+     */
+    public function getScMoyMq()
+    {
+        return $this->scMoyMq;
+    }
+
+    /**
+     * Set scMaxMq
+     *
+     * @param integer $scMaxMq
+     *
+     * @return ScUser
+     */
+    public function setScMaxMq($scMaxMq)
+    {
+        $this->scMaxMq = $scMaxMq;
+
+        return $this;
+    }
+
+    /**
+     * Get scMaxMq
+     *
+     * @return integer
+     */
+    public function getScMaxMq()
+    {
+        return $this->scMaxMq;
+    }
+
+    /**
+     * Set datescMaxMq
+     *
+     * @param \DateTime $datescMaxMq
+     *
+     * @return ScUser
+     */
+    public function setDatescMaxMq($datescMaxMq)
+    {
+        $this->datescMaxMq = $datescMaxMq;
+
+        return $this;
+    }
+
+    /**
+     * Get datescMaxMq
+     *
+     * @return \DateTime
+     */
+    public function getDatescMaxMq()
+    {
+        return $this->datescMaxMq;
+    }
+
+    /**
+     * Set nbQtotMq
+     *
+     * @param integer $nbQtotMq
+     *
+     * @return ScUser
+     */
+    public function setNbQtotMq($nbQtotMq)
+    {
+        $this->nbQtotMq = $nbQtotMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQtotMq
+     *
+     * @return integer
+     */
+    public function getNbQtotMq()
+    {
+        return $this->nbQtotMq;
+    }
+
+    /**
+     * Set nbBrtotMq
+     *
+     * @param integer $nbBrtotMq
+     *
+     * @return ScUser
+     */
+    public function setNbBrtotMq($nbBrtotMq)
+    {
+        $this->nbBrtotMq = $nbBrtotMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrtotMq
+     *
+     * @return integer
+     */
+    public function getNbBrtotMq()
+    {
+        return $this->nbBrtotMq;
+    }
+
+    /**
+     * Set prctBrtotMq
+     *
+     * @param string $prctBrtotMq
+     *
+     * @return ScUser
+     */
+    public function setPrctBrtotMq($prctBrtotMq)
+    {
+        $this->prctBrtotMq = $prctBrtotMq;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrtotMq
+     *
+     * @return string
+     */
+    public function getPrctBrtotMq()
+    {
+        return $this->prctBrtotMq;
+    }
+
+    /**
+     * Set nbQhMq
+     *
+     * @param integer $nbQhMq
+     *
+     * @return ScUser
+     */
+    public function setNbQhMq($nbQhMq)
+    {
+        $this->nbQhMq = $nbQhMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQhMq
+     *
+     * @return integer
+     */
+    public function getNbQhMq()
+    {
+        return $this->nbQhMq;
+    }
+
+    /**
+     * Set nbBrhMq
+     *
+     * @param integer $nbBrhMq
+     *
+     * @return ScUser
+     */
+    public function setNbBrhMq($nbBrhMq)
+    {
+        $this->nbBrhMq = $nbBrhMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrhMq
+     *
+     * @return integer
+     */
+    public function getNbBrhMq()
+    {
+        return $this->nbBrhMq;
+    }
+
+    /**
+     * Set prctBrhMq
+     *
+     * @param string $prctBrhMq
+     *
+     * @return ScUser
+     */
+    public function setPrctBrhMq($prctBrhMq)
+    {
+        $this->prctBrhMq = $prctBrhMq;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrhMq
+     *
+     * @return string
+     */
+    public function getPrctBrhMq()
+    {
+        return $this->prctBrhMq;
+    }
+
+    /**
+     * Set nbQgMq
+     *
+     * @param integer $nbQgMq
+     *
+     * @return ScUser
+     */
+    public function setNbQgMq($nbQgMq)
+    {
+        $this->nbQgMq = $nbQgMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQgMq
+     *
+     * @return integer
+     */
+    public function getNbQgMq()
+    {
+        return $this->nbQgMq;
+    }
+
+    /**
+     * Set nbBrgMq
+     *
+     * @param integer $nbBrgMq
+     *
+     * @return ScUser
+     */
+    public function setNbBrgMq($nbBrgMq)
+    {
+        $this->nbBrgMq = $nbBrgMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrgMq
+     *
+     * @return integer
+     */
+    public function getNbBrgMq()
+    {
+        return $this->nbBrgMq;
+    }
+
+    /**
+     * Set prctBrgMq
+     *
+     * @param string $prctBrgMq
+     *
+     * @return ScUser
+     */
+    public function setPrctBrgMq($prctBrgMq)
+    {
+        $this->prctBrgMq = $prctBrgMq;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrgMq
+     *
+     * @return string
+     */
+    public function getPrctBrgMq()
+    {
+        return $this->prctBrgMq;
+    }
+
+    /**
+     * Set nbQdMq
+     *
+     * @param integer $nbQdMq
+     *
+     * @return ScUser
+     */
+    public function setNbQdMq($nbQdMq)
+    {
+        $this->nbQdMq = $nbQdMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQdMq
+     *
+     * @return integer
+     */
+    public function getNbQdMq()
+    {
+        return $this->nbQdMq;
+    }
+
+    /**
+     * Set nbBrdMq
+     *
+     * @param integer $nbBrdMq
+     *
+     * @return ScUser
+     */
+    public function setNbBrdMq($nbBrdMq)
+    {
+        $this->nbBrdMq = $nbBrdMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrdMq
+     *
+     * @return integer
+     */
+    public function getNbBrdMq()
+    {
+        return $this->nbBrdMq;
+    }
+
+    /**
+     * Set prctBrdMq
+     *
+     * @param string $prctBrdMq
+     *
+     * @return ScUser
+     */
+    public function setPrctBrdMq($prctBrdMq)
+    {
+        $this->prctBrdMq = $prctBrdMq;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrdMq
+     *
+     * @return string
+     */
+    public function getPrctBrdMq()
+    {
+        return $this->prctBrdMq;
+    }
+
+    /**
+     * Set nbQalMq
+     *
+     * @param integer $nbQalMq
+     *
+     * @return ScUser
+     */
+    public function setNbQalMq($nbQalMq)
+    {
+        $this->nbQalMq = $nbQalMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQalMq
+     *
+     * @return integer
+     */
+    public function getNbQalMq()
+    {
+        return $this->nbQalMq;
+    }
+
+    /**
+     * Set nbBralMq
+     *
+     * @param integer $nbBralMq
+     *
+     * @return ScUser
+     */
+    public function setNbBralMq($nbBralMq)
+    {
+        $this->nbBralMq = $nbBralMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBralMq
+     *
+     * @return integer
+     */
+    public function getNbBralMq()
+    {
+        return $this->nbBralMq;
+    }
+
+    /**
+     * Set prctBralMq
+     *
+     * @param string $prctBralMq
+     *
+     * @return ScUser
+     */
+    public function setPrctBralMq($prctBralMq)
+    {
+        $this->prctBralMq = $prctBralMq;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBralMq
+     *
+     * @return string
+     */
+    public function getPrctBralMq()
+    {
+        return $this->prctBralMq;
+    }
+
+    /**
+     * Set nbQslMq
+     *
+     * @param integer $nbQslMq
+     *
+     * @return ScUser
+     */
+    public function setNbQslMq($nbQslMq)
+    {
+        $this->nbQslMq = $nbQslMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQslMq
+     *
+     * @return integer
+     */
+    public function getNbQslMq()
+    {
+        return $this->nbQslMq;
+    }
+
+    /**
+     * Set nbBrslMq
+     *
+     * @param integer $nbBrslMq
+     *
+     * @return ScUser
+     */
+    public function setNbBrslMq($nbBrslMq)
+    {
+        $this->nbBrslMq = $nbBrslMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrslMq
+     *
+     * @return integer
+     */
+    public function getNbBrslMq()
+    {
+        return $this->nbBrslMq;
+    }
+
+    /**
+     * Set prctBrslMq
+     *
+     * @param string $prctBrslMq
+     *
+     * @return ScUser
+     */
+    public function setPrctBrslMq($prctBrslMq)
+    {
+        $this->prctBrslMq = $prctBrslMq;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrslMq
+     *
+     * @return string
+     */
+    public function getPrctBrslMq()
+    {
+        return $this->prctBrslMq;
+    }
+
+    /**
+     * Set nbQsnMq
+     *
+     * @param integer $nbQsnMq
+     *
+     * @return ScUser
+     */
+    public function setNbQsnMq($nbQsnMq)
+    {
+        $this->nbQsnMq = $nbQsnMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQsnMq
+     *
+     * @return integer
+     */
+    public function getNbQsnMq()
+    {
+        return $this->nbQsnMq;
+    }
+
+    /**
+     * Set nbBrsnMq
+     *
+     * @param integer $nbBrsnMq
+     *
+     * @return ScUser
+     */
+    public function setNbBrsnMq($nbBrsnMq)
+    {
+        $this->nbBrsnMq = $nbBrsnMq;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrsnMq
+     *
+     * @return integer
+     */
+    public function getNbBrsnMq()
+    {
+        return $this->nbBrsnMq;
+    }
+
+    /**
+     * Set prctBrsnMq
+     *
+     * @param string $prctBrsnMq
+     *
+     * @return ScUser
+     */
+    public function setPrctBrsnMq($prctBrsnMq)
+    {
+        $this->prctBrsnMq = $prctBrsnMq;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrsnMq
+     *
+     * @return string
+     */
+    public function getPrctBrsnMq()
+    {
+        return $this->prctBrsnMq;
+    }
+
+    /**
+     * Set top10month
+     *
+     * @param array $top10month
+     *
+     * @return ScUser
+     */
+    public function setTop10month($top10month)
+    {
+        $this->top10month = $top10month;
+
+        return $this;
+    }
+
+    /**
+     * Get top10month
+     *
+     * @return array
+     */
+    public function getTop10month()
+    {
+        return $this->top10month;
+    }
+
+    /**
+     * Set sumtop10month
+     *
+     * @param integer $sumtop10month
+     *
+     * @return ScUser
+     */
+    public function setSumtop10month($sumtop10month)
+    {
+        $this->sumtop10month = $sumtop10month;
+
+        return $this;
+    }
+
+    /**
+     * Get sumtop10month
+     *
+     * @return integer
+     */
+    public function getSumtop10month()
+    {
+        return $this->sumtop10month;
+    }
+
+    /**
+     * Set monthHighScMq
+     *
+     * @param integer $monthHighScMq
+     *
+     * @return ScUser
+     */
+    public function setMonthHighScMq($monthHighScMq)
+    {
+        $this->monthHighScMq = $monthHighScMq;
+
+        return $this;
+    }
+
+    /**
+     * Get monthHighScMq
+     *
+     * @return integer
+     */
+    public function getMonthHighScMq()
+    {
+        return $this->monthHighScMq;
+    }
+
+    /**
+     * Set highClassMonthMq
+     *
+     * @param integer $highClassMonthMq
+     *
+     * @return ScUser
+     */
+    public function setHighClassMonthMq($highClassMonthMq)
+    {
+        $this->highClassMonthMq = $highClassMonthMq;
+
+        return $this;
+    }
+
+    /**
+     * Get highClassMonthMq
+     *
+     * @return integer
+     */
+    public function getHighClassMonthMq()
+    {
+        return $this->highClassMonthMq;
+    }
+
+    /**
+     * Set numHighClassMonthMq
+     *
+     * @param integer $numHighClassMonthMq
+     *
+     * @return ScUser
+     */
+    public function setNumHighClassMonthMq($numHighClassMonthMq)
+    {
+        $this->numHighClassMonthMq = $numHighClassMonthMq;
+
+        return $this;
+    }
+
+    /**
+     * Get numHighClassMonthMq
+     *
+     * @return integer
+     */
+    public function getNumHighClassMonthMq()
+    {
+        return $this->numHighClassMonthMq;
+    }
+
+    /**
      * Set top5weekMq
      *
      * @param array $top5weekMq
+     *
      * @return ScUser
      */
     public function setTop5weekMq($top5weekMq)
@@ -2756,7 +2284,7 @@ class ScUser
     /**
      * Get top5weekMq
      *
-     * @return array 
+     * @return array
      */
     public function getTop5weekMq()
     {
@@ -2767,6 +2295,7 @@ class ScUser
      * Set sumtop5weekMq
      *
      * @param integer $sumtop5weekMq
+     *
      * @return ScUser
      */
     public function setSumtop5weekMq($sumtop5weekMq)
@@ -2779,7 +2308,7 @@ class ScUser
     /**
      * Get sumtop5weekMq
      *
-     * @return integer 
+     * @return integer
      */
     public function getSumtop5weekMq()
     {
@@ -2790,6 +2319,7 @@ class ScUser
      * Set hightop5weekMq
      *
      * @param integer $hightop5weekMq
+     *
      * @return ScUser
      */
     public function setHightop5weekMq($hightop5weekMq)
@@ -2802,1031 +2332,18 @@ class ScUser
     /**
      * Get hightop5weekMq
      *
-     * @return integer 
+     * @return integer
      */
     public function getHightop5weekMq()
     {
         return $this->hightop5weekMq;
     }
 
-  
-
-    /**
-     * Set nbQMu
-     *
-     * @param integer $nbQMu
-     * @return ScUser
-     */
-    public function setNbQMu($nbQMu)
-    {
-        $this->nbQMu = $nbQMu;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQMu
-     *
-     * @return integer 
-     */
-    public function getNbQMu()
-    {
-        return $this->nbQMu;
-    }
-
-    /**
-     * Set nbBrMu
-     *
-     * @param integer $nbBrMu
-     * @return ScUser
-     */
-    public function setNbBrMu($nbBrMu)
-    {
-        $this->nbBrMu = $nbBrMu;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrMu
-     *
-     * @return integer 
-     */
-    public function getNbBrMu()
-    {
-        return $this->nbBrMu;
-    }
-
-    /**
-     * Set prctBrMu
-     *
-     * @param string $prctBrMu
-     * @return ScUser
-     */
-    public function setPrctBrMu($prctBrMu)
-    {
-        $this->prctBrMu = $prctBrMu;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrMu
-     *
-     * @return string 
-     */
-    public function getPrctBrMu()
-    {
-        return $this->prctBrMu;
-    }
-
-    /**
-     * Set nbPMu
-     *
-     * @param integer $nbPMu
-     * @return ScUser
-     */
-    public function setNbPMu($nbPMu)
-    {
-        $this->nbPMu = $nbPMu;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPMu
-     *
-     * @return integer 
-     */
-    public function getNbPMu()
-    {
-        return $this->nbPMu;
-    }
-
-    /**
-     * Set scTotMu
-     *
-     * @param integer $scTotMu
-     * @return ScUser
-     */
-    public function setScTotMu($scTotMu)
-    {
-        $this->scTotMu = $scTotMu;
-
-        return $this;
-    }
-
-    /**
-     * Get scTotMu
-     *
-     * @return integer 
-     */
-    public function getScTotMu()
-    {
-        return $this->scTotMu;
-    }
-
-    /**
-     * Set scMoyMu
-     *
-     * @param string $scMoyMu
-     * @return ScUser
-     */
-    public function setScMoyMu($scMoyMu)
-    {
-        $this->scMoyMu = $scMoyMu;
-
-        return $this;
-    }
-
-    /**
-     * Get scMoyMu
-     *
-     * @return string 
-     */
-    public function getScMoyMu()
-    {
-        return $this->scMoyMu;
-    }
-
-    /**
-     * Set scMaxMu
-     *
-     * @param integer $scMaxMu
-     * @return ScUser
-     */
-    public function setScMaxMu($scMaxMu)
-    {
-        $this->scMaxMu = $scMaxMu;
-
-        return $this;
-    }
-
-    /**
-     * Get scMaxMu
-     *
-     * @return integer 
-     */
-    public function getScMaxMu()
-    {
-        return $this->scMaxMu;
-    }
-
-    /**
-     * Set scofDayMu
-     *
-     * @param integer $scofDayMu
-     * @return ScUser
-     */
-    public function setScofDayMu($scofDayMu)
-    {
-        $this->scofDayMu = $scofDayMu;
-
-        return $this;
-    }
-
-    /**
-     * Get scofDayMu
-     *
-     * @return integer 
-     */
-    public function getScofDayMu()
-    {
-        return $this->scofDayMu;
-    }
-
-    /**
-     * Set nbQFf
-     *
-     * @param integer $nbQFf
-     * @return ScUser
-     */
-    public function setNbQFf($nbQFf)
-    {
-        $this->nbQFf = $nbQFf;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQFf
-     *
-     * @return integer 
-     */
-    public function getNbQFf()
-    {
-        return $this->nbQFf;
-    }
-
-    /**
-     * Set nbBrFf
-     *
-     * @param integer $nbBrFf
-     * @return ScUser
-     */
-    public function setNbBrFf($nbBrFf)
-    {
-        $this->nbBrFf = $nbBrFf;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrFf
-     *
-     * @return integer 
-     */
-    public function getNbBrFf()
-    {
-        return $this->nbBrFf;
-    }
-
-    /**
-     * Set prctBrFf
-     *
-     * @param string $prctBrFf
-     * @return ScUser
-     */
-    public function setPrctBrFf($prctBrFf)
-    {
-        $this->prctBrFf = $prctBrFf;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrFf
-     *
-     * @return string 
-     */
-    public function getPrctBrFf()
-    {
-        return $this->prctBrFf;
-    }
-
-    /**
-     * Set nbPFf
-     *
-     * @param integer $nbPFf
-     * @return ScUser
-     */
-    public function setNbPFf($nbPFf)
-    {
-        $this->nbPFf = $nbPFf;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPFf
-     *
-     * @return integer 
-     */
-    public function getNbPFf()
-    {
-        return $this->nbPFf;
-    }
-
-    /**
-     * Set scTotFf
-     *
-     * @param integer $scTotFf
-     * @return ScUser
-     */
-    public function setScTotFf($scTotFf)
-    {
-        $this->scTotFf = $scTotFf;
-
-        return $this;
-    }
-
-    /**
-     * Get scTotFf
-     *
-     * @return integer 
-     */
-    public function getScTotFf()
-    {
-        return $this->scTotFf;
-    }
-
-    /**
-     * Set scMoyFf
-     *
-     * @param string $scMoyFf
-     * @return ScUser
-     */
-    public function setScMoyFf($scMoyFf)
-    {
-        $this->scMoyFf = $scMoyFf;
-
-        return $this;
-    }
-
-    /**
-     * Get scMoyFf
-     *
-     * @return string 
-     */
-    public function getScMoyFf()
-    {
-        return $this->scMoyFf;
-    }
-
-    /**
-     * Set scMaxFf
-     *
-     * @param integer $scMaxFf
-     * @return ScUser
-     */
-    public function setScMaxFf($scMaxFf)
-    {
-        $this->scMaxFf = $scMaxFf;
-
-        return $this;
-    }
-
-    /**
-     * Get scMaxFf
-     *
-     * @return integer 
-     */
-    public function getScMaxFf()
-    {
-        return $this->scMaxFf;
-    }
-
-    /**
-     * Set scofDayFf
-     *
-     * @param integer $scofDayFf
-     * @return ScUser
-     */
-    public function setScofDayFf($scofDayFf)
-    {
-        $this->scofDayFf = $scofDayFf;
-
-        return $this;
-    }
-
-    /**
-     * Get scofDayFf
-     *
-     * @return integer 
-     */
-    public function getScofDayFf()
-    {
-        return $this->scofDayFf;
-    }
-
-    /**
-     * Set nbQAr
-     *
-     * @param integer $nbQAr
-     * @return ScUser
-     */
-    public function setNbQAr($nbQAr)
-    {
-        $this->nbQAr = $nbQAr;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQAr
-     *
-     * @return integer 
-     */
-    public function getNbQAr()
-    {
-        return $this->nbQAr;
-    }
-
-    /**
-     * Set nbBrAr
-     *
-     * @param integer $nbBrAr
-     * @return ScUser
-     */
-    public function setNbBrAr($nbBrAr)
-    {
-        $this->nbBrAr = $nbBrAr;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrAr
-     *
-     * @return integer 
-     */
-    public function getNbBrAr()
-    {
-        return $this->nbBrAr;
-    }
-
-    /**
-     * Set prctBrAr
-     *
-     * @param string $prctBrAr
-     * @return ScUser
-     */
-    public function setPrctBrAr($prctBrAr)
-    {
-        $this->prctBrAr = $prctBrAr;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrAr
-     *
-     * @return string 
-     */
-    public function getPrctBrAr()
-    {
-        return $this->prctBrAr;
-    }
-
-    /**
-     * Set nbPAr
-     *
-     * @param integer $nbPAr
-     * @return ScUser
-     */
-    public function setNbPAr($nbPAr)
-    {
-        $this->nbPAr = $nbPAr;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPAr
-     *
-     * @return integer 
-     */
-    public function getNbPAr()
-    {
-        return $this->nbPAr;
-    }
-
-    /**
-     * Set scTotAr
-     *
-     * @param integer $scTotAr
-     * @return ScUser
-     */
-    public function setScTotAr($scTotAr)
-    {
-        $this->scTotAr = $scTotAr;
-
-        return $this;
-    }
-
-    /**
-     * Get scTotAr
-     *
-     * @return integer 
-     */
-    public function getScTotAr()
-    {
-        return $this->scTotAr;
-    }
-
-    /**
-     * Set scMoyAr
-     *
-     * @param string $scMoyAr
-     * @return ScUser
-     */
-    public function setScMoyAr($scMoyAr)
-    {
-        $this->scMoyAr = $scMoyAr;
-
-        return $this;
-    }
-
-    /**
-     * Get scMoyAr
-     *
-     * @return string 
-     */
-    public function getScMoyAr()
-    {
-        return $this->scMoyAr;
-    }
-
-    /**
-     * Set scMaxAr
-     *
-     * @param integer $scMaxAr
-     * @return ScUser
-     */
-    public function setScMaxAr($scMaxAr)
-    {
-        $this->scMaxAr = $scMaxAr;
-
-        return $this;
-    }
-
-    /**
-     * Get scMaxAr
-     *
-     * @return integer 
-     */
-    public function getScMaxAr()
-    {
-        return $this->scMaxAr;
-    }
-
-    /**
-     * Set scofDayAr
-     *
-     * @param integer $scofDayAr
-     * @return ScUser
-     */
-    public function setScofDayAr($scofDayAr)
-    {
-        $this->scofDayAr = $scofDayAr;
-
-        return $this;
-    }
-
-    /**
-     * Get scofDayAr
-     *
-     * @return integer 
-     */
-    public function getScofDayAr()
-    {
-        return $this->scofDayAr;
-    }
-
-    /**
-     * Set nbQLx
-     *
-     * @param integer $nbQLx
-     * @return ScUser
-     */
-    public function setNbQLx($nbQLx)
-    {
-        $this->nbQLx = $nbQLx;
-
-        return $this;
-    }
-
-    /**
-     * Get nbQLx
-     *
-     * @return integer 
-     */
-    public function getNbQLx()
-    {
-        return $this->nbQLx;
-    }
-
-    /**
-     * Set nbBrLx
-     *
-     * @param integer $nbBrLx
-     * @return ScUser
-     */
-    public function setNbBrLx($nbBrLx)
-    {
-        $this->nbBrLx = $nbBrLx;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrLx
-     *
-     * @return integer 
-     */
-    public function getNbBrLx()
-    {
-        return $this->nbBrLx;
-    }
-
-    /**
-     * Set prctBrLx
-     *
-     * @param string $prctBrLx
-     * @return ScUser
-     */
-    public function setPrctBrLx($prctBrLx)
-    {
-        $this->prctBrLx = $prctBrLx;
-
-        return $this;
-    }
-
-    /**
-     * Get prctBrLx
-     *
-     * @return string 
-     */
-    public function getPrctBrLx()
-    {
-        return $this->prctBrLx;
-    }
-
-    /**
-     * Set nbPLx
-     *
-     * @param integer $nbPLx
-     * @return ScUser
-     */
-    public function setNbPLx($nbPLx)
-    {
-        $this->nbPLx = $nbPLx;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPLx
-     *
-     * @return integer 
-     */
-    public function getNbPLx()
-    {
-        return $this->nbPLx;
-    }
-
-    /**
-     * Set scTotLx
-     *
-     * @param integer $scTotLx
-     * @return ScUser
-     */
-    public function setScTotLx($scTotLx)
-    {
-        $this->scTotLx = $scTotLx;
-
-        return $this;
-    }
-
-    /**
-     * Get scTotLx
-     *
-     * @return integer 
-     */
-    public function getScTotLx()
-    {
-        return $this->scTotLx;
-    }
-
-    /**
-     * Set scMoyLx
-     *
-     * @param string $scMoyLx
-     * @return ScUser
-     */
-    public function setScMoyLx($scMoyLx)
-    {
-        $this->scMoyLx = $scMoyLx;
-
-        return $this;
-    }
-
-    /**
-     * Get scMoyLx
-     *
-     * @return string 
-     */
-    public function getScMoyLx()
-    {
-        return $this->scMoyLx;
-    }
-
-    /**
-     * Set scMaxLx
-     *
-     * @param integer $scMaxLx
-     * @return ScUser
-     */
-    public function setScMaxLx($scMaxLx)
-    {
-        $this->scMaxLx = $scMaxLx;
-
-        return $this;
-    }
-
-    /**
-     * Get scMaxLx
-     *
-     * @return integer 
-     */
-    public function getScMaxLx()
-    {
-        return $this->scMaxLx;
-    }
-
-    /**
-     * Set scofDayLx
-     *
-     * @param integer $scofDayLx
-     * @return ScUser
-     */
-    public function setScofDayLx($scofDayLx)
-    {
-        $this->scofDayLx = $scofDayLx;
-
-        return $this;
-    }
-
-    /**
-     * Get scofDayLx
-     *
-     * @return integer 
-     */
-    public function getScofDayLx()
-    {
-        return $this->scofDayLx;
-    }
-
-    /**
-     * Set scofDayTM
-     *
-     * @param integer $scofDayTM
-     * @return ScUser
-     */
-    public function setScofDayTM($scofDayTM)
-    {
-        $this->scofDayTM = $scofDayTM;
-
-        return $this;
-    }
-
-    /**
-     * Get scofDayTM
-     *
-     * @return integer 
-     */
-    public function getScofDayTM()
-    {
-        return $this->scofDayTM;
-    }
-
-    /**
-     * Set scMaxTM
-     *
-     * @param integer $scMaxTM
-     * @return ScUser
-     */
-    public function setScMaxTM($scMaxTM)
-    {
-        $this->scMaxTM = $scMaxTM;
-
-        return $this;
-    }
-
-    /**
-     * Get scMaxTM
-     *
-     * @return integer 
-     */
-    public function getScMaxTM()
-    {
-        return $this->scMaxTM;
-    }
-
-    /**
-     * Set highClassDayTM
-     *
-     * @param integer $highClassDayTM
-     * @return ScUser
-     */
-    public function setHighClassDayTM($highClassDayTM)
-    {
-        $this->highClassDayTM = $highClassDayTM;
-
-        return $this;
-    }
-
-    /**
-     * Get highClassDayTM
-     *
-     * @return integer 
-     */
-    public function getHighClassDayTM()
-    {
-        return $this->highClassDayTM;
-    }
-
-    /**
-     * Set numHighClassDayTM
-     *
-     * @param integer $numHighClassDayTM
-     * @return ScUser
-     */
-    public function setNumHighClassDayTM($numHighClassDayTM)
-    {
-        $this->numHighClassDayTM = $numHighClassDayTM;
-
-        return $this;
-    }
-
-    /**
-     * Get numHighClassDayTM
-     *
-     * @return integer 
-     */
-    public function getNumHighClassDayTM()
-    {
-        return $this->numHighClassDayTM;
-    }
-
-    /**
-     * Set highClassDayMu
-     *
-     * @param integer $highClassDayMu
-     * @return ScUser
-     */
-    public function setHighClassDayMu($highClassDayMu)
-    {
-        $this->highClassDayMu = $highClassDayMu;
-
-        return $this;
-    }
-
-    /**
-     * Get highClassDayMu
-     *
-     * @return integer 
-     */
-    public function getHighClassDayMu()
-    {
-        return $this->highClassDayMu;
-    }
-
-    /**
-     * Set numHighClassDayMu
-     *
-     * @param integer $numHighClassDayMu
-     * @return ScUser
-     */
-    public function setNumHighClassDayMu($numHighClassDayMu)
-    {
-        $this->numHighClassDayMu = $numHighClassDayMu;
-
-        return $this;
-    }
-
-    /**
-     * Get numHighClassDayMu
-     *
-     * @return integer 
-     */
-    public function getNumHighClassDayMu()
-    {
-        return $this->numHighClassDayMu;
-    }
-
-    /**
-     * Set highClassDayFf
-     *
-     * @param integer $highClassDayFf
-     * @return ScUser
-     */
-    public function setHighClassDayFf($highClassDayFf)
-    {
-        $this->highClassDayFf = $highClassDayFf;
-
-        return $this;
-    }
-
-    /**
-     * Get highClassDayFf
-     *
-     * @return integer 
-     */
-    public function getHighClassDayFf()
-    {
-        return $this->highClassDayFf;
-    }
-
-    /**
-     * Set numHighClassDayFf
-     *
-     * @param integer $numHighClassDayFf
-     * @return ScUser
-     */
-    public function setNumHighClassDayFf($numHighClassDayFf)
-    {
-        $this->numHighClassDayFf = $numHighClassDayFf;
-
-        return $this;
-    }
-
-    /**
-     * Get numHighClassDayFf
-     *
-     * @return integer 
-     */
-    public function getNumHighClassDayFf()
-    {
-        return $this->numHighClassDayFf;
-    }
-
-    /**
-     * Set highClassDayAr
-     *
-     * @param integer $highClassDayAr
-     * @return ScUser
-     */
-    public function setHighClassDayAr($highClassDayAr)
-    {
-        $this->highClassDayAr = $highClassDayAr;
-
-        return $this;
-    }
-
-    /**
-     * Get highClassDayAr
-     *
-     * @return integer 
-     */
-    public function getHighClassDayAr()
-    {
-        return $this->highClassDayAr;
-    }
-
-    /**
-     * Set numHighClassDayAr
-     *
-     * @param integer $numHighClassDayAr
-     * @return ScUser
-     */
-    public function setNumHighClassDayAr($numHighClassDayAr)
-    {
-        $this->numHighClassDayAr = $numHighClassDayAr;
-
-        return $this;
-    }
-
-    /**
-     * Get numHighClassDayAr
-     *
-     * @return integer 
-     */
-    public function getNumHighClassDayAr()
-    {
-        return $this->numHighClassDayAr;
-    }
-
-    /**
-     * Set highClassDayLx
-     *
-     * @param integer $highClassDayLx
-     * @return ScUser
-     */
-    public function setHighClassDayLx($highClassDayLx)
-    {
-        $this->highClassDayLx = $highClassDayLx;
-
-        return $this;
-    }
-
-    /**
-     * Get highClassDayLx
-     *
-     * @return integer 
-     */
-    public function getHighClassDayLx()
-    {
-        return $this->highClassDayLx;
-    }
-
-    /**
-     * Set numHighClassDayLx
-     *
-     * @param integer $numHighClassDayLx
-     * @return ScUser
-     */
-    public function setNumHighClassDayLx($numHighClassDayLx)
-    {
-        $this->numHighClassDayLx = $numHighClassDayLx;
-
-        return $this;
-    }
-
-    /**
-     * Get numHighClassDayLx
-     *
-     * @return integer 
-     */
-    public function getNumHighClassDayLx()
-    {
-        return $this->numHighClassDayLx;
-    }
-
     /**
      * Set kingMaster
      *
      * @param integer $kingMaster
+     *
      * @return ScUser
      */
     public function setKingMaster($kingMaster)
@@ -3850,6 +2367,7 @@ class ScUser
      * Set highScKM
      *
      * @param integer $highScKM
+     *
      * @return ScUser
      */
     public function setHighScKM($highScKM)
@@ -3862,7 +2380,7 @@ class ScUser
     /**
      * Get highScKM
      *
-     * @return integer 
+     * @return integer
      */
     public function getHighScKM()
     {
@@ -3873,6 +2391,7 @@ class ScUser
      * Set highClassKM
      *
      * @param integer $highClassKM
+     *
      * @return ScUser
      */
     public function setHighClassKM($highClassKM)
@@ -3885,7 +2404,7 @@ class ScUser
     /**
      * Get highClassKM
      *
-     * @return integer 
+     * @return integer
      */
     public function getHighClassKM()
     {
@@ -3896,6 +2415,7 @@ class ScUser
      * Set numHighClassKM
      *
      * @param integer $numHighClassKM
+     *
      * @return ScUser
      */
     public function setNumHighClassKM($numHighClassKM)
@@ -3908,7 +2428,7 @@ class ScUser
     /**
      * Get numHighClassKM
      *
-     * @return integer 
+     * @return integer
      */
     public function getNumHighClassKM()
     {
@@ -3916,9 +2436,706 @@ class ScUser
     }
 
     /**
+     * Set scofDayMq
+     *
+     * @param integer $scofDayMq
+     *
+     * @return ScUser
+     */
+    public function setScofDayMq($scofDayMq)
+    {
+        $this->scofDayMq = $scofDayMq;
+
+        return $this;
+    }
+
+    /**
+     * Get scofDayMq
+     *
+     * @return integer
+     */
+    public function getScofDayMq()
+    {
+        return $this->scofDayMq;
+    }
+
+    /**
+     * Set highClassDayMq
+     *
+     * @param integer $highClassDayMq
+     *
+     * @return ScUser
+     */
+    public function setHighClassDayMq($highClassDayMq)
+    {
+        $this->highClassDayMq = $highClassDayMq;
+
+        return $this;
+    }
+
+    /**
+     * Get highClassDayMq
+     *
+     * @return integer
+     */
+    public function getHighClassDayMq()
+    {
+        return $this->highClassDayMq;
+    }
+
+    /**
+     * Set numHighClassDayMq
+     *
+     * @param integer $numHighClassDayMq
+     *
+     * @return ScUser
+     */
+    public function setNumHighClassDayMq($numHighClassDayMq)
+    {
+        $this->numHighClassDayMq = $numHighClassDayMq;
+
+        return $this;
+    }
+
+    /**
+     * Get numHighClassDayMq
+     *
+     * @return integer
+     */
+    public function getNumHighClassDayMq()
+    {
+        return $this->numHighClassDayMq;
+    }
+
+    /**
+     * Set nbQSx
+     *
+     * @param integer $nbQSx
+     *
+     * @return ScUser
+     */
+    public function setNbQSx($nbQSx)
+    {
+        $this->nbQSx = $nbQSx;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQSx
+     *
+     * @return integer
+     */
+    public function getNbQSx()
+    {
+        return $this->nbQSx;
+    }
+
+    /**
+     * Set nbBrSx
+     *
+     * @param integer $nbBrSx
+     *
+     * @return ScUser
+     */
+    public function setNbBrSx($nbBrSx)
+    {
+        $this->nbBrSx = $nbBrSx;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrSx
+     *
+     * @return integer
+     */
+    public function getNbBrSx()
+    {
+        return $this->nbBrSx;
+    }
+
+    /**
+     * Set prctBrSx
+     *
+     * @param string $prctBrSx
+     *
+     * @return ScUser
+     */
+    public function setPrctBrSx($prctBrSx)
+    {
+        $this->prctBrSx = $prctBrSx;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrSx
+     *
+     * @return string
+     */
+    public function getPrctBrSx()
+    {
+        return $this->prctBrSx;
+    }
+
+    /**
+     * Set nbPSx
+     *
+     * @param integer $nbPSx
+     *
+     * @return ScUser
+     */
+    public function setNbPSx($nbPSx)
+    {
+        $this->nbPSx = $nbPSx;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPSx
+     *
+     * @return integer
+     */
+    public function getNbPSx()
+    {
+        return $this->nbPSx;
+    }
+
+    /**
+     * Set scTotSx
+     *
+     * @param integer $scTotSx
+     *
+     * @return ScUser
+     */
+    public function setScTotSx($scTotSx)
+    {
+        $this->scTotSx = $scTotSx;
+
+        return $this;
+    }
+
+    /**
+     * Get scTotSx
+     *
+     * @return integer
+     */
+    public function getScTotSx()
+    {
+        return $this->scTotSx;
+    }
+
+    /**
+     * Set scMoySx
+     *
+     * @param string $scMoySx
+     *
+     * @return ScUser
+     */
+    public function setScMoySx($scMoySx)
+    {
+        $this->scMoySx = $scMoySx;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoySx
+     *
+     * @return string
+     */
+    public function getScMoySx()
+    {
+        return $this->scMoySx;
+    }
+
+    /**
+     * Set scMaxSx
+     *
+     * @param integer $scMaxSx
+     *
+     * @return ScUser
+     */
+    public function setScMaxSx($scMaxSx)
+    {
+        $this->scMaxSx = $scMaxSx;
+
+        return $this;
+    }
+
+    /**
+     * Get scMaxSx
+     *
+     * @return integer
+     */
+    public function getScMaxSx()
+    {
+        return $this->scMaxSx;
+    }
+
+    /**
+     * Set scofDaySx
+     *
+     * @param integer $scofDaySx
+     *
+     * @return ScUser
+     */
+    public function setScofDaySx($scofDaySx)
+    {
+        $this->scofDaySx = $scofDaySx;
+
+        return $this;
+    }
+
+    /**
+     * Get scofDaySx
+     *
+     * @return integer
+     */
+    public function getScofDaySx()
+    {
+        return $this->scofDaySx;
+    }
+
+    /**
+     * Set nbQTv
+     *
+     * @param integer $nbQTv
+     *
+     * @return ScUser
+     */
+    public function setNbQTv($nbQTv)
+    {
+        $this->nbQTv = $nbQTv;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQTv
+     *
+     * @return integer
+     */
+    public function getNbQTv()
+    {
+        return $this->nbQTv;
+    }
+
+    /**
+     * Set nbBrTv
+     *
+     * @param integer $nbBrTv
+     *
+     * @return ScUser
+     */
+    public function setNbBrTv($nbBrTv)
+    {
+        $this->nbBrTv = $nbBrTv;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrTv
+     *
+     * @return integer
+     */
+    public function getNbBrTv()
+    {
+        return $this->nbBrTv;
+    }
+
+    /**
+     * Set prctBrTv
+     *
+     * @param string $prctBrTv
+     *
+     * @return ScUser
+     */
+    public function setPrctBrTv($prctBrTv)
+    {
+        $this->prctBrTv = $prctBrTv;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrTv
+     *
+     * @return string
+     */
+    public function getPrctBrTv()
+    {
+        return $this->prctBrTv;
+    }
+
+    /**
+     * Set nbPTv
+     *
+     * @param integer $nbPTv
+     *
+     * @return ScUser
+     */
+    public function setNbPTv($nbPTv)
+    {
+        $this->nbPTv = $nbPTv;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPTv
+     *
+     * @return integer
+     */
+    public function getNbPTv()
+    {
+        return $this->nbPTv;
+    }
+
+    /**
+     * Set scTotTv
+     *
+     * @param integer $scTotTv
+     *
+     * @return ScUser
+     */
+    public function setScTotTv($scTotTv)
+    {
+        $this->scTotTv = $scTotTv;
+
+        return $this;
+    }
+
+    /**
+     * Get scTotTv
+     *
+     * @return integer
+     */
+    public function getScTotTv()
+    {
+        return $this->scTotTv;
+    }
+
+    /**
+     * Set scMoyTv
+     *
+     * @param string $scMoyTv
+     *
+     * @return ScUser
+     */
+    public function setScMoyTv($scMoyTv)
+    {
+        $this->scMoyTv = $scMoyTv;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyTv
+     *
+     * @return string
+     */
+    public function getScMoyTv()
+    {
+        return $this->scMoyTv;
+    }
+
+    /**
+     * Set scMaxTv
+     *
+     * @param integer $scMaxTv
+     *
+     * @return ScUser
+     */
+    public function setScMaxTv($scMaxTv)
+    {
+        $this->scMaxTv = $scMaxTv;
+
+        return $this;
+    }
+
+    /**
+     * Get scMaxTv
+     *
+     * @return integer
+     */
+    public function getScMaxTv()
+    {
+        return $this->scMaxTv;
+    }
+
+    /**
+     * Set scofDayTv
+     *
+     * @param integer $scofDayTv
+     *
+     * @return ScUser
+     */
+    public function setScofDayTv($scofDayTv)
+    {
+        $this->scofDayTv = $scofDayTv;
+
+        return $this;
+    }
+
+    /**
+     * Get scofDayTv
+     *
+     * @return integer
+     */
+    public function getScofDayTv()
+    {
+        return $this->scofDayTv;
+    }
+
+    /**
+     * Set nbQMu
+     *
+     * @param integer $nbQMu
+     *
+     * @return ScUser
+     */
+    public function setNbQMu($nbQMu)
+    {
+        $this->nbQMu = $nbQMu;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQMu
+     *
+     * @return integer
+     */
+    public function getNbQMu()
+    {
+        return $this->nbQMu;
+    }
+
+    /**
+     * Set nbBrMu
+     *
+     * @param integer $nbBrMu
+     *
+     * @return ScUser
+     */
+    public function setNbBrMu($nbBrMu)
+    {
+        $this->nbBrMu = $nbBrMu;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrMu
+     *
+     * @return integer
+     */
+    public function getNbBrMu()
+    {
+        return $this->nbBrMu;
+    }
+
+    /**
+     * Set prctBrMu
+     *
+     * @param string $prctBrMu
+     *
+     * @return ScUser
+     */
+    public function setPrctBrMu($prctBrMu)
+    {
+        $this->prctBrMu = $prctBrMu;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrMu
+     *
+     * @return string
+     */
+    public function getPrctBrMu()
+    {
+        return $this->prctBrMu;
+    }
+
+    /**
+     * Set nbPMu
+     *
+     * @param integer $nbPMu
+     *
+     * @return ScUser
+     */
+    public function setNbPMu($nbPMu)
+    {
+        $this->nbPMu = $nbPMu;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPMu
+     *
+     * @return integer
+     */
+    public function getNbPMu()
+    {
+        return $this->nbPMu;
+    }
+
+    /**
+     * Set scTotMu
+     *
+     * @param integer $scTotMu
+     *
+     * @return ScUser
+     */
+    public function setScTotMu($scTotMu)
+    {
+        $this->scTotMu = $scTotMu;
+
+        return $this;
+    }
+
+    /**
+     * Get scTotMu
+     *
+     * @return integer
+     */
+    public function getScTotMu()
+    {
+        return $this->scTotMu;
+    }
+
+    /**
+     * Set scMoyMu
+     *
+     * @param string $scMoyMu
+     *
+     * @return ScUser
+     */
+    public function setScMoyMu($scMoyMu)
+    {
+        $this->scMoyMu = $scMoyMu;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyMu
+     *
+     * @return string
+     */
+    public function getScMoyMu()
+    {
+        return $this->scMoyMu;
+    }
+
+    /**
+     * Set scMaxMu
+     *
+     * @param integer $scMaxMu
+     *
+     * @return ScUser
+     */
+    public function setScMaxMu($scMaxMu)
+    {
+        $this->scMaxMu = $scMaxMu;
+
+        return $this;
+    }
+
+    /**
+     * Get scMaxMu
+     *
+     * @return integer
+     */
+    public function getScMaxMu()
+    {
+        return $this->scMaxMu;
+    }
+
+    /**
+     * Set scofDayMu
+     *
+     * @param integer $scofDayMu
+     *
+     * @return ScUser
+     */
+    public function setScofDayMu($scofDayMu)
+    {
+        $this->scofDayMu = $scofDayMu;
+
+        return $this;
+    }
+
+    /**
+     * Get scofDayMu
+     *
+     * @return integer
+     */
+    public function getScofDayMu()
+    {
+        return $this->scofDayMu;
+    }
+
+    /**
+     * Set highClassDayMu
+     *
+     * @param integer $highClassDayMu
+     *
+     * @return ScUser
+     */
+    public function setHighClassDayMu($highClassDayMu)
+    {
+        $this->highClassDayMu = $highClassDayMu;
+
+        return $this;
+    }
+
+    /**
+     * Get highClassDayMu
+     *
+     * @return integer
+     */
+    public function getHighClassDayMu()
+    {
+        return $this->highClassDayMu;
+    }
+
+    /**
+     * Set numHighClassDayMu
+     *
+     * @param integer $numHighClassDayMu
+     *
+     * @return ScUser
+     */
+    public function setNumHighClassDayMu($numHighClassDayMu)
+    {
+        $this->numHighClassDayMu = $numHighClassDayMu;
+
+        return $this;
+    }
+
+    /**
+     * Get numHighClassDayMu
+     *
+     * @return integer
+     */
+    public function getNumHighClassDayMu()
+    {
+        return $this->numHighClassDayMu;
+    }
+
+    /**
      * Set scofWeekMu
      *
      * @param integer $scofWeekMu
+     *
      * @return ScUser
      */
     public function setScofWeekMu($scofWeekMu)
@@ -3931,7 +3148,7 @@ class ScUser
     /**
      * Get scofWeekMu
      *
-     * @return integer 
+     * @return integer
      */
     public function getScofWeekMu()
     {
@@ -3939,9 +3156,250 @@ class ScUser
     }
 
     /**
+     * Set nbQFf
+     *
+     * @param integer $nbQFf
+     *
+     * @return ScUser
+     */
+    public function setNbQFf($nbQFf)
+    {
+        $this->nbQFf = $nbQFf;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQFf
+     *
+     * @return integer
+     */
+    public function getNbQFf()
+    {
+        return $this->nbQFf;
+    }
+
+    /**
+     * Set nbBrFf
+     *
+     * @param integer $nbBrFf
+     *
+     * @return ScUser
+     */
+    public function setNbBrFf($nbBrFf)
+    {
+        $this->nbBrFf = $nbBrFf;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrFf
+     *
+     * @return integer
+     */
+    public function getNbBrFf()
+    {
+        return $this->nbBrFf;
+    }
+
+    /**
+     * Set prctBrFf
+     *
+     * @param string $prctBrFf
+     *
+     * @return ScUser
+     */
+    public function setPrctBrFf($prctBrFf)
+    {
+        $this->prctBrFf = $prctBrFf;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrFf
+     *
+     * @return string
+     */
+    public function getPrctBrFf()
+    {
+        return $this->prctBrFf;
+    }
+
+    /**
+     * Set nbPFf
+     *
+     * @param integer $nbPFf
+     *
+     * @return ScUser
+     */
+    public function setNbPFf($nbPFf)
+    {
+        $this->nbPFf = $nbPFf;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPFf
+     *
+     * @return integer
+     */
+    public function getNbPFf()
+    {
+        return $this->nbPFf;
+    }
+
+    /**
+     * Set scTotFf
+     *
+     * @param integer $scTotFf
+     *
+     * @return ScUser
+     */
+    public function setScTotFf($scTotFf)
+    {
+        $this->scTotFf = $scTotFf;
+
+        return $this;
+    }
+
+    /**
+     * Get scTotFf
+     *
+     * @return integer
+     */
+    public function getScTotFf()
+    {
+        return $this->scTotFf;
+    }
+
+    /**
+     * Set scMoyFf
+     *
+     * @param string $scMoyFf
+     *
+     * @return ScUser
+     */
+    public function setScMoyFf($scMoyFf)
+    {
+        $this->scMoyFf = $scMoyFf;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyFf
+     *
+     * @return string
+     */
+    public function getScMoyFf()
+    {
+        return $this->scMoyFf;
+    }
+
+    /**
+     * Set scMaxFf
+     *
+     * @param integer $scMaxFf
+     *
+     * @return ScUser
+     */
+    public function setScMaxFf($scMaxFf)
+    {
+        $this->scMaxFf = $scMaxFf;
+
+        return $this;
+    }
+
+    /**
+     * Get scMaxFf
+     *
+     * @return integer
+     */
+    public function getScMaxFf()
+    {
+        return $this->scMaxFf;
+    }
+
+    /**
+     * Set scofDayFf
+     *
+     * @param integer $scofDayFf
+     *
+     * @return ScUser
+     */
+    public function setScofDayFf($scofDayFf)
+    {
+        $this->scofDayFf = $scofDayFf;
+
+        return $this;
+    }
+
+    /**
+     * Get scofDayFf
+     *
+     * @return integer
+     */
+    public function getScofDayFf()
+    {
+        return $this->scofDayFf;
+    }
+
+    /**
+     * Set highClassDayFf
+     *
+     * @param integer $highClassDayFf
+     *
+     * @return ScUser
+     */
+    public function setHighClassDayFf($highClassDayFf)
+    {
+        $this->highClassDayFf = $highClassDayFf;
+
+        return $this;
+    }
+
+    /**
+     * Get highClassDayFf
+     *
+     * @return integer
+     */
+    public function getHighClassDayFf()
+    {
+        return $this->highClassDayFf;
+    }
+
+    /**
+     * Set numHighClassDayFf
+     *
+     * @param integer $numHighClassDayFf
+     *
+     * @return ScUser
+     */
+    public function setNumHighClassDayFf($numHighClassDayFf)
+    {
+        $this->numHighClassDayFf = $numHighClassDayFf;
+
+        return $this;
+    }
+
+    /**
+     * Get numHighClassDayFf
+     *
+     * @return integer
+     */
+    public function getNumHighClassDayFf()
+    {
+        return $this->numHighClassDayFf;
+    }
+
+    /**
      * Set scofWeekFf
      *
      * @param integer $scofWeekFf
+     *
      * @return ScUser
      */
     public function setScofWeekFf($scofWeekFf)
@@ -3954,7 +3412,7 @@ class ScUser
     /**
      * Get scofWeekFf
      *
-     * @return integer 
+     * @return integer
      */
     public function getScofWeekFf()
     {
@@ -3962,9 +3420,514 @@ class ScUser
     }
 
     /**
+     * Set nbQWz
+     *
+     * @param integer $nbQWz
+     *
+     * @return ScUser
+     */
+    public function setNbQWz($nbQWz)
+    {
+        $this->nbQWz = $nbQWz;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQWz
+     *
+     * @return integer
+     */
+    public function getNbQWz()
+    {
+        return $this->nbQWz;
+    }
+
+    /**
+     * Set nbBrWz
+     *
+     * @param integer $nbBrWz
+     *
+     * @return ScUser
+     */
+    public function setNbBrWz($nbBrWz)
+    {
+        $this->nbBrWz = $nbBrWz;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrWz
+     *
+     * @return integer
+     */
+    public function getNbBrWz()
+    {
+        return $this->nbBrWz;
+    }
+
+    /**
+     * Set prctBrWz
+     *
+     * @param string $prctBrWz
+     *
+     * @return ScUser
+     */
+    public function setPrctBrWz($prctBrWz)
+    {
+        $this->prctBrWz = $prctBrWz;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrWz
+     *
+     * @return string
+     */
+    public function getPrctBrWz()
+    {
+        return $this->prctBrWz;
+    }
+
+    /**
+     * Set nbPWz
+     *
+     * @param integer $nbPWz
+     *
+     * @return ScUser
+     */
+    public function setNbPWz($nbPWz)
+    {
+        $this->nbPWz = $nbPWz;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPWz
+     *
+     * @return integer
+     */
+    public function getNbPWz()
+    {
+        return $this->nbPWz;
+    }
+
+    /**
+     * Set scTotWz
+     *
+     * @param integer $scTotWz
+     *
+     * @return ScUser
+     */
+    public function setScTotWz($scTotWz)
+    {
+        $this->scTotWz = $scTotWz;
+
+        return $this;
+    }
+
+    /**
+     * Get scTotWz
+     *
+     * @return integer
+     */
+    public function getScTotWz()
+    {
+        return $this->scTotWz;
+    }
+
+    /**
+     * Set scMoyWz
+     *
+     * @param string $scMoyWz
+     *
+     * @return ScUser
+     */
+    public function setScMoyWz($scMoyWz)
+    {
+        $this->scMoyWz = $scMoyWz;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyWz
+     *
+     * @return string
+     */
+    public function getScMoyWz()
+    {
+        return $this->scMoyWz;
+    }
+
+    /**
+     * Set scMaxWz
+     *
+     * @param integer $scMaxWz
+     *
+     * @return ScUser
+     */
+    public function setScMaxWz($scMaxWz)
+    {
+        $this->scMaxWz = $scMaxWz;
+
+        return $this;
+    }
+
+    /**
+     * Get scMaxWz
+     *
+     * @return integer
+     */
+    public function getScMaxWz()
+    {
+        return $this->scMaxWz;
+    }
+
+    /**
+     * Set scofDayWz
+     *
+     * @param integer $scofDayWz
+     *
+     * @return ScUser
+     */
+    public function setScofDayWz($scofDayWz)
+    {
+        $this->scofDayWz = $scofDayWz;
+
+        return $this;
+    }
+
+    /**
+     * Get scofDayWz
+     *
+     * @return integer
+     */
+    public function getScofDayWz()
+    {
+        return $this->scofDayWz;
+    }
+
+    /**
+     * Set highClassDayWz
+     *
+     * @param integer $highClassDayWz
+     *
+     * @return ScUser
+     */
+    public function setHighClassDayWz($highClassDayWz)
+    {
+        $this->highClassDayWz = $highClassDayWz;
+
+        return $this;
+    }
+
+    /**
+     * Get highClassDayWz
+     *
+     * @return integer
+     */
+    public function getHighClassDayWz()
+    {
+        return $this->highClassDayWz;
+    }
+
+    /**
+     * Set numHighClassDayWz
+     *
+     * @param integer $numHighClassDayWz
+     *
+     * @return ScUser
+     */
+    public function setNumHighClassDayWz($numHighClassDayWz)
+    {
+        $this->numHighClassDayWz = $numHighClassDayWz;
+
+        return $this;
+    }
+
+    /**
+     * Get numHighClassDayWz
+     *
+     * @return integer
+     */
+    public function getNumHighClassDayWz()
+    {
+        return $this->numHighClassDayWz;
+    }
+
+    /**
+     * Set scofWeekWz
+     *
+     * @param integer $scofWeekWz
+     *
+     * @return ScUser
+     */
+    public function setScofWeekWz($scofWeekWz)
+    {
+        $this->scofWeekWz = $scofWeekWz;
+
+        return $this;
+    }
+
+    /**
+     * Get scofWeekWz
+     *
+     * @return integer
+     */
+    public function getScofWeekWz()
+    {
+        return $this->scofWeekWz;
+    }
+
+    /**
+     * Set nbQAr
+     *
+     * @param integer $nbQAr
+     *
+     * @return ScUser
+     */
+    public function setNbQAr($nbQAr)
+    {
+        $this->nbQAr = $nbQAr;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQAr
+     *
+     * @return integer
+     */
+    public function getNbQAr()
+    {
+        return $this->nbQAr;
+    }
+
+    /**
+     * Set nbBrAr
+     *
+     * @param integer $nbBrAr
+     *
+     * @return ScUser
+     */
+    public function setNbBrAr($nbBrAr)
+    {
+        $this->nbBrAr = $nbBrAr;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrAr
+     *
+     * @return integer
+     */
+    public function getNbBrAr()
+    {
+        return $this->nbBrAr;
+    }
+
+    /**
+     * Set prctBrAr
+     *
+     * @param string $prctBrAr
+     *
+     * @return ScUser
+     */
+    public function setPrctBrAr($prctBrAr)
+    {
+        $this->prctBrAr = $prctBrAr;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrAr
+     *
+     * @return string
+     */
+    public function getPrctBrAr()
+    {
+        return $this->prctBrAr;
+    }
+
+    /**
+     * Set nbPAr
+     *
+     * @param integer $nbPAr
+     *
+     * @return ScUser
+     */
+    public function setNbPAr($nbPAr)
+    {
+        $this->nbPAr = $nbPAr;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPAr
+     *
+     * @return integer
+     */
+    public function getNbPAr()
+    {
+        return $this->nbPAr;
+    }
+
+    /**
+     * Set scTotAr
+     *
+     * @param integer $scTotAr
+     *
+     * @return ScUser
+     */
+    public function setScTotAr($scTotAr)
+    {
+        $this->scTotAr = $scTotAr;
+
+        return $this;
+    }
+
+    /**
+     * Get scTotAr
+     *
+     * @return integer
+     */
+    public function getScTotAr()
+    {
+        return $this->scTotAr;
+    }
+
+    /**
+     * Set scMoyAr
+     *
+     * @param string $scMoyAr
+     *
+     * @return ScUser
+     */
+    public function setScMoyAr($scMoyAr)
+    {
+        $this->scMoyAr = $scMoyAr;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyAr
+     *
+     * @return string
+     */
+    public function getScMoyAr()
+    {
+        return $this->scMoyAr;
+    }
+
+    /**
+     * Set scMaxAr
+     *
+     * @param integer $scMaxAr
+     *
+     * @return ScUser
+     */
+    public function setScMaxAr($scMaxAr)
+    {
+        $this->scMaxAr = $scMaxAr;
+
+        return $this;
+    }
+
+    /**
+     * Get scMaxAr
+     *
+     * @return integer
+     */
+    public function getScMaxAr()
+    {
+        return $this->scMaxAr;
+    }
+
+    /**
+     * Set scofDayAr
+     *
+     * @param integer $scofDayAr
+     *
+     * @return ScUser
+     */
+    public function setScofDayAr($scofDayAr)
+    {
+        $this->scofDayAr = $scofDayAr;
+
+        return $this;
+    }
+
+    /**
+     * Get scofDayAr
+     *
+     * @return integer
+     */
+    public function getScofDayAr()
+    {
+        return $this->scofDayAr;
+    }
+
+    /**
+     * Set highClassDayAr
+     *
+     * @param integer $highClassDayAr
+     *
+     * @return ScUser
+     */
+    public function setHighClassDayAr($highClassDayAr)
+    {
+        $this->highClassDayAr = $highClassDayAr;
+
+        return $this;
+    }
+
+    /**
+     * Get highClassDayAr
+     *
+     * @return integer
+     */
+    public function getHighClassDayAr()
+    {
+        return $this->highClassDayAr;
+    }
+
+    /**
+     * Set numHighClassDayAr
+     *
+     * @param integer $numHighClassDayAr
+     *
+     * @return ScUser
+     */
+    public function setNumHighClassDayAr($numHighClassDayAr)
+    {
+        $this->numHighClassDayAr = $numHighClassDayAr;
+
+        return $this;
+    }
+
+    /**
+     * Get numHighClassDayAr
+     *
+     * @return integer
+     */
+    public function getNumHighClassDayAr()
+    {
+        return $this->numHighClassDayAr;
+    }
+
+    /**
      * Set scofWeekAr
      *
      * @param integer $scofWeekAr
+     *
      * @return ScUser
      */
     public function setScofWeekAr($scofWeekAr)
@@ -3977,7 +3940,7 @@ class ScUser
     /**
      * Get scofWeekAr
      *
-     * @return integer 
+     * @return integer
      */
     public function getScofWeekAr()
     {
@@ -3985,9 +3948,250 @@ class ScUser
     }
 
     /**
+     * Set nbQLx
+     *
+     * @param integer $nbQLx
+     *
+     * @return ScUser
+     */
+    public function setNbQLx($nbQLx)
+    {
+        $this->nbQLx = $nbQLx;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQLx
+     *
+     * @return integer
+     */
+    public function getNbQLx()
+    {
+        return $this->nbQLx;
+    }
+
+    /**
+     * Set nbBrLx
+     *
+     * @param integer $nbBrLx
+     *
+     * @return ScUser
+     */
+    public function setNbBrLx($nbBrLx)
+    {
+        $this->nbBrLx = $nbBrLx;
+
+        return $this;
+    }
+
+    /**
+     * Get nbBrLx
+     *
+     * @return integer
+     */
+    public function getNbBrLx()
+    {
+        return $this->nbBrLx;
+    }
+
+    /**
+     * Set prctBrLx
+     *
+     * @param string $prctBrLx
+     *
+     * @return ScUser
+     */
+    public function setPrctBrLx($prctBrLx)
+    {
+        $this->prctBrLx = $prctBrLx;
+
+        return $this;
+    }
+
+    /**
+     * Get prctBrLx
+     *
+     * @return string
+     */
+    public function getPrctBrLx()
+    {
+        return $this->prctBrLx;
+    }
+
+    /**
+     * Set nbPLx
+     *
+     * @param integer $nbPLx
+     *
+     * @return ScUser
+     */
+    public function setNbPLx($nbPLx)
+    {
+        $this->nbPLx = $nbPLx;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPLx
+     *
+     * @return integer
+     */
+    public function getNbPLx()
+    {
+        return $this->nbPLx;
+    }
+
+    /**
+     * Set scTotLx
+     *
+     * @param integer $scTotLx
+     *
+     * @return ScUser
+     */
+    public function setScTotLx($scTotLx)
+    {
+        $this->scTotLx = $scTotLx;
+
+        return $this;
+    }
+
+    /**
+     * Get scTotLx
+     *
+     * @return integer
+     */
+    public function getScTotLx()
+    {
+        return $this->scTotLx;
+    }
+
+    /**
+     * Set scMoyLx
+     *
+     * @param string $scMoyLx
+     *
+     * @return ScUser
+     */
+    public function setScMoyLx($scMoyLx)
+    {
+        $this->scMoyLx = $scMoyLx;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyLx
+     *
+     * @return string
+     */
+    public function getScMoyLx()
+    {
+        return $this->scMoyLx;
+    }
+
+    /**
+     * Set scMaxLx
+     *
+     * @param integer $scMaxLx
+     *
+     * @return ScUser
+     */
+    public function setScMaxLx($scMaxLx)
+    {
+        $this->scMaxLx = $scMaxLx;
+
+        return $this;
+    }
+
+    /**
+     * Get scMaxLx
+     *
+     * @return integer
+     */
+    public function getScMaxLx()
+    {
+        return $this->scMaxLx;
+    }
+
+    /**
+     * Set scofDayLx
+     *
+     * @param integer $scofDayLx
+     *
+     * @return ScUser
+     */
+    public function setScofDayLx($scofDayLx)
+    {
+        $this->scofDayLx = $scofDayLx;
+
+        return $this;
+    }
+
+    /**
+     * Get scofDayLx
+     *
+     * @return integer
+     */
+    public function getScofDayLx()
+    {
+        return $this->scofDayLx;
+    }
+
+    /**
+     * Set highClassDayLx
+     *
+     * @param integer $highClassDayLx
+     *
+     * @return ScUser
+     */
+    public function setHighClassDayLx($highClassDayLx)
+    {
+        $this->highClassDayLx = $highClassDayLx;
+
+        return $this;
+    }
+
+    /**
+     * Get highClassDayLx
+     *
+     * @return integer
+     */
+    public function getHighClassDayLx()
+    {
+        return $this->highClassDayLx;
+    }
+
+    /**
+     * Set numHighClassDayLx
+     *
+     * @param integer $numHighClassDayLx
+     *
+     * @return ScUser
+     */
+    public function setNumHighClassDayLx($numHighClassDayLx)
+    {
+        $this->numHighClassDayLx = $numHighClassDayLx;
+
+        return $this;
+    }
+
+    /**
+     * Get numHighClassDayLx
+     *
+     * @return integer
+     */
+    public function getNumHighClassDayLx()
+    {
+        return $this->numHighClassDayLx;
+    }
+
+    /**
      * Set scofWeekLx
      *
      * @param integer $scofWeekLx
+     *
      * @return ScUser
      */
     public function setScofWeekLx($scofWeekLx)
@@ -4000,7 +4204,7 @@ class ScUser
     /**
      * Get scofWeekLx
      *
-     * @return integer 
+     * @return integer
      */
     public function getScofWeekLx()
     {
@@ -4008,9 +4212,318 @@ class ScUser
     }
 
     /**
+     * Set scofDayCq
+     *
+     * @param integer $scofDayCq
+     *
+     * @return ScUser
+     */
+    public function setScofDayCq($scofDayCq)
+    {
+        $this->scofDayCq = $scofDayCq;
+
+        return $this;
+    }
+
+    /**
+     * Get scofDayCq
+     *
+     * @return integer
+     */
+    public function getScofDayCq()
+    {
+        return $this->scofDayCq;
+    }
+
+    /**
+     * Set scMaxCq
+     *
+     * @param integer $scMaxCq
+     *
+     * @return ScUser
+     */
+    public function setScMaxCq($scMaxCq)
+    {
+        $this->scMaxCq = $scMaxCq;
+
+        return $this;
+    }
+
+    /**
+     * Get scMaxCq
+     *
+     * @return integer
+     */
+    public function getScMaxCq()
+    {
+        return $this->scMaxCq;
+    }
+
+    /**
+     * Set highClassDayCq
+     *
+     * @param integer $highClassDayCq
+     *
+     * @return ScUser
+     */
+    public function setHighClassDayCq($highClassDayCq)
+    {
+        $this->highClassDayCq = $highClassDayCq;
+
+        return $this;
+    }
+
+    /**
+     * Get highClassDayCq
+     *
+     * @return integer
+     */
+    public function getHighClassDayCq()
+    {
+        return $this->highClassDayCq;
+    }
+
+    /**
+     * Set numHighClassDayCq
+     *
+     * @param integer $numHighClassDayCq
+     *
+     * @return ScUser
+     */
+    public function setNumHighClassDayCq($numHighClassDayCq)
+    {
+        $this->numHighClassDayCq = $numHighClassDayCq;
+
+        return $this;
+    }
+
+    /**
+     * Get numHighClassDayCq
+     *
+     * @return integer
+     */
+    public function getNumHighClassDayCq()
+    {
+        return $this->numHighClassDayCq;
+    }
+
+    /**
+     * Set nbErrorSignalTot
+     *
+     * @param integer $nbErrorSignalTot
+     *
+     * @return ScUser
+     */
+    public function setNbErrorSignalTot($nbErrorSignalTot)
+    {
+        $this->nbErrorSignalTot = $nbErrorSignalTot;
+
+        return $this;
+    }
+
+    /**
+     * Get nbErrorSignalTot
+     *
+     * @return integer
+     */
+    public function getNbErrorSignalTot()
+    {
+        return $this->nbErrorSignalTot;
+    }
+
+    /**
+     * Set nbErrorSignal
+     *
+     * @param integer $nbErrorSignal
+     *
+     * @return ScUser
+     */
+    public function setNbErrorSignal($nbErrorSignal)
+    {
+        $this->nbErrorSignal = $nbErrorSignal;
+
+        return $this;
+    }
+
+    /**
+     * Get nbErrorSignal
+     *
+     * @return integer
+     */
+    public function getNbErrorSignal()
+    {
+        return $this->nbErrorSignal;
+    }
+
+    /**
+     * Set nbQprop
+     *
+     * @param integer $nbQprop
+     *
+     * @return ScUser
+     */
+    public function setNbQprop($nbQprop)
+    {
+        $this->nbQprop = $nbQprop;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQprop
+     *
+     * @return integer
+     */
+    public function getNbQprop()
+    {
+        return $this->nbQprop;
+    }
+
+    /**
+     * Set nbQvalid
+     *
+     * @param integer $nbQvalid
+     *
+     * @return ScUser
+     */
+    public function setNbQvalid($nbQvalid)
+    {
+        $this->nbQvalid = $nbQvalid;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQvalid
+     *
+     * @return integer
+     */
+    public function getNbQvalid()
+    {
+        return $this->nbQvalid;
+    }
+
+    /**
+     * Set tabCoefBot
+     *
+     * @param array $tabCoefBot
+     *
+     * @return ScUser
+     */
+    public function setTabCoefBot($tabCoefBot)
+    {
+        $this->tabCoefBot = $tabCoefBot;
+
+        return $this;
+    }
+
+    /**
+     * Get tabCoefBot
+     *
+     * @return array
+     */
+    public function getTabCoefBot()
+    {
+        return $this->tabCoefBot;
+    }
+
+    /**
+     * Add questionsError
+     *
+     * @param \MDQ\QuestionBundle\Entity\Question $questionsError
+     *
+     * @return ScUser
+     */
+    public function addQuestionsError(\MDQ\QuestionBundle\Entity\Question $questionsError)
+    {
+        $this->questions_error[] = $questionsError;
+
+        return $this;
+    }
+
+    /**
+     * Remove questionsError
+     *
+     * @param \MDQ\QuestionBundle\Entity\Question $questionsError
+     */
+    public function removeQuestionsError(\MDQ\QuestionBundle\Entity\Question $questionsError)
+    {
+        $this->questions_error->removeElement($questionsError);
+    }
+
+    /**
+     * Get questionsError
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestionsError()
+    {
+        return $this->questions_error;
+    }
+
+    /**
+     * Add qavalider
+     *
+     * @param \MDQ\QuestionBundle\Entity\QaValider $qavalider
+     *
+     * @return ScUser
+     */
+    public function addQavalider(\MDQ\QuestionBundle\Entity\QaValider $qavalider)
+    {
+        $this->qavaliders[] = $qavalider;
+
+        return $this;
+    }
+
+    /**
+     * Remove qavalider
+     *
+     * @param \MDQ\QuestionBundle\Entity\QaValider $qavalider
+     */
+    public function removeQavalider(\MDQ\QuestionBundle\Entity\QaValider $qavalider)
+    {
+        $this->qavaliders->removeElement($qavalider);
+    }
+
+    /**
+     * Get qavaliders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQavaliders()
+    {
+        return $this->qavaliders;
+    }
+
+    /**
+     * Set usermap
+     *
+     * @param \MDQ\UserBundle\Entity\User $usermap
+     *
+     * @return ScUser
+     */
+    public function setUsermap(\MDQ\UserBundle\Entity\User $usermap = null)
+    {
+        $this->usermap = $usermap;
+
+        return $this;
+    }
+
+    /**
+     * Get usermap
+     *
+     * @return \MDQ\UserBundle\Entity\User
+     */
+    public function getUsermap()
+    {
+        return $this->usermap;
+    }
+
+    /**
      * Set medailles
      *
      * @param \MDQ\UserBundle\Entity\Medailles $medailles
+     *
      * @return ScUser
      */
     public function setMedailles(\MDQ\UserBundle\Entity\Medailles $medailles = null)
@@ -4023,56 +4536,10 @@ class ScUser
     /**
      * Get medailles
      *
-     * @return \MDQ\UserBundle\Entity\Medailles 
+     * @return \MDQ\UserBundle\Entity\Medailles
      */
     public function getMedailles()
     {
         return $this->medailles;
-    }
-
-    /**
-     * Set nbBrtot
-     *
-     * @param integer $nbBrtot
-     * @return ScUser
-     */
-    public function setNbBrtot($nbBrtot)
-    {
-        $this->nbBrtot = $nbBrtot;
-
-        return $this;
-    }
-
-    /**
-     * Get nbBrtot
-     *
-     * @return integer 
-     */
-    public function getNbBrtot()
-    {
-        return $this->nbBrtot;
-    }
-
-    /**
-     * Set nbPtot
-     *
-     * @param integer $nbPtot
-     * @return ScUser
-     */
-    public function setNbPtot($nbPtot)
-    {
-        $this->nbPtot = $nbPtot;
-
-        return $this;
-    }
-
-    /**
-     * Get nbPtot
-     *
-     * @return integer 
-     */
-    public function getNbPtot()
-    {
-        return $this->nbPtot;
     }
 }

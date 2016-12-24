@@ -4,7 +4,9 @@ namespace MDQ\QuestionBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CritEditQaValType extends AbstractType
 {
@@ -15,20 +17,21 @@ class CritEditQaValType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('repAdmin', 'choice', array(
+            ->add('repAdmin', ChoiceType::class, array(
 				'choices' => array(
-					'0' => 'Pas encore étudiées',
-					'1' => 'Refusées',
-					'2'=> 'Retournées',
-					'3'=> 'Retournées et modifiées',
-					'4' => 'Toutes'
+					'Pas encore étudiées'=>'0',
+					'Refusées'=>'1',
+					'Retournées'=>'2',
+					'Retournées et modifiées'=>'3',
+					'Toutes'=>'4'
 				),
+				'choices_as_values' => true,
 				'required'    => true,				
 				'data'  => '0'
 			))
-			->add('dom1',   'choice', array(
+			->add('dom1',   ChoiceType::class, array(
 				'choices' => array(
-					'none' => 'tous',
+					'tous' => 'none',
 					'Histoire' => 'Histoire',
 					'Géographie' => 'Géographie',
 					'Sciences et nature' => 'Sciences et nature',
@@ -36,42 +39,46 @@ class CritEditQaValType extends AbstractType
 					'Sports et loisirs' => 'Sports et loisirs',
 					'Divers' => 'Divers'					
 				),
+				'choices_as_values' => true,
 				'required'    => true,
 				'data'  => 'none'
 			))
-            ->add('diff', 'choice', array(
+            ->add('diff', ChoiceType::class, array(
 				'choices' => array(
-					'0' => 'toutes',
-					'1' => 'Très facile',
-					'2' => 'Facile',
-					'3' => 'Moyen',
-					'4' => 'Difficile',
-					'5' => 'Très difficile',										
+					'Toutes'=>'0',
+					'Très facile'=>'1',
+					'Facile'=>'2',
+					'Moyen'=>'3',
+					'Difficile'=>'4',
+					'Très difficile'=>'5',											
 				),
+				'choices_as_values' => true,
 				'required'    => true,				
 				'empty_data'  => 0
 			))
             
-            ->add('crit', 'choice', array(
+            ->add('crit', ChoiceType::class, array(
 				'choices' => array(
 					'id' => 'id',
-					'dom1'=> 'domaine',
-					'diff' => 'difficulté',	
+					'domaine'=>'dom1',
+					'difficulté'=>'diff',
 				),
+				'choices_as_values' => true,
 				'required'    => true,
 				'data'  => 'id'
 			))
-            ->add('sens', 'choice', array(
+            ->add('sens', ChoiceType::class, array(
 				'choices' => array(
-					'ASC' => 'croissant',
-					'DESC' => 'décroissant'										
+					'croissant'=>'ASC',
+					'décroissant'=>'DESC'										
 				),
+				'choices_as_values' => true,
 				'required'    => true,
 				'data'  => 'ASC'
 			))
-            ->add('nbdeQ', 'choice', array(
+            ->add('nbdeQ', ChoiceType::class, array(
 				'choices' => array(
-					'0' => 'toutes',
+					'toutes'=>'0',
 					'10' => '10',
 					'50' => '50',
 					'100' => '100',
@@ -79,30 +86,24 @@ class CritEditQaValType extends AbstractType
 					'500' => '500',
 					'1000' => '1000',										
 				),
+				'choices_as_values' => true,
 				'required'    => true,				
 				'data'  => '0'
 			))
-            ->add('nbmin', 'text', array(
+            ->add('nbmin', TextType::class, array(
 				'data' => '1'
 			))
         ;
     }
     
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'MDQ\QuestionBundle\Entity\CritEditQaVal'
         ));
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mdq_questionbundle_criteditqaval';
-    }
 }

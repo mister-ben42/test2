@@ -28,13 +28,13 @@
 		    
 		    </div>
 		    
-		    <div class="accueil_maitre_col1" id="accueil_maitre_ministre">
-		    <a {{accueilServ.maitreTesthref(tabMaitre.ministre.id|default(''))}}>
-		     <img {{accueilServ.maitreImg("Ministre",tabMaitre.ministre.sexe|default(0),tabMaitre.ministre.id|default(''))}} style="margin-left:-8px" alt="roi" width=68%>
+		    <div class="accueil_maitre_col1" id="accueil_maitre_capitaine">
+		    <a {{accueilServ.maitreTesthref(tabMaitre.capitaine.id|default(''))}}>
+		     <img {{accueilServ.maitreImg("Capitaine",tabMaitre.capitaine.sexe|default(0),tabMaitre.capitaine.id|default(''))}} style="margin-left:-8px" alt="roi" width=68%>
 
 			    <div class="accueil_maitre_txt">
-				    <div class="accueil_maitre_txt_titre">Ministre</div>
-				    <div class={{accueilServ.maitreColorSexe(tabMaitre.ministre.sexe|default(''))}}>{{tabMaitre.ministre.username|default('')}}</div>
+				    <div class="accueil_maitre_txt_titre">Capitaine</div>
+				    <div class={{accueilServ.maitreColorSexe(tabMaitre.capitaine.sexe|default(''))}}>{{tabMaitre.capitaine.username|default('')}}</div>
 			    </div>
 		    </a>
 		    </div>

@@ -14,7 +14,7 @@ class UserController extends Controller
 	public function profileUAction(User $user)
 	{
 		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		$user_connect = $this->container->get('security.context')->getToken()->getUser();
+		$user_connect = $this->container->get('security.token_storage')->getToken()->getUser();
 		if ($user_connect===$user && $user_connect->getId()==$user->getId()) {
 			return $this->redirect($this->generateUrl('mdquser_profileUAuto'));
         }
@@ -24,13 +24,14 @@ class UserController extends Controller
 		return $this->render('MDQUserBundle:User:profileU.html.twig', array(
 	   'user'   => $user,
 	  'derParties'=>$derPartieUser,
+	  'usertwig'=>$this->container->get('mdq_user.usertwig')
     ));
 	}
 
 	public function profileUAutoAction()
 	{
 		if(!$this->container->get('mdq_admin.security')->testAutorize("profileUAuto", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		$user = $this->container->get('security.context')->getToken()->getUser();
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();
 		$em=$this->getDoctrine()->getManager();
 		$derPartieUser=$em	->getRepository('MDQQuizzBundle:PartieQuizz')
 							->recupDerPartieUser($user->getId());
@@ -39,12 +40,14 @@ class UserController extends Controller
 		$nbQaval7j=$em 	->getRepository('MDQQuestionBundle:QaValider')
 						->nbQaval7j($user->getId());
 		$gestionQProp=$em->getRepository('MDQAdminBundle:Gestion')->findOneById(1)->getPropQ();
+		$data['nbQaval7j']=$nbQaval7j;
+		$data['gestionQProp']=$gestionQProp;
 		return $this->render('MDQUserBundle:User:profileUAuto.html.twig', array(
 		  'user'   => $user,	  
 		  'derParties'=>$derPartieUser,
 		  'qaval'=>$qavalUser,
-		  'nbQaval7j'=>$nbQaval7j,
-		  'gestionQProp'=>$gestionQProp,
+		  'data'=>$data,
+		  'usertwig'=>$this->container->get('mdq_user.usertwig')
 		));	
 	}
 	public function profileUAutoEditAction()

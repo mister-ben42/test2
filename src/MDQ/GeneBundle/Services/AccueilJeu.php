@@ -49,13 +49,18 @@ class AccueilJeu
 		    }
 		    elseif($jeu=="Mu")
 		    {
-			  if($gestion->getMc()==0 && $admin==0){$txt="affich_flash3";}
+			  if($gestion->getMu()==0 && $admin==0){$txt="affich_flash3";}
 			  elseif($this->jetonServ->testJeton($user, "MuQuizz")===false && $admin==0){$txt="affich_flash2";}	      
 		    }		        
 		    elseif($jeu=="Lx")
 		    {
 			  if($gestion->getLx()==0 && $admin==0){$txt="affich_flash3";}
 			  elseif($this->jetonServ->testJeton($user, "LxQuizz")===false && $admin==0){$txt="affich_flash2";}	      
+		    }		        
+		    elseif($jeu=="Wz")
+		    {
+			  if($gestion->getWz()==0 && $admin==0){$txt="affich_flash3";}
+			  elseif($this->jetonServ->testJeton($user, "WzQuizz")===false && $admin==0){$txt="affich_flash2";}	      
 		    }
 			    
 	      }
@@ -82,12 +87,16 @@ class AccueilJeu
 		    }
 		    elseif($jeu=="Mu")
 		    {
-			  if(($gestion->getMc()!=0 && $this->jetonServ->testJeton($user, "MuQuizz")===true) || $admin==1){$txt="href=quizz/preGame/MuQuizz";}
+			  if(($gestion->getMu()!=0 && $this->jetonServ->testJeton($user, "MuQuizz")===true) || $admin==1){$txt="href=quizz/preGame/MuQuizz";}
 		    }
 		    elseif($jeu=="Lx")
 		    {
 			  if(($gestion->getLx()!=0 && $this->jetonServ->testJeton($user, "LxQuizz")===true) || $admin==1){$txt="href=quizz/preGame/LxQuizz";}
-		    }		    
+		    }
+		    elseif($jeu=="Wz")
+		    {
+			  if(($gestion->getWz()!=0 && $this->jetonServ->testJeton($user, "WzQuizz")===true) || $admin==1){$txt="href=quizz/preGame/WzQuizz";}
+		    }			    
 			    
 	      }
 	      return $txt;

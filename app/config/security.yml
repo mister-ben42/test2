@@ -35,13 +35,14 @@ security:
                 path: fos_user_security_logout
                 target: /
             remember_me:
-                key: %secret% # %secret% est un parametre de parameters.yml
+                secret: %secret% # %secret% est un parametre de parameters.yml
 
     access_control:
         - { path: ^/quizz, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/mod, roles: ROLE_MOD }
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/goToMDQ, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/newToMDQ, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         #- possibilite d'augementer la securite avec l'IP, le https, ...
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
 

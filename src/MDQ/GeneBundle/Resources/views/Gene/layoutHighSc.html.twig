@@ -20,7 +20,7 @@
 		<ul>
 
 		<li class="num_page"><a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'page': 1}) }}"><<</a></li>
-		<li class="num_page">{% if pagi.page !=1 %}<a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'page': (pagi.page)-1}) }}"><</a>{% else %}-{% endif %}</li>
+
 
 		{# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
 		{% for p in range(pagi.page_min, pagi.page_max) %}
@@ -28,7 +28,7 @@
 		<a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'page': p}) }}">{{ p }}</a>
 		</li>
 		{% endfor %}
-		<li class="num_page">{% if pagi.page !=pagi.nbPage %}<a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'page': (pagi.page)+1}) }}">></a>{% else %}-{% endif %}</li>
+		
 		<li class="num_page"><a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'page': pagi.nbPage}) }}">>></a></li>
 		{% if id_connect!=0 %}<li class="num_page" title="Voir mon classement"><a href="{{ path('mdqgene_highScore', {'crit': data.crit, 'id': id_connect}) }}"><img src="{{ asset('bundles/GeneBundle/smiley3.png') }}" alt="face" width="15px"></a></li>
 		{% endif %}

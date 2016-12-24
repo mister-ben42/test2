@@ -53,15 +53,16 @@ class ScUserRepository extends EntityRepository
 		/*	->where('s.scofDayLx IS NOT NULL')
 			->orWhere('s.scofDayAr IS NOT NULL')
 			->orWhere('s.scofDayMu IS NOT NULL')
+			->orWhere('s.scofDayWz IS NOT NULL')
 			->orWhere('s.scofDayFf IS NOT NULL')*/
-			->where('s.scofDayTM IS NOT NULL')
+			->where('s.scofDayCq IS NOT NULL')
 			->leftJoin('s.usermap', 'u')
 			->where('u.supprime!=1')
 			->andwhere('u.roles NOT LIKE :roles1')
 			->andwhere('u.roles NOT LIKE :roles2')
 			->setParameter('roles1', '%"ROLE_ADMIN"%')
 			->setParameter('roles2', '%"ROLE_SUPER_ADMIN"%')
-			->orderBy('s.scofDayTM', 'DESC');
+			->orderBy('s.scofDayCq', 'DESC');
 		return $tab->getQuery()
 			      ->getResult();	
 	}
@@ -112,14 +113,15 @@ class ScUserRepository extends EntityRepository
 			 // Au tout debut, me permet de choisir ceux que j'inclus ou non (les supprime, l'admin, ...)
 			
 		
-		if($crit=='MedMq' || $crit=='MedKm' || $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu')
+		if($crit=='MedMq' || $crit=='MedKm' || $crit=='MedCq' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedWz' || $crit=='MedMu')
 		{
 			if($crit=='MedMq'){$type='mq';$clsmt='highClassDayMq';}
 			elseif($crit=='MedKm'){$type='km'; $clsmt='highClassKM';}
-			elseif($crit=='MedTm'){$type='tm'; $clsmt='highClassDayTM';}
+			elseif($crit=='MedCq'){$type='cq'; $clsmt='highClassDayCq';}
 			elseif($crit=='MedAr'){$type='ar'; $clsmt='highClassDayAr';}
 			elseif($crit=='MedFf'){$type='ff'; $clsmt='highClassDayFf';}
 			elseif($crit=='MedLx'){$type='lx'; $clsmt='highClassDayLx';}
+			elseif($crit=='MedWz'){$type='wz'; $clsmt='highClassDayWz';}
 			elseif($crit=='MedMu'){$type='mu'; $clsmt='highClassDayMu';}
 			
 			$tab->addSelect('s.'.$clsmt,'s.id')
@@ -151,11 +153,12 @@ class ScUserRepository extends EntityRepository
 		$tab->addSelect('s.'.$crit);
 			//Plus utile ce qui suit ?
 			if($crit=="highClassDayMq") {$tab->addselect('s.numHighClassDayMq');}
-			elseif($crit=="highClassDayTM") {$tab->addselect('s.numHighClassDayTM');}
+			elseif($crit=="highClassDayCq") {$tab->addselect('s.numHighClassDayCq');}
 			elseif($crit=="highClassKM"){$tab->addselect('s.numHighClassKM');}
 			elseif($crit=="highClassDayAr"){$tab->addselect('s.numHighClassDayAr');}
 			elseif($crit=="highClassDayFf"){$tab->addselect('s.numHighClassDayFf');}
 			elseif($crit=="highClassDayLx"){$tab->addselect('s.numHighClassDayLx');}
+			elseif($crit=="highClassDayWz"){$tab->addselect('s.numHighClassDayWz');}
 			elseif($crit=="highClassDayMu"){$tab->addselect('s.numHighClassDayMu');}
 		$tab->andWhere('s.'.$crit.'!=0')
 			->andWhere('s.'.$crit.' IS NOT NULL');
@@ -169,6 +172,7 @@ class ScUserRepository extends EntityRepository
 			elseif($crit=="scMoyMq") {$tab->andWhere('s.nbPMq>9');}
 			elseif($crit=="ScMoyAr") {$tab->andWhere('s.nbPAr>9');}
 			elseif($crit=="ScMoyLx") {$tab->andWhere('s.nbPLx>9');}
+			elseif($crit=="ScMoyWz") {$tab->andWhere('s.nbPWz>9');}
 			elseif($crit=="ScMoyMu") {$tab->andWhere('s.nbPMu>9');}
 			elseif($crit=="ScMoyFf") {$tab->andWhere('s.nbPFf>9');}
 			elseif($crit=="nbQvalid"){$tab->andWhere('s.id!=1');}
@@ -177,8 +181,8 @@ class ScUserRepository extends EntityRepository
 			if($crit=="highClassDayMq") {$tab->orderBy('s.'.$crit, 'ASC');
 										$tab->addOrderBy('s.numHighClassDayMq','DESC');
 			}
-			elseif($crit=="highClassDayTM") {$tab->orderBy('s.'.$crit, 'ASC');
-										$tab->addOrderBy('s.numHighClassDayTM','DESC');
+			elseif($crit=="highClassDayCq") {$tab->orderBy('s.'.$crit, 'ASC');
+										$tab->addOrderBy('s.numHighClassDayCq','DESC');
 			}
 			elseif($crit=="highClassKM") {$tab->orderBy('s.'.$crit, 'ASC');
 										$tab->addOrderBy('s.numHighClassKM','DESC');
@@ -191,6 +195,9 @@ class ScUserRepository extends EntityRepository
 			}
 			elseif($crit=="highClassDayLx") {$tab->orderBy('s.'.$crit, 'ASC');
 										$tab->addOrderBy('s.numHighClassDayLx','DESC');
+			}
+			elseif($crit=="highClassDayWz") {$tab->orderBy('s.'.$crit, 'ASC');
+										$tab->addOrderBy('s.numHighClassDayWz','DESC');
 			}
 			elseif($crit=="highClassDayMu") {$tab->orderBy('s.'.$crit, 'ASC');
 										$tab->addOrderBy('s.numHighClassDayMu','DESC');
@@ -211,45 +218,7 @@ class ScUserRepository extends EntityRepository
 			      ->getResult();
 			
 	}
-	public function nbHighScore($crit)
-	{
-		$tab=$this->_em->createQueryBuilder();
-		$tab->from('MDQUserBundle:ScUser', 's');
-		$tab->leftJoin('s.usermap', 'u')
-			->where('u.supprime!=1')
-			->andwhere('u.roles NOT LIKE :roles1')
-			->andwhere('u.roles NOT LIKE :roles2')
-			->setParameter('roles1', '%"ROLE_ADMIN"%')
-			->setParameter('roles2', '%"ROLE_SUPER_ADMIN"%');
-		if($crit=='MedMq' || $crit=='MedKm' || $crit=='MedTm' || $crit=='MedAr' || $crit=='MedFf' || $crit=='MedLx' || $crit=='MedMu'){
-			if($crit=='MedMq'){$clsmt='highClassDayMq';}
-			elseif($crit=='MedKm'){$clsmt='highClassKM';}
-			elseif($crit=='MedTm'){$clsmt='highClassDayTM';}
-			elseif($crit=='MedAr'){$clsmt='highClassDayAr';}
-			elseif($crit=='MedFf'){$clsmt='highClassDayFf';}
-			elseif($crit=='MedLx'){$clsmt='highClassDayLx';}
-			elseif($crit=='MedMu'){$clsmt='highClassDayMu';}
-		$tab->select('s')
-			->andWhere('s.'.$clsmt.' IS NOT NULL')
-			->andWhere('s.'.$clsmt.'>0');
-		}
-		else
-		{
-			$tab->select('s.'.$crit)
-				->andWhere('s.'.$crit.'!=0')
-				->andWhere('s.'.$crit.' IS NOT NULL');
-			if($crit=="prctBrtotMq") {$tab->andWhere('s.nbQtotMq>99');}
-			if($crit=="ScMoyMq") {$tab->andWhere('s.nbPMq>9');}
-			elseif($crit=="ScMoyTv") {$tab->andWhere('s.nbPTv>9');}
-			elseif($crit=="ScMoySx") {$tab->andWhere('s.nbPSx>9');}
-			elseif($crit=="ScMoyMc") {$tab->andWhere('s.nbPMc>9');}
-			elseif($crit=="ScMoyEy") {$tab->andWhere('s.nbPEy>9');}
-		}
-		
-		$tab2=$tab->getQuery()->getResult();
-		
-		return count($tab2);
-	}
+
 	public function getBot($djajoue)
 	{
 		$tab=$this->_em->createQueryBuilder();
@@ -304,6 +273,8 @@ class ScUserRepository extends EntityRepository
 										$scUser->setNbQFf($nbQ);}
 				elseif($dom1=='LxQuizz'){$nbQ=$scUser->getNbQLx()+1;
 										$scUser->setNbQLx($nbQ);}
+				elseif($dom1=='WzQuizz'){$nbQ=$scUser->getNbQWz()+1;
+										$scUser->setNbQWz($nbQ);}
 				elseif($dom1=='TvQuizz'){$nbQ=$scUser->getNbQTv()+1;
 										$scUser->setNbQTv($nbQ);}
 				elseif($dom1=='SexyQuizz'){$nbQ=$scUser->getNbQSx()+1;
@@ -332,7 +303,9 @@ class ScUserRepository extends EntityRepository
 				elseif($dom1=='FfQuizz'){$nbBr=$scUser->getNbBrFf()+$br;
 									$scUser->setNbBrFf($nbBr);}
 				elseif($dom1=='LxQuizz'){$nbBr=$scUser->getNbBrLx()+$br;
-									$scUser->setNbBrLx($nbBr);}				
+									$scUser->setNbBrLx($nbBr);}
+				elseif($dom1=='WzQuizz'){$nbBr=$scUser->getNbBrWz()+$br;
+									$scUser->setNbBrWz($nbBr);}					
 				elseif($dom1=='TvQuizz'){$nbBr=$scUser->getNbBrTv()+$br;
 									$scUser->setNbBrTv($nbBr);}				
 				elseif($dom1=='SexyQuizz'){$nbBr=$scUser->getNbBrSx()+$br;
@@ -350,7 +323,8 @@ class ScUserRepository extends EntityRepository
 				elseif($dom1=='MuQuizz'){$scUser->setPrctBrMu($nbBr*100/$nbQ);}
 				elseif($dom1=='ArQuizz'){$scUser->setPrctBrAr($nbBr*100/$nbQ);}
 				elseif($dom1=='FfQuizz'){$scUser->setPrctBrFf($nbBr*100/$nbQ);}
-				elseif($dom1=='LxQuizz'){$scUser->setPrctBrLx($nbBr*100/$nbQ);}				
+				elseif($dom1=='LxQuizz'){$scUser->setPrctBrLx($nbBr*100/$nbQ);}
+				elseif($dom1=='WzQuizz'){$scUser->setPrctBrWz($nbBr*100/$nbQ);}					
 				elseif($dom1=='TvQuizz'){$scUser->setPrctBrTv($nbBr*100/$nbQ);}				
 				elseif($dom1=='SexyQuizz'){$scUser->setPrctBrSx($nbBr*100/$nbQ);}
 				return;
@@ -390,7 +364,7 @@ class ScUserRepository extends EntityRepository
 		{
 			$scUser->testScMax($dom1, $game, $scP, $partie->getDate());
 			if($game=='MasterQuizz'){$scUser->majsumTop5($scP);}
-			elseif($game=='MediaQuizz'){$scUser->majTM($dom1, $scP);}
+			elseif($game=='MediaQuizz'){$scUser->majCq($dom1, $scP);}
 			$scUser->majKingMaster();
 		}
 		return 1;
@@ -422,11 +396,12 @@ class ScUserRepository extends EntityRepository
 			if($nbExae>0){shuffle($tab1);}
 			if($clsmt=='KingMaster'){$tabMaitres[0]=$tab1[0];}
 			elseif($clsmt=='scofDayMq'){$tabMaitres[1]=$tab1[0];}
-			elseif($clsmt=='TotalMedia'){$tabMaitres[2]=$tab1[0];}
+			elseif($clsmt=='CaQuizz'){$tabMaitres[2]=$tab1[0];}
 			elseif($clsmt=='MuQuizz'){$tabMaitres[3]=$tab1[0];}
 			elseif($clsmt=='ArQuizz'){$tabMaitres[4]=$tab1[0];}
 			elseif($clsmt=='FfQuizz'){$tabMaitres[5]=$tab1[0];}
 			elseif($clsmt=='LxQuizz'){$tabMaitres[6]=$tab1[0];}
+			elseif($clsmt=='WzQuizz'){$tabMaitres[6]=$tab1[0];}
 			
 			return $tabMaitres;
 		

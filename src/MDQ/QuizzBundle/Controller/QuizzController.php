@@ -5,6 +5,7 @@ namespace MDQ\QuizzBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
+use Symfony\Component\HttpFoundation\Request;
 
 class QuizzController extends Controller
 {
@@ -22,9 +23,9 @@ class QuizzController extends Controller
 	public function newGameAction($game)// 9 requete en tout
 	{
 		if(!$this->container->get('mdq_admin.security')->testAutorize("newGame", $game)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-	$user = $this->container->get('security.context')->getToken()->getUser();
+	$user = $this->container->get('security.token_storage')->getToken()->getUser();
 	$em = $this->getDoctrine()->getManager();
-	if($this->get('security.context')->isGranted('ROLE_ADMIN')){$admin=1;}
+	if($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){$admin=1;}
 	else{$admin=0;}
         if($this->container->get('mdq_user.jeton_serv')->testJeton($user, $game)===false && $admin!=1){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$partie=$em->getRepository('MDQQuizzBundle:PartieQuizz')->createNewP($game,$user);		
@@ -47,10 +48,9 @@ class QuizzController extends Controller
 		    'signalE'=>$signalE,
 		    ));			
 	}
-	public function editQuestionAction(){// 3 requete en tout (2spécifique)
-		$request = $this->getRequest();	 	
+	public function editQuestionAction(Request $request){// 3 requete en tout (2spécifique)
 		$quizzServ = $this->container->get('mdq_quizz.ajax');
-		$user = $this->container->get('security.context')->getToken()->getUser();		
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();		
 		if($quizzServ->testSession($request->getSession())==1 || $user===null){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 	  if($request->isXmlHttpRequest())  {
 		$numQ = $request->request->get('numQ');	
@@ -69,10 +69,9 @@ class QuizzController extends Controller
 	  }
 	  return "erreur";        
 	}
-	public function verifReponseAction(){// 9 requetes (8spécifiques) je ne vois pas comment diminuer.
-		$request = $this->getRequest();	 		
+	public function verifReponseAction(Request $request){// 9 requetes (8spécifiques) je ne vois pas comment diminuer.
 		$quizzServ = $this->container->get('mdq_quizz.ajax');
-		$user = $this->container->get('security.context')->getToken()->getUser();		
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();		
 		if($quizzServ->testSession($request->getSession())==1 || $user===null){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		if($request->isXmlHttpRequest())		{
 			$em=$this->getDoctrine()->getManager();					
@@ -92,7 +91,7 @@ class QuizzController extends Controller
 	public function finPartieAction(){//6 dont celle de sécurité.
 	
 		if(!$this->container->get('mdq_admin.security')->testAutorize("finPartie", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		$user = $this->container->get('security.context')->getToken()->getUser();
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();
 		$quizzServ = $this->container->get('mdq_quizz.services');
 		$partieJoue=$this->getDoctrine()->getManager()->getRepository('MDQQuizzBundle:PartieQuizz')->recupPartie($user->getId());
 		$game=$partieJoue->getType();
@@ -108,13 +107,12 @@ class QuizzController extends Controller
 		));
 	}
 	
-	public function signalErrorAction()
+	public function signalErrorAction(Request $request)
 	{
 	  if($this->container->get('mdq_admin.security')->testAutorize("signalError", null))
 	  {
 		$em=$this->getDoctrine()->getManager();	
-		$user = $this->container->get('security.context')->getToken()->getUser();
-		$request = $this->getRequest();	 
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();
 		if($request->isXmlHttpRequest() && $user->getAllowError()==1) // pour vérifier la présence d'une requete Ajax
 		{
 			$idQ = $request->request->get('idQ');	

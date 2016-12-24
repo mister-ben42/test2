@@ -11,7 +11,7 @@ services:
          
      mdq_admin.adminTwig:
          class: MDQ\AdminBundle\Services\AdminTwig
-         arguments: [@twig.extension.assets]        
+         arguments: ['@twig.extension.assets']        
          
      mdq_admin.gestionQ:
          class: MDQ\AdminBundle\Services\GestionQuestion

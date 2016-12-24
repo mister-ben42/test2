@@ -9,7 +9,7 @@
 {% block fos_user_content %}
 
 		 <div id="formulaire_inscription">
-			<form method="post" {{ form_enctype(form) }}>
+			 {{ form_start(form, {'attr':{'class':'formQ'}, 'method': 'POST'}) }}
 			{{ form_errors(form) }}
 
 			<div id="registration_email" class="registration_ligne">

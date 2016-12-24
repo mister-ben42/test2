@@ -11,33 +11,29 @@ services:
 
     mdq_gene.repository.date_ref:
         class: MDQ\GeneBundle\Entity\DateReference
-        factory_service: doctrine.orm.default_entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
         arguments: ['MDQGeneBundle:DateReference']
 
     mdq_admin.repository.gestion:
         class: MDQ\AdminBundle\Entity\Gestion
-        factory_service: doctrine.orm.default_entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
         arguments: ['MDQAdminBundle:Gestion']      
 
     mdq_quizz.repository.partiequizz:
         class: MDQ\QuizzBundle\Entity\PartieQuizz
-        factory_service: doctrine.orm.default_entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
         arguments: ['MDQQuizzBundle:PartieQuizz']
         
     mdq_user.repository.scuser:
         class: MDQ\UserBundle\Entity\ScUser
-        factory_service: doctrine.orm.default_entity_manager
-        factory_method: getRepository
+        factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
         arguments: ['MDQUserBundle:ScUser']
        
     mdq_gene.service.role:
         class: MDQ\GeneBundle\Services\RoleService
-        arguments: [@security.role_hierarchy]
+        arguments: ['@security.role_hierarchy']
         
     mdq_admin.security:
         class: MDQ\AdminBundle\Services\SelfSecurity
-        arguments: [@security.context, @session, @mdq_admin.repository.gestion]
+        arguments: ['@security.token_storage', '@security.authorization_checker', '@session', '@mdq_admin.repository.gestion']
 

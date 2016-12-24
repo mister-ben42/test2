@@ -23,15 +23,15 @@
 	<div class="bloc_profile_joueur" >
 		<div class="titre_bloc_joueur">Mes questions</div>
 		
-      {% if testPropQ(user.scuser.nbPMq, nbQaval7j, gestionQProp)==0 and (not is_granted('ROLE_ADMIN')) %}
+      {% if usertwig.testPropQ(user.scuser.nbPMq, data.nbQaval7j, data.gestionQProp)==0 and (not is_granted('ROLE_ADMIN')) %}
 		<div class="profileUAuto_button_inactive">Proposer une question</div>
-		<div class="profileUAuto_inactif">{{ txtRefusPropQ(user.scuser.nbPMq, nbQaval7j, gestionQProp)}}</div>
+		<div class="profileUAuto_inactif">{{ usertwig.txtRefusPropQ(user.scuser.nbPMq, data.nbQaval7j, data.gestionQProp)}}</div>
 		</div>
 	{% else %}
 	<a href="{{path ('mdqquestion_ajouterQ')}}">	<div class="profileUAuto_button">Proposer une question</div></a>
 	{% endif %}
 	{% if user.scuser.nbQprop>0 %}
-		{{phraseQaval(user.scuser.nbQprop,user.scuser.nbQvalid)}}
+		{{usertwig.phraseQaval(user.scuser.nbQprop,user.scuser.nbQvalid)}}
 		<table id="profileUAuto_table_Q">
 			<thead>
 			<tr>
@@ -45,7 +45,7 @@
 				<td class="profileUAuto_table_Q_intitule">{{question.intitule}}</td>
 				<td class="profileUAuto_table_Q_rep">				
 				{% if question.repAdmin>9 and question.repAdmin<20 %}<a href="{{ path('mdqquestion_modifQaval', {'id':question.id}) }}">Retournée</a>
-				{% else %}<span style="color : {{retourQavalColor(question.repAdmin, question.retournee)}}">{{retourQavalTxt(question.repAdmin, question.retournee)}}</span>
+				{% else %}<span style="color : {{usertwig.retourQavalColor(question.repAdmin, question.retournee)}}">{{usertwig.retourQavalTxt(question.repAdmin, question.retournee)}}</span>
 				{%endif%}</td>
 			</tr>
 		{% endfor %}

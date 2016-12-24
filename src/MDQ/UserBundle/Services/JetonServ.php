@@ -19,7 +19,7 @@ class JetonServ
 	{
 	      $gestion=$this->gestion;
 	      if($gestion->getJetonsUniques()===true){
-		  if(($user->getScUser()->getNbJdayMq()+$user->getScUser()->getNbJMq()+$user->getScUser()->getNbJdayQnF()+$user->getScUser()->getNbJQnF()>0) && ($game=="MuQuizz" || $game=="FfQuizz" || $game=="ArQuizz" || $game=="LxQuizz"|| $game=="MasterQuizz")){
+		  if(($user->getScUser()->getNbJdayMq()+$user->getScUser()->getNbJMq()+$user->getScUser()->getNbJdayQnF()+$user->getScUser()->getNbJQnF()>0) && ($game=="MuQuizz" || $game=="FfQuizz" || $game=="ArQuizz" || $game=="LxQuizz" || $game=="WzQuizz" || $game=="MasterQuizz")){
 		  return true;}
 		  else{return false;}
 	      }
@@ -28,7 +28,7 @@ class JetonServ
 		  return true;}
 		  else{return false;}
 	      }
-	      elseif($game=="MuQuizz" || $game=="FfQuizz" || $game=="ArQuizz" || $game=="LxQuizz"){
+	      elseif($game=="MuQuizz" || $game=="FfQuizz" || $game=="ArQuizz" || $game=="LxQuizz" || $game=="WzQuizz"){
 		  if(($user->getScUser()->getNbJdayQnF()+$user->getScUser()->getNbJQnF())>0){
 		  return true;}
 		  else{return false;}  
@@ -52,7 +52,7 @@ class JetonServ
 			if($scUser->getNbJdayMq()>0){$scUser->setNbJdayMq($scUser->getNbJdayMq()-1);}
 			 elseif($scUser->getNbJMq()>0){$scUser->setNbJMq($scUser->getNbJMq()-1);}	
 		  }
-		  else{
+		  elseif($game=="MuQuizz" || $game=="FfQuizz" || $game=="ArQuizz" || $game=="LxQuizz" || $game=="WzQuizz"){
 			if($scUser->getNbJdayQnF()>0){$scUser->setNbJdayQnF($scUser->getNbJdayQnF()-1);}			
 			elseif($scUser->getNbJQnF()>0){$scUser->setNbJQnF($scUser->getNbJQnF()-1);}
 		  }      

@@ -1,0 +1,40 @@
+
+{% extends "MDQGeneBundle:Gene:layoutHighSc.html.twig" %}
+
+
+
+{% block liste_scores %}
+
+		
+		 {% for scuser in scusers %}
+
+			
+			{% set number=loop.index+(pagi.page-1)*pagi.nbParPage %}
+		<div class="ligne_HSc_Med">
+		<span class="num_nom" >{{number}}- 
+		<a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}" {%if scuser.id==id_connect %}style="color:rgb(128,255,255);"{%elseif scuser.id==id_search %} style="color:rgb(255,168,168);" {%endif%}> {{scuser.username}} </a>
+		</span>
+		<span class="score">
+			{% if scuser.cq1+scuser.cq2+scuser.cq3+scuser.cq4+scuser.cq5==0 %}
+				Meilleur classement : {{scuser.highClassDayCq}}ème
+			{% else %}
+				<span class="bloc_med">
+					<img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.cq1}}					
+				</span>
+				<span class="bloc_med">					
+					<img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.cq2}}					
+				</span>
+				<span class="bloc_med">					
+					<img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.cq3}}					
+				</span>
+				<span class="bloc_med">
+					<img src={{ asset('bundles/UserBundle/MedCh0.png') }} alt="Med">x{{scuser.cq4}}
+				</span>
+				<span class="bloc_med">
+					<img src={{ asset('bundles/UserBundle/MedCt0.png') }} alt="Med">x{{scuser.cq5}}
+				</span>
+			{% endif %}
+		</span></div>
+		 {% endfor %}
+
+{% endblock %}

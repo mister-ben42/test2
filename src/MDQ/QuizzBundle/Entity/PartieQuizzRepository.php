@@ -156,9 +156,10 @@ class PartieQuizzRepository extends EntityRepository
 	public function createNewP($game, $user)
 	{
 		if($game=="MasterQuizz"){$nbP=5;$nbQ=10;}
-		elseif($game=="MuQuizz" || $game=="FfQuizz" || $game=="ArQuizz" || $game=="LxQuizz"){$nbP=1;$nbQ=8;}
+		elseif($game=="MuQuizz" || $game=="FfQuizz" || $game=="ArQuizz" || $game=="LxQuizz" || $game=="WzQuizz"){$nbP=1;$nbQ=8;}
 		elseif($game=="SexyQuizz" || $game=="TvQuizz"){$nbP=1;$nbQ=8;}
 		if($game=="FfQuizz" || $game=="LxQuizz"){$nbP=4;}// Temporaire à modifier ensuite
+		if($game=="WzQuizz"){$nbP=0;}
 		$derPjoues=$this->getDerParties($user->getId(),$game,$nbP);
 		$tabDerQ=[];
 		foreach($derPjoues as $partie)
@@ -187,6 +188,7 @@ class PartieQuizzRepository extends EntityRepository
 			elseif($game=="FfQuizz"){$scUser->setNbPFf($scUser->getNbPFf()+1);}
 			elseif($game=="ArQuizz"){$scUser->setNbPAr($scUser->getNbPAr()+1);}
 			elseif($game=="LxQuizz"){$scUser->setNbPLx($scUser->getNbPLx()+1);}
+			elseif($game=="WzQuizz"){$scUser->setNbPWz($scUser->getNbPWz()+1);}
 			$tabidQ=$this->getEntityManager()->getRepository('MDQQuestionBundle:Question')->tiragePartieQM($tabDerQ, $game);
 		}
 		$scUser->setNbPtot($scUser->getNbPtot()+1);

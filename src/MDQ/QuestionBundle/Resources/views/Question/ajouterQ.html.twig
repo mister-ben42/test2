@@ -21,7 +21,7 @@
 <div id="bloc_ajoutQ_intro">Avant de rédiger une question, reportez-vous aux <a href="#bloc_ajoutQ_consigne">conignes de rédaction</a> ci-dessous.</div>
 
 <div id="form_ajoutQ">
-  <form  method="post"  {{ form_enctype(form) }}>
+   {{ form_start(form, {'attr':{'class':'formQ'}, 'method': 'POST'}) }}
 
 {# Les erreurs générales du formulaire. #}
 {{ form_errors(form) }}

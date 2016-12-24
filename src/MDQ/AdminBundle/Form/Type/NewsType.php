@@ -5,7 +5,9 @@ namespace MDQ\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class NewsType extends AbstractType
 {
@@ -20,39 +22,25 @@ class NewsType extends AbstractType
             ->add('titre')
             ->add('texte')
             ->add('dateCreate')
-            ->add('auteur', 'text')
-            ->add('publication', 'checkbox', array(			
+            ->add('auteur', TextType::class)
+            ->add('publication', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			 ->add('priorite', 'checkbox', array(			
+			 ->add('priorite', CheckboxType::class, array(			
 			'required'  => false,
 				))
-		/*	->add('captcha', 'captcha', array(
-					'as_url' => true,
-					'reload' => true,
-					'mapped' => false,
-					'width' => 150,
-					'height' => 50,
-					'length' => 3,
-						))*/
 		;
     }
     
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'MDQ\AdminBundle\Entity\News'
         ));
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mdq_adminbundle_news';
-    }
+
 }

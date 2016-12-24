@@ -14,7 +14,7 @@
   <h3>Choix des critères de sélection</h3>
 
 <div >
-  <form  method="post" class="formQ" {{ form_enctype(form) }}>
+   {{ form_start(form, {'attr':{'class':'formQ'}, 'method': 'POST'}) }}
 
 {# Les erreurs générales du formulaire. #}
 {{ form_errors(form) }}

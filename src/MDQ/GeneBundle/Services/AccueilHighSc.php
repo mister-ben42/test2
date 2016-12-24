@@ -14,7 +14,7 @@ class AccueilHighSc
 	private $tabHighScKM;
 	private $tabMedKm;	
 	private $tabMedMq;
- 	private $tabMedTm;
+ 	private $tabMedCq;
  	private $tabMedLx;
  	private $tabMedFf;
  	
@@ -26,7 +26,7 @@ class AccueilHighSc
 	  $this->tabHighScKM=$scUserRepository->recupHighScore('highScKM',1,10);
 	  $this->tabMedKm=$scUserRepository->recupHighScore('MedKm',1,10);
 	  $this->tabMedMq=$scUserRepository->recupHighScore('MedMq',1,10);
-	  $this->tabMedTm=$scUserRepository->recupHighScore('MedTm',1,10);
+	  $this->tabMedCq=$scUserRepository->recupHighScore('MedCq',1,10);
 	  $this->tabMedLx=$scUserRepository->recupHighScore('MedLx',1,10);
 	  $this->tabMedFf=$scUserRepository->recupHighScore('MedFf',1,10);
 	}
@@ -38,7 +38,7 @@ class AccueilHighSc
 	      elseif($type=="highScKM"){$tab=$this->tabHighScKM;}
 	      elseif($type=="MedKm"){$tab=$this->tabMedKm;}
 	      elseif($type=="MedMq"){$tab=$this->tabMedMq;}
-	      elseif($type=="MedTm"){$tab=$this->tabMedTm;}
+	      elseif($type=="MedCq"){$tab=$this->tabMedCq;}
 	      elseif($type=="MedLx"){$tab=$this->tabMedLx;}
 	      elseif($type=="MedFf"){$tab=$this->tabMedFf;} 
 	      return $tab;
@@ -74,7 +74,7 @@ class AccueilHighSc
 	     $rang=$rang-1;
 	     if($type=="MedKm"){$tab=$this->tabMedKm;$nomMed="km";}
 	      elseif($type=="MedMq"){$tab=$this->tabMedMq; $nomMed="mq";}
-	      elseif($type=="MedTm"){$tab=$this->tabMedTm; $nomMed="tm";}
+	      elseif($type=="MedCq"){$tab=$this->tabMedCq; $nomMed="cq";}
 	      elseif($type=="MedLx"){$tab=$this->tabMedLx; $nomMed="lx";}
 	      elseif($type=="MedFf"){$tab=$this->tabMedFf; $nomMed="ff";} 
 	      if(isset($tab[$rang]) && $tab[$rang]!==Null){$txt=$tab[$rang][$nomMed.$typeMed];}	     

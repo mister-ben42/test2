@@ -59,9 +59,9 @@ class Gestion
     /**
      * @var boolean
      *
-     * @ORM\Column(name="Mc", type="boolean")
+     * @ORM\Column(name="Mu", type="boolean")
      */
-    private $mc;
+    private $mu;
 
     /**
      * @var boolean
@@ -70,6 +70,13 @@ class Gestion
      */
     private $lx;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="Wz", type="boolean")
+     */
+    private $wz;
+    
     /**
      * @var boolean
      *
@@ -252,26 +259,26 @@ class Gestion
     }
 
     /**
-     * Set mc
+     * Set mu
      *
-     * @param boolean $mc
+     * @param boolean $mu
      * @return Gestion
      */
-    public function setMc($mc)
+    public function setMu($mu)
     {
-        $this->mc = $mc;
+        $this->mu = $mu;
 
         return $this;
     }
 
     /**
-     * Get mc
+     * Get mu
      *
      * @return boolean 
      */
-    public function getMc()
+    public function getMu()
     {
-        return $this->mc;
+        return $this->mu;
     }
 
     /**
@@ -486,5 +493,29 @@ class Gestion
     public function getNbJinitQM()
     {
         return $this->nbJinitQM;
+    }
+
+    /**
+     * Set wz
+     *
+     * @param boolean $wz
+     *
+     * @return Gestion
+     */
+    public function setWz($wz)
+    {
+        $this->wz = $wz;
+
+        return $this;
+    }
+
+    /**
+     * Get wz
+     *
+     * @return boolean
+     */
+    public function getWz()
+    {
+        return $this->wz;
     }
 }

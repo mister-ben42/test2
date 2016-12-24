@@ -19,7 +19,7 @@
 	</div>
 	<div class="bloc">
 	  <div class="well">
-	  <form  method="post" {{ form_enctype(form) }}>
+	  {{ form_start(form, {'attr':{'class':'formQ'}, 'method': 'POST'}) }}
 		
 
 		</div>
@@ -31,7 +31,7 @@
 		<p>Erreurs signalées au total : {{user.scuser.nbErrorSignalTot}}</p>
 		<p>Erreurs signalées en cours : {{user.scuser.nbErrorSignal}}</p>
 		{% if not user.scuser.questionsError.empty %}
-		{% for question in user.scuser.questions_error %}
+		{% for question in user.scuser.questionsError %}
 			<a href="{{ path('mdqadmin_modifQ', {'id': question.id}) }}">{{question.id}}</a>{% if not loop.last %}, {% endif %}
 		{% endfor %}
 		{% endif %}

@@ -6,7 +6,23 @@
 	{% include("MDQGeneBundle:Gene/AccueilGene:accueilConnect.html.twig") %}
 {% endblock %}
 
+	{% block bloc_page %}
+	    <div id="bloc_page">
+	   {% if gestion.blocageTot==1 and not(is_granted('ROLE_ADMIN')) %}
+	   	    <div id="accueil_bandeau_maintenance">
+	   	    <div id="accueil_bloc_maintenance">
+	   	    <div id="accueil_maintenance_bloc_img1"><img src="{{ asset('bundles/GeneBundle/coneRigolo.png') }}" alt="cone" width="100%"></div>
+	   	    <div id="accueil_bloc_maintenance_txt">Le site est actuellement en maintenance</div>
+		    <div id="accueil_maintenance_bloc_img2"><img src="{{ asset('bundles/GeneBundle/reparateur.png') }}" alt="reparateur" width="100%"></div>
+			</div></div>
+	   <div id="accueil_backG_maintenance">
+			
+	    </div>
+
+	  {% endif %}
+	{% endblock %}	
 {% block body_gene %}
+	
        {% include("MDQGeneBundle:Gene/AccueilGene:accueilPart1.html.twig") %}
        {% include("MDQGeneBundle:Gene/AccueilGene:accueilPart2.html.twig") %}
        {% include("MDQGeneBundle:Gene/AccueilGene:accueilPart3.html.twig") %}

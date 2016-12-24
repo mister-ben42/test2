@@ -9,6 +9,8 @@ namespace MDQ\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ProfileFormType extends BaseType
 {
@@ -17,68 +19,38 @@ class ProfileFormType extends BaseType
         parent::buildUserForm($builder, $options);
 
         // add your custom field
-        $builder->add('sexe', 'choice', array(
+        $builder->add('sexe', ChoiceType::class, array(
 				'choices' => array(
-					'0' => 'Homme',
-					'1' => 'Femme',
+					'Homme'=>'0',
+					'Femme'=>'1',
 				),
+				'choices_as_values' => true,
 				'multiple' => false,
 				'expanded' => true,				
 				))
-				->add('datenaissance', 'date', array(
+				->add('datenaissance', DateType::class, array(
 				'years' => range(2010,1930),
-				'empty_value' => array('year' => 'année', 'month' => 'mois', 'day' => 'jour')
+				'placeholder' => array('year' => 'année', 'month' => 'mois', 'day' => 'jour')
 				))
 				->remove('username')
-				->add('departement', 'choice', array(
-					'choices' => array(
-					'France métropolitaine'=>array(
-		''=>'Département','Ain'=> '01- Ain','Aisne' => '02- Aisne','Allier' => '03- Allier','Alpes-de-Haute-Provence'=> '04- Alpes-de-Haute-Provence',
-		'Hautes-Alpes'=> '05- Hautes-Alpes','Alpes-Maritimes'=> '06- Alpes-Maritimes','Ardèche'=> '07- Ardèche',
-		'Ardennes'=> '08- Ardennes','Ariège'=> '09- Ariège','Aube'=> '10- Aube','Aude'=> '11- Aude',
-		'Aveyron'=> '12- Aveyron','Bouches-du-Rhône'=> '13- Bouches-du-Rhône','Calvados'=> '14- Calvados',
-		'Cantal'=> '15- Cantal','Charente'=> '16- Charente','Charente-Maritime'=> '17- Charente-Maritime',
-		'Cher'=> '18- Cher','Corrèze'=> '19- Corrèze','Corse-du-Sud'=> '2A- Corse-du-Sud','Haute-Corse'=> '2B- Haute-Corse',
-		'Côte-d\'Or'=> '21- Côte-d\'Or','Côtes-d\'Armor'=> '22- Côtes-d\'Armor','Creuse'=> '23- Creuse',
-		'Dordogne'=> '24- Dordogne','Doubs'=> '25- Doubs','Drôme'=> '26- Drôme','Eure'=> '27- Eure',
-		'Eure-et-Loir'=> '28- Eure-et-Loir','Finistère'=> '29- Finistère','Gard'=> '30- Gard','Haute-Garonne'=> '31- Haute-Garonne',
-		'Gers'=> '32- Gers','Gironde'=> '33- Gironde','Hérault'=> '34- Hérault','Ille-et-Vilaine'=> '35- Ille-et-Vilaine',
-		'Indre'=> '36- Indre','Indre-et-Loire'=> '37- Indre-et-Loire','Isère'=> '38- Isère','Jura'=> '39- Jura',
-		'Landes'=> '40- Landes','Loir-et-Cher'=> '41- Loir-et-Cher','Loire'=> '42- Loire','Haute-Loire'=> '43- Haute-Loire',
-		'Loire-Atlantique'=> '44- Loire-Atlantique','Loiret'=> '45- Loiret','Lot'=> '46- Lot','Lot-et-Garonne'=> '47- Lot-et-Garonne',
-		'Lozère'=> '48- Lozère','Maine-et-Loire'=> '49- Maine-et-Loire','Manche'=> '50- Manche','Marne'=> '51- Marne',
-		'Haute-Marne'=> '52- Haute-Marne','Mayenne'=> '53- Mayenne','Meurthe-et-Moselle'=> '54- Meurthe-et-Moselle',
-		'Meuse'=> '55- Meuse','Morbihan'=> '56- Morbihan','Moselle'=> '57- Moselle','Nièvre'=> '58- Nièvre',
-		'Nord'=> '59- Nord','Oise'=> '60- Oise','Orne'=> '61- Orne','Pas-de-Calais'=> '62- Pas-de-Calais',
-		'Puy-de-Dôme'=> '63- Puy-de-Dôme','Pyrénées-Atlantiques'=> '64- Pyrénées-Atlantiques',
-		'Hautes-Pyrénées'=> '65- Hautes-Pyrénées','Pyrénées-Orientales'=> '66- Pyrénées-Orientales',
-		'Bas-Rhin'=> '67- Bas-Rhin','Haut-Rhin'=> '68- Haut-Rhin','Rhône'=> '69- Rhône','Haute-Saône'=> '70- Haute-Saône',
-		'Saône-et-Loire'=> '71- Saône-et-Loire','Sarthe'=> '72- Sarthe','Savoie'=> '73- Savoie',
-		'Haute-Savoie'=> '74- Haute-Savoie','Paris'=> '75- Paris','Seine-Maritime'=> '76- Seine-Maritime',
-		'Seine-et-Marne'=> '77- Seine-et-Marne','Yvelines'=> '78- Yvelines','Deux-Sèvres'=> '79- Deux-Sèvres',
-		'Somme'=> '80- Somme','Tarn'=> '81- Tarn','Tarn-et-Garonne'=> '82- Tarn-et-Garonne','Var'=> '83- Var',
-		'Vaucluse'=> '84- Vaucluse','Vendée'=> '85- Vendée','Vienne'=> '86- Vienne','Haute-Vienne'=> '87- Haute-Vienne',
-		'Vosges'=> '88- Vosges','Yonne'=> '89- Yonne','Territoire de Belfort'=> '90- Territoire de Belfort',
-		'Essonne'=> '91- Essonne','Hauts-de-Seine'=> '92- Hauts-de-Seine','Seine-Saint-Denis'=> '93- Seine-Saint-Denis',
-		'Val-de-Marne'=> '94- Val-de-Marne','Val-d\'Oise'=> '95- Val-d\'Oise',),
-			'Départements d\'outre-mer'=>array(
-		'Guadeloupe'=> '971- Guadeloupe','Martinique'=> '972- Martinique','Guyane'=> '973- Guyane',
-		'La Réunion'=> '974- La Réunion','Mayotte'=> '976- Mayotte',),
-			'Autre'=>array(
-			'Autre pays'=> '1000 Autre pays',),
-						),
-						'multiple' => false,
-						'expanded' => false,				
-						))
-			//	->add('devise', 'textarea', array(
-			//		'required'=>false,
-			//	))	
+->add('departement', ChoiceType::class, array(
+				'choices' => array(
+				'France métropolitaine'=>array(
+    '01- Ain'=>'Ain', '02- Aisne'=>'Aisne', '03- Allier'=>'Allier', '04- Alpes de Haute Provence'=>'Alpes de Haute Provence', '05- Hautes Alpes'=>'Hautes Alpes', '06- Alpes Maritimes'=>'Alpes Maritimes', '07- Ardèche'=>'Ardèche', '08- Ardennes'=>'Ardennes', '09- Ariège'=>'Ariège', '10- Aube'=>'Aube', '11- Aude'=>'Aude', '12- Aveyron'=>'Aveyron', '13- Bouches du Rhône'=>'Bouches du Rhône', '14- Calvados'=>'Calvados', '15- Cantal'=>'Cantal', '16- Charente'=>'Charente', '17- Charente Maritime'=>'Charente Maritime', '18- Cher'=>'Cher', '19- Corrèze'=>'Corrèze', '2A- Corse du Sud'=>'Corse du Sud', '2B- Haute Corse'=>'Haute Corse', '21- Côte d\'Or'=>'Côte d\'Or', '22- Côtes d\'Armor'=>'Côtes d\'Armor', '23- Creuse'=>'Creuse', '24- Dordogne'=>'Dordogne', '25- Doubs'=>'Doubs', '26- Drôme'=>'Drôme', '27- Eure'=>'Eure', '28- Eure et Loir'=>'Eure et Loir', '29- Finistère'=>'Finistère', '30- Gard'=>'Gard', '31- Haute Garonne'=>'Haute Garonne', '32- Gers'=>'Gers', '33- Gironde'=>'Gironde', '34- Hérault'=>'Hérault', '35- Ille et Vilaine'=>'Ille et Vilaine', '36- Indre'=>'Indre', '37- Indre et Loire'=>'Indre et Loire', '38- Isère'=>'Isère', '39- Jura'=>'Jura', '40- Landes'=>'Landes', '41- Loir et Cher'=>'Loir et Cher', '42- Loire'=>'Loire', '43- Haute Loire'=>'Haute Loire', '44- Loire Atlantique'=>'Loire Atlantique', '45- Loiret'=>'Loiret', '46- Lot'=>'Lot', '47- Lot et Garonne'=>'Lot et Garonne', '48- Lozère'=>'Lozère', '49- Maine et Loire'=>'Maine et Loire', '50- Manche'=>'Manche', '51- Marne'=>'Marne', '52- Haute Marne'=>'Haute Marne', '53- Mayenne'=>'Mayenne', '54- Meurthe et Moselle'=>'Meurthe et Moselle', '55- Meuse'=>'Meuse', '56- Morbihan'=>'Morbihan', '57- Moselle'=>'Moselle', '58- Nièvre'=>'Nièvre', '59- Nord'=>'Nord', '60- Oise'=>'Oise', '61- Orne'=>'Orne', '62- Pas de Calais'=>'Pas de Calais', '63- Puy de Dôme'=>'Puy de Dôme', '64- Pyrénées Atlantiques'=>'Pyrénées Atlantiques', '65- Hautes Pyrénées'=>'Hautes Pyrénées', '66- Pyrénées Orientales'=>'Pyrénées Orientales', '67- Bas Rhin'=>'Bas Rhin', '68- Haut Rhin'=>'Haut Rhin', '69- Rhône'=>'Rhône', '70- Haute Saône'=>'Haute Saône', '71- Saône et Loire'=>'Saône et Loire', '72- Sarthe'=>'Sarthe', '73- Savoie'=>'Savoie', '74- Haute Savoie'=>'Haute Savoie', '75- Paris'=>'Paris', '76- Seine Maritime'=>'Seine Maritime', '77- Seine et Marne'=>'Seine et Marne', '78- Yvelines'=>'Yvelines', '79- Deux Sèvres'=>'Deux Sèvres', '80- Somme'=>'Somme', '81- Tarn'=>'Tarn', '82- Tarn et Garonne'=>'Tarn et Garonne', '83- Var'=>'Var', '84- Vaucluse'=>'Vaucluse', '85- Vendée'=>'Vendée', '86- Vienne'=>'Vienne', '87- Haute Vienne'=>'Haute Vienne', '88- Vosges'=>'Vosges', '89- Yonne'=>'Yonne', '90- Territoire de Belfort'=>'Territoire de Belfort', '91- Essonne'=>'Essonne', '92- Hauts de Seine'=>'Hauts de Seine', '93- Seine St Denis'=>'Seine St Denis', '94- Val de Marne'=>'Val de Marne', '95- Val d\'Oise'=>'Val d\'Oise', ),
+		'Départements d\'outre-mer'=>array(
+	'971- Guadeloupe'=>'Guadeloupe', '972- Martinique'=> 'Martinique','973- Guyane'=>'Guyane',
+    '974- La Réunion'=>'La Réunion','976- Mayotte'=>'Mayotte',),
+		'Autre'=>array(
+		'1000- Autre pays' => 'Autre pays',),
+					),
+					'choices_as_values' => true,
+					'multiple' => false,
+					'expanded' => false,
+					'placeholder'=> 'Département',
+					))
 					
 					;
     }
 
-    public function getName()
-    {
-        return 'mdq_user_profile';
-    }
+
 }

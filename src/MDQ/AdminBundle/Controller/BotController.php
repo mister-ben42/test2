@@ -120,12 +120,12 @@ class BotController extends Controller
 			$scUser=$bot->getScUser();
 			$gestion=$em->getRepository('MDQAdminBundle:Gestion')	
 				->find(1);
-			$GFf=$gestion->getFf(); $GLx=$gestion->getLx(); $GMc=$gestion->getMc(); $GAr=$gestion->getAr();
-			if($GFf+$GLx+$GMc+$GAr==0){return;}
+			$GFf=$gestion->getFf(); $GLx=$gestion->getLx(); $GAr=$gestion->getAr(); $GWz=$gestion->getWz(); 
+			if($GFf+$GLx+$GAr+$GWz==0){return;}
 			
 			// Tirage au sort jeu
-			 $tab4game=['MuQuizz','ArQuizz','FfQuizz','LxQuizz'];
-			 $tabGestion=[$GMc,$GAr,$GFf,$GLx];
+			 $tab4game=['ArQuizz','FfQuizz','LxQuizz', 'WzQuizz'];
+			 $tabGestion=[$GAr,$GFf,$GLx, $GWz];
 			 $nbG=0;
 			 $tabgame=[];
 			for($i=0; $i<4; $i++)
@@ -140,11 +140,11 @@ class BotController extends Controller
 			
 			$game=$tabgame[$nb];
 			
-			//$game='MuQuizz';// Pour forcer le tirage de MuQuizz
+			//$game='WzQuizz';// Pour forcer le tirage de WzQuizz
 			$tabPartie2['bot']=$bot->getUsername();
 			$tabPartie2['game']=$game;
 			$tabcoef=$scUser->getTabCoefBot();
-			if($game=='MuQuizz'){$coefJ=$tabcoef[6];}
+			if($game=='WzQuizz'){$coefJ=$tabcoef[6];}
 			else if($game=='ArQuizz'){$coefJ=$tabcoef[7];}
 			else if($game=='FfQuizz'){$coefJ=$tabcoef[8];}
 			else if($game=='LxQuizz'){$coefJ=$tabcoef[9];}
@@ -153,7 +153,7 @@ class BotController extends Controller
 			$nbQAr=$scUser->getNbQAr();	$nbBrAr=$scUser->getNbBrAr();
 			$nbQFf=$scUser->getNbQFf();	$nbBrFf=$scUser->getNbBrFf();
 			$nbQLx=$scUser->getNbQLx();	$nbBrLx=$scUser->getNbBrLx();
-			$nbQMu=$scUser->getNbQMu();	$nbBrMu=$scUser->getNbBrMu();
+			$nbQWz=$scUser->getNbQWz();	$nbBrWz=$scUser->getNbBrWz();
 			$nbBrtot=$scUser->getNbBrtot();
 			
 			for($numQ=1; $numQ<9; $numQ++)
@@ -173,9 +173,9 @@ class BotController extends Controller
 					$nbQLx++; $scoreQ=0;
 					if($rep==1){$nbBrLx++;$scoreQ=$botGame->calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
 				}
-				if($game=='MuQuizz'){	
-					$nbQMu++; $scoreQ=0;
-					if($rep==1){$nbBrMu++;$scoreQ=$botGame->calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
+				if($game=='WzQuizz'){	
+					$nbQWz++; $scoreQ=0;
+					if($rep==1){$nbBrWz++;$scoreQ=$botGame->calcScQ(1000);$scoreP=$scoreP+$scoreQ;}					
 				}
 				$tabPartie2['scQ'.$numQ]=$scoreP;
 			}	
@@ -200,12 +200,12 @@ class BotController extends Controller
 				$scUser->setNbBrLx($nbBrLx);
 				$scUser->setPrctBrLx($nbBrLx*100/$nbQLx);
 			}
-			elseif($game=='MuQuizz')
+			elseif($game=='WzQuizz')
 			{
-				$scUser->setNbPMu($scUser->getNbPMu()+1);
-				$scUser->setNbQMu($nbQMu);
-				$scUser->setNbBrMu($nbBrMu);
-				$scUser->setPrctBrMu($nbBrMu*100/$nbQMu);
+				$scUser->setNbPWz($scUser->getNbPWz()+1);
+				$scUser->setNbQWz($nbQWz);
+				$scUser->setNbBrWz($nbBrWz);
+				$scUser->setPrctBrWz($nbBrWz*100/$nbQWz);
 			}
 			$scUser->setNbBrtot($nbBrtot);
 			$partie2=new PartieQuizz(); 

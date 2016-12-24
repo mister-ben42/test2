@@ -8,28 +8,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MDQ\QuestionBundle\Entity\QaValider;
 use MDQ\QuestionBundle\Form\Type\QuestionType;
 use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
+use Symfony\Component\HttpFoundation\Request;
 
 class QuestionController extends Controller
 {
-	 public function ajouterQAction()
+	 public function ajouterQAction(Request $request)
 	{
 		if(!$this->container->get('mdq_admin.security')->testAutorize("ajoutQ", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$em=$this->getDoctrine()->getManager();
-		$user = $this->container->get('security.context')->getToken()->getUser();
+		$user = $this->container->get('security.token_storage')->getToken()->getUser();
  
 /**		// A définir le moment opportun
 		nbPMq=$user->getScUser()->getNbPMq();
 		$nbQaval7j=$em 	->getRepository('MDQQuestionBundle:QaValider')
 						->nbQaval7j($user->getId());
-		if(!$this->get('security.context')->isGranted('ROLE_ADMIN')){
+		if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
 			if($nbQaval7j>4 || $nbPMq<10){ return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		}
 **/		
 		$quest = new QaValider;
 		$quest->setAuteur($user->getScUser());
-		$form = $this->createForm(new QuestionType(), $quest);  
-		if ($this->getRequest()->getMethod() == 'POST') {
-			$form->bind($this->getRequest());
+		$form = $this->get('form.factory')->create(QuestionType::class, $quest);  
+		if ($request->getMethod() == 'POST' && $form->handleRequest($request)->isValid()) {   
 /**		// A développe rle moment opportun : tester les doublons?	
 			$intitule=$quest->getIntitule();
 			$doublons=$em->getRepository('MDQQuestionBundle:Question')
@@ -40,35 +40,30 @@ class QuestionController extends Controller
 						'doublon'=>1,
 							));
 			}
-*/			if ($form->isValid()) {
-			   $scUser=$user->getScUser();
+*/			   $scUser=$user->getScUser();
 			   $scUser->setNbQprop($scUser->getNbQprop()+1);
 				$em->persist($quest);
 				$em->flush();
 		return $this->redirect($this->generateUrl('mdquser_profileUAuto'));
-			}
 		}
 		return $this->render('MDQQuestionBundle:Question:ajouterQ.html.twig', array(
 		  'form' => $form->createView(),
 		  'doublon'=>0,
 		));
 	}
-	public function modifQavalAction(Qavalider $qaval)
+	public function modifQavalAction(Qavalider $qaval, Request $request)
 	{
 		if(!$this->container->get('mdq_admin.security')->testAutorize("modifQaval", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		$user = $this->container->get('security.context')->getToken()->getUser(); 
+		$user = $this->container->get('security.token_storage')->getToken()->getUser(); 
 		$idauteur=$qaval->getAuteur()->getId();		
 		$repAdmin=$qaval->getRepAdmin();
 		if($repAdmin<10 || $repAdmin>20 || $user->getId()!=$idauteur){return $this->redirect($this->generateUrl('mdquser_profileUAuto'));}// pour ne pas sélectionner par l'URL des questions validées ou refusées.
-		$form = $this->createForm(new QuestionType(), $qaval);
-		$request = $this->getRequest();
-		if ($request->getMethod() == 'POST') {
-		  $form->bind($request);
-		  if ($form->isValid()) {
+		$form = $this->get('form.factory')->create(QuestionType::class, $qaval);
+		if ($request->getMethod() == 'POST' && $form->handleRequest($request)->isValid()) {   
 			$qaval->setRetournee(1);
 			$this->getDoctrine()->getManager()->flush();   
 			return $this->redirect($this->generateUrl('mdquser_profileUAuto'));
-		}}
+		}
 	      
 		return $this->render('MDQQuestionBundle:Question:ajouterQ.html.twig', array(
 		  'form'    => $form->createView(),
@@ -79,9 +74,8 @@ class QuestionController extends Controller
    	}
 
    
-   public function adaptFormAction()
-	{
-	  $request = $this->getRequest();	 
+   public function adaptFormAction(Request $request)
+	{	 
 	  if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 	  {
 		$id = $request->request->get('id');

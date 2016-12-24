@@ -6,14 +6,15 @@
            <option value="Arts et Littérature" {{ adminTwig.testSelected(question.dom1,"Arts et Littérature" )}}>Arts et Littérature</option>
            <option value="Sports et loisirs" {{ adminTwig.testSelected(question.dom1,"Sports et loisirs")}}>Sports et loisirs</option>
            <option value="Divers" {{ adminTwig.testSelected(question.dom1,"Divers")}}>Divers</option>
-           <option value="McQuizz" {{ adminTwig.testSelected(question.dom1,"McQuizz")}}>Musique classique</option>
+           <option value="MuQuizz" {{ adminTwig.testSelected(question.dom1,"MuQuizz")}}>Musique classique</option>
            <option value="ArQuizz" {{ adminTwig.testSelected(question.dom1,"ArQuizz")}}>Quizz Art</option>
            <option value="FfQuizz" {{ adminTwig.testSelected(question.dom1,"FfQuizz")}}>Faune et Flore</option>
-           <option value="LxQuizz" {{ adminTwig.testSelected(question.dom1,"LxQuizz")}}>Lieux du monde</option>
+           <option value="LxQuizz" {{ adminTwig.testSelected(question.dom1,"LxQuizz")}}>Quizz Géo</option>
+           <option value="WzQuizz" {{ adminTwig.testSelected(question.dom1,"WzQuizz")}}>Quizz Wouzou</option>
            <option value="TvQuizz" {{ adminTwig.testSelected(question.dom1,"TvQuizz")}}>TvQuizz</option>
            <option value="EyesQuizz" {{ adminTwig.testSelected(question.dom1,"EyesQuizz")}}>Regard de star</option> 
            <option value="SexyQuizz" {{ adminTwig.testSelected(question.dom1,"SexyQuizz")}}>SexyQuizz</option>
-			<option value="Error" {% if question.dom1!="TvQuizz" and question.dom1!="EyesQuizz" and question.dom1!="McQuizz" and question.dom1!="FfQuizz" and question.dom1!="ArQuizz" and question.dom1!="LxQuizz" and  question.dom1!="SexyQuizz" and question.dom1!="Histoire" and question.dom1!="Géographie" and question.dom1!="Sciences et nature" and question.dom1!="Arts et Littérature" and question.dom1!="Sports et loisirs" and question.dom1!="Divers"%}selected style="background-color:pink;"{%endif%}>Erreur</option>
+			<option value="Error" {% if question.dom1!="TvQuizz" and question.dom1!="EyesQuizz" and question.dom1!="MuQuizz" and question.dom1!="FfQuizz" and question.dom1!="ArQuizz" and question.dom1!="LxQuizz" nd question.dom1!="WzQuizz" and  question.dom1!="SexyQuizz" and question.dom1!="Histoire" and question.dom1!="Géographie" and question.dom1!="Sciences et nature" and question.dom1!="Arts et Littérature" and question.dom1!="Sports et loisirs" and question.dom1!="Divers"%}selected style="background-color:pink;"{%endif%}>Erreur</option>
 	  </select>
 		<select name="diff">
            <option value="1"  {{ adminTwig.testSelected(question.diff,1) }} >Très facile</option>

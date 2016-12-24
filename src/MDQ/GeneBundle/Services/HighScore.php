@@ -6,15 +6,7 @@ namespace MDQ\GeneBundle\Services;
 class HighScore
 {    
 
-	public function getFunctions(){// voir si possible d'envoyer à twig
-		return array(
-		  'test'=> new \Twig_Function_Method($this, 'test')
-	      );
-	}
-	public function test($data)
-	{
-	      return "test concluant !";
-	}
+
 	public function editTxt($crit)
 	{
 	$data['crit']=$crit;
@@ -40,7 +32,7 @@ class HighScore
 			            }
 	else if ($crit=="scMaxMq") {$data['titre1']="Meilleur score";
 			            $data['titre2']="au MasterQuizz";
-			            $data['aide']="Score Maximal réalisé lors d'une partie au MasterQuizz";
+			            $data['aide']="Score maximal réalisé lors d'une partie au MasterQuizz";
 				    $data['nomPage']="highScore";
 			            }	
 	else if ($crit=="nbPMq") {$data['titre1']="Nombre de parties jouées";
@@ -98,9 +90,9 @@ class HighScore
 			            $data['aide']="Tableau des médailles au KingMaster";
 			            $data['nomPage']='medailles'.$crit; 
 			            }	
-	else if ($crit=="MedTM") {$data['titre1']="Médailles";
-			            $data['titre2']="Expert Media";
-			            $data['aide']="Tableau des médailles au classement Expert Média";
+	else if ($crit=="MedCq") {$data['titre1']="Médailles";
+			            $data['titre2']="Quizz du Capitaine";
+			            $data['aide']="Tableau des médailles au classement du Quizz du Capitaine";
 			            $data['nomPage']='medailles'.$crit; 
 			            }	
 	else if ($crit=="MedAr") {$data['titre1']="Médailles";
@@ -114,35 +106,97 @@ class HighScore
 			            $data['nomPage']='medailles'.$crit; 
 			            }	
 	else if ($crit=="MedLx") {$data['titre1']="Médailles";
-			            $data['titre2']="Lieux du Monde";
-			            $data['aide']="Tableau des médailles au Quizz Lieux du Monde";
+			            $data['titre2']="Quizz Géo";
+			            $data['aide']="Tableau des médailles au Quizz Géo";
 			            $data['nomPage']='medailles'.$crit; 
 			            }	
+	else if ($crit=="MedWz") {$data['titre1']="Médailles";
+			            $data['titre2']="Quizz Wouzou";
+			            $data['aide']="Tableau des médailles au Quizz Wouzou";
+			            $data['nomPage']='medailles'.$crit; 
+			            }		
 	else if ($crit=="MedMu") {$data['titre1']="Médailles";
 			            $data['titre2']="Quizz Musique";
 			            $data['aide']="Tableau des médailles au Quizz Musique";
-			            $data['nomPage']='Medailles'.$crit; 
+			            $data['nomPage']='medailles'.$crit; 
 			            }	
 	else if ($crit=="totMed") {$data['titre1']="Nombre total";
 			            $data['titre2']="de Médailles";
 			            $data['aide']="Nombre total de médailles tous classements confondus";
 			            $data['nomPage']="highScore";
 			            }	
-/*	else if ($crit=="scTotMq") {$data['titre1']==
-			            $data['titre2']==
-			            $data['aide']== 
+	else if ($crit=="scofDayCq") {$data['titre1']="Score du jour";
+			            $data['titre2']="au Score du Capitaine";
+			            $data['aide']="Le score du Capitaine est égal à la somme des scores aux Quizz Géo, Nature, Art et Wouzou";
+			            $data['nomPage']="highScore";
 			            }	
-	else if ($crit=="scTotMq") {$data['titre1']==
-			            $data['titre2']==
-			            $data['aide']== 
+	else if ($crit=="scMaxCq") {$data['titre1']="Meilleur score";
+			            $data['titre2']="au Score du Capitaine";
+			            $data['aide']="Le score du Capitaine est égal à la somme des scores aux Quizz Géo, Nature, Art et Wouzou";
+			            $data['nomPage']="highScore";
 			            }	
-	else if ($crit=="scTotMq") {$data['titre1']==
-			            $data['titre2']==
-			            $data['aide']== 
+	else if ($crit=="scofDayFf") {$data['titre1']="Score du jour";
+			            $data['titre2']="au Quizz Nature";
+			            $data['aide']="Meilleur score au Quizz Nature dans la journée en cours";
+			            $data['nomPage']="highScore";
 			            }	
-	else if ($crit=="scTotMq") {$data['titre1']==
-			            $data['titre2']==
-			            $data['aide']== 
+	else if ($crit=="scMaxFf") {$data['titre1']="Meilleur score";
+			            $data['titre2']="au Quizz Nature";
+			            $data['aide']="Score Maximal réalisé lors d'une partie au Quizz Nature";
+			            $data['nomPage']="highScore";
+			            }
+	else if ($crit=="scofDayLx") {$data['titre1']="Score du jour";
+			            $data['titre2']="au Quizz Géo";
+			            $data['aide']="Meilleur score au Quizz Nature dans la journée en cours";
+			            $data['nomPage']="highScore";
+			            }	
+	else if ($crit=="scMaxLx") {$data['titre1']="Meilleur score";
+			            $data['titre2']="au Quizz Géo";
+			            $data['aide']="Score Maximal réalisé lors d'une partie au Quizz Nature";
+			            $data['nomPage']="highScore";			            
+			            }
+	else if ($crit=="scofDayWz") {$data['titre1']="Score du jour";
+			            $data['titre2']="au Quizz Wouzou";
+			            $data['aide']="Meilleur score au Quizz Nature dans la journée en cours";
+			            $data['nomPage']="highScore";
+			            }	
+	else if ($crit=="scMaxWz") {$data['titre1']="Meilleur score";
+			            $data['titre2']="au Quizz Wouzou";
+			            $data['aide']="Score Maximal réalisé lors d'une partie au Quizz Wouzou";
+			            $data['nomPage']="highScore";
+			            }
+	else if ($crit=="scofDayAr") {$data['titre1']="Score du jour";
+			            $data['titre2']="au Quizz Art";
+			            $data['aide']="Meilleur score au Quizz Nature dans la journée en cours";
+			            $data['nomPage']="highScore";
+			            }	
+	else if ($crit=="scMaxAr") {$data['titre1']="Meilleur score";
+			            $data['titre2']="au Quizz Art";
+			            $data['aide']="Score Maximal réalisé lors d'une partie au Quizz Nature";
+			            $data['nomPage']="highScore";
+			            }	
+	else if ($crit=="kingMaster") {$data['titre1']="Score actuel";
+			            $data['titre2']="au Tournoi Royal";
+			            $data['aide']="Score actuel au Tournoi Royal";
+			            $data['nomPage']="highScore";
+			            }	
+	else if ($crit=="highScKM") {$data['titre1']="Meilleur score";
+			            $data['titre2']="au Tournoi Royal";
+			            $data['aide']="Score Maximal réalisé au Tournoi Royal";
+			            $data['nomPage']="highScore";
+			            }	
+	else if ($crit=="nbBrTot") {$data['titre1']="Nombre total";
+			            $data['titre2']="de bonnes réponses";
+			            $data['aide']="Nombre total de bonnes réponses données dans tous les jeux du Monde Du Quizz";
+			            $data['nomPage']="highScore";
+			            }				
+			            /*	else if ($crit=="scTotMq") {$data['titre1']=
+			            $data['titre2']=
+			            $data['aide']=
+			            }	
+	else if ($crit=="scTotMq") {$data['titre1']=
+			            $data['titre2']=
+			            $data['aide']=
 			            }	*/
 	else {$data['crit']="none";
 	      $data['titre1']="none";
@@ -156,16 +210,6 @@ class HighScore
 	  return $data;
 	}
 
-/*
-
-		&& $crit!="scofDayLx" && $crit!="scofDayAr"
-		&& $crit!="scofDayFf"&& $crit!="scofDayMu" && $crit!="scofDayTM"  
-		&& $crit!="scMoyLx" && $crit!="scMoyAr" && $crit!="scMoyFf"&& $crit!="scMoyMu"
-		&& $crit!="scMaxLx" && $crit!="scMaxAr" && $crit!="scMaxFf"&& $crit!="scMaxMu"
-		&& $crit!="scMaxTM" && $crit!="kingMaster"
- && $crit!="highScKM" && $crit!="nbQvalid"
-		&& $crit!="nbBrtot" &&  
-*/
 	public function pagination($nbParPage, $nbHighSc, $page )
 	{
 	      $pagi['nbParPage']=$nbParPage;
@@ -175,19 +219,19 @@ class HighScore
 	      if($page<4)
 	      {
 		      $pagi['page_min']=1;
-		      if($pagi['nbPage']<7){$pagi['page_max']=$pagi['nbPage'];}
-		      else{$pagi['page_max']=7;}      
+		      if($pagi['nbPage']<5){$pagi['page_max']=$pagi['nbPage'];}
+		      else{$pagi['page_max']=5;}      
 	      }
-	      elseif ($page>($pagi=['nbPage']-4))
+	      elseif($page>($pagi['nbPage']-3))
 	      {
 		      $pagi['page_max']=$pagi['nbPage'];
-		      if($pagi['nbPage']<7){$pagi['page_min']=1;}
-		      else{$pagi['page_min']=$pagi['nbPage']-6;}	      
+		      if($pagi['nbPage']<5){$pagi['page_min']=1;}
+		      else{$pagi['page_min']=$pagi['nbPage']-4;}	      
 	      }
 	      else
 	      {
-		      $pagi['page_min']=$pagi['nbPage']-3;
-		      $pagi['page_max']=$pagi['nbPage']+3;
+		      $pagi['page_min']=$pagi['page']-2;
+		      $pagi['page_max']=$pagi['page']+2;
 	      }
 	      return $pagi;
 	}

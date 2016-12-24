@@ -15,7 +15,7 @@ class AccueilGene
 	private $router;
 	private $tabScDayMq;
 	private $tabScDayKM;
-	private $tabScDayTM;
+	private $tabScDayCq;
 	private $tabScDayFf;
 	private $tabScDayLx;      	
  
@@ -26,7 +26,7 @@ class AccueilGene
 	  $this->router=$router;
 	  $this->tabScDayMq=$scUserRepository->recupHighScore('scofDayMq',1,15);
 	  $this->tabScDayKM=$scUserRepository->recupHighScore('kingMaster',1,15);	  
-	  $this->tabScDayTM=$scUserRepository->recupHighScore('scofDayTM',1,15);
+	  $this->tabScDayCq=$scUserRepository->recupHighScore('scofDayCq',1,15);
 	  $this->tabScDayFf=$scUserRepository->recupHighScore('scofDayFf',1,5);	  
 	  $this->tabScDayLx=$scUserRepository->recupHighScore('scofDayLx',1,5);	  
 	}
@@ -99,12 +99,7 @@ class AccueilGene
 		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/savant-H.png');}
 		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/savant-F.png');}		     
 		    $txt="src=".$route;
-	      }
-	      elseif($type=="Ministre"){		    
-		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/ministre-H.png');}
-		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/ministre-H.png');}		     
-		    $txt="src=".$route;
-	      }	      	      	      
+	      }	      	      
 	      elseif($type=="Musicien"){		    
 		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/virtuose-H.png');}
 		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/virtuose-F.png');}		     
@@ -124,8 +119,17 @@ class AccueilGene
 		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/globeT-H2.png');}
 		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/globeT-F.png');}		     
 		    $txt="src=".$route;
+	      }	      
+	      elseif($type=="Paparazzi"){		    
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/paparazzi-H.png');}
+		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/paparazzi-F.png');}		     
+		    $txt="src=".$route;
 	      }
-
+	      elseif($type=="Capitaine"){		    
+		    if($sexe==0){$route=$this->assets->getAssetUrl('bundles/GeneBundle/capitaine-H.png');}
+		    else{$route=$this->assets->getAssetUrl('bundles/GeneBundle/capitaine-F.png');}		     
+		    $txt="src=".$route;
+	      }
 	      if($id==""){$txt=$txt." style=opacity:0.4";}
 	      return $txt;
 	}
@@ -146,7 +150,7 @@ class AccueilGene
 	     $rang=$rang-1;
 	     if($type=="scofDayMq"){$tab=$this->tabScDayMq;}
 	      elseif($type=="kingMaster"){$tab=$this->tabScDayKM;}
-	      elseif($type=="scofDayTM"){$tab=$this->tabScDayTM;}
+	      elseif($type=="scofDayCq"){$tab=$this->tabScDayCq;}
 	      elseif($type=="scofDayFf"){$tab=$this->tabScDayFf;}
 	      elseif($type=="scofDayLx"){$tab=$this->tabScDayLx;}
 	      if(isset($tab[$rang]) && $tab[$rang]!==Null){$txt="href=".$this->router->generate('mdquser_profileU', array("id"=>$tab[$rang]['id']));}	 	
@@ -158,7 +162,7 @@ class AccueilGene
 	     $rang=$rang-1;
 	     if($type=="scofDayMq"){$tab=$this->tabScDayMq;}
 	      elseif($type=="kingMaster"){$tab=$this->tabScDayKM;}	      
-	      elseif($type=="scofDayTM"){$tab=$this->tabScDayTM;}
+	      elseif($type=="scofDayCq"){$tab=$this->tabScDayCq;}
 	      elseif($type=="scofDayFf"){$tab=$this->tabScDayFf;}
 	      elseif($type=="scofDayLx"){$tab=$this->tabScDayLx;}
 	      if(isset($tab[$rang]) && $tab[$rang]!==Null){$txt=$tab[$rang]['username'];}	      
@@ -170,7 +174,7 @@ class AccueilGene
 	     $rang=$rang-1;
 	     if($type=="scofDayMq"){$tab=$this->tabScDayMq;}
 	      elseif($type=="kingMaster"){$tab=$this->tabScDayKM;}	      
-	      elseif($type=="scofDayTM"){$tab=$this->tabScDayTM;}
+	      elseif($type=="scofDayCq"){$tab=$this->tabScDayCq;}
 	      elseif($type=="scofDayFf"){$tab=$this->tabScDayFf;}
 	      elseif($type=="scofDayLx"){$tab=$this->tabScDayLx;}
 	      if(isset($tab[$rang]) && $tab[$rang]!==Null){$txt=$tab[$rang][$type];}	     
@@ -183,10 +187,10 @@ class AccueilGene
 	      $key=array_search($dateref->getRMDQ()->getId(), array_column($tabMaitre2, 'id'));
 	      $tabMaitre['roi']=$tabMaitre2[$key];
 	 }
-	if($dateref->getMMDQ()===null){$tabMaitre['ministre']=null;}
+	if($dateref->getCMDQ()===null){$tabMaitre['capitaine']=null;}
 	else{
-	      $key=array_search($dateref->getMMDQ()->getId(), array_column($tabMaitre2, 'id'));
-	      $tabMaitre['ministre']=$tabMaitre2[$key];
+	      $key=array_search($dateref->getCMDQ()->getId(), array_column($tabMaitre2, 'id'));
+	      $tabMaitre['capitaine']=$tabMaitre2[$key];
 	 }
 	if($dateref->getSMDQ()===null){$tabMaitre['savant']=null;}
 	else{
@@ -202,6 +206,11 @@ class AccueilGene
 	else{
 	      $key=array_search($dateref->getLxMDQ()->getId(), array_column($tabMaitre2, 'id'));
 	      $tabMaitre['globeT']=$tabMaitre2[$key];
+	 }
+	if($dateref->getWzMDQ()===null){$tabMaitre['paparazzi']=null;}
+	else{
+	      $key=array_search($dateref->getWzMDQ()->getId(), array_column($tabMaitre2, 'id'));
+	      $tabMaitre['paparazzi']=$tabMaitre2[$key];
 	 }
 	 if($dateref->getArMDQ()===null){$tabMaitre['peintre']=null;}
 	  else{

@@ -8,12 +8,14 @@ namespace MDQ\AdminBundle\Services;
 class SelfSecurity
 {    
       	private $gestionRepository;
-      	private $securityContext;
+      	private $securityToken;
+       	private $securityAutho;     	
       	private $session;
  
-	public function __construct($securityContext, $session, $gestionRepository) {
+	public function __construct($securityToken, $securityAutho, $session, $gestionRepository) {
 	  $this->gestionRepository=$gestionRepository;
-	  $this->securityContext=$securityContext;
+	  $this->securityToken=$securityToken;
+	  $this->securityAutho=$securityAutho;
 	  $this->session=$session;
 	}
 
@@ -76,26 +78,27 @@ class SelfSecurity
 		}	
 		$gestion=$this->gestionRepository->findOneById(1);
 
-		if($blocageTot==1 && $gestion->getBlocageTot()==1 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
+		if($blocageTot==1 && $gestion->getBlocageTot()==1 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
 		
-		elseif($user==1 && $this->securityContext->getToken()->getUser()===null){return false;}
-		elseif($user==2 && $this->securityContext->isGranted('ROLE_USER')){return false;}
+		elseif($user==1 && $this->securityToken->getToken()->getUser()===null){return false;}
+		elseif($user==2 && $this->securityAutho->isGranted('ROLE_USER')){return false;}
 		
-		elseif($inscription==1 && $gestion->getInscription()==0 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
-		elseif($propQ==1 && $gestion->getPropQ()==0 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
-		elseif($signalE==1 && $gestion->getSignalE()==0 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
+		elseif($inscription==1 && $gestion->getInscription()==0 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
+		elseif($propQ==1 && $gestion->getPropQ()==0 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
+		elseif($signalE==1 && $gestion->getSignalE()==0 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
 		elseif($pagePrec!==null && $pagePrec!=$sessionPage){return false;}
 		
 		elseif($testGame==1){ 
-		if($game!="MasterQuizz" && $game!="MuQuizz" && $game!="SexyQuizz" && $game!="FfQuizz" && $game!="ArQuizz" && $game!="LxQuizz"  && $game!="TvQuizz"){return false;}
+		if($game!="MasterQuizz" && $game!="MuQuizz" && $game!="SexyQuizz" && $game!="FfQuizz" && $game!="ArQuizz" && $game!="LxQuizz" && $game!="WzQuizz" && $game!="TvQuizz"){return false;}
 		else{
-		if($game=="MasterQuizz" && $gestion->getMq()==0 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
-		elseif($game=="FfQuizz" && $gestion->getFf()==0 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
-		elseif($game=="ArQuizz" && $gestion->getAr()==0 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
-		elseif($game=="LxQuizz" && $gestion->getLx()==0 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
-		elseif($game=="MuQuizz" && $gestion->getMc()==0 && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
-		elseif($game=="TvQuizz" && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
-		elseif($game=="SexyQuizz" && !$this->securityContext->isGranted('ROLE_ADMIN')){return false;}
+		if($game=="MasterQuizz" && $gestion->getMq()==0 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
+		elseif($game=="FfQuizz" && $gestion->getFf()==0 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
+		elseif($game=="ArQuizz" && $gestion->getAr()==0 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
+		elseif($game=="LxQuizz" && $gestion->getLx()==0 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
+		elseif($game=="WzQuizz" && $gestion->getWz()==0 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
+		elseif($game=="MuQuizz" && $gestion->getMu()==0 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
+		elseif($game=="TvQuizz" && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
+		elseif($game=="SexyQuizz" && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
 		}}
 		
 	      return $test; //true or false

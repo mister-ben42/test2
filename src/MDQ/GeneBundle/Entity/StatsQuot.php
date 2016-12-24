@@ -38,9 +38,9 @@ class StatsQuot
     /**
      * @var integer
      *
-     * @ORM\Column(name="mMDQ", type="integer", nullable=true)
+     * @ORM\Column(name="cMDQ", type="integer", nullable=true)
      */
-    private $mMDQ;
+    private $cMDQ;
 
     /**
      * @var integer
@@ -62,6 +62,13 @@ class StatsQuot
      * @ORM\Column(name="lxMDQ", type="integer", nullable=true)
      */
     private $lxMDQ;
+
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="wzMDQ", type="integer", nullable=true)
+     */
+    private $wzMDQ;
     
         /**
      * @var integer
@@ -111,6 +118,13 @@ class StatsQuot
      * @ORM\Column(name="nbPLx", type="integer")
      */
     private $nbPLx;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbPWz", type="integer")
+     */
+    private $nbPWz;
 
     /**
      * @var integer
@@ -168,6 +182,13 @@ class StatsQuot
      * @ORM\Column(name="nbQLxV", type="integer", nullable=true)
      */
     private $nbQLxV;
+
+         /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbQWzV", type="integer", nullable=true)
+     */
+    private $nbQWzV;
     
          /**
      * @var integer
@@ -230,15 +251,17 @@ class StatsQuot
 	{
 		$this->day = new \Datetime(date('Y-m-d')); 
 		$this->rMDQ = null;
-		$this->mMDQ = null;
+		$this->cMDQ = null;
 		$this->sMDQ = null;
 		$this->ffMDQ = null;
 		$this->arMDQ = null;
 		$this->lxMDQ = null;
+		$this->wzMDQ = null;
 		$this->muMDQ = null;
 		$this->nbPtot=0;
 		$this->nbPMq=0;
 		$this->nbPLx=0;
+		$this->nbPWz=0;
 		$this->nbPMu=0;
 		$this->nbPAr=0;
 		$this->nbPFf=0;
@@ -254,6 +277,7 @@ class StatsQuot
 		$this->nbQMqV=null;
 		$this->nbQFfV=null;
 		$this->nbQLxV=null;
+		$this->nbQWzV=null;
 		$this->nbQArV=null;
 		$this->nbQMuV=null;
 		$this->valid=false;
@@ -317,26 +341,26 @@ class StatsQuot
     }
 
     /**
-     * Set mMDQ
+     * Set cMDQ
      *
-     * @param integer $mMDQ
+     * @param integer $cMDQ
      * @return StatsQuot
      */
-    public function setMMDQ($mMDQ)
+    public function setCMDQ($cMDQ)
     {
-        $this->mMDQ = $mMDQ;
+        $this->cMDQ = $cMDQ;
 
         return $this;
     }
 
     /**
-     * Get mMDQ
+     * Get cMDQ
      *
      * @return integer 
      */
-    public function getMMDQ()
+    public function getCMDQ()
     {
-        return $this->mMDQ;
+        return $this->cMDQ;
     }
 
     /**
@@ -958,5 +982,77 @@ class StatsQuot
     public function getNbQMuV()
     {
         return $this->nbQMuV;
+    }
+
+    /**
+     * Set wzMDQ
+     *
+     * @param integer $wzMDQ
+     *
+     * @return StatsQuot
+     */
+    public function setWzMDQ($wzMDQ)
+    {
+        $this->wzMDQ = $wzMDQ;
+
+        return $this;
+    }
+
+    /**
+     * Get wzMDQ
+     *
+     * @return integer
+     */
+    public function getWzMDQ()
+    {
+        return $this->wzMDQ;
+    }
+
+    /**
+     * Set nbPWz
+     *
+     * @param integer $nbPWz
+     *
+     * @return StatsQuot
+     */
+    public function setNbPWz($nbPWz)
+    {
+        $this->nbPWz = $nbPWz;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPWz
+     *
+     * @return integer
+     */
+    public function getNbPWz()
+    {
+        return $this->nbPWz;
+    }
+
+    /**
+     * Set nbQWzV
+     *
+     * @param integer $nbQWzV
+     *
+     * @return StatsQuot
+     */
+    public function setNbQWzV($nbQWzV)
+    {
+        $this->nbQWzV = $nbQWzV;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQWzV
+     *
+     * @return integer
+     */
+    public function getNbQWzV()
+    {
+        return $this->nbQWzV;
     }
 }

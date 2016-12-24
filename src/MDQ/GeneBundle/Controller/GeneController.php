@@ -5,14 +5,15 @@
 namespace MDQ\GeneBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 //use MDQ\GeneBundle\Entity\StatsQuot; //En attendant de le réactiver quand en ligne, avec un service à part
 
 
 class GeneController extends Controller
 {
-  public function accueilAction()
+  public function accueilAction(Request $request)
   {// Rq, je n'ai mis aucun persist et ca marche quand meme ! A etudier.
-    $session = $this->getRequest()->getSession();
+    $session = $request->getSession();
 	$session->set('page', 'accueil');	
 	$em=$this->getDoctrine()->getManager();
 	/* Remarque : mise a jour journee et mois en meme temps que maj jur partie non validees, du coup si partie non validee en fin de journee, ou si aucune connection ensuite,
@@ -55,12 +56,12 @@ class GeneController extends Controller
 						->majClassement($listeUserMq, 'scofDayMq', $tabMaitres);
 		
 			$listeUQM=$em->getRepository('MDQUserBundle:ScUser')
-							->recupUserByCrit('scofDayTM');
+							->recupUserByCrit('scofDayCq');
 			$jetonServ = $this->container->get('mdq_user.jeton_serv');
 			$jetonServ->majQuotJeton($listeUserMq);// A mixer avec le suivant
 			$jetonServ->majQuotJeton($listeUQM);
 			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
-						->majClassement($listeUQM, 'TotalMedia', $tabMaitres);
+						->majClassement($listeUQM, 'CaQuizz', $tabMaitres);
 			$listeUMu=$em->getRepository('MDQUserBundle:ScUser')
 						->recupUserByCrit('scofDayMu');
 			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
@@ -82,7 +83,7 @@ class GeneController extends Controller
 					
 			$dateref->setRMDQ($tabMaitres[0]);
 			$dateref->setSMDQ($tabMaitres[1]);
-			$dateref->setMMDQ($tabMaitres[2]);
+			$dateref->setCMDQ($tabMaitres[2]);
 			$dateref->setMuMDQ($tabMaitres[3]);
 			$dateref->setArMDQ($tabMaitres[4]);
 			$dateref->setFfMDQ($tabMaitres[5]);
@@ -92,7 +93,7 @@ class GeneController extends Controller
 		}
 	// ************ flush final, execute toutes les mises a jour ******* ////
 			
-	$tabMaitre1=[$dateref->getRMDQ(),$dateref->getMMDQ(),$dateref->getSMDQ(), $dateref->getFfMDQ(), $dateref->getLxMDQ(), $dateref->getMuMDQ(), $dateref->getArMDQ()];
+	$tabMaitre1=[$dateref->getRMDQ(),$dateref->getCMDQ(),$dateref->getSMDQ(), $dateref->getFfMDQ(), $dateref->getLxMDQ(), $dateref->getMuMDQ(), $dateref->getArMDQ()];
 	$tabMaitre2=$em->getRepository('MDQUserBundle:User')->selectTabMaitres($tabMaitre1);
 	$tabMaitre=$geneServ->getTabMaitre($dateref, $tabMaitre2);
 	$newsA=$em->getRepository('MDQAdminBundle:News')->recupNews();
@@ -106,10 +107,10 @@ class GeneController extends Controller
 	  'tabMaitre'=>$tabMaitre,
     ));
   }
-   public function accueilJeuAction()
+   public function accueilJeuAction(Request $request)
   {
 		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
-		$session = $this->getRequest()->getSession();
+		$session = $request->getSession();
 		$accueilJServ = $this->container->get('mdq_gene.accueilJeu');	
 		$session->set('page', 'accueilJeu');
 		return $this->render('MDQGeneBundle:Gene:accueilJeu.html.twig', array(
@@ -129,8 +130,8 @@ class GeneController extends Controller
 	{
 		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 		$id_connect=0;$nbparPage=20;
-		if ($this->get('security.context')->isGranted('ROLE_USER')) {// ca ca marche.
-			$id_connect = $this->container->get('security.context')->getToken()->getUser()->getScUser()->getId();
+		if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {// ca ca marche.
+			$id_connect = $this->container->get('security.token_storage')->getToken()->getUser()->getScUser()->getId();
 		}
 		$highScServ = $this->container->get('mdq_gene.services');
 		$data=$highScServ->editTxt($crit);

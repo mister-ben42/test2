@@ -11,7 +11,8 @@ use MDQ\QuestionBundle\Entity\CritEditQaVal;
 use MDQ\QuestionBundle\Form\Type\CritEditQType;
 use MDQ\QuestionBundle\Form\Type\CritEditQaValType;
 use MDQ\QuestionBundle\Form\Type\QuestionEditType;
-use Symfony\Component\HttpFoundation\JsonResponse; // pour les requête ajax
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class GestionQuestionController extends Controller
 {
@@ -85,18 +86,14 @@ class GestionQuestionController extends Controller
 			 ));
 
 	}
-	public function critvoirQAction($choice)
+	public function critvoirQAction($choice, Request $request)
 	{
 
 		$crits = new CritEditQ;
-		$form = $this->createForm(new CritEditQType(), $crits);
-		$request = $this->getRequest();
+		$form = $this->get('form.factory')->create(CritEditQType::class, $crits);
 		if($choice=="listForm"){$url='mdqadmin_voirListFormQ';}
 		else{$url='mdqadmin_voirQ';}
-		if ($request->getMethod() == 'POST') {
-		  $form->bind($request);
-		  if ($form->isValid()) {
-			
+		if ($request->getMethod() == 'POST' && $form->handleRequest($request)->isValid()) {   			
 				return $this->redirect($this->generateUrl($url, array(
 				'error'=> $crits->getError(),
 				'valid'=> $crits->getValid(),
@@ -110,24 +107,17 @@ class GestionQuestionController extends Controller
 				'nbmin'   => $crits->getNbmin()				
 				)));
 			
-			
-		  }
 		}
 
 		return $this->render('MDQAdminBundle:Admin:critvoirQ.html.twig', array(
 		  'form' => $form->createView(),
 		));
 	}
-	public function modifQAction(Question $question, $choice, $error, $valid, $diff, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin)
+	public function modifQAction(Question $question, $choice, $error, $valid, $diff, $dom1, $theme, $crit, $sens, $nbdeQ, $nbmin, Request $request)
 	{
-		$form = $this->createForm(new QuestionEditType(), $question);
-		$request = $this->getRequest();
+		$form = $this->get('form.factory')->create(QuestionEditType::class, $question);
 
-		if ($request->getMethod() == 'POST') {
-		  $form->bind($request);
-
-		  if ($form->isValid()) {
-			// On enregistre l'article
+		if ($request->getMethod() == 'POST' && $form->handleRequest($request)->isValid()) {   
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($question);
 			$em->flush();
@@ -144,16 +134,15 @@ class GestionQuestionController extends Controller
 			'nbdeQ'   => $nbdeQ,
 			'nbmin'   => $nbmin
 			)));
-		}}
+		}
 
 		return $this->render('MDQAdminBundle:Admin:editQ.html.twig', array(
 		  'form'    => $form->createView(),
 		  'question' => $question,
 		));
 	}
-	public function modifQajaxAction()
+	public function modifQajaxAction(Request $request)
 	{
-		$request = $this->getRequest();	 
 		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 		{
 		      $idQ=$request->request->get('idQ');
@@ -175,14 +164,11 @@ class GestionQuestionController extends Controller
 		$data='error';
 		return $data;  
 	}
-	public function critvoirQaValAction()
+	public function critvoirQaValAction(Request $request)
 	{
 		$crits = new CritEditQaVal;
-		$form = $this->createForm(new CritEditQaValType(), $crits);		
-		$request = $this->getRequest();
-		if ($request->getMethod() == 'POST') {
-		  $form->bind($request);
-		  if ($form->isValid()) {
+		$form = $this->get('form.factory')->create(CritEditQaValType::class, $crits);
+		if ($request->getMethod() == 'POST' && $form->handleRequest($request)->isValid()) {   
 				return $this->redirect($this->generateUrl('mdqadmin_voirQaVal', array(
 				'repAdmin'=> $crits->getRepAdmin(),
 				'diff'=> $crits->getDiff(),
@@ -192,7 +178,6 @@ class GestionQuestionController extends Controller
 				'nbdeQ'   => $crits->getNbdeQ(),
 				'nbmin'   => $crits->getNbmin()
 				)));						
-		  }
 		}
 		return $this->render('MDQAdminBundle:Admin:critvoirQ.html.twig', array(
 		  'form' => $form->createView(),
@@ -257,9 +242,8 @@ class GestionQuestionController extends Controller
 			  'data'=>$data,
 			 ));		
 	}
-	public function retourQaValajaxAction()
+	public function retourQaValajaxAction(Request $request)
 	{// Qd la Qaval n'est pas ajoutée à la bdd.
-		$request = $this->getRequest();	 
 		if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
 		{
 			$idQ = $request->request->get('idQ');
@@ -279,9 +263,8 @@ class GestionQuestionController extends Controller
 		$data='error';
 		return $data;  
 	}
-	public function insertQaValajaxAction()
+	public function insertQaValajaxAction(Request $request)
 	{// Qd Qaval est insérée dans la bdd
-		$request = $this->getRequest();	 
 		if($request->isXmlHttpRequest())
 		{			
 

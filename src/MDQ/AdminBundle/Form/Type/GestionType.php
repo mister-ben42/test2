@@ -4,7 +4,9 @@ namespace MDQ\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class GestionType extends AbstractType
 {
@@ -16,63 +18,60 @@ class GestionType extends AbstractType
     {
       
 		$builder
-            ->add('blocageTot', 'checkbox', array(			
+            ->add('blocageTot', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			 ->add('jeuTot', 'checkbox', array(			
+			 ->add('jeuTot', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			 ->add('mq', 'checkbox', array(			
+			 ->add('mq', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			 ->add('ff', 'checkbox', array(			
+			 ->add('ff', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			 ->add('mc', 'checkbox', array(			
+			 ->add('mu', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			 ->add('lx', 'checkbox', array(			
+			 ->add('lx', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			 ->add('ar', 'checkbox', array(			
+			 ->add('wz', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			 ->add('propQ', 'checkbox', array(			
+			 ->add('ar', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			 ->add('signalE', 'checkbox', array(			
+			 ->add('propQ', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			 ->add('inscription', 'checkbox', array(			
+			 ->add('signalE', CheckboxType::class, array(			
+			'required'  => false,
+				))
+			 ->add('inscription', CheckboxType::class, array(			
 			'required'  => false,
 				))			
-			 ->add('jetons_uniques', 'checkbox', array(			
+			 ->add('jetons_uniques', CheckboxType::class, array(			
 			'required'  => false,
 				))
-			->add('nbJquotMq', 'text', array(			
+			->add('nbJquotMq', TextType::class, array(			
 			'required'  => false,
 				))
-			->add('nbJquotQm', 'text', array(			
+			->add('nbJquotQm', TextType::class, array(			
 			'required'  => false,
 				))
 		;
     }
     
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'MDQ\AdminBundle\Entity\Gestion'
         ));
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mdq_adminbundle_gestion';
-    }
+
 }

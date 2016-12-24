@@ -323,28 +323,4 @@ class DateReference
     {
         return $this->ffMDQ;
     }
-
-    /**
-     * Set wzMDQ
-     *
-     * @param \MDQ\UserBundle\Entity\ScUser $wzMDQ
-     *
-     * @return DateReference
-     */
-    public function setWzMDQ(\MDQ\UserBundle\Entity\ScUser $wzMDQ = null)
-    {
-        $this->wzMDQ = $wzMDQ;
-
-        return $this;
-    }
-
-    /**
-     * Get wzMDQ
-     *
-     * @return \MDQ\UserBundle\Entity\ScUser
-     */
-    public function getWzMDQ()
-    {
-        return $this->wzMDQ;
-    }
 }

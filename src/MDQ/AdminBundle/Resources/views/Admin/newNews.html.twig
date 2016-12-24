@@ -12,8 +12,8 @@
   <h2>Créer une nouvelle News</h2>
   
 
-<div >
-  <form  method="post" class="formQ" {{ form_enctype(form) }}>
+<div id="form_edit_news" >
+  {{ form_start(form, {'attr':{'class':'formQ'}, 'method': 'POST'}) }}
 
 {# Les erreurs générales du formulaire. #}
 {{ form_errors(form) }}

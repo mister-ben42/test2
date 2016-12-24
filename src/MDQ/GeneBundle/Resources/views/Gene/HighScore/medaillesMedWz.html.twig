@@ -15,23 +15,23 @@
 		<a href="{{ path('mdquser_profileU', {'id':scuser.id}) }}" {%if scuser.id==id_connect %}style="color:rgb(128,255,255);"{%elseif scuser.id==id_search %} style="color:rgb(255,168,168);" {%endif%}> {{scuser.username}} </a>
 		</span>
 		<span class="score">
-			{% if scuser.tm1+scuser.tm2+scuser.tm3+scuser.tm4+scuser.tm5==0 %}
-				Meilleur classement : {{scuser.highClassDayTM}}ème
+			{% if scuser.wz1+scuser.wz2+scuser.wz3+scuser.wz4+scuser.wz5==0 %}
+				Meilleur classement : {{scuser.highClassDayWz}}ème
 			{% else %}
 				<span class="bloc_med">
-					<img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.tm1}}					
-				</span>
-				<span class="bloc_med">					
-					<img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.tm2}}					
-				</span>
-				<span class="bloc_med">					
-					<img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.tm3}}					
+					<img src={{ asset('bundles/UserBundle/MedOr0.png') }} alt="Med">x{{scuser.wz1}}
 				</span>
 				<span class="bloc_med">
-					<img src={{ asset('bundles/UserBundle/MedCh0.png') }} alt="Med">x{{scuser.tm4}}
+					<img src={{ asset('bundles/UserBundle/MedAg0.png') }} alt="Med">x{{scuser.wz2}}
 				</span>
 				<span class="bloc_med">
-					<img src={{ asset('bundles/UserBundle/MedCt0.png') }} alt="Med">x{{scuser.tm5}}
+					<img src={{ asset('bundles/UserBundle/MedBz0.png') }} alt="Med">x{{scuser.wz3}}
+				</span>
+				<span class="bloc_med">
+					<img src={{ asset('bundles/UserBundle/MedCh0.png') }} alt="Med">x{{scuser.wz4}}
+				</span>
+				<span class="bloc_med">
+					<img src={{ asset('bundles/UserBundle/MedCt0.png') }} alt="Med">x{{scuser.wz5}}
 				</span>
 			{% endif %}
 		</span></div>

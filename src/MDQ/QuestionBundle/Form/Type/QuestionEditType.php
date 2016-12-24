@@ -16,9 +16,5 @@ class QuestionEditType extends QuestionType // Ici, on hérite de QuestionType -
 			;
   }
 
-  // On modifie cette méthode, car les deux formulaires doivent avoir un nom différent
-  public function getName()
-  {
-    return 'mdq_questionbundle_questionedittype';
-  }
+
 }

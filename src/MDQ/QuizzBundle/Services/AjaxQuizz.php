@@ -58,6 +58,7 @@ class AjaxQuizz
 		elseif($dom1=='ArQuizz'){$type['game']='MediaQuizz'; $type['dom1']='ArQuizz';$type['nbQparP']=8;}
 		elseif($dom1=='FfQuizz'){$type['game']='MediaQuizz'; $type['dom1']='FfQuizz';$type['nbQparP']=8;}
 		elseif($dom1=='LxQuizz'){$type['game']='MediaQuizz'; $type['dom1']='LxQuizz';$type['nbQparP']=8;}
+		elseif($dom1=='WzQuizz'){$type['game']='MediaQuizz'; $type['dom1']='WzQuizz';$type['nbQparP']=8;}
 		return $type;
 	}
 	public function calcScVerifR($requete, $repQ, $game)

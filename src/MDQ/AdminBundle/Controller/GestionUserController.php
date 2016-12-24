@@ -9,20 +9,16 @@ use MDQ\UserBundle\Entity\User;
 use MDQ\UserBundle\Form\Type\UserBlockType;
 use MDQ\UserBundle\Entity\CritEditU;
 use MDQ\UserBundle\Form\Type\CritEditUType;
+use Symfony\Component\HttpFoundation\Request;
 
 class GestionUserController extends Controller
 {
 
-	public function profileUAdminAction(User $user)
+	public function profileUAdminAction(User $user, Request $request)
 	{
-		 $form = $this->createForm(new UserBlockType(), $user);
+		 $form = $this->get('form.factory')->create(UserBlockType::class, $user);
 
-		$request = $this->getRequest();
-
-		if ($request->getMethod() == 'POST') {
-		  $form->bind($request);
-
-		  if ($form->isValid()) {
+		if ($request->getMethod() == 'POST' && $form->handleRequest($request)->isValid()) {   
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($user);
 			$em->flush();
@@ -30,7 +26,7 @@ class GestionUserController extends Controller
 			return $this->redirect($this->generateUrl('mdqadmin_profileUAdmin', array(
 			'id' => $id
 			)));
-		}}
+		}
 		$derPartieUser=$this->getDoctrine()
 							->getManager()
 							->getRepository('MDQQuizzBundle:PartieQuizz')
@@ -41,17 +37,15 @@ class GestionUserController extends Controller
 		'derParties'=>$derPartieUser,
 		'form'    => $form->createView(),
 		'dateref'=>$dateref,
+		'usertwig'=>$this->container->get('mdq_user.usertwig')
 		));
 	}
-	public function critvoirUAction()
+	public function critvoirUAction(Request $request)
 	{
 
 		$crits = new CritEditU;
-		$form = $this->createForm(new CritEditUType(), $crits);		
-		$request = $this->getRequest();		
-		if ($request->getMethod() == 'POST') {		  
-		  $form->bind($request);		 
-		  if ($form->isValid()) {			
+		$form = $this->get('form.factory')->create(CritEditUType::class, $crits);	
+		if ($request->getMethod() == 'POST' && $form->handleRequest($request)->isValid()) {   			
 			return $this->redirect($this->generateUrl('mdqadmin_voirU', array(		
 			'type'=> $crits->getType(),
 			'compte'=> $crits->getCompte(),
@@ -67,7 +61,6 @@ class GestionUserController extends Controller
 			'nbdeU'=>$crits->getNbdeU(),
 			'nbmin'=>$crits->getNbmin()
 			)));
-		  }
 		}
 		return $this->render('MDQAdminBundle:Admin:critvoirU.html.twig', array(
 		  'form' => $form->createView(),

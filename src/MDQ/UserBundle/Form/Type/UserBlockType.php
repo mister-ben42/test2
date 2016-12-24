@@ -4,7 +4,9 @@ namespace MDQ\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UserBlockType extends AbstractType
 {
@@ -16,38 +18,42 @@ class UserBlockType extends AbstractType
     {
         $builder
 
-			->add('allowError', 'choice', array(
+			->add('allowError', ChoiceType::class, array(
 				'choices' => array(
-					'1' => 'SignalError Autorisé',
-					'0' => 'SignalError Interdit',					
+					'SignalError Autorisé' =>'1',
+					'SignalError Interdit' =>'0',					
 				),
+				'choices_as_values' => true,
 				'required'    => true,
 				'expanded'   =>true,
 			))
-	    ->add('supprime', 'choice', array(
+	    ->add('supprime', ChoiceType::class, array(
 				'choices' => array(
-					'0' => 'Autoriser le compte',
-					'1' => 'Supprimer le compte',
+					'Autoriser le compte' =>'0',
+					'Supprimer le compte' =>'1',
 				),
+				'choices_as_values' => true,
 				'required'    => true,
 				'expanded'   =>true,
 			))
-	    ->add('allowPropQ', 'choice', array(
+	    ->add('allowPropQ', ChoiceType::class, array(
 				'choices' => array(
-					'0' => 'Autoriser Questions',
-					'1' => 'Interdire Questions',
+					 'Autoriser Questions' =>'0',
+					'Interdire Questions' =>'1',
 				),
+				'choices_as_values' => true,
 				'required'    => true,
 				'expanded'   =>true,
 			))
-	    ->add('roles', 'collection', array(
-				'type'   => 'choice',
-				'options'  => array(
+	    ->add('roles', CollectionType::class, array(
+				'entry_type'   => ChoiceType::class,
+				'entry_options'  => array(
 				    'choices'  => array(
-					'ROLE_USER' => 'User',
-					'ROLE_ADMIN'     => 'Admin',
-					'ROLE_SUPER_ADMIN'    => 'Super Admin',
+					'User' => 'ROLE_USER',
+					'Admin' => 'ROLE_ADMIN' ,
+					'Super Admin' => 'ROLE_SUPER_ADMIN',
 				      ),
+				'choices_as_values' => true,
 				'required'    => true,
 			)))
 		;
@@ -55,20 +61,14 @@ class UserBlockType extends AbstractType
     }
     
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'MDQ\UserBundle\Entity\User'
         ));
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'mdq_userbundle_userblock';
-    }
+
 }

@@ -47,12 +47,14 @@ class QuestionRepository extends EntityRepository
 					$qb->expr()->eq('a.dom1', ':dom1a'),
 					$qb->expr()->eq('a.dom1', ':dom1b'),
 					$qb->expr()->eq('a.dom1', ':dom1c'),
-					$qb->expr()->eq('a.dom1', ':dom1d')
+					$qb->expr()->eq('a.dom1', ':dom1d'),
+					$qb->expr()->eq('a.dom1', ':dom1e')
 					));
 					$qb->setParameter('dom1a', "FfQuizz")
 					->setParameter('dom1b', "LxQuizz")
-					->setParameter('dom1c', "McQuizz")
-					->setParameter('dom1d', "ArQuizz");
+					->setParameter('dom1c', "MuQuizz")
+					->setParameter('dom1d', "ArQuizz")
+					->setParameter('dom1e', "WzQuizz");
 					}
 					elseif($game=="Autre"){
 					$qb->andWhere('a.dom1 != :dom1a')
@@ -72,10 +74,11 @@ class QuestionRepository extends EntityRepository
 					$qb->andWhere('a.dom1 != :dom1h')
 					->setParameter('dom1h', "LxQuizz");
 					$qb->andWhere('a.dom1 != :dom1i')
-					->setParameter('dom1i', "McQuizz");
+					->setParameter('dom1i', "MuQuizz");
 					$qb->andWhere('a.dom1 != :dom1j')
-					->setParameter('dom1j', "ArQuizz");
-					}
+					->setParameter('dom1j', "ArQuizz");					
+					}$qb->andWhere('a.dom1 != :dom1k')
+					->setParameter('dom1k', "WzQuizz");
 					
 				}
 			}		if($valid!=4){
@@ -135,13 +138,14 @@ class QuestionRepository extends EntityRepository
 	$nbQslv1=0; $nbQsld1v1=0; $nbQsld2v1=0; $nbQsld3v1=0; $nbQsld4v1=0; $nbQsld5v1=0;
 	$nbQsnv1=0; $nbQsnd1v1=0; $nbQsnd2v1=0; $nbQsnd3v1=0; $nbQsnd4v1=0; $nbQsnd5v1=0;
 	//Stats MediaQuizz
-	$nbQar=0;$nbQff=0; $nbQmu=0; $nbQlx=0;
+	$nbQar=0;$nbQff=0; $nbQmu=0; $nbQlx=0; $nbQwz=0;
 	$nbQQmd1=0; $nbQQmd2=0; $nbQQmd3=0; $nbQQmd4=0; $nbQQmd5=0;//diff
 	$nbQQmv0=0; $nbQQmv1=0; $nbQQmv2=0; $nbQQmv3=0;//valide
 	$nbQard1=0; $nbQard2=0; $nbQard3=0; $nbQard4=0; $nbQard5=0;
 	$nbQffd1=0; $nbQffd2=0; $nbQffd3=0; $nbQffd4=0; $nbQffd5=0;
 	$nbQmud1=0; $nbQmud2=0; $nbQmud3=0; $nbQmud4=0; $nbQmud5=0;
 	$nbQlxd1=0; $nbQlxd2=0; $nbQlxd3=0; $nbQlxd4=0; $nbQlxd5=0;
+	$nbQwzd1=0; $nbQwzd2=0; $nbQwzd3=0; $nbQwzd4=0; $nbQwzd5=0;
 	//Stats QuizzenFolie
 	$nbQsx=0; $nbQtv=0; 
 	$nbQsxd1=0;$nbQsxd2=0;$nbQsxd3=0;$nbQsxd4=0;$nbQsxd5=0;
@@ -164,7 +168,7 @@ class QuestionRepository extends EntityRepository
 		{		
 			$game="QuizzEnFolie";
 		}
-		elseif($dom1=='ArQuizz' || $dom1=='MuQuizz' || $dom1=='FfQuizz' || $dom1=='LxQuizz')
+		elseif($dom1=='ArQuizz' || $dom1=='MuQuizz' || $dom1=='FfQuizz' || $dom1=='LxQuizz' || $dom1=='WzQuizz')
 		{
 			$game="MediaQuizz";
 		}
@@ -387,6 +391,15 @@ class QuestionRepository extends EntityRepository
 				elseif($diff==4){$nbQQmd4++; $nbQlxd4++;}				
 				elseif($diff==5){$nbQQmd5++; $nbQlxd5++;}
 			}
+			elseif($dom1=='WzQuizz')
+			{
+				$nbQwz++;
+				if($diff==1){$nbQQmd1++; $nbQwzd1++;}
+				elseif($diff==2){$nbQQmd2++; $nbQwzd2++;}
+				elseif($diff==3){$nbQQmd3++; $nbQwzd3++;}
+				elseif($diff==4){$nbQQmd4++; $nbQwzd4++;}				
+				elseif($diff==5){$nbQQmd5++; $nbQwzd5++;}
+			}
 			elseif($dom1=='MuQuizz')
 			{
 				$nbQmu++;
@@ -464,6 +477,7 @@ class QuestionRepository extends EntityRepository
 	$pctQard1=round((100*$nbQard1/$nbQar),2);$pctQard2=round((100*$nbQard2/$nbQar),2);$pctQard3=round((100*$nbQard3/$nbQar),2);$pctQard4=round((100*$nbQard4/$nbQar),2);$pctQard5=round((100*$nbQard5/$nbQar),2);
 	$pctQffd1=round((100*$nbQffd1/$nbQff),2);$pctQffd2=round((100*$nbQffd2/$nbQff),2);$pctQffd3=round((100*$nbQffd3/$nbQff),2);$pctQffd4=round((100*$nbQffd4/$nbQff),2);$pctQffd5=round((100*$nbQffd5/$nbQff),2);
 	$pctQlxd1=round((100*$nbQlxd1/$nbQlx),2);$pctQlxd2=round((100*$nbQlxd2/$nbQlx),2);$pctQlxd3=round((100*$nbQlxd3/$nbQlx),2);$pctQlxd4=round((100*$nbQlxd4/$nbQlx),2);$pctQlxd5=round((100*$nbQlxd5/$nbQlx),2);
+	$pctQwzd1=round((100*$nbQwzd1/$nbQwz),2);$pctQwzd2=round((100*$nbQwzd2/$nbQwz),2);$pctQwzd3=round((100*$nbQwzd3/$nbQwz),2);$pctQwzd4=round((100*$nbQwzd4/$nbQwz),2);$pctQwzd5=round((100*$nbQwzd5/$nbQwz),2);
 	$pctQmud1=round((100*$nbQmud1/$nbQmu),2);$pctQmud2=round((100*$nbQmud2/$nbQmu),2);$pctQmud3=round((100*$nbQmud3/$nbQmu),2);$pctQmud4=round((100*$nbQmud4/$nbQmu),2);$pctQmud5=round((100*$nbQmud5/$nbQmu),2);
 		
 	return array(	
@@ -500,6 +514,8 @@ class QuestionRepository extends EntityRepository
 		'pctQffd1' => $pctQffd1, 'pctQffd2' => $pctQffd2, 'pctQffd3' => $pctQffd3, 'pctQffd4' => $pctQffd4, 'pctQffd5' => $pctQffd5,
 		'nbQlx' => $nbQlx,'nbQlxd1' => $nbQlxd1, 'nbQlxd2' => $nbQlxd2, 'nbQlxd3' => $nbQlxd3, 'nbQlxd4' => $nbQlxd4, 'nbQlxd5' => $nbQlxd5,
 		'pctQlxd1' => $pctQlxd1, 'pctQlxd2' => $pctQlxd2, 'pctQlxd3' => $pctQlxd3, 'pctQlxd4' => $pctQlxd4, 'pctQlxd5' => $pctQlxd5,
+		'nbQwz' => $nbQwz,'nbQwzd1' => $nbQwzd1, 'nbQwzd2' => $nbQwzd2, 'nbQwzd3' => $nbQwzd3, 'nbQwzd4' => $nbQwzd4, 'nbQwzd5' => $nbQwzd5,
+		'pctQwzd1' => $pctQwzd1, 'pctQwzd2' => $pctQwzd2, 'pctQwzd3' => $pctQwzd3, 'pctQwzd4' => $pctQwzd4, 'pctQwzd5' => $pctQwzd5,
 		'nbQmu' => $nbQmu,'nbQmud1' => $nbQmud1, 'nbQmud2' => $nbQmud2, 'nbQmud3' => $nbQmud3, 'nbQmud4' => $nbQmud4, 'nbQmud5' => $nbQmud5,
 		'pctQmud1' => $pctQmud1, 'pctQmud2' => $pctQmud2, 'pctQmud3' => $pctQmud3, 'pctQmud4' => $pctQmud4, 'pctQmud5' => $pctQmud5,
 		'nbQMqd1v1'=> $nbQMqd1v1,'nbQMqd2v1'=> $nbQMqd2v1,'nbQMqd3v1'=> $nbQMqd3v1,'nbQMqd4v1'=> $nbQMqd4v1,'nbQMqd5v1'=> $nbQMqd5v1,
@@ -560,24 +576,26 @@ class QuestionRepository extends EntityRepository
 				$tabidQ[$numQ-1]=$result[$numR]['id'];			
 				$tabdom3[$numQ-1]=$result[$numR]['dom3'];
 				//$tabtheme[$numQ-1]=$result[$numR]['theme']; //Pas sur que très utile
-				$tabId[$numQ-1]=$result[$numR]['id'];
 			}
-		return $tabId;
+		return $tabidQ;
 			
 	}
 	public function tiragePartieQM($tabDerP, $game)
 	{
-		$tabdom3=[]; $tabtheme=['x','x']; $tabidQ=[];$tabId=[];$tabMedia=[];
+		$tabdom3=[]; $tabtheme=['x','x']; $tabidQ=[];$tabId=[];$tabMedia=[]; $falseGame=false;
 		$tabdiffTv=[1,1,3,3,3,3,5,5];
 		$tabdiffFf=[1,3,3,3,4,4,5,5];
 		$tabdiffLx=[3,3,3,4,4,4,5,5];
+		if($game=="ArQuizz" || $game=="MuQuizz" || $game=="TvQuizz" || $game=="SexyQuizz" || $game=="WzQuizz"){$falseGame=true;}
 			$questions=$this->_em->createQueryBuilder();
 			$questions->select('q.id, q.dom3, q.theme, q.diff, q.dom1, q.media')
 				->from('MDQQuestionBundle:Question', 'q')
-				->where('q.valid = :valid')
-				->setParameter('valid', 1)
-				->andWhere('q.dom1=:dom1')
-				->setParameter('dom1', $game);		
+				->where('q.dom1=:dom1')
+				->setParameter('dom1', $game);
+			if(!$falseGame){
+			$questions->andWhere('q.valid = :valid')
+				->setParameter('valid', 1);
+			}
 			$result=$questions->getQuery()->getResult();
 			$nbResult=count($result);
 			for($numQ=1; $numQ<9; $numQ++) {
@@ -593,15 +611,16 @@ class QuestionRepository extends EntityRepository
 				if(in_array($result[$numR]['theme'],$tabtheme)){$test=false;}				
 				if(in_array($result[$numR]['dom3'],$tabdom3)){$test=false;}
 				if(in_array($result[$numR]['media'],$tabMedia)){$test=false;}
-				}
-
+				}				
+				$tabidQ[$numQ-1]=$result[$numR]['id'];	
+				if(!$falseGame){
 				$tabtheme[0]=$tabtheme[1];
-				$tabtheme[1]=$result[$numR]['theme'];
-				$tabidQ[$numQ-1]=$result[$numR]['id'];			
+				if($game=="LxQuizz"){$tabtheme[0]="x";}// Permet de uniquement conserver un thème dans la tab.
+				$tabtheme[1]=$result[$numR]['theme'];		
 				$tabdom3[$numQ-1]=$result[$numR]['dom3'];
-				$tabId[$numQ-1]=$result[$numR]['id'];
+				}
 			}
-		return $tabId;
+		return $tabidQ;
 			
 	}
 

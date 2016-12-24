@@ -1,9 +1,9 @@
 <?php
-// src/MDQ/UserBundle/Twig/UserExtension.php
+// src/MDQ/UserBundle/Service/UserTwig.php
 
-namespace MDQ\UserBundle\Twig;
+namespace MDQ\UserBundle\Services;
 
-class UserExtension extends \Twig_Extension
+class UserTwig
 {
 
 	private $dateRefRepository;
@@ -11,59 +11,7 @@ class UserExtension extends \Twig_Extension
 	public function __construct($dateRefRepository ) {
 	  $this->dateRefRepository = $dateRefRepository ;
 	}
-	public function getFunctions(){
-		return array(
-		  'age' => new \Twig_Function_Method($this, 'calculage'),
-		  'colorSexe' => new \Twig_Function_Method($this, 'colorSexe'),
-		  'tabMed' => new \Twig_Function_Method($this, 'tabMedailles'),
-		  'spanMed' => new \Twig_Function_Method($this, 'spanMedailles'),
-		  'spanDerPartie' => new \Twig_Function_Method($this, 'spanDerPartie'),
-		  'testMaitre' => new \Twig_Function_Method($this, 'testMaitre'),
-		  'testSup99Mq'=> new \Twig_Function_Method($this, 'testSup99Mq'),
-		  'testInfobulle99'=> new \Twig_Function_Method($this, 'testInfobulle99'),
-		  'testPropQ'=> new \Twig_Function_Method($this, 'testPropQ'),
-		  'txtRefusPropQ'=> new \Twig_Function_Method($this, 'txtRefusPropQ'),
-		  'phraseQaval'=> new \Twig_Function_Method($this, 'phraseQaval'),
-		  'retourQavalTxt'=> new \Twig_Function_Method($this, 'retourQavalTxt'),
-		  'retourQavalColor'=> new \Twig_Function_Method($this, 'retourQavalColor'),
-	      );
-	}
-	    public function getFilters()
-	{
-	    return array(
-		'chgeNull' => new \Twig_Filter_Method($this, 'chgeNullto0'),
-		  'sexe' => new \Twig_Filter_Method($this, 'calculSexe'),
-		'affichePartie' => new \Twig_Filter_Method($this, 'affichePartieType')
-		
-	    );
-	}
-	public function calculage($date)
-	{	
-	$dna=$date;
-	  
-	  $now = date("d/m/Y");
-	   $date1 = explode("/",$dna);// explode decoupe la chaine de caractere et en fait un tableau.
-       $date2= explode("/",$now);
-        $age = $date2[2] - $date1[2]; // Dans les tableau cree, la case numero 0 est la 1ere, dont l'annee.
-		// L'age est la difference des annees ...
-        if(($date2[1] < $date1[1]) || ($date2[1] == $date1[1] && $date2[0] < $date1[0])) $age--;
-		// A la quelle on retranche une annee selon les situations.
-         return $age;	  
-	}
-	public function calculSexe($sexe)
-	{
-		if ($sexe==1) {$sex="Femme";}
-		else if($sexe==0) {$sex="Homme";}
-		else {$sex= "Pas de sexe !";}
-		return $sex;
-	}
-	public function colorSexe($sexe)
-	{
-		if ($sexe==1) {$sex='id=sexe_femme';}
-		else if($sexe==0) {$sex='id=sexe_homme';}
-		else {$sex='id=sexe_homme';}
-		return $sex;
-	}
+
 
 	public function tabMedailles($data, $type)
 	{
@@ -78,23 +26,17 @@ class UserExtension extends \Twig_Extension
 	    }
             return $balise;
 	}
-	public function spanMedailles($data)
+	public function spanMed($data)
 	{
 	    if($data<6){$data='';}
 	    return $data;
-	}
-	
-	public function chgeNullto0($data)
-	{
-	    if($data===Null){$data=0;}
-	    
-	    return $data;
-	}
+	}	
+
 	public function affichePartieType($partieType)
 	{
 	      if($partieType=="MasterQuizz"){$data='MasterQuizz';}
 	      elseif($partieType=="FfQuizz"){$data='Quizz Nature';}
-	      elseif($partieType=="LxQuizz"){$data='Lieux du monde';}
+	      elseif($partieType=="LxQuizz"){$data='Quizz Géo';}
 	      else{$data='Autre';}
 	      return $data;
 	}
@@ -125,9 +67,9 @@ class UserExtension extends \Twig_Extension
 			 if($user->getSexe()==1){$data='bundles/GeneBundle/savant-F.png';}
 			 else{$data='bundles/GeneBundle/savant-H.png';}
 			 }
-		elseif($dateRef->getMMDQ()!==Null && $user->getId()==$dateRef->getMMDQ()->getId()){
-			 if($user->getSexe()==1){$data='bundles/GeneBundle/ministre-F.png';}
-			 else{$data='bundles/GeneBundle/ministre-H.png';}
+		elseif($dateRef->getCMDQ()!==Null && $user->getId()==$dateRef->getCMDQ()->getId()){
+			 if($user->getSexe()==1){$data='bundles/GeneBundle/capitaine-F.png';}
+			 else{$data='bundles/GeneBundle/capitaine-H.png';}
 			 }
 		elseif($dateRef->getMuMDQ()!==Null && $user->getId()==$dateRef->getMuMDQ()->getId()){
 			 if($user->getSexe()==1){$data='bundles/GeneBundle/virtuose-F.png';}
@@ -144,6 +86,10 @@ class UserExtension extends \Twig_Extension
 		elseif($dateRef->getLxMDQ()!==Null && $user->getId()==$dateRef->getLxMDQ()->getId()){
 			 if($user->getSexe()==1){$data='bundles/GeneBundle/globeT-F.png';}
 			 else{$data='bundles/GeneBundle/globeT-H2.png';}
+			 }
+		elseif($dateRef->getWzMDQ()!==Null && $user->getId()==$dateRef->getWzMDQ()->getId()){
+			 if($user->getSexe()==1){$data='bundles/GeneBundle/paparazzi-F.png';}
+			 else{$data='bundles/GeneBundle/paparazzi-H.png';}
 			 }
 		return $data;			
 	  
