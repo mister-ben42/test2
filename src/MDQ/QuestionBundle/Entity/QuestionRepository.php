@@ -746,5 +746,30 @@ class QuestionRepository extends EntityRepository
 		$tabdoublon=$question->getQuery()->getArrayResult();
 		return $tabdoublon;
 	}
+	public function resetQuestion()
+	{
+		        $qB = $this->getEntityManager()->createQueryBuilder();
+			$qB ->update('MDQQuestionBundle:Question', 'q')
+			    ->set('q.prct500j', 0)
+			    ->set('q.prct100j', 0)
+			    ->set('q.nbJoue', 0)			    
+			    ->set('q.nbBrep', 0)
+			    ->set('q.prctBrep', 0)			    
+			    ->set('q.prctMrep1', 0)			    
+			    ->set('q.nbMrep1', 0)			    
+			    ->set('q.prctMrep2', 0)			    
+			    ->set('q.nbMrep2', 0)			    
+			    ->set('q.prctMrep3', 0)			    
+			    ->set('q.nbMrep3', 0)			    
+			    ->set('q.prctTout', 0)			    
+			    ->set('q.nbTout', 0)		    
+			//    ->set('q.error', 0)	// Ne mettre que si pertient						    
+	
+			    ->where('q.id=1')//ligne à supprimer pour viser toutes les questions.
+			    ;
+			$q=$qB->getQuery();
+			$q->execute();
+		return; 
+	}
 
 }

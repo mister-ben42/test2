@@ -119,7 +119,7 @@
 			<div class="profile_user_type">Score du jour :<a href="{{ path('mdqgene_highScore', {'crit':'scofDayMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scofDayMq|chgeNull}}</span></div></a>
 
 			<div class="profile_user_type">Meilleur score : <a href="{{ path('mdqgene_highScore', {'crit':'scMaxMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scMaxMq}}</span></div></a>
-			<div id="stats_date_hsc">({{user.scUser.datescMaxMq|date('d/m/Y') }})</div>			
+			<div id="stats_date_hsc">{% if user.scUser.datescMaxMq!=NULL %}({{user.scUser.datescMaxMq|date('d/m/Y') }}){% endif%}</div>			
 			
 			<div class="profile_user_type"> % de bonnes réponses :<a href="{{ path('mdqgene_highScore', {'crit':'prctBrtotMq', 'id':user.scuser.id}) }}"><span class="score_profile"><span {{usertwig.testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés."  >{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrtotMq)}}</span></span></a></div>							
 			<div class="profile_user_type"> Score moyen : <a href="{{ path('mdqgene_highScore', {'crit':'scMoyMq', 'id':user.scuser.id}) }}"><span {{usertwig.testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés." class="score_profile">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.scMoyMq)}}</span></a></div>

@@ -16,7 +16,7 @@
 		</span>
 		<span class="score">
 			{% if scuser.km1+scuser.km2+scuser.km3+scuser.km4+scuser.km5==0 %}
-				Meilleur classement : {{scuser.highClassDayKM}}ème
+				Meilleur classement : {{scuser.highClassKM}}ème
 			{% else %}
 				<span class="bloc_med">
 					<img src={{ asset('bundles/mdquser/images/MedOr0.png') }} alt="Med">x{{scuser.km1}}

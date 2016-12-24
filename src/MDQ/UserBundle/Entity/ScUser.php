@@ -930,7 +930,7 @@ class ScUser
 	private $usermap;
 	
 	/**
-	* @ORM\OneToOne(targetEntity="MDQ\UserBundle\Entity\Medailles", cascade={"persist"})
+	* @ORM\OneToOne(targetEntity="MDQ\UserBundle\Entity\Medailles", inversedBy="scUser", cascade={"persist"})
 	*/
 	private $medailles;
 

@@ -108,4 +108,20 @@ mdqadmin_testR:
     path:    /testR
     defaults: { _controller: MDQAdminBundle:Admin:testRequete }
     methods:  [GET]
+mdqadmin_accueilReset:
+    path:    /accueilReset
+    defaults: { _controller: MDQAdminBundle:Reset:accueilReset }
+    methods:  [GET]
+mdqadmin_resetPartie:
+    path:    /resetPartie
+    defaults: { _controller: MDQAdminBundle:Reset:resetPartie }
+    methods:  [GET, DELETE]
+mdqadmin_resetQuestion:
+    path:    /resetQuestion
+    defaults: { _controller: MDQAdminBundle:Reset:resetQuestion }
+    methods:  [GET, PUT]
+mdqadmin_resetScUser:
+    path:    /resetScUser
+    defaults: { _controller: MDQAdminBundle:Reset:resetScUser }
+    methods:  [GET, PUT]
 

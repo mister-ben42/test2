@@ -1,0 +1,24 @@
+{# src/MDQ/AdminBundle/Resources/views/Admin/accueilA.html.twig #}
+
+{% extends "MDQAdminBundle::layoutA.html.twig" %}
+
+{% block title %}
+  Accueil admin
+{% endblock %}
+
+{% block admin_body %}
+
+  <h2>Partie Reset</h2>
+
+ 	<div id="blocadmin_gauche">
+		<div class="blocadmin">
+			<h4> Gestion Questions </h4>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_resetPartie') }}">Suppression parties</a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_resetQuestion') }}">Remise à Zéro des questions</a></div>
+			<div class="choix_accueilQ"><a href="{{ path('mdqadmin_resetScUser') }}">Remise à zéro des ScUser</a></div>
+		<div class="blocadmin">
+	</div>
+  
+
+{% endblock %}
+

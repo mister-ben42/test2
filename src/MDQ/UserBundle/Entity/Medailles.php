@@ -307,6 +307,11 @@ class Medailles
      * @ORM\Column(name="totMed", type="integer")
      */
     private $totMed;
+    
+    	/**
+	* @ORM\OneToOne(targetEntity="MDQ\UserBundle\Entity\ScUser", mappedBy="medailles", cascade={"persist"})
+	*/
+	private $scUser;
 
 	public function __construct()
 	{
@@ -1309,5 +1314,29 @@ class Medailles
     public function getWz5()
     {
         return $this->wz5;
+    }
+
+    /**
+     * Set scUser
+     *
+     * @param \MDQ\UserBundle\Entity\ScUser $scUser
+     *
+     * @return Medailles
+     */
+    public function setScUser(\MDQ\UserBundle\Entity\ScUser $scUser = null)
+    {
+        $this->scUser = $scUser;
+
+        return $this;
+    }
+
+    /**
+     * Get scUser
+     *
+     * @return \MDQ\UserBundle\Entity\ScUser
+     */
+    public function getScUser()
+    {
+        return $this->scUser;
     }
 }

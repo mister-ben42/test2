@@ -64,13 +64,13 @@ a
 .bloc_page_MasterQuizz
 {
 	background-color: rgb(27,35,114);
-	background-image: url("../GeneBundle/fond2c.jpg");
+	background-image: url("../../mdqgene/images/fond2cb.jpg");
 	height:100vh;
 }
 .bloc_page_SexyQuizz
 {
 	background-color: pink;
-	background-image: url("../QuizzBundle/fondkama4.jpg");
+	background-image: url("../images/fondkama4.jpg");
 }
 #marge_avt_bloc_question
 {
@@ -579,8 +579,8 @@ a
 }
 #bloc_finPartie_feux
 {
-		background:url("feux-artifice1.gif") right no-repeat,
-				url("feux-artifice2.gif") left no-repeat;
+		background:url("../images/feux-artifice1.gif") right no-repeat,
+				url("../images/feux-artifice2.gif") left no-repeat;
 }
 #fin_partie_bloc_bas
 {

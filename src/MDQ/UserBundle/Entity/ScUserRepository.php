@@ -406,4 +406,199 @@ class ScUserRepository extends EntityRepository
 			return $tabMaitres;
 		
 	}
+	public function resetScUser($id)
+	{
+		        $qB = $this->getEntityManager()->createQueryBuilder();
+			$qB->update('MDQUserBundle:ScUser', 'sc')
+			->where('sc.id=:id')//ligne à supprimer pour viser toutes les questions.						    
+			->setParameter('id', $id)
+		//	    ->set('sc.nbJdayMq', 0)// Fixer le nb souhaité
+		//	    ->set('sc.nbJdayQnF', 0)// Fixer le nb souhaité
+		//	    ->set('sc.nbJMq', 0)// Fixer le nb souhaité
+		//	    ->set('sc.nbJQnF', 0)// Fixer le nb souhaité
+	->set('sc.nbBrtot', 0)
+	->set('sc.nbPtot', 0)
+	->set('sc.nbPMq', 0)
+	->set('sc.scTotMq', 0)
+	->set('sc.scMoyMq', 0)	
+	->set('sc.scMaxMq', 'Null')	
+	->set('sc.datescMaxMq', 'Null')
+	->set('sc.nbQtotMq', 0)
+	->set('sc.nbBrtotMq', 0)	
+	->set('sc.prctBrtotMq', 0)
+	->set('sc.nbQhMq', 0)
+	->set('sc.nbBrhMq', 0)	
+	->set('sc.prctBrhMq', 0)
+	->set('sc.nbQgMq', 0)
+	->set('sc.nbBrgMq', 0)	
+	->set('sc.prctBrgMq', 0)
+	->set('sc.nbQdMq', 0)
+	->set('sc.nbBrdMq', 0)	
+	->set('sc.prctBrdMq', 0)
+	->set('sc.nbQalMq', 0)
+	->set('sc.nbBralMq', 0)	
+	->set('sc.prctBralMq', 0)
+	->set('sc.nbQslMq', 0)
+	->set('sc.nbBrslMq', 0)	
+	->set('sc.prctBrslMq', 0)
+	->set('sc.nbQsnMq', 0)
+	->set('sc.nbBrsnMq', 0)	
+	->set('sc.prctBrsnMq', 0)	
+	->set('sc.scofDayMq', 'Null')
+	->set('sc.highClassDayMq', 'Null')
+	->set('sc.numHighClassDayMq', 'Null')	
+	->set('sc.nbPSx', 0)
+	->set('sc.scTotSx', 0)
+	->set('sc.scMoySx', 0)	
+	->set('sc.scMaxSx', 0)	
+	->set('sc.nbQSx', 0)
+	->set('sc.nbBrSx', 0)	
+	->set('sc.prctBrSx', 0)	
+	->set('sc.scofDaySx', 'Null')
+	->set('sc.nbPTv', 0)
+	->set('sc.scTotTv', 0)
+	->set('sc.scMoyTv', 0)	
+	->set('sc.scMaxTv', 0)
+	->set('sc.nbQTv', 0)
+	->set('sc.nbBrTv', 0)	
+	->set('sc.prctBrTv', 0)	
+	->set('sc.scofDayTv', 'Null')
+	->set('sc.nbPMu', 0)
+	->set('sc.scTotMu', 0)
+	->set('sc.scMoyMu', 0)	
+	->set('sc.scMaxMu', 0)
+	->set('sc.nbQMu', 0)
+	->set('sc.nbBrMu', 0)	
+	->set('sc.prctBrMu', 0)	
+	->set('sc.scofDayMu', 'Null')
+	->set('sc.highClassDayMu', 'Null')
+	->set('sc.numHighClassDayMu', 'Null')	
+	->set('sc.scofWeekMu', 'Null')	
+	->set('sc.nbPFf', 0)
+	->set('sc.scTotFf', 0)
+	->set('sc.scMoyFf', 0)	
+	->set('sc.scMaxFf', 0)
+	->set('sc.nbQFf', 0)
+	->set('sc.nbBrFf', 0)	
+	->set('sc.prctBrFf', 0)	
+	->set('sc.scofDayFf', 'Null')
+	->set('sc.highClassDayFf', 'Null')
+	->set('sc.numHighClassDayFf', 'Null')	
+	->set('sc.scofWeekFf', 'Null')	
+	->set('sc.nbPWz', 0)
+	->set('sc.scTotWz', 0)
+	->set('sc.scMoyWz', 0)	
+	->set('sc.scMaxWz', 0)
+	->set('sc.nbQWz', 0)
+	->set('sc.nbBrWz', 0)	
+	->set('sc.prctBrWz', 0)	
+	->set('sc.scofDayWz', 'Null')
+	->set('sc.highClassDayWz', 'Null')
+	->set('sc.numHighClassDayWz', 'Null')	
+	->set('sc.scofWeekWz', 'Null')	
+	->set('sc.nbPAr', 0)
+	->set('sc.scTotAr', 0)
+	->set('sc.scMoyAr', 0)	
+	->set('sc.scMaxAr', 0)
+	->set('sc.nbQAr', 0)
+	->set('sc.nbBrAr', 0)	
+	->set('sc.prctBrAr', 0)	
+	->set('sc.scofDayAr', 'Null')
+	->set('sc.highClassDayAr', 'Null')
+	->set('sc.numHighClassDayAr', 'Null')	
+	->set('sc.scofWeekAr', 'Null')	
+	->set('sc.nbPLx', 0)
+	->set('sc.scTotLx', 0)
+	->set('sc.scMoyLx', 0)	
+	->set('sc.scMaxLx', 0)
+	->set('sc.nbQLx', 0)
+	->set('sc.nbBrLx', 0)	
+	->set('sc.prctBrLx', 0)	
+	->set('sc.scofDayLx', 'Null')
+	->set('sc.highClassDayLx', 'Null')
+	->set('sc.numHighClassDayLx', 'Null')	
+	->set('sc.scofWeekLx', 'Null')	
+	->set('sc.sumtop10month', 'Null')
+	->set('sc.sumtop5weekMq', 'Null')
+	->set('sc.hightop5weekMq', 'Null')	
+	->set('sc.scMaxCq', 0)
+	->set('sc.scofDayCq', 'Null')
+	->set('sc.highClassDayCq', 'Null')
+	->set('sc.numHighClassDayCq', 'Null')
+	->set('sc.kingMaster', 'Null')
+	->set('sc.highScKM', 'Null')
+	->set('sc.highClassKM', 'Null')	
+	->set('sc.numHighClassKM', 'Null')	
+//	->set('sc.nbErrorSignalTot', 0) // Voir si nécessaire
+//	->set('sc.nbErrorSignal', 0)// Voir si nécessaire
+//	->set('sc.tabCoefBot', 'Null')// Voir si nécessaire
+//	->set('sc.nbQprop', 0)// Voir si nécessaire
+//	->set('sc.nbQvalid', 0)// Voir si nécessaire
+
+	
+
+			    ;
+			   
+			 $q=$qB->getQuery();
+			$q->execute();
+			
+	$qB = $this->getEntityManager()->createQueryBuilder(); // Pas possible d'utiliser le join avec update.
+			$qB ->update('MDQUserBundle:Medailles', 'm')
+	->set('m.mq1', 0)
+	->set('m.mq2', 0)
+	->set('m.mq3', 0)
+	->set('m.mq4', 0)
+	->set('m.mq5', 0)
+	->set('m.cq1', 0)
+	->set('m.cq2', 0)
+	->set('m.cq3', 0)
+	->set('m.cq4', 0)
+	->set('m.cq5', 0)
+	->set('m.ff1', 0)
+	->set('m.ff2', 0)
+	->set('m.ff3', 0)
+	->set('m.ff4', 0)
+	->set('m.ff5', 0)
+	->set('m.ar1', 0)
+	->set('m.ar2', 0)
+	->set('m.ar3', 0)
+	->set('m.ar4', 0)
+	->set('m.ar5', 0)
+	->set('m.lx1', 0)
+	->set('m.lx2', 0)
+	->set('m.lx3', 0)
+	->set('m.lx4', 0)
+	->set('m.lx5', 0)
+	->set('m.wz1', 0)
+	->set('m.wz2', 0)
+	->set('m.wz3', 0)
+	->set('m.wz4', 0)
+	->set('m.wz5', 0)
+	->set('m.km1', 0)
+	->set('m.km2', 0)
+	->set('m.km3', 0)
+	->set('m.km4', 0)
+	->set('m.km5', 0)
+	->set('m.mu1', 0)
+	->set('m.mu2', 0)
+	->set('m.mu3', 0)
+	->set('m.mu4', 0)
+	->set('m.mu5', 0)
+	->set('m.totMed', 0)	
+	->where('m.id= :id')//ligne à supprimer pour viser toutes les questions.						    
+	->setParameter('id', $id)
+			    ;
+			   
+			 $q=$qB->getQuery();
+			$q->execute();
+		return; 
+	}
+
+
+/*	->set('sc.top5weekMq=[0,0,0,0,0];
+	->set('sc.top10month=[0,0,0,0,0,0,0,0,0,0];
+	$this->questions_error=new ArrayCollection();
+	$this->qavaliders = new\Doctrine\Common\Collections\ArrayCollection();
+	$this->medailles = new Medailles();
+*/
 }
