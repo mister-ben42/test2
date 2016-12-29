@@ -1,7 +1,7 @@
 ﻿$(function () {	 
 jQuery(document).ready(function() {
 	var numQ=0;
-	var volume_son=0.3;
+	var volume_son=0.1;
 	var repselect; var error;
 	var timerID; var timeLeft;
 	// ********** Critères principaux : ceux du Masterquizz **********************
@@ -12,11 +12,11 @@ jQuery(document).ready(function() {
 	function volume(){
 			if(volume_son==3){volume_son=0;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol0.png'});}
-			else if(volume_son==0){volume_son=0.3;
+			else if(volume_son==0){volume_son=0.1;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol1.png'});}
-			else if(volume_son==0.3){volume_son=1.5;
+			else if(volume_son==0.1){volume_son=0.4;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol2.png'});}
-			else if(volume_son==1.5){volume_son=3;
+			else if(volume_son==0.4){volume_son=1;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol3.png'});}
 			//alert(volume_son);
 			$('#son_fondjeu')[0].volume=0.5*0.33*volume_son;

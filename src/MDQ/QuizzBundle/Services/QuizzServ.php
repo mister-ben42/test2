@@ -34,7 +34,7 @@ class QuizzServ
 				elseif($game=='MuQuizz'){$nameGame='Quizz Musique';}
 				elseif($game=='ArQuizz'){$nameGame='Quizz Art';}
 				elseif($game=='FfQuizz'){$nameGame='Quizz Nature';}
-				elseif($game=='LxQuizz'){$nameGame='Quizz Monde';}
+				elseif($game=='LxQuizz'){$nameGame='Quizz Géo';}
 				elseif($game=='WzQuizz'){$nameGame='Quizz Wouzou';}
 				elseif($game=='SexyQuizz'){$nameGame='SexyQuizz';}
 				elseif($game=='TvQuizz'){$nameGame='Quizz Tv';}

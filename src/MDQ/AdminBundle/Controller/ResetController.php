@@ -5,8 +5,6 @@
 namespace MDQ\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use MDQ\AdminBundle\Entity\Gestion;
-use MDQ\AdminBundle\Form\Type\GestionType;
 
 class ResetController extends Controller
 {
@@ -19,7 +17,6 @@ class ResetController extends Controller
 	public function resetPartieAction()//efface la table et remet l'incrément à 0
 	{		
 		$connection = $this->getDoctrine()->getManager()->getConnection();
-		$em=$this->getDoctrine()->getManager();		
 
 		$connection->query('START TRANSACTION;SET FOREIGN_KEY_CHECKS=0; TRUNCATE partiequizz; SET FOREIGN_KEY_CHECKS=1; COMMIT;');
 		

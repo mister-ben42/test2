@@ -30,27 +30,23 @@
 				{% else %}
 				<div id="bloc_finPartie_sans_feux">
 				{% endif %}
-				
-				<p>{{ com.phrase1 }}</p>	
-				</br>				
-				<p>{{ com.phrase2 }}</p>	
-				</br>
-				<p>{{ com.phrase3 }}</p>	
-				</br>
+				    <div id="bloc_finPartie_txt">
+				    <p>{{ com.phrase1 }}</p>	
+				    <p>{{ com.phrase2 }}</p>
+				    <p>{{ com.phrase3 }}</p>
+				    </div>
 				</div>
 			</div>
 			
 		
 		</div>
-		<div id="bloc_question_bas">
-			<div id="bloc_question_bas_txt"></div>
-		</div>
+
 	</div>
 {% endblock %}
 {% block proposition %}
-		<div id="quizz_proposition" class="fin_partie_bloc_bas">
 		<div id="fin_partie_bloc_bas">
-		A bientôt, pour une nouvelle partie sur <img src="{{ asset('bundles/mdqgene/images/MDQlogblc.png') }}" alt="titre" width="100px">
+		<div id="fin_partie_bloc_bas_txt">
+		A bientôt, pour une nouvelle partie sur <img src="{{ asset('bundles/mdqgene/images/MDQlogblc.png') }}" alt="titre" width="100px" style="display:inline-block; vertical-align:middle;">
 		</div>
 		</div>
 		<div id="jeu_bloc_error_volume">

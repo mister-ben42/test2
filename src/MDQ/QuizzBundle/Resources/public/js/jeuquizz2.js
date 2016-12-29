@@ -3,7 +3,7 @@ jQuery(document).ready(function() {
        // console.log("jQuery est prêt !");
 		//alert('dans jquerry');
 	var numQ=0;
-	var volume_son=0.3;
+	var volume_son=0.1;
 	var repselect; var error;
 	var timerID; var timeLeft;
 	// ********** Critères principaux : ceux du Masterquizz **********************
@@ -12,13 +12,13 @@ jQuery(document).ready(function() {
 	init();	
 	// ---- Fonction valable sur toute la partie du jeu // -------
 	function volume(){
-			if(volume_son==3){volume_son=0;
+			if(volume_son==1.5){volume_son=0;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol0.png'});}
-			else if(volume_son==0){volume_son=0.3;
+			else if(volume_son==0){volume_son=0.1;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol1.png'});}
-			else if(volume_son==0.3){volume_son=1.5;
+			else if(volume_son==0.1){volume_son=0.4;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol2.png'});}
-			else if(volume_son==1.5){volume_son=3;
+			else if(volume_son==0.4){volume_son=1;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol3.png'});}
 			//alert(volume_son);
 			$('#son_fondjeu')[0].volume=0.5*0.33*volume_son;
@@ -376,7 +376,7 @@ jQuery(document).ready(function() {
 			      else{var maxlength=text2.length;}
 			      //test en fonction de max length et de largeur : on affiche ou non txt3
 			     var largeurA=$('#bloc_question_photo2').width();
-				if (largeurA/9<maxlength)
+				if (largeurA/10<maxlength)
 				{
 				  $('#bloc_question_bas_txt3').html(com).css('display','block');
 				  $('#bloc_question_bas3').css('display','block');

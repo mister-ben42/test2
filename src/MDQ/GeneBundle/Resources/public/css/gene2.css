@@ -1128,6 +1128,14 @@ a
 	color:rgb(0,255,255);
 	margin-top:7px;
 }
+.regle_nom_jeu
+{
+	color:rgb(50, 255, 50);
+}
+.regle_nom_maitre
+{
+	color:rgb(255, 150, 100);
+}
 #bloc_regle p
 {
 	max-width:650px;
@@ -1201,6 +1209,7 @@ a
 	overflow:hidden;
 	max-width:200px;
 	width:42%;
+	min-width:100px;
 	
 }
 #accueil_jeu_bloc_QnF
@@ -1215,7 +1224,8 @@ a
 	width:39%;	
 	vertical-align:top;
 	background-color:black;
-	margin:3%;	
+	margin:3%;
+	min-width:100px;
 }
 
 .accueil_jeu_QnF img
@@ -1384,6 +1394,7 @@ a
 	 text-align:center;
 	 margin-left:0px;
 	}
+
 }
 
 @media (max-width:360px)
@@ -1443,11 +1454,12 @@ a
 	}
 	.accueil_jeu_logo
 	{
-	 max-width:133px;
+	 max-width:120px;
 	}
 	.accueil_jeu_QnF
 	{
-	  max-width:90px;
+	  min-width:80px;
+	  width:42%;
 	}
 	#page_accueil_jeu .bloc_menu
 	{
@@ -1477,15 +1489,19 @@ a
 /*** Accueil jeu ***/
 	#accueil_jeu_boutonGo
 	{
-	  max-width:70px;
+	  min-width:90px;
 	}
 	.accueil_jeu_logo
 	{
-	 max-width:92px;
+	 max-width:70px;
 	}
 	.accueil_jeu_QnF
 	{
-	  max-width:63px;
+	  min-width:70px;
+	}
+	#accueil_jeu_Capitaine
+	{
+	 display:none;
 	}
 	
 }
@@ -1531,5 +1547,24 @@ a
 	     display:inline-block;
 	     vertical-align:middle;
 	}
+	.accueil_jeu_QnF
+	{
+	  min-width:80px;
+	  width:35%;
+	}
 
 }
+@media (max-height:815px) and (min-height:450px) and (max-width:450px)
+{
+		 /******* Accueil jeu ****/
+ 	#accueil_jeu_Capitaine
+	{
+	 display:none;
+	}
+	#accueil_jeu_bloc_QnF
+	{
+	 width:80%; 
+	}
+  
+}  
+ 

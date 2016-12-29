@@ -30,7 +30,9 @@
 		$('#bouton_jouer img').attr({src:'../bundles/mdqgene/images/buttonjouer.png'});		
 	}));
 	}));
-	if( typeof(mCustomScrollbar) == 'function' ){$('#bloc_news').mCustomScrollbar({     
+	
+	   if( typeof(mCustomScrollbar)!="undefined"){
+	    $('#bloc_news').mCustomScrollbar({     
 	});}
 	$('#bloc_connextion_bouton').on('click',(function(){
 		$('#bandeau_form_connexion').css('display','block');
