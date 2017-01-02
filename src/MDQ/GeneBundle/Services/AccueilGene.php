@@ -9,7 +9,6 @@ use MDQ\GeneBundle\Entity\DateReference;
 
 class AccueilGene
 {  
-      	private $scUserRepository;
 	private $assets;
 	private $router;
 	private $tabScDayMq;

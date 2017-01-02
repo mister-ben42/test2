@@ -31,7 +31,7 @@ class GeneController extends Controller
 		//Reste un petit pb avec l'objet date : si pas de connexion le lundi, mais le mardi, la date de Maj de la dateref jour est celle du debut de semane, ce qui conduit a une maj automatique du jour lors de l'arrivee suivante sur la page d'accueil.
 		$dateref=$em->getRepository('MDQGeneBundle:DateReference')->find(1);
 		//$tabrMDQ[0]=$dateref->getRMDQ(); Que si classement mensuel
-		$tabMaitres=[$dateref->getRMDQ(), null,null,null,null,null,null];
+		//$tabMaitres=[$dateref->getRMDQ(), null,null,null,null,null,null]; // ne sert à rien
 		if($dateref->getDay()!=$datejour){
                         $cronServ->majQuot();
 			$em->flush();
