@@ -5,7 +5,7 @@ mdqadmin_accueilAdmin:
 mdqadmin_profileUAdmin:
     path:    /profileUAdmin/{id}
     defaults: { _controller: MDQAdminBundle:GestionUser:profileUAdmin }
-    methods:  [GET, PUT]
+    methods:  [GET, PUT, POST]
 mdqadmin_voirU:
     path:    /voirU/{type}/{compte}/{sexe}/{departement}/{age}/{last_login}/{role}/{nbP}/{triUser}/{triStats}/{sens}/{nbdeU}/{nbmin}
     defaults: { _controller: MDQAdminBundle:GestionUser:voirU}

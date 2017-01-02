@@ -11,7 +11,7 @@ services:
          
      mdq_gene.accueilGene:
          class: MDQ\GeneBundle\Services\AccueilGene
-         arguments: ['@mdq_quizz.repository.partiequizz', '@mdq_user.repository.scuser', '@twig.extension.assets', '@router']
+         arguments: ['@mdq_user.repository.scuser', '@twig.extension.assets', '@router']
          
      mdq_gene.accueilHS:
          class: MDQ\GeneBundle\Services\AccueilHighSc
@@ -25,4 +25,8 @@ services:
         class: MDQ\GeneBundle\Twig\GeneExtension
         arguments: ['@mdq_gene.repository.date_ref']
         tags:
-            - { name: twig.extension }       
+            - { name: twig.extension }
+            
+     mdq_gene.cronServ:
+         class: MDQ\GeneBundle\Services\CronServ
+         arguments: ['@mdq_quizz.repository.partiequizz', '@mdq_user.repository.scuser', '@mdq_gene.repository.date_ref', '@mdq_user.jeton_serv']

@@ -30,10 +30,13 @@ class SelfSecurity
 		$propQ=0;
 		$signalE=0;
 		$pagePrec=null;
+		$gestion=$this->gestionRepository->findOneById(1);
 		if($this->session->has('page')){$sessionPage=$this->session->get('page');}
 		else{$sessionPage=null;}
-		
-		if($action=="simpleAction"){
+		if($action=="accueilGene"){
+                        if($gestion->getBlocageTot()==1 && !$this->securityAutho->isGranted('ROLE_ADMIN') && $this->securityAutho->isGranted('IS_AUTHENTICATED_REMEMBERED')){return false;}
+		}
+		elseif($action=="simpleAction"){
 			$blocageTot=1;
 			$this->session->set('page', 'gene');
 		}
@@ -62,6 +65,7 @@ class SelfSecurity
 			$this->session->set('page', 'userAuto');
 		}
 		elseif($action=="register"){
+			$blocageTot=1;
 			$inscription=1;
 			$user=2;
 		}
@@ -76,11 +80,11 @@ class SelfSecurity
 			$signalE=1;
 			$pagePrec="jeuQuizz";
 		}	
-		$gestion=$this->gestionRepository->findOneById(1);
+		
 
 		if($blocageTot==1 && $gestion->getBlocageTot()==1 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}
 		
-		elseif($user==1 && $this->securityToken->getToken()->getUser()===null){return false;}
+		elseif($user==1 && ($this->securityToken->getToken()->getUser()===null || $this->securityToken->getToken()->getUser()->getSupprime()==1)){return false;}
 		elseif($user==2 && $this->securityAutho->isGranted('ROLE_USER')){return false;}
 		
 		elseif($inscription==1 && $gestion->getInscription()==0 && !$this->securityAutho->isGranted('ROLE_ADMIN')){return false;}

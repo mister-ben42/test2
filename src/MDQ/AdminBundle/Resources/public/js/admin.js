@@ -11,7 +11,7 @@
 		 //alert(tabresult)
 		{				
 				$.ajax({
-				url: 'http://localhost/MondeDuquizz/web/app_dev.php/admin/formListNews',
+				url: 'http://localhost/MondeDuQuizz/web/app.php/admin/formListNews',
 				type: 'POST',// ne pas oublier les en t^te dans le fichier de ttt de la dde.
 				data:{ tabresult : tabresult },
 				dataType: 'json',

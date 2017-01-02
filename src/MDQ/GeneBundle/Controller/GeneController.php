@@ -13,7 +13,8 @@ class GeneController extends Controller
 {
   public function accueilAction(Request $request)
   {// Rq, je n'ai mis aucun persist et ca marche quand meme ! A etudier.
-    $session = $request->getSession();
+        if(!$this->container->get('mdq_admin.security')->testAutorize("accueilGene", null)){return $this->redirect($this->generateUrl('fos_user_security_logout'));}
+        $session = $request->getSession();
 	$session->set('page', 'accueil');	
 	$em=$this->getDoctrine()->getManager();
 	/* Remarque : mise a jour journee et mois en meme temps que maj jur partie non validees, du coup si partie non validee en fin de journee, ou si aucune connection ensuite,
@@ -22,7 +23,8 @@ class GeneController extends Controller
 	// MODIF EFFECTUEE : A tester puis effacer le passage precedent.
 	// ******** Controle des parties en bdd et validation le cas echeant + mise a jours de bdd user et partie
 	$geneServ = $this->container->get('mdq_gene.accueilGene');
-	$geneServ->testNonValidPartie();	
+	$cronServ = $this->container->get('mdq_gene.cronServ');	
+	$cronServ->testNonValidPartie();	
 	$em->flush();
 	// ********** Controle de nouvelle journee -- A terme a remplacer par un CRON ******** ///
 	$datejour= new \DateTime(date('Y-m-d'));
@@ -31,63 +33,7 @@ class GeneController extends Controller
 		//$tabrMDQ[0]=$dateref->getRMDQ(); Que si classement mensuel
 		$tabMaitres=[$dateref->getRMDQ(), null,null,null,null,null,null];
 		if($dateref->getDay()!=$datejour){
-			$dateref->setDay($datejour);// Je le mets la ; si je le mets apres l'operation sub dateInter, l'interval est deduit de la date entree en bdd -jsp pourquoi.
-
-			
-	//************* Controle nouvelle semaine ************** /////////////////////
-		$semref=$dateref->getWeek();
-		$int=$datejour->diff($semref);
-		if($int->format('%a')>6){
-			$tabMaitres=[null,null,null,null,null,null,null];
-			$listeUser=$em->getRepository('MDQUserBundle:ScUser')
-					->recupUserByCrit('kingMaster');// ****** A FAIRE PAR UNE FONCTION SIMPLIFIEE ***
-
-			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
-						->majClassement($listeUser, 'KingMaster', $tabMaitres);
-			$week1= new \DateInterval('P7D');
-			$dateref->getWeek()->add($week1);
-			$dateref->setWeek($datejour->add($int)->add($week1));
-		}
-	//****************************** Mise a jour, donnees du jour.*******************************
-			$listeUserMq=$em->getRepository('MDQUserBundle:ScUser')
-					->recupUserByCrit('scofDayMq');				
-			
-			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
-						->majClassement($listeUserMq, 'scofDayMq', $tabMaitres);
-		
-			$listeUQM=$em->getRepository('MDQUserBundle:ScUser')
-							->recupUserByCrit('scofDayCq');
-			$jetonServ = $this->container->get('mdq_user.jeton_serv');
-			$jetonServ->majQuotJeton($listeUserMq);// A mixer avec le suivant
-			$jetonServ->majQuotJeton($listeUQM);
-			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
-						->majClassement($listeUQM, 'CaQuizz', $tabMaitres);
-			$listeUMu=$em->getRepository('MDQUserBundle:ScUser')
-						->recupUserByCrit('scofDayMu');
-			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
-						->majClassement($listeUMu, 'MuQuizz', $tabMaitres);
-			$listeUAr=$em->getRepository('MDQUserBundle:ScUser')
-						->recupUserByCrit('scofDayAr');
-			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
-						->majClassement($listeUAr, 'ArQuizz', $tabMaitres);
-			$listeUFf=$em->getRepository('MDQUserBundle:ScUser')
-						->recupUserByCrit('scofDayFf');
-			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
-						->majClassement($listeUFf, 'FfQuizz', $tabMaitres);
-			$listeULx=$em->getRepository('MDQUserBundle:ScUser')
-						->recupUserByCrit('scofDayLx');
-			$tabMaitres=$em->getRepository('MDQUserBundle:ScUser')
-						->majClassement($listeULx, 'LxQuizz', $tabMaitres);
-
-	//**** mise a jour date_ref ***********************//
-					
-			$dateref->setRMDQ($tabMaitres[0]);
-			$dateref->setSMDQ($tabMaitres[1]);
-			$dateref->setCMDQ($tabMaitres[2]);
-			$dateref->setMuMDQ($tabMaitres[3]);
-			$dateref->setArMDQ($tabMaitres[4]);
-			$dateref->setFfMDQ($tabMaitres[5]);
-			$dateref->setLxMDQ($tabMaitres[6]);
+                        $cronServ->majQuot();
 			$em->flush();
 			return $this->redirect($this->generateUrl('mdqgene_accueil'));
 		}

@@ -8,8 +8,7 @@ use MDQ\GeneBundle\Entity\DateReference;
 
 
 class AccueilGene
-{    
-      	private $partieRepository;
+{  
       	private $scUserRepository;
 	private $assets;
 	private $router;
@@ -19,8 +18,7 @@ class AccueilGene
 	private $tabScDayFf;
 	private $tabScDayLx;      	
  
-	public function __construct($partieRepository, ScUserRepository $scUserRepository, $assets, $router) {
-	  $this->partieRepository=$partieRepository;
+	public function __construct(ScUserRepository $scUserRepository, $assets, $router) {
 	  $this->scUserRepository=$scUserRepository;
 	  $this->assets=$assets;
 	  $this->router=$router;
@@ -33,27 +31,7 @@ class AccueilGene
 
  
 
-      public function testNonValidPartie()
-      {
-	    $partieNonValide=$this->partieRepository->recupPNonValid();
-	    foreach ($partieNonValide as $partie){
-			$intcontrol = new \DateInterval('PT10M');// Definition d'un intervalle de 10 minutes
-			$dateactu= new \DateTime();
-			$datepartie=$partie->getDate();
-			if($dateactu->sub($intcontrol)>$datepartie){
-				$partie->setValid(true);
-				$user=$partie->getUser();
-				$scUser=$user->getScUser();
-				$game=$partie->getType();
-				if($game=='MasterQuizz'){$dom1='none';}
-				else{$dom1=$game;
-					$game='MediaQuizz';}
-				$this->scUserRepository->majBddScfinP($scUser, $dom1, $game, $partie);
 
-			}
-		}
-		return ;
-      }
       	public function maitreTesthref($id)
 	{
 	      $txt="";
@@ -80,6 +58,10 @@ class AccueilGene
 	      elseif($type=="Musicien"){
 		    if($isNul || $sexe==0){$txt="Musicien";}
 		    else{$txt="Musicienne";}
+	      }
+	      elseif($type=="Paparazzi"){
+		    if($isNul || $sexe==0){$txt="Paparazzi";}
+		    else{$txt="Paparazette";}
 	      }
 	      elseif($type=="Globe-T"){
 		    if($isNul || $sexe==0){$txt="Globe-trotter";}
