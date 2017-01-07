@@ -8,6 +8,7 @@ services:
 
      mdq_admin.botGame:
          class: MDQ\AdminBundle\Services\BotGame
+         arguments: ['@doctrine.orm.entity_manager']      
          
      mdq_admin.adminTwig:
          class: MDQ\AdminBundle\Services\AdminTwig

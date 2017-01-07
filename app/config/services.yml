@@ -28,6 +28,11 @@ services:
         class: MDQ\UserBundle\Entity\ScUser
         factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
         arguments: ['MDQUserBundle:ScUser']
+        
+    mdq_user.repository.user:
+        class: MDQ\UserBundle\Entity\User
+        factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+        arguments: ['MDQUserBundle:User']
        
     mdq_gene.service.role:
         class: MDQ\GeneBundle\Services\RoleService

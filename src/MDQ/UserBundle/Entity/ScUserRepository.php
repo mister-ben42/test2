@@ -421,7 +421,7 @@ class ScUserRepository extends EntityRepository
 	->set('sc.nbPMq', 0)
 	->set('sc.scTotMq', 0)
 	->set('sc.scMoyMq', 0)	
-	->set('sc.scMaxMq', 'Null')	
+	->set('sc.scMaxMq', 0)	
 	->set('sc.datescMaxMq', 'Null')
 	->set('sc.nbQtotMq', 0)
 	->set('sc.nbBrtotMq', 0)	

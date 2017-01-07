@@ -27,7 +27,7 @@ class CronServ
       {
 	    $partieNonValide=$this->partieRepository->recupPNonValid();
 	    foreach ($partieNonValide as $partie){
-			$intcontrol = new \DateInterval('PT10M');// Definition d'un intervalle de 10 minutes
+			$intcontrol = new \DateInterval('PT15M');// Definition d'un intervalle de 10 minutes
 			$dateactu= new \DateTime();
 			$datepartie=$partie->getDate();
 			if($dateactu->sub($intcontrol)>$datepartie){
