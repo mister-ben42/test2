@@ -16,7 +16,10 @@ class AdminController extends Controller
 
 	public function accueilAdminAction()
 	{
-		return $this->render('MDQAdminBundle:Admin:accueilA.html.twig');	
+		$newsA=$this->getDoctrine()->getManager()->getRepository('MDQAdminBundle:News')->recupNewsAdmin();
+		return $this->render('MDQAdminBundle:Admin:accueilA.html.twig', array(
+			'newsA' => $newsA,
+			));	
 	}
 
     public function resetThemeAction()//efface la table et remet l'incrément à 0

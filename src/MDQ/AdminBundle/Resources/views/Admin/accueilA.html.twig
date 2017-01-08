@@ -61,6 +61,16 @@
 		</div>		
 		
 	</div>
+	<div id="blocadmin_news">
+                        <h4>Notes</h4>
+                        <div id="blocadmin_news_txt">
+                		  {% for new in newsA %}
+			<div style="font-weight:bold;">{{ new.titre }}</div>
+			<div>{{ new.dateCreate|date('d/m/Y') }}</div></br>
+			<div>{{ new.texte|nl2br }}</div>				
+			{% endfor %}
+			</div>
+	</div>
 
   
 

@@ -5,10 +5,16 @@
 		{{ render(controller("MDQUserBundle:User:loginBis")) }} 
 	{#	{{render (controller("FOSUserBundle:Security:login")) }}#}
 		<div id="inscrire">
-		{% if gestion.Inscription==0 %}<strong class="affich_flash1" style="color:yellow; font-weight:normal;" >Pas encore inscrit ?</strong>
+		{% if gestion.Inscription==0 %}<strong class="affich_flash1" style="color:yellow; font-weight:normal;" >Pas encore inscrit ?</strong>	
 		{% else %}<a href="{{ path('fos_user_registration_register') }}">Pas encore inscrit ?</a>
 		{% endif %}
 		</div>
+		</br>
+		{% if gestion.BlocageTot==0 %}
+                <div id="inscrire">
+		<a href="{{ path('fos_user_resetting_request') }}" style="color:blue; font-size:11px;">Mot de passe oublié ?</a>
+		</div>		
+		{% endif %}
 		<div id="bloc_connexion_croix">x</div>
 	      </div>
 	</div>

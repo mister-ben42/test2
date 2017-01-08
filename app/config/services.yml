@@ -23,6 +23,11 @@ services:
         class: MDQ\QuizzBundle\Entity\PartieQuizz
         factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
         arguments: ['MDQQuizzBundle:PartieQuizz']
+
+    mdq_gene.repository.statsquot:
+        class: MDQ\GeneBundle\Entity\StatsQuot
+        factory: ['@doctrine.orm.default_entity_manager', 'getRepository']
+        arguments: ['MDQGeneBundle:StatsQuot']
         
     mdq_user.repository.scuser:
         class: MDQ\UserBundle\Entity\ScUser

@@ -59,13 +59,13 @@ a
 .blocadmin
 {
 	display: inline-block;
-	width: 400px;
+	width: 250px;
 	vertical-align:top;
 }
-#blocadmin_droite, #blocadmin_gauche
+#blocadmin_droite, #blocadmin_gauche, #blocadmin_news
 {
 	display:inline-block;
-	width:410px;
+	width:300px;
 	text-align:center;
 	vertical-align:top;
 }
@@ -73,13 +73,24 @@ a
 {
 	display: block;
 	width: 200px;
-	margin-left: 100px;
+	margin-left: 20px;
 	margin-bottom: 20px;
 	font-size: 20px;
 	border: solid 1px black;
 	text-align:center;
 	cursor:pointer;
 	background-color:rgb(255,200,200);
+}
+#blocadmin_news_txt
+{
+        width:270px;
+        height:300px;
+        border:solid 1px black;
+        overflow: scroll;
+        text-align: justify;
+        width: 270px;
+        font-size:13px;
+        
 }
 .formQ
 {

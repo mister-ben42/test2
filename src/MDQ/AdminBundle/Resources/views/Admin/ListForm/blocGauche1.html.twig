@@ -2,6 +2,7 @@
         <div class="bloc_commentaire"><div class="commentaire"><textarea name="com" >{{question.commentaire}}</textarea></div><div class="nblettre"></div></div>
 		{% if question.type=="image" %}		
 
-		<img {{adminTwig.routeImg(question.dom1,question.media)}} height="100" />
+		<img {{adminTwig.routeImg(question.dom1,question.media)}} height="250" />
+		<div>{{question.media}}</div>
 		{% endif %}
 		

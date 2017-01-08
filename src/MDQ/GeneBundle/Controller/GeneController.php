@@ -42,7 +42,7 @@ class GeneController extends Controller
 	$tabMaitre1=[$dateref->getRMDQ(),$dateref->getCMDQ(),$dateref->getSMDQ(), $dateref->getFfMDQ(), $dateref->getLxMDQ(), $dateref->getMuMDQ(), $dateref->getArMDQ()];
 	$tabMaitre2=$em->getRepository('MDQUserBundle:User')->selectTabMaitres($tabMaitre1);
 	$tabMaitre=$geneServ->getTabMaitre($dateref, $tabMaitre2);
-	$newsA=$em->getRepository('MDQAdminBundle:News')->recupNews();
+	$newsA=$em->getRepository('MDQAdminBundle:News')->recupNewsPublic();
 	$gestion=$em->getRepository('MDQAdminBundle:Gestion')->find(1);	
 	$accueilServ = $this->container->get('mdq_gene.accueilGene');
 	return $this->render('MDQGeneBundle:Gene:accueil.html.twig', array(

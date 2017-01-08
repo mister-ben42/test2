@@ -15,19 +15,23 @@
    {{ new.texte|nl2br }} </br>
    </div>
    <div class="admin_news_droite">
-   {{ new.auteur }}, {{ new.dateCreate|date('d/m/Y') }},</br> publication : {% if new.publication==1 %}oui{%else%}non{%endif%}, priorité :{% if new.priorite==1 %}oui{%else%}non{%endif%}
+   {{ new.auteur }}, {{ new.dateCreate|date('d/m/Y') }},</br> publication : {% if new.publication==1 %}public{% elseif new.publication==2 %}admin{%else%}non{%endif%}, priorité :{% if new.priorite==1 %}oui{%else%}non{%endif%}
    </br></br>
 	  <form class="form_news" >
 		<p>
 		<div class="id_news" style="visibility: hidden">{{ new.id }}</div>
-		<div class="publication"><label  for="Publication">Publication</label><input type="checkbox" name="publication" class="checkbox_news" {% if new.publication==1 %}checked="checked"{%endif%}/></div>
+		<div class="publication"><label  for="Publication">Publication</label><select name="publication">
+                                                                                    <option value=0>Non publié</option>
+                                                                                    <option value=1 {% if new.publication==1 %} selected {%endif%}>Public</option>
+                                                                                    <option value=2 {% if new.publication==2 %} selected {%endif%}>Admin</option>
+                                                                                    </select>
 		<div class="priorite"><label class="priorite" for="Priorité">Priorité</label><input type="checkbox" name="priorite" class="checkbox_news" {% if new.priorite==1 %}checked="checked"{%endif%}/></div>
 		<input type="button" name="valider" value="Valider" id="button_valid_news" class="bloc_news_button">
 		</p>
 	</form>
    </div>
    </div>
-		
+    </div>
    {% endfor %}
   
 {% endblock %}

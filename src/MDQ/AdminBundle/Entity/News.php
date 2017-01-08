@@ -50,9 +50,9 @@ class News
     private $auteur;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="publication", type="boolean")
+     * @ORM\Column(name="publication", type="integer")
      */
     private $publication;
 	
@@ -174,7 +174,7 @@ class News
     /**
      * Set publication
      *
-     * @param boolean $publication
+     * @param integer $publication
      * @return News
      */
     public function setPublication($publication)
@@ -187,7 +187,7 @@ class News
     /**
      * Get publication
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getPublication()
     {

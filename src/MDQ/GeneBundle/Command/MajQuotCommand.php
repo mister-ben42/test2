@@ -27,6 +27,8 @@ class MajQuotCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->getContainer()->get('mdq_gene.cronServ')->majQuot();
+        $newStatsQuot=$this->getContainer()->get('mdq_gene.statsQuot')->majStatsQuot();
+        $this->getContainer()->get('doctrine.orm.entity_manager')->persist($newStatsQuot);
         $this->getContainer()->get('doctrine.orm.entity_manager')->flush();
     }
 }

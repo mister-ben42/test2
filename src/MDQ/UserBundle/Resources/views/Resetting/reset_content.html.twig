@@ -1,0 +1,22 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div id="formulaire_inscription">
+	  <div style="font-size:18px;color:yellow; margin-bottom:15px;">Réinitialisation du mot de passe</div>
+{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+    
+		<div class="registration_ligne" >
+				{{ form_label(form.plainPassword.first, "Mot de Passe") }}
+				{{ form_widget(form.plainPassword.first) }}
+		</div>
+		
+		<div class="registration_ligne" >
+				{{ form_label(form.plainPassword.second, "Confirmation") }}
+				{{ form_widget(form.plainPassword.second) }}
+		</div>
+		{% if (form_errors(form.plainPassword.first))!="" %}	<div class="form_error">{{ form_errors(form.plainPassword.first) }}</div>{% endif %}
+
+    <div id="inscription_valid" class="registration_ligne">
+        <input type="submit" value="Valider" />
+    </div>
+    </br>
+{{ form_end(form) }}
