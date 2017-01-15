@@ -603,7 +603,7 @@ a
 #highScDay, #highScMonth
 {
 	margin-top:40px;
-	height:245px;
+	height:268px;
 }
 .accueil_heighSC_1 img, .accueil_heighSC_2 img, .accueil_heighSC_3 img
 {
@@ -677,7 +677,7 @@ a
 {		
 	max-width:445px;
 	width:95%;
-	height: 303px;
+	height: 200px;
 	overflow:hidden;
 	margin-left:10px;
 	padding-bottom:10px;	
@@ -692,7 +692,7 @@ a
 	width:30px;
 	border-radius:15px;
 	float:right;
-	top:310px;
+	top:207px;
 	position:relative;
 	border:outset 2px white;
 	cursor:pointer;
@@ -759,7 +759,6 @@ a
 {
 	margin-top:40px;
 	display:inline-block;
-	height: 531px;
 	text-align:center;
 }
 #bloc_QnF_EM
@@ -768,7 +767,7 @@ a
 }
 #accueil_QnF_bloc2
 {
-	margin-top:30px;
+	margin-top:0px;
 }
 #bloc_QnF .QnF_col
 {
@@ -1182,7 +1181,7 @@ a
 	max-width:370px;
 	min-width:180px;
 	max-height:460px;
-	min-height:200px;
+	min-height:150px;
 	height:66%;
 	padding-top:20px;
 	margin:10px 10px;	
@@ -1358,10 +1357,7 @@ a
 	{
 	    height:130px;
 	}
-	#bloc_QnF
-	{
-	    height:auto;
-	}
+
 	#accueil_maitre
 	{
 	 height:360px; 
@@ -1475,7 +1471,7 @@ a
 	}
 	
 }
-@media (max-height:400px)
+@media (max-height:380px)
 {
 	#bloc_titre
       {
@@ -1503,9 +1499,31 @@ a
 	{
 	 display:none;
 	}
+	#bloc_accueil_jeu_bloc_Cq
+	{
+         display:inline-flex;
+         padding:10px;
+         flex-direction: column;
+         justify-content: space-around;
+        }
+        #accueil_jeu_bloc_QnF {
+            height: 100%;
+            margin-top: 0px;
+            text-align: center;
+            display:flex;
+            flex-direction: column;
+         justify-content: space-around;
+        }
 	
 }
-@media (max-height:815px) and (min-height:450px) and (max-width:615px)
+@media (max-height:300px)
+{
+        #page_accueil_jeu #haut_page
+    {
+        display:none;
+    }
+}
+@media (max-height:815px) and (min-height:380px) and (max-width:615px)
 {
   	#flash_message
 	{
@@ -1521,7 +1539,7 @@ a
 	height:30vh;
 	padding-top:0px;
 	margin:10px 10px;	
-	margin-bottom:40px;
+	margin-bottom:10px;
 	text-align:center;
 	line-height:30vh;
 	vertical-align:middle;
@@ -1552,9 +1570,13 @@ a
 	  min-width:80px;
 	  width:35%;
 	}
+	#page_accueil_jeu .bloc_menu
+	{
+                    margin-top:0px;
+        }
 
 }
-@media (max-height:815px) and (min-height:450px) and (max-width:450px)
+@media (max-height:815px) and (min-height:380px) and (max-width:450px)
 {
 		 /******* Accueil jeu ****/
  	#accueil_jeu_Capitaine

@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
 	init();	
 	// ---- Fonction valable sur toute la partie du jeu // -------
 	function volume(){
-			if(volume_son==1.5){volume_son=0;
+			if(volume_son==1){volume_son=0;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol0.png'});}
 			else if(volume_son==0){volume_son=0.1;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol1.png'});}

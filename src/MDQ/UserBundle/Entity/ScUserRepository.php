@@ -170,11 +170,11 @@ class ScUserRepository extends EntityRepository
 			elseif($crit=="prctBrslMq") {$tab->andWhere('s.nbQslMq>50');}
 			elseif($crit=="prctBrsnMq") {$tab->andWhere('s.nbQsnMq>50');}
 			elseif($crit=="scMoyMq") {$tab->andWhere('s.nbPMq>9');}
-			elseif($crit=="ScMoyAr") {$tab->andWhere('s.nbPAr>9');}
-			elseif($crit=="ScMoyLx") {$tab->andWhere('s.nbPLx>9');}
-			elseif($crit=="ScMoyWz") {$tab->andWhere('s.nbPWz>9');}
-			elseif($crit=="ScMoyMu") {$tab->andWhere('s.nbPMu>9');}
-			elseif($crit=="ScMoyFf") {$tab->andWhere('s.nbPFf>9');}
+			elseif($crit=="scMoyAr") {$tab->andWhere('s.nbPAr>9');}
+			elseif($crit=="scMoyLx") {$tab->andWhere('s.nbPLx>9');}
+			elseif($crit=="scMoyWz") {$tab->andWhere('s.nbPWz>9');}
+			elseif($crit=="scMoyMu") {$tab->andWhere('s.nbPMu>9');}
+			elseif($crit=="scMoyFf") {$tab->andWhere('s.nbPFf>9');}
 			elseif($crit=="nbQvalid"){$tab->andWhere('s.id!=1');}
 			      
 			//Plus utile les condition sur les Classements.

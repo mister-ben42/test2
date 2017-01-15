@@ -157,6 +157,41 @@ class StatsQuot
     /**
      * @var integer
      *
+     * @ORM\Column(name="scMoyMq", type="integer", nullable=true)
+     */
+    private $scMoyMq;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="scMoyFf", type="integer", nullable=true)
+     */
+    private $scMoyFf;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="scMoyLx", type="integer", nullable=true)
+     */
+    private $scMoyLx;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="scMoyAr", type="integer", nullable=true)
+     */
+    private $scMoyAr;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="scMoyWz", type="integer", nullable=true)
+     */
+    private $scMoyWz;
+    
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="scMoyPbot", type="integer", nullable=true)
      */
     private $scMoyPbot;
@@ -268,7 +303,12 @@ class StatsQuot
 		$this->nbPTotbot=0;
 		$this->nbPMqbot=0;
 		$this->nbQprop=0;
-		$this->scMoyP=null;		
+		$this->scMoyP=null;
+		$this->scMoyMq=null;
+		$this->scMoyFf=null;
+		$this->scMoyLx=null;
+		$this->scMoyWz=null;
+		$this->scMoyAr=null;		
 		$this->scMoyPbot=null;
 		$this->nbUserDay=0;
 		$this->nbUser7j=0;
@@ -1054,5 +1094,125 @@ class StatsQuot
     public function getNbQWzV()
     {
         return $this->nbQWzV;
+    }
+
+    /**
+     * Set scMoyMq
+     *
+     * @param integer $scMoyMq
+     *
+     * @return StatsQuot
+     */
+    public function setScMoyMq($scMoyMq)
+    {
+        $this->scMoyMq = $scMoyMq;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyMq
+     *
+     * @return integer
+     */
+    public function getScMoyMq()
+    {
+        return $this->scMoyMq;
+    }
+
+    /**
+     * Set scMoyFf
+     *
+     * @param integer $scMoyFf
+     *
+     * @return StatsQuot
+     */
+    public function setScMoyFf($scMoyFf)
+    {
+        $this->scMoyFf = $scMoyFf;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyFf
+     *
+     * @return integer
+     */
+    public function getScMoyFf()
+    {
+        return $this->scMoyFf;
+    }
+
+    /**
+     * Set scMoyLx
+     *
+     * @param integer $scMoyLx
+     *
+     * @return StatsQuot
+     */
+    public function setScMoyLx($scMoyLx)
+    {
+        $this->scMoyLx = $scMoyLx;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyLx
+     *
+     * @return integer
+     */
+    public function getScMoyLx()
+    {
+        return $this->scMoyLx;
+    }
+
+    /**
+     * Set scMoyAr
+     *
+     * @param integer $scMoyAr
+     *
+     * @return StatsQuot
+     */
+    public function setScMoyAr($scMoyAr)
+    {
+        $this->scMoyAr = $scMoyAr;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyAr
+     *
+     * @return integer
+     */
+    public function getScMoyAr()
+    {
+        return $this->scMoyAr;
+    }
+
+    /**
+     * Set scMoyWz
+     *
+     * @param integer $scMoyWz
+     *
+     * @return StatsQuot
+     */
+    public function setScMoyWz($scMoyWz)
+    {
+        $this->scMoyWz = $scMoyWz;
+
+        return $this;
+    }
+
+    /**
+     * Get scMoyWz
+     *
+     * @return integer
+     */
+    public function getScMoyWz()
+    {
+        return $this->scMoyWz;
     }
 }

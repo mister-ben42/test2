@@ -113,7 +113,7 @@
 		</div>
 		
 		<div id="user_stats_Mq">
-		<div id="user_stats_titre_MqKm" class="user_stats_titre">MasterQuizz et King Master</div>
+		<div id="user_stats_titre_MqKm" class="user_stats_titre">MasterQuizz et Tournoi Royal</div>
 		<div id="stats_bloc1">
 			<div class="user_stats_titre_Mq">MasterQuizz</div>
 			<div class="profile_user_type">Score du jour :<a href="{{ path('mdqgene_highScore', {'crit':'scofDayMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scofDayMq|chgeNull}}</span></div></a>
@@ -121,20 +121,20 @@
 			<div class="profile_user_type">Meilleur score : <a href="{{ path('mdqgene_highScore', {'crit':'scMaxMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.scMaxMq}}</span></div></a>
 			<div id="stats_date_hsc">{% if user.scUser.datescMaxMq!=NULL %}({{user.scUser.datescMaxMq|date('d/m/Y') }}){% endif%}</div>			
 			
-			<div class="profile_user_type"> % de bonnes réponses :<a href="{{ path('mdqgene_highScore', {'crit':'prctBrtotMq', 'id':user.scuser.id}) }}"><span class="score_profile"><span {{usertwig.testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés."  >{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrtotMq)}}</span></span></a></div>							
-			<div class="profile_user_type"> Score moyen : <a href="{{ path('mdqgene_highScore', {'crit':'scMoyMq', 'id':user.scuser.id}) }}"><span {{usertwig.testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés." class="score_profile">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.scMoyMq)}}</span></a></div>
+			<div class="profile_user_type {{usertwig.testInfobulle99(user.scuser.nbQtotMq)}}"  aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés."> % de bonnes réponses :<a href="{{ path('mdqgene_highScore', {'crit':'prctBrtotMq', 'id':user.scuser.id}) }}"><span class="score_profile"><span   >{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrtotMq)}}</span></span></a></div>							
+			<div class="profile_user_type {{usertwig.testInfobulle99(user.scuser.nbQtotMq)}}" aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés."> Score moyen : <a href="{{ path('mdqgene_highScore', {'crit':'scMoyMq', 'id':user.scuser.id}) }}"><span  class="score_profile">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.scMoyMq)}}</span></a></div>
 								
 			<div class="profile_user_type"> Nombre de questions jouées : <a href="{{ path('mdqgene_highScore', {'crit':'nbQtotMq', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.nbQtotMq}}</span></a></div>
 
 			</br>
 			<div id="stats_masters">
-			<div class="user_stats_titre_Mq" style="margin-top:10px;">King Master</div>
+			<div class="user_stats_titre_Mq" style="margin-top:10px;">Tournoi Royal</div>
 			<div class="profile_user_type"> Score actuel :<a href="{{ path('mdqgene_highScore', {'crit':'kingMaster', 'id':user.scuser.id}) }}"><span class="score_profile"> {{user.scUser.kingMaster|chgeNull}} </span></a></div>
 			<div class="profile_user_type"> Meilleur score :<a href="{{ path('mdqgene_highScore', {'crit':'highScKM', 'id':user.scuser.id}) }}"><span class="score_profile">{{user.scUser.highScKM}}</span></a></div>
 			</div>
 		</div>
 		<div id="graph_bande_stats" >
-			<div id="user_graphstats_titre" {{usertwig.testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés.">% de bonnes réponses par catégorie</div>
+			<div id="user_graphstats_titre" class={{usertwig.testInfobulle99(user.scuser.nbQtotMq)}} aria-label="Il faut avoir répondu à plus de 100 questions au Masterquizz pour que les scores soient calculés.">% de bonnes réponses par catégorie</div>
 			<div id="bande_H"><a href="{{ path('mdqgene_highScore', {'crit':'prctBrhMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Histoire</div><div class="base"><div class="bande_score" id="bande_score_H"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_H">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrhMq)}}</span> %</div></a></div>
 			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrgMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Géographie </div><div class="base"><div class="bande_score" id="bande_score_G"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_G">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrgMq)}}</span> %</div></a></div>
 			<div><a href="{{ path('mdqgene_highScore', {'crit':'prctBrsnMq', 'id':user.scuser.id}) }}"><div class="dom_bande">Sciences et nature </div><div class="base"><div class="bande_score" id="bande_score_SN"></div><div class="bande_fin"></div></div><div class="bande_prct"><span id="sc_prct_SN">{{usertwig.testSup99Mq(user.scuser.nbQtotMq,user.scUser.prctBrsnMq)}}</span> %</div></a></div>

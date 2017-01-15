@@ -117,6 +117,40 @@ class PartieQuizzRepository extends EntityRepository
 				
 		return $qb->getQuery()->getSingleScalarResult();	
 	}
+	public function recupParties($game, $date, $nbjr, $type_user){
+		if($date!==0){
+                        $xday=$nbjr-1;
+			$date_min=$date->format('Y-m-d').' 00:00:00';
+			$date_min= date("Y-m-d", strtotime($date_min." -".$xday." day"));
+			$date_max=$date->format('Y-m-d').' 23:59:59';			
+		}
+		else{
+			$date_min='2010-01-01 00:00:00';
+			$date_max='2100-12-31 23:59:59';			
+		}
+		$qb = $this->createQueryBuilder('p')
+				->select('p.type', 'p.score')
+				->where('p.date >= :date_min')
+				  ->setParameter('date_min', $date_min)
+				  ->andWhere('p.date <= :date_max')
+				  ->setParameter('date_max', $date_max);
+                $qb->leftJoin('p.user','u')
+                    ->addSelect('u.bot');
+		if($game!="tous"){
+				  $qb->andWhere('p.type= :type')
+				  ->setParameter('type', $game);
+		}
+		if($type_user!=2)
+		{
+			      $qb->andWhere('u.bot = :type_user')
+			       ->setParameter('type_user', $type_user);
+		}
+				$qb->andWhere('p.valid = :valid')	
+				->setParameter('valid', true)
+				->orderBy('p.id', 'DESC');
+				
+		return $qb->getQuery()->getResult();	
+	}
 
 	public function recupScMoy($game, $date, $nbjr, $type_user)
 	{

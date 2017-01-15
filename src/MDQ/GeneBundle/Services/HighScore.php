@@ -145,6 +145,11 @@ class HighScore
 			            $data['aide']="Score Maximal réalisé lors d'une partie au Quizz Nature";
 			            $data['nomPage']="highScore";
 			            }
+	else if ($crit=="scMoyFf") {$data['titre1']="Score moyen";
+			            $data['titre2']="au Quizz Nature";
+			            $data['aide']="Pour figurer dans ce classement, il faut avoir jouer au moins 10 parties au Quizz Nature";
+				    $data['nomPage']="highScore";
+			            }
 	else if ($crit=="scofDayLx") {$data['titre1']="Score du jour";
 			            $data['titre2']="au Quizz Géo";
 			            $data['aide']="Meilleur score au Quizz Nature dans la journée en cours";
@@ -154,6 +159,11 @@ class HighScore
 			            $data['titre2']="au Quizz Géo";
 			            $data['aide']="Score Maximal réalisé lors d'une partie au Quizz Nature";
 			            $data['nomPage']="highScore";			            
+			            }
+	else if ($crit=="scMoyLx") {$data['titre1']="Score moyen";
+			            $data['titre2']="au Quizz Géo";
+			            $data['aide']="Pour figurer dans ce classement, il faut avoir jouer au moins 10 parties au Quizz Géo";
+				    $data['nomPage']="highScore";
 			            }
 	else if ($crit=="scofDayWz") {$data['titre1']="Score du jour";
 			            $data['titre2']="au Quizz Wouzou";
@@ -165,6 +175,11 @@ class HighScore
 			            $data['aide']="Score Maximal réalisé lors d'une partie au Quizz Wouzou";
 			            $data['nomPage']="highScore";
 			            }
+	else if ($crit=="scMoyWz") {$data['titre1']="Score moyen";
+			            $data['titre2']="au Quizz Wouzou";
+			            $data['aide']="Pour figurer dans ce classement, il faut avoir jouer au moins 10 parties au Quizz Wouzou";
+				    $data['nomPage']="highScore";
+			            }
 	else if ($crit=="scofDayAr") {$data['titre1']="Score du jour";
 			            $data['titre2']="au Quizz Art";
 			            $data['aide']="Meilleur score au Quizz Nature dans la journée en cours";
@@ -175,6 +190,11 @@ class HighScore
 			            $data['aide']="Score Maximal réalisé lors d'une partie au Quizz Nature";
 			            $data['nomPage']="highScore";
 			            }	
+	else if ($crit=="scMoyAr") {$data['titre1']="Score moyen";
+			            $data['titre2']="au Quizz Art";
+			            $data['aide']="Pour figurer dans ce classement, il faut avoir jouer au moins 10 parties au Quizz Art";
+				    $data['nomPage']="highScore";
+			            }
 	else if ($crit=="kingMaster") {$data['titre1']="Score actuel";
 			            $data['titre2']="au Tournoi Royal";
 			            $data['aide']="Score actuel au Tournoi Royal";

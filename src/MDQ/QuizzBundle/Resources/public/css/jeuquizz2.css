@@ -86,7 +86,7 @@ a
 	width:99%;
 	min-width:300px;
 	max-height:400px;
-	min-height:165px;
+	min-height:150px;
 	height:40vh;
 	border: solid 1.5px rgb(243,248,78);
 	background-color: black;
@@ -905,6 +905,20 @@ a
 	line-height:12px;
       }
 	
+}
+@media (max-height:300px) 
+{
+    #haut_page
+    {
+            display:none;
+    }    
+}
+@media (max-height:280px) 
+{
+    #haut_page
+    {
+            display:none;
+    }    
 }
 @media (max-width:430px) and (max-height:700px)
 {

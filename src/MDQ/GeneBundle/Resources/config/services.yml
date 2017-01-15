@@ -33,4 +33,4 @@ services:
          
      mdq_gene.statsQuot:
          class: MDQ\GeneBundle\Services\MajStatsQuot
-         arguments: ['@mdq_quizz.repository.partiequizz', '@mdq_user.repository.user', '@mdq_gene.repository.statsquot']
+         arguments: ['@mdq_quizz.repository.partiequizz', '@mdq_user.repository.user', '@mdq_gene.repository.statsquot', '@mdq_gene.repository.date_ref', '@mdq_question.repository.question']

@@ -26,7 +26,7 @@ class ResettingController extends BaseController
 		if(!$this->container->get('mdq_admin.security')->testAutorize("simpleAction", null)){return $this->redirect($this->generateUrl('mdqgene_accueil'));}
 	else{
 	// Le register de FOS User
-	    $response = parent::sendEmailAction($request)
+	    $response = parent::sendEmailAction($request);
             return $response;
           }
         }

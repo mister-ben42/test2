@@ -1,7 +1,7 @@
 ﻿$(function () {	 
 jQuery(document).ready(function() {
 	var numQ=0;
-	var volume_son=0.1;
+	var volume_son=0.4;
 	var repselect; var error;
 	var timerID; var timeLeft;
 	// ********** Critères principaux : ceux du Masterquizz **********************
@@ -10,7 +10,7 @@ jQuery(document).ready(function() {
 	init();	
 	// ---- Fonction valable sur toute la partie du jeu // -------
 	function volume(){
-			if(volume_son==3){volume_son=0;
+			if(volume_son==1){volume_son=0;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol0.png'});}
 			else if(volume_son==0){volume_son=0.1;
 							$('#quizz_volume img').attr({src:'../../../bundles/mdqquizz/images/vol1.png'});}
@@ -298,7 +298,7 @@ jQuery(document).ready(function() {
 	}
 	function finpartie(){
 		//alert('Dans la fonction finpartie');
-		window.location.replace("http://localhost/MondeDuQuizz/web/app_dev.php/quizz/finPartie");
+		window.location.replace("../finPartie");
 		//$('head').append( '<meta name="meta" http-equiv="refresh" content="0;url=finPartie" />' );
 	}
 });

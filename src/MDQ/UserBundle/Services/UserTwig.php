@@ -103,7 +103,7 @@ class UserTwig
 	  }
 	  public function testInfobulle99($nbQMq)
 	  {
-		if($nbQMq<100){$data='class=infobulle';}
+		if($nbQMq<100){$data='infobulle';}
 		else{$data="";}
 		return $data;
 	  }

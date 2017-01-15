@@ -39,7 +39,7 @@ security:
 
     access_control:
         - { path: ^/quizz, roles: ROLE_USER }
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/bossMDQ, roles: ROLE_ADMIN }
         - { path: ^/mod, roles: ROLE_MOD }
         - { path: ^/goToMDQ, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/newToMDQ, roles: IS_AUTHENTICATED_ANONYMOUSLY }
